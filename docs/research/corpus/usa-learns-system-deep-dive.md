@@ -17,6 +17,11 @@ External validation used: official how-to-study doc, official Scope &
 Sequence PDF (`/Content/Documents/ScopeSequence.pdf`), OTAN course-launch
 article, LINCS resource profile (US DoE).
 
+EVIDENCE PROVENANCE (Correction C): LIVE OBSERVATION = Playwright-driven
+research account, 2026-10-03. OFFICIAL DOC = usalearns.org pages/PDFs.
+EXTERNAL REVIEW = LINCS profile + OTAN article — they describe the
+site/courses generally, not a current line-by-line E1+ audit.
+
 ---
 
 ## 1. Course catalog (observed at student-home)
@@ -169,8 +174,14 @@ USA Learns does NOT do machine-scored speech at all:
   Playback to self-review → re-record until satisfied → Next.
 - "Your Turn" = semi-scripted production prompts ("Say, 'Hi! I'm ___.
   Nice to meet you.'") embedded in each lesson's Self-Evaluation.
-- ALL speaking activities are `—` (unscored). Evidence recorded =
+- ALL record/playback speaking activities are `—` (unscored): Say it!,
+  Your Turn, Shorten-forms, Pronounce. Evidence recorded =
   attempted/practiced, never "passed speaking".
+- CORRECTION A (verified live): the Speaking SECTION of E1+ 1.1 does
+  contain one scored activity, "Introducing Yourself" (•), but its
+  scored component is a LISTENING item — "select all the sentences
+  you hear" (7 checkboxes, PermittedAttempts=3). No recorded speech
+  is scored anywhere; machine speech scoring does not exist.
 - Mic permission handled in-page; legacy Flash fallback still offered.
 
 This validates SE's locked policy: self-practice → record → replay →
@@ -211,8 +222,11 @@ is required for a credible beginner product.
 ## 9. Strengths vs dated mechanics
 
 STRONG (worth clean-room reuse as DESIGN):
-- One uniform engine across 7 courses — LINCS reviewers explicitly
-  praise uniform lesson architecture reducing learner navigation load.
+- One uniform engine across 7 courses — LINCS resource profile
+  describes uniformly-structured lessons/units across the reviewed
+  courses (profile covers the site generally; it does NOT
+  independently validate every current English 1 Plus activity —
+  E1+ launched after the profile was written).
 - Orthogonal completion/score/self-declared-mastery channels.
 - Advisory 80% without hard gating; unlimited repeats.
 - Resume = next-incomplete deep link + explicit reset.

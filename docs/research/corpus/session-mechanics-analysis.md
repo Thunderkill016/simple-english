@@ -170,7 +170,7 @@ USAL answers several open questions with a *minimal* model:
   pointer = first-incomplete-activity in linear order. SE's planned
   section-level resume is FINER than USAL; USAL shows coarser is
   survivable but we keep finer for deep lessons.
-- **Completion ≠ mastery proven in production:** a 22% activity marks
+- **Completion ≠ measured mastery proven in production:** a 22% activity marks
   FULL; the 80% rule is advisory text. No gate anywhere.
 - **Mistake recovery = bounded retry + reveal** (2 attempts, then
   "See the correct answer above"). No re-queue, no remediation branch.

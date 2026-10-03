@@ -63,7 +63,7 @@ STUDY_ONLY / REJECT.**
 |---|---|---|---|---|---|
 | Sectioned lesson skeleton over a source asset | USAL E1+ lesson pattern (8 sections/21 activities) | n/a (pattern, not code) | HIGH — designed for exactly this | usa-learns-voa-transformation.md | CLEAN_ROOM_REIMPLEMENT |
 | Linear course nav + next-incomplete pointer | USAL menus + "Go to my next activity" | n/a | HIGH | usa-learns-state-machine.md | CLEAN_ROOM_REIMPLEMENT |
-| Tri-state completion + orthogonal % score + self-declared mastery | USAL ✓/Score/—,• + Learning Log | n/a | HIGH — proves completion≠mastery in production | usa-learns-system-deep-dive.md | CLEAN_ROOM_REIMPLEMENT |
+| Tri-state completion + orthogonal % score + self-report channel | USAL ✓/Score/—,• + Learning Log | n/a | HIGH — proves completion≠mastery in production | usa-learns-system-deep-dive.md | CLEAN_ROOM_REIMPLEMENT |
 | Bounded retry feedback (2 attempts → reveal) | USAL item cycle | n/a | HIGH | observed live | CLEAN_ROOM_REIMPLEMENT |
 | Speaking self-practice (record→playback→rerecord) | USAL Say it!/Your Turn | n/a | HIGH — validates SE's practice-only policy | observed live | CLEAN_ROOM_REIMPLEMENT |
 | Self-eval can-do/word checklist | USAL Learning Log | n/a | HIGH — ready-made metacognition layer | observed live | CLEAN_ROOM_REIMPLEMENT |

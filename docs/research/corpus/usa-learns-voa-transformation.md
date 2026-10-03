@@ -50,7 +50,7 @@ language in the episode         →  2 grammar-point activity chains
 | 13 | Notice the Language (—) | story sentences | highlighting explainer ("we use *because* to show a reason…") | noticing/awareness | YES | NO |
 | 14 | Pronounce the Words (—) | — | model + mic record + playback | pronunciation practice | YES | NO |
 | 15 | Shorten the Pres. Cont. (—) | grammar's spoken form | record short forms ("I'm working") | connected-speech form | YES | NO |
-| 16 | Introducing Yourself (•) | — | functional speaking task, SCORED | production w/ feedback? (score=•; mechanism UNKNOWN — likely checklist/completion not ASR) | PARTIAL — how it scores unverified | NO |
+| 16 | Introducing Yourself (•) | phrases used in episode | functional-language presentation + SCORED LISTENING item ("select all sentences you hear", checkboxes×7, 3 attempts) | functional listening+prep for production; **NOT scored speech** | YES | NO |
 | 17 | Your Turn (—) | — | 5-screen scripted speaking self-check | self-eval production | YES | NO |
 | 18 | Learning Log (—) | — | "words I know" + can-do checkboxes | metacognitive self-report | YES | NO |
 

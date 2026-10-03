@@ -249,8 +249,8 @@ SOLVED_BY_REFERENCE / PARTIALLY_SOLVED / NOT_SOLVED.
   per-component analysis of E1+ 1.1 (21 activities/8 sections);
   what SE can legally reimplement (pattern YES, USAL content NO).
 - `usa-learns-vs-se-needs.md` — subsystem scores
-  (7 SOLVED_BY_REFERENCE / 5 PARTIALLY_SOLVED / 1 NOT_SOLVED) and
-  the revised fork/build verdict.
+  (subsystem matrix; aggregate count removed per Correction D)
+  and the revised fork/build verdict.
 
 Method note: research account (free registration, math captcha, no
 email verification). Clean-room rule honored — behavior only.
@@ -290,3 +290,28 @@ email verification). Clean-room rule honored — behavior only.
 Temporary inspection copies live in gitignored `research_cache/` (`cambridge/`,
 `voa/`, `pearson/`, `ngl/`, `oup/`). Nothing copyrighted is committed.
 See `download-manifest.md` for the exact inventory.
+
+**ChatGPT R1.4A REVIEW — PASS WITH FINAL CORRECTIONS. R1 FINAL
+SYNTHESIS AUTHORIZED** after correction pass:
+
+- DECISION 1: USAL = PRIMARY SELF-STUDY PRODUCT REFERENCE (not
+  authoritative pedagogical source). Extract FUNCTIONS, not a fixed
+  section count: ORIENT → PREPARE LANGUAGE → PRIMARY INPUT →
+  COMPREHENSION → LANGUAGE FOCUS → SUPPORTED PRACTICE → PRODUCTION →
+  REFLECT/REVIEW. Human-authored curriculum decides per lesson.
+- DECISION 2: Learning Log = SELF-EVALUATION channel only. Renamed
+  self-declared mastery → self-reported can-do/confidence. Never
+  affects mastery/capability/CEFR/FSRS. Four orthogonal channels:
+  COMPLETION / FORMATIVE SCORE / SELF-REPORT / RETENTION-REVIEW.
+- DECISION 3: Resume = FINER THAN USAL: persist completed activities +
+  resolved item outcomes + current activity + item cursor; resume at
+  first unresolved item; no exhaustive UI micro-state.
+- DECISION 4: NO SESSION entity in V1. Canonical hierarchy:
+  COURSE→UNIT→LESSON→SECTION→ACTIVITY→ITEM. Session = runtime visit.
+- DECISION 5: NO proficiency channel in V1. Track: presented,
+  attempted, correctness, completed, practiced, self-reported,
+  review/retention state. Never claim CEFR/proficiency/competence.
+- CORR A: scored Speaking item resolved (listening checkbox, not
+  speech). CORR B: feedback = PARTIALLY_SOLVED (cue→reproduce→
+  stronger-cue→reveal preferred). CORR C: LINCS scope precision.
+  CORR D: aggregate score removed. CORR E: clean-room wording fixed.

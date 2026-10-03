@@ -13,8 +13,8 @@ do it (SE must design independently).
 | Curriculum navigation | **SOLVED_BY_REFERENCE** | rigid course→unit→lesson→activity menus; LINCS-praised uniformity; breadcrumb + Menu link; next-activity chaining |
 | Lesson sequencing | **SOLVED_BY_REFERENCE** | fixed linear order, sections inside lessons, review lesson at unit end; simplest possible correct model |
 | Activity engine | **PARTIALLY_SOLVED** | taxonomy covers vocab/listen/grammar/dictation/reading/speaking/self-eval; but server-driven full reloads, no offline, dated controls — SE must rebuild the renderer anyway |
-| Feedback | **SOLVED_BY_REFERENCE** | 2-attempt + reveal cycle; correct/retry/exhausted strings; Next hidden until resolved; advisory 80% |
-| Progress | **SOLVED_BY_REFERENCE** | orthogonal ✓ state + % score + self-declared mastery (Learning Log); 22%-still-complete proves completion≠mastery by design |
+| Feedback | **PARTIALLY_SOLVED_BY_REFERENCE** | 2-attempt + reveal cycle is a proven simple mechanic (immediate feedback, bounded retry, deterministic resolution); LINCS notes items do not explain WHY an answer is wrong; learning science favors cue→reproduce→stronger-cue→reveal — SE should extend, not copy |
+| Progress | **SOLVED_BY_REFERENCE** | orthogonal ✓ state + % score + self-report channel (Learning Log); 22%-still-complete proves completion≠mastery by design |
 | Resume | **PARTIALLY_SOLVED** | "Go to my next activity" = next-incomplete deep link (excellent); but activity-internal progress discarded on exit — SE must decide item-level resume deliberately |
 | Review | **NOT_SOLVED** | only unit-level retrieval lessons; NO spaced scheduling, no due queue, no cross-session review — SE needs FSRS anyway |
 | Speaking | **SOLVED_BY_REFERENCE** | model→record→playback→rerecord, scripted prompts, ALL unscored; confirms SE's practice-evidence-only policy |
@@ -23,12 +23,11 @@ do it (SE must design independently).
 | Next action | **SOLVED_BY_REFERENCE** | "Go to my next activity" + Next chaining = unambiguous forward motion; Start over = explicit reset |
 | Learner autonomy | **PARTIALLY_SOLVED** | full freedom to hop any activity/unit (nothing locked); but no session framing, no daily plan, no stopping guidance |
 
-**Score: 7 SOLVED_BY_REFERENCE / 5 PARTIALLY_SOLVED / 1 NOT_SOLVED**
 
 ## Fork/build verdict — REVISED (post-deep-dive)
 
 USAL is NOT a fork candidate (proprietary platform+content, no source),
-but it is now the **authoritative self-study architecture reference**:
+but it is now the **PRIMARY SELF-STUDY PRODUCT REFERENCE**:
 
 - The earlier claim "no existing system solves resumable multi-section
   lessons" was wrong in spirit: USAL solves RESUMABLE LINEAR COURSES
@@ -47,7 +46,14 @@ but it is now the **authoritative self-study architecture reference**:
 
 ## What SE can clean-room reimplement (legal analysis)
 
-SAFE (functional patterns — unprotectable):
+SE documents abstract functional behavior for clean-room study and
+independently implements its own code, content, wording and visual
+expression. USA Learns code, proprietary activity content, media,
+layout and other protected expression are not reused. (Correction E —
+functional-pattern reuse is a clean-room methodology claim, not a
+categorical legal conclusion; rights remain asset-level.)
+
+IMPLEMENTABLE FUNCTIONAL PATTERNS:
 - hierarchy + ✓/score/tri-state + next-incomplete pointer
 - 2-attempt → reveal feedback cycle
 - advisory 80% + unlimited retry + Start over

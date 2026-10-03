@@ -190,7 +190,7 @@ consumer-app loops.
 | Review | unit-level retrieval lesson; NO spaced scheduling/due queue |
 | Feedback | 2 attempts → reveal; "Incorrect. Try again." / "See the correct answer above." |
 | Speaking | record→playback→self-review, 100% unscored |
-| Self-eval | Learning Log: "words I know" + can-do checkboxes every lesson |
+| Self-eval | Learning Log: "words I know" + can-do checkboxes every lesson (self-report channel — never mastery evidence) |
 | Media | YouTube embeds + self-hosted MP3; ads inside activities; Flash fallback remnants |
 | Persistence | server-side account only; no offline |
 | Monetization | none (government); AdSense present anyway |
