@@ -26,7 +26,8 @@ Claims are tagged `CONFIRMED` / `PARTIAL` / `UNKNOWN` where source visibility is
 | R1.2 | Professional course comparison (Empower / English File / Speakout / Roadmap-GSE / Outcomes) | DONE — reported to ChatGPT, awaiting review |
 | R1.3 | Open content & rights | DONE — PASS WITH CORRECTIONS |
 | R1.4 | SLA evidence & digital systems | PARTIAL PASS → R1.4A opened |
-| R1.4A | USA Learns deep reverse-engineering (observed as registered learner) | DONE — pending ChatGPT review |
+| R1.4A | USA Learns deep reverse-engineering (observed as registered learner) | DONE — PASS w/ final corrections |
+| Final | SE evidence base synthesis | DONE — pending ChatGPT review |
 | Final | Evidence-base synthesis | Pending |
 
 ## Documents
@@ -236,6 +237,20 @@ behavior/architecture/state transitions only; never copy code,
 exercises, prose, media, or layout. Subsystems scored
 SOLVED_BY_REFERENCE / PARTIALLY_SOLVED / NOT_SOLVED.
 
+
+
+### Final synthesis
+
+- `SE-EVIDENCE-MAP.md` — consolidated claims map (LOCKED / STRONG /
+  HYPOTHESIS / GAP / FORBIDDEN) across curriculum, mechanics,
+  progress, software, rights.
+- `contradictions-and-tradeoffs.md` — resolved conflicts + live
+  tradeoffs (feedback design, freedom vs guidance, depth vs session,
+  self-report, local-first, coherence gap, assessment honesty).
+- `research-coverage.md` — what R1 covered, declared limits,
+  confidence map.
+- `R1-FINAL-SYNTHESIS.md` — the ten-question synthesis + provisional
+  architecture map + smallest evidence-backed pilot definition.
 
 ### R1.4A — USA Learns (clean-room, REFERENCE_ONLY)
 
