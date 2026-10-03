@@ -54,6 +54,8 @@ The next step is a research audit of the best reusable foundations for V1
 
 - SE source code and SE-authored documentation: [MIT](LICENSE)
 - Third-party educational content retains its original license (e.g., CC BY
-  4.0) and is tracked in the source registry — see
-  [SPEC.md §11](SPEC.md) and [docs/sources/](docs/sources/).
+  4.0) and is tracked in the source registry.
 - The "Simple English" name and branding are not covered by the license grant.
+
+Canonical licensing rules: [LICENSING.md](LICENSING.md) — see also
+[SPEC.md §13](SPEC.md) and [docs/sources/](docs/sources/).
