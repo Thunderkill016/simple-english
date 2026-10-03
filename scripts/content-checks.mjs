@@ -53,7 +53,6 @@ export function checkLessonSemantics(lesson) {
   // Exercise + embed semantics
   const EMBED_HOSTS = {
     youtube: ["www.youtube.com", "www.youtube-nocookie.com"],
-    h5p: ["openoregon.pressbooks.pub"],
   };
   const mcIds = [];
   (lesson.blocks ?? []).forEach((block, i) => {

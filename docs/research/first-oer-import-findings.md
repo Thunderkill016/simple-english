@@ -45,7 +45,7 @@ from their original host (rights and hosting stay upstream) or linked.
 | H5P `greetings-01-17` (dialogue text) | CC0 1.0, Tim Krause | REUSE/ADAPT | adapted into SE blocks |
 | YouTube `AzES-nhQFzk` "Hello. How are you?" | third-party, not reusable | EXTERNAL_EMBED | official YouTube player, click-to-load |
 | YouTube `uqgKvNxhCvQ` "More Greetings" | third-party, not reusable | LINK_ONLY | on-topic but second video would dilute one focused lesson |
-| H5P `greetings-02-18` memory game | CC0; per-image copyrights unverified | EXTERNAL_EMBED | original-host embed `admin-ajax.php?action=h5p_embed&id=18` (verified 200, no frame-ancestors block) |
+| H5P `greetings-02-18` memory game | CC0; per-image copyrights unverified | LINK_ONLY | embed endpoint exists but CloudFront blocks it cross-origin (403 in real browser — verified live 2026-10-03) |
 | H5P `useful-expressions-19` cards | license "U" | LINK_ONLY | embeddable technically, but excluded for lesson focus; reachable via chapter link |
 | H5P `greetings-extra-20` dialogue | license "U" | LINK_ONLY | same |
 | Source page URL | — | LINK_ONLY | attribution/provenance link in lesson footer |
@@ -55,26 +55,40 @@ linkable; nothing needed deletion on rights grounds alone.
 
 ## External embed architecture
 
-- New minimal block `external-embed`: provider-allowlisted (`youtube`,
-  `h5p`), https-only URLs, required `sourceUrl`/`fallbackUrl`/`purpose`.
-  Semantic checks map provider → permitted embed host so the label can't
-  smuggle arbitrary iframes.
+- New minimal block `external-embed`: provider-allowlisted (`youtube`
+  only — H5P was removed after live verification, see below), https-only
+  URLs, required `sourceUrl`/`fallbackUrl`/`purpose`. Semantic checks map
+  provider → permitted embed host so the label can't smuggle arbitrary
+  iframes.
 - Embeds are **optional infrastructure**: click-to-load placeholder
   (honest "loads content from {host}" boundary) → lazy iframe with
   least-privilege sandbox + persistent "Open original ↗" fallback link.
   No eager third-party bytes at lesson render.
 - Iframe attrs: youtube = `sandbox="allow-scripts allow-same-origin
   allow-presentation allow-popups"` + `allow="fullscreen;
-  picture-in-picture"`; h5p = `sandbox="allow-scripts allow-same-origin
-  allow-forms"`. No arbitrary embed HTML anywhere.
+  picture-in-picture"`. No arbitrary embed HTML anywhere.
 - Offline/failure: SE content, exercises, progress unaffected — embed
   degrades to its fallback link. Proven by E2E with all third-party
   requests aborted.
-- CSP directions (when a policy is deployed): `frame-src www.youtube.com
-  openoregon.pressbooks.pub`; `img-src`/`media-src` need nothing extra
-  (no thumbnails/proxied media). No `*`.
-- Runtime impact: 2 embeds, both click-to-load → zero third-party bytes
-  until learner opts in; measured SE bundle unaffected.
+- CSP directions (when a policy is deployed): `frame-src
+  www.youtube.com`; `img-src`/`media-src` need nothing extra (no
+  thumbnails/proxied media). No `*`.
+- Runtime impact: 1 embed, click-to-load → zero third-party bytes until
+  learner opts in; measured SE bundle unaffected.
+
+## Live verification (2026-10-03)
+
+CI never calls third parties (deterministic). One manual live QA run
+against the production build found:
+
+- YouTube iframe: **200 + player rendered** (title card, play button) —
+  works.
+- H5P iframe `admin-ajax.php?action=h5p_embed&id=18`: **403 "Request
+  blocked"** from CloudFront in a real browser context, despite the same
+  URL returning 200 to curl. The embed endpoint is only permitted
+  on-origin. Memory game therefore dropped to LINK_ONLY — this is why
+  embed providers need one live check per source, not just schema checks.
+- No horizontal overflow at 390px.
 
 ## Licensing friction
 
@@ -127,8 +141,10 @@ wording edits; they double as the IndexedDB progress key.
 
 ## What should NOT be automated
 
-- License decisions on items with missing/ambiguous metadata
-  ("U", unverified images, third-party embeds) — default stays "omit".
+- License decisions on missing/ambiguous redistribution rights must not
+  be automated into permission to copy/rehost — nor automated into
+  deletion. Decision order: EXTERNAL_EMBED when the original provider
+  supports it → LINK_ONLY → OMIT only as last resort.
 - Pedagogical restructuring choices (which interaction replaces a
   fill-in-the-blank) — needs human judgment per item.
 - Translation/authored support text — must stay marked as SE-authored.

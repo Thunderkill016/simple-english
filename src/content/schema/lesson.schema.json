@@ -135,7 +135,7 @@
             "type": { "const": "external-embed" },
             "provider": {
               "type": "string",
-              "enum": ["youtube", "h5p"],
+              "enum": ["youtube"],
               "description": "allowlisted embed provider — extend only when a real lesson needs it"
             },
             "title": { "type": "string", "minLength": 1 },

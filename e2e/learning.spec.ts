@@ -96,7 +96,7 @@ test.describe("local-first learning slice", () => {
   }) => {
     // Third-party requests fail hard — the learning flow must not care.
     await context.route("**/youtube.com/**", (r) => r.abort());
-    await context.route("**/openoregon.pressbooks.pub/**", (r) => r.abort());
+    await context.route("**/youtube-nocookie.com/**", (r) => r.abort());
 
     await openLesson(page);
 

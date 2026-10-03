@@ -57,7 +57,7 @@ export interface MultipleChoiceBlock {
 export interface ExternalEmbedBlock {
   type: "external-embed";
   /** allowlisted provider — semantic checks map it to permitted hosts */
-  provider: "youtube" | "h5p";
+  provider: "youtube";
   title: string;
   /** https embed URL on the original host — never a copied/rehosted asset */
   src: string;

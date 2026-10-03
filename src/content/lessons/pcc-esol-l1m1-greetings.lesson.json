@@ -14,8 +14,8 @@
       "Source item is an H5P fill-in-the-blank dialogue; reformatted into heading/text/example blocks with the conversation reconstructed from the exercise's accepted answers.",
       "Fill-in-the-blank interaction converted to one multiple-choice question with the same learning goal (choosing a reply to 'How are you?').",
       "Vietnamese translations on example blocks added by SE (not present in the source).",
-      "Two third-party items are included as click-to-load external embeds from their original hosts — one English with Jennifer YouTube video (AzES-nhQFzk) and the original PCC memory-game activity (H5P id 18); nothing was copied or rehosted.",
-      "Remaining chapter items (dialog cards, extra dialogue, second video) left un-embedded to keep this to one focused lesson; reachable via the source link."
+      "One third-party item is included as a click-to-load external embed from its original host — the English with Jennifer YouTube video (AzES-nhQFzk); nothing was copied or rehosted.",
+      "The original PCC memory game (H5P id 18) is link-only: its embed endpoint is blocked cross-origin by the host's CDN (verified live 2026-10-03). Remaining chapter items are reachable via the source link."
     ],
     "attribution": "Adapted from 'Level 01 Module 01 Greetings 01' by Tim Krause, A Digital Workbook for Beginning ESOL (Portland Community College / Open Oregon Educational Resources), CC0 1.0. Adapted by Simple English."
   },
@@ -50,15 +50,6 @@
       "sourceUrl": "https://www.youtube.com/watch?v=AzES-nhQFzk",
       "purpose": "Watch and listen to the greeting conversation in real English (English with Jennifer).",
       "fallbackUrl": "https://www.youtube.com/watch?v=AzES-nhQFzk"
-    },
-    {
-      "type": "external-embed",
-      "provider": "h5p",
-      "title": "Practice: match the greetings",
-      "src": "https://openoregon.pressbooks.pub/esol23/wp-admin/admin-ajax.php?action=h5p_embed&id=18",
-      "sourceUrl": "https://openoregon.pressbooks.pub/esol23/chapter/chapter-1-2/",
-      "purpose": "Practice matching greeting words with their meanings (original PCC activity, hosted by Open Oregon).",
-      "fallbackUrl": "https://openoregon.pressbooks.pub/esol23/chapter/chapter-1-2/"
     },
     {
       "type": "multiple-choice",

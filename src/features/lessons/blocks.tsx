@@ -75,7 +75,6 @@ const EMBED_IFRAME_ATTRS: Record<
     sandbox: "allow-scripts allow-same-origin allow-presentation allow-popups",
     allow: "fullscreen; picture-in-picture",
   },
-  h5p: { sandbox: "allow-scripts allow-same-origin allow-forms" },
 };
 
 function ExternalEmbed({ block }: { block: ExternalEmbedBlock }) {
