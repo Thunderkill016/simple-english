@@ -71,18 +71,10 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
     });
   }
 
-  const record = getSourceRecord(lesson.source.id);
-  const resolved = {
-    title: lesson.source.title ?? record?.title,
-    url: lesson.source.url ?? record?.url,
-    license: lesson.source.license ?? record?.license,
-    licenseUrl: lesson.source.licenseUrl ?? record?.licenseUrl,
-    attribution:
-      lesson.source.attribution ??
-      (record
-        ? `Based on “${record.title}” by ${record.authors.join(", ")} (${record.publisher}), ${record.license}. Adapted by Simple English.`
-        : undefined),
-  };
+  const sources = lesson.sourceRefs.map((ref) => ({
+    ref,
+    record: getSourceRecord(ref.sourceId),
+  }));
 
   return (
     <article className="space-y-6">
@@ -116,61 +108,111 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
             persistError={persistError}
             onSelect={handleSelect}
             onCheck={handleCheck}
-            onComplete={handleComplete}
           />
         ) : (
           <Block key={i} block={block} />
         ),
       )}
 
+      {/* Completion CTA lives AFTER all content — the learner reaches it
+          only past the production step, not mid-lesson. */}
+      {!completed && (!exercise || feedback === "correct" || correctSelected) ? (
+        <section className="panel space-y-3">
+          <p className="font-semibold">
+            Finished your turn? Complete the lesson.
+          </p>
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={handleComplete}
+          >
+            Complete lesson
+          </button>
+          {persistError ? (
+            <p role="alert" className="text-sm text-warning">
+              Couldn't save progress locally — it may not be there after reload.
+            </p>
+          ) : null}
+        </section>
+      ) : null}
+
       {completed ? (
         <section className="panel space-y-3 border-success/30 bg-success-soft/60">
-          <p className="font-semibold text-success">✓ Lesson complete</p>
-          <p className="text-sm">You finished {lesson.title}.</p>
+          {lesson.completion ? (
+            <>
+              <p className="font-semibold text-success">
+                ✓ {lesson.completion.statement}
+              </p>
+              <ul className="space-y-1 text-sm">
+                {lesson.completion.skills.map((skill) => (
+                  <li key={skill} className="flex items-center gap-2">
+                    <span aria-hidden="true" className="text-success">
+                      ✓
+                    </span>
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            </>
+          ) : (
+            <>
+              <p className="font-semibold text-success">✓ Lesson complete</p>
+              <p className="text-sm">You finished {lesson.title}.</p>
+            </>
+          )}
           <Link to="/learn" className="btn btn-primary">
             Back to Learn
           </Link>
         </section>
       ) : null}
 
-      {/* Provenance stays intact but out of the reading flow. */}
+      {/* Provenance stays intact but out of the reading flow — the lesson
+          is SE-authored; contributing sources are credited individually. */}
       <details className="text-sm text-muted">
         <summary className="cursor-pointer font-medium text-ink">
           Sources &amp; license
         </summary>
-        <div className="mt-3 space-y-1 border-l-2 border-border pl-4">
-          <p>
-            {resolved.url ? (
-              <a
-                href={resolved.url}
-                target="_blank"
-                rel="noreferrer"
-                className="text-primary hover:underline"
-              >
-                {resolved.title} ↗
-              </a>
-            ) : (
-              resolved.title
-            )}
-          </p>
-          <p>
-            License:{" "}
-            {resolved.licenseUrl ? (
-              <a
-                href={resolved.licenseUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="text-primary hover:underline"
-              >
-                {resolved.license} ↗
-              </a>
-            ) : (
-              resolved.license
-            )}
-            {lesson.source.adapted ? " · adapted" : null}
-            {lesson.source.synthetic ? " · synthetic fixture" : null}
-          </p>
-          {resolved.attribution ? <p>{resolved.attribution}</p> : null}
+        <div className="mt-3 space-y-3 border-l-2 border-border pl-4">
+          <p>Lesson by {lesson.authoredBy}.</p>
+          {sources.length > 0 ? (
+            <div className="space-y-2">
+              <p className="font-medium text-ink">Built using:</p>
+              <ul className="space-y-2">
+                {sources.map(({ ref, record }) => (
+                  <li key={ref.id} className="space-y-0.5">
+                    <a
+                      href={ref.itemUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-primary hover:underline"
+                    >
+                      {ref.itemTitle ?? record?.title ?? ref.id} ↗
+                    </a>
+                    <p>
+                      {ref.role} — {record?.publisher}
+                      {record ? ` · ${record.license}` : null}
+                      {record?.licenseUrl ? (
+                        <>
+                          {" "}
+                          (
+                          <a
+                            href={record.licenseUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="text-primary hover:underline"
+                          >
+                            license ↗
+                          </a>
+                          )
+                        </>
+                      ) : null}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+          <p>Explanations, exercises and translations are {lesson.authoredBy}&rsquo;s own.</p>
         </div>
       </details>
     </article>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type {
+  AudioBlock,
   ExampleBlock,
   ExternalEmbedBlock,
   HeadingBlock,
@@ -50,6 +51,26 @@ const EMBED_IFRAME_ATTRS: Record<
 const PROVIDER_LABEL: Record<ExternalEmbedBlock["provider"], string> = {
   youtube: "YouTube",
 };
+
+/**
+ * Listening — a local, rights-verified audio asset on native controls.
+ * The full transcript keeps the lesson usable when audio can't play.
+ */
+function Audio({ block }: { block: AudioBlock }) {
+  return (
+    <section className="panel space-y-3" aria-label={block.title}>
+      <h2 className="font-semibold">{block.title}</h2>
+      <audio
+        controls
+        preload="none"
+        src={block.src}
+        aria-label={block.title}
+        className="w-full"
+      />
+      <p className="text-lesson whitespace-pre-line">{block.transcript}</p>
+    </section>
+  );
+}
 
 function ExternalEmbed({ block }: { block: ExternalEmbedBlock }) {
   const [loaded, setLoaded] = useState(false);
@@ -125,6 +146,8 @@ const OPTION_CLASSES: Record<ReturnType<typeof optionState>, string> = {
 /**
  * The exercise is ONE interaction surface: prompt, choices, check action
  * and feedback belong together — feedback/completion stay separate.
+ * Lesson completion is deliberately NOT here: LessonView renders it after
+ * the last block so the learner finishes every step first.
  */
 export function Exercise({
   block,
@@ -134,7 +157,6 @@ export function Exercise({
   persistError,
   onSelect,
   onCheck,
-  onComplete,
 }: {
   block: MultipleChoiceBlock;
   selected: string | undefined;
@@ -143,7 +165,6 @@ export function Exercise({
   persistError: boolean;
   onSelect: (optionId: string) => void;
   onCheck: () => void;
-  onComplete: () => void;
 }) {
   const selectedText = block.options.find((o) => o.id === selected)?.text;
 
@@ -171,26 +192,16 @@ export function Exercise({
         </div>
       </fieldset>
 
-      {!completed ? (
+      {!completed && feedback !== "correct" ? (
         <div className="flex items-center gap-3">
-          {feedback === "correct" ? (
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={onComplete}
-            >
-              Complete lesson
-            </button>
-          ) : (
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={onCheck}
-              disabled={selected === undefined}
-            >
-              Check answer
-            </button>
-          )}
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={onCheck}
+            disabled={selected === undefined}
+          >
+            Check answer
+          </button>
         </div>
       ) : null}
 
@@ -223,6 +234,8 @@ export function Block({ block }: { block: LessonBlock }) {
       return <Text block={block} />;
     case "example":
       return <Example block={block} />;
+    case "audio":
+      return <Audio block={block} />;
     case "external-embed":
       return <ExternalEmbed block={block} />;
     case "multiple-choice":

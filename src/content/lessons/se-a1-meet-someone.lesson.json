@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 2,
+  "id": "se-a1-meet-someone",
+  "title": "Meet Someone",
+  "level": "beginner",
+  "summary": "Say hello, say your name, and respond when someone introduces themselves.",
+  "capability": "The learner can meet someone for the first time in English: say hello, say their name, and respond to an introduction.",
+  "authoredBy": "Simple English",
+  "sourceRefs": [
+    {
+      "id": "voa-lle1-welcome",
+      "sourceId": "voa-lets-learn-english-level-1",
+      "itemTitle": "Let's Learn English Level 1, Lesson 1: Welcome! — conversation",
+      "itemUrl": "https://learningenglish.voanews.com/a/lets-learn-english-lesson-one/3111026.html",
+      "role": "primary language model",
+      "use": "adapted"
+    },
+    {
+      "id": "voa-lle1-audio",
+      "sourceId": "voa-lets-learn-english-level-1",
+      "itemTitle": "Lesson 1 'Welcome!' — conversation audio (MP3)",
+      "itemUrl": "https://learningenglish.voanews.com/a/lets-learn-english-lesson-one/3111026.html",
+      "role": "listening input — served as a local asset",
+      "use": "reused"
+    },
+    {
+      "id": "evergreen-ch1",
+      "sourceId": "evergreen-beginning-listening-speaking",
+      "itemTitle": "Chapter 1: Greetings and Introductions",
+      "itemUrl": "https://human.libretexts.org/Courses/Evergreen_Valley_College/Listening_and_Speaking_for_Beginning_English_Language_Learners/01:_Greetings_and_Introductions",
+      "role": "lesson-structure reference (activate → model → check → produce)",
+      "use": "reference"
+    },
+    {
+      "id": "pcc-greetings",
+      "sourceId": "pcc-esol-digital-workbook",
+      "itemTitle": "Beginning ESOL — Greetings chapter",
+      "itemUrl": "https://openoregon.pressbooks.pub/esol23/chapter/chapter-1-2/",
+      "role": "exercise-mechanics reference (instant-feedback interactive items)",
+      "use": "reference"
+    },
+    {
+      "id": "ae-conversations",
+      "sourceId": "american-english-everyday-conversations",
+      "itemTitle": "Everyday Conversations — Introductions and Small Talk",
+      "itemUrl": "https://americanenglish.state.gov/resources/everyday-conversations-learning-american-english",
+      "role": "naturalness benchmark for the target chunk set",
+      "use": "reference"
+    }
+  ],
+  "completion": {
+    "statement": "You can meet someone in English.",
+    "skills": [
+      "Say hello",
+      "Say your name",
+      "Respond to an introduction"
+    ]
+  },
+  "blocks": [
+    {
+      "type": "text",
+      "text": "In this lesson you learn to meet someone for the first time in English: say hello, say your name, and answer when someone says hello to you.",
+      "provenance": { "kind": "se-authored" }
+    },
+    {
+      "type": "heading",
+      "text": "Listen: Anna and Pete meet",
+      "provenance": { "kind": "se-authored" }
+    },
+    {
+      "type": "audio",
+      "title": "Anna and Pete meet — listen and repeat",
+      "src": "/media/voa-lle1-conversation.mp3",
+      "transcript": "Pete: Hi! Are you Anna?\nAnna: Yes! Hi there! Are you Pete?\nPete: I am Pete.\nAnna: Nice to meet you.\nAnna: Let's try that again. I'm Anna. Nice to meet you.\nPete: I'm Pete.",
+      "evidence": "docs/sources/evidence/voa-lle1-conversation.json",
+      "provenance": { "kind": "reused", "sourceRef": "voa-lle1-audio" }
+    },
+    {
+      "type": "text",
+      "text": "Listen two or three times. Then read the important parts below — the parts you use when you meet someone.",
+      "provenance": { "kind": "se-authored" }
+    },
+    {
+      "type": "example",
+      "text": "— Hi! I'm Anna.\n— I'm Pete. Nice to meet you.",
+      "translation": "— Chào! Tôi là Anna.\n— Tôi là Pete. Rất vui được gặp bạn.",
+      "provenance": { "kind": "adapted", "sourceRef": "voa-lle1-welcome" }
+    },
+    {
+      "type": "example",
+      "text": "— Nice to meet you too.",
+      "translation": "— Tôi cũng rất vui được gặp bạn.",
+      "provenance": { "kind": "se-authored" }
+    },
+    {
+      "type": "text",
+      "text": "“I'm” means “I am”. “I'm Anna” is how you say your name. “Nice to meet you” is what people say when they meet someone for the first time.",
+      "provenance": { "kind": "se-authored" }
+    },
+    {
+      "type": "multiple-choice",
+      "id": "q-nice-to-meet-you",
+      "prompt": "Anna says “Nice to meet you.” What is a good answer?",
+      "options": [
+        { "id": "a", "text": "Nice to meet you too." },
+        { "id": "b", "text": "Good night." },
+        { "id": "c", "text": "I am Pete." }
+      ],
+      "answer": "a",
+      "provenance": { "kind": "se-authored" }
+    },
+    {
+      "type": "heading",
+      "text": "Your turn",
+      "provenance": { "kind": "se-authored" }
+    },
+    {
+      "type": "text",
+      "text": "Say it out loud. Use your own name — not Anna or Pete.",
+      "provenance": { "kind": "se-authored" }
+    },
+    {
+      "type": "example",
+      "text": "— Hi, I'm ______.\n— Nice to meet you.\n— Nice to meet you too.",
+      "translation": "— Chào, tôi là ______.\n— Rất vui được gặp bạn.\n— Tôi cũng rất vui được gặp bạn.",
+      "provenance": { "kind": "se-authored" }
+    }
+  ]
+}

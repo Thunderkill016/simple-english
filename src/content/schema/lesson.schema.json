@@ -2,64 +2,96 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://simple-english.dev/schema/lesson.schema.json",
   "title": "SE Lesson",
-  "description": "Normalized lesson unit for Simple English. Deliberately minimal — extend only when a real content need exists.",
+  "description": "Normalized lesson unit for Simple English. Deliberately minimal — extend only when a real content need exists. v2: lessons are SE-authored multi-source syntheses — single-source `source` replaced by authoredBy + sourceRefs + block-level provenance.",
   "type": "object",
-  "required": ["schemaVersion", "id", "title", "level", "source", "blocks"],
+  "required": [
+    "schemaVersion",
+    "id",
+    "title",
+    "level",
+    "summary",
+    "capability",
+    "authoredBy",
+    "sourceRefs",
+    "blocks"
+  ],
   "additionalProperties": false,
   "properties": {
-    "schemaVersion": { "type": "integer", "const": 1 },
+    "schemaVersion": { "type": "integer", "const": 2 },
     "id": {
       "type": "string",
       "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
-      "description": "URL-safe stable identifier"
+      "description": "URL-safe stable identifier, SE-owned — never encodes a source name"
     },
     "title": { "type": "string", "minLength": 1 },
     "level": { "type": "string", "enum": ["beginner", "elementary", "intermediate"] },
-    "source": {
+    "summary": {
+      "type": "string",
+      "minLength": 1,
+      "description": "one-sentence learner-facing description shown on Today/Learn"
+    },
+    "capability": {
+      "type": "string",
+      "minLength": 1,
+      "description": "what the learner can do after completing the lesson"
+    },
+    "authoredBy": {
+      "type": "string",
+      "minLength": 1,
+      "description": "author of the synthesized lesson — 'Simple English' for canonical lessons, 'SE fixture' for synthetic test content"
+    },
+    "sourceRefs": {
+      "type": "array",
+      "description": "external sources the lesson draws on; synthetic fixtures use []",
+      "items": {
+        "type": "object",
+        "required": ["id", "sourceId", "itemUrl", "role", "use"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "description": "local key blocks' provenance.sourceRef points to; unique within the lesson (semantic check)"
+          },
+          "sourceId": {
+            "type": "string",
+            "minLength": 1,
+            "description": "registry key — must match a record in src/content/sources/ (semantic check)"
+          },
+          "itemTitle": { "type": "string", "minLength": 1 },
+          "itemUrl": {
+            "type": "string",
+            "pattern": "^https://",
+            "description": "canonical URL of the specific source item used"
+          },
+          "role": {
+            "type": "string",
+            "minLength": 1,
+            "description": "what this source contributes, e.g. 'primary-language-model', 'structure', 'naturalness-benchmark'"
+          },
+          "use": {
+            "type": "string",
+            "enum": ["reused", "adapted", "reference"],
+            "description": "how SE uses the item — 'reference' sources contribute no copied content (semantic check enforces)"
+          }
+        }
+      }
+    },
+    "completion": {
       "type": "object",
-      "required": ["id", "adapted"],
+      "required": ["statement", "skills"],
       "additionalProperties": false,
       "properties": {
-        "id": {
+        "statement": {
           "type": "string",
           "minLength": 1,
-          "description": "registry key — must match a record in src/content/sources/ for non-synthetic content (semantic check)"
+          "description": "capability-completion sentence, e.g. 'You can meet someone in English.'"
         },
-        "title": {
-          "type": "string",
-          "minLength": 1,
-          "description": "item-level title override; defaults to the registry record title"
-        },
-        "license": {
-          "type": "string",
-          "minLength": 1,
-          "description": "item-level license override; defaults to the registry record license"
-        },
-        "url": {
-          "type": "string",
-          "minLength": 1,
-          "description": "item-level provenance URL; defaults to the registry record url"
-        },
-        "licenseUrl": {
-          "type": "string",
-          "description": "canonical URL of the source license deed"
-        },
-        "adapted": {
-          "type": "boolean",
-          "description": "true when SE adapted this from an external source"
-        },
-        "adaptationNotes": {
+        "skills": {
           "type": "array",
+          "minItems": 1,
           "items": { "type": "string", "minLength": 1 },
-          "description": "material adaptations made from the source, for attribution/QA/re-import traceability"
-        },
-        "synthetic": {
-          "type": "boolean",
-          "description": "true when content is SE-authored fixture/test data, not real curriculum"
-        },
-        "attribution": {
-          "type": "string",
-          "description": "attribution line satisfying the source license obligations (author, work, license, changes)"
+          "description": "what the learner practiced, shown on completion"
         }
       }
     },
@@ -70,6 +102,23 @@
     }
   },
   "$defs": {
+    "provenance": {
+      "type": "object",
+      "required": ["kind"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["reused", "adapted", "se-authored", "reference"],
+          "description": "origin of this block's English content; Vietnamese translations on any block are always SE-authored"
+        },
+        "sourceRef": {
+          "type": "string",
+          "minLength": 1,
+          "description": "sourceRefs[].id this block derives from — required for reused/adapted/reference, forbidden for se-authored (semantic check)"
+        }
+      }
+    },
     "block": {
       "oneOf": [
         {
@@ -78,7 +127,8 @@
           "additionalProperties": false,
           "properties": {
             "type": { "const": "heading" },
-            "text": { "type": "string", "minLength": 1 }
+            "text": { "type": "string", "minLength": 1 },
+            "provenance": { "$ref": "#/$defs/provenance" }
           }
         },
         {
@@ -87,7 +137,8 @@
           "additionalProperties": false,
           "properties": {
             "type": { "const": "text" },
-            "text": { "type": "string", "minLength": 1 }
+            "text": { "type": "string", "minLength": 1 },
+            "provenance": { "$ref": "#/$defs/provenance" }
           }
         },
         {
@@ -97,7 +148,11 @@
           "properties": {
             "type": { "const": "example" },
             "text": { "type": "string", "minLength": 1 },
-            "translation": { "type": "string" }
+            "translation": {
+              "type": "string",
+              "description": "secondary-language support — always SE-authored"
+            },
+            "provenance": { "$ref": "#/$defs/provenance" }
           }
         },
         {
@@ -124,7 +179,33 @@
             "answer": {
               "type": "string",
               "description": "id of the correct option"
-            }
+            },
+            "provenance": { "$ref": "#/$defs/provenance" }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["type", "title", "src", "transcript", "evidence"],
+          "additionalProperties": false,
+          "properties": {
+            "type": { "const": "audio" },
+            "title": { "type": "string", "minLength": 1 },
+            "src": {
+              "type": "string",
+              "pattern": "^/media/",
+              "description": "local static asset — SE hosts only rights-verified media; external audio goes through external-embed or links, never rehosted files"
+            },
+            "transcript": {
+              "type": "string",
+              "minLength": 1,
+              "description": "full transcript — keeps the lesson usable when audio fails or the learner prefers reading"
+            },
+            "evidence": {
+              "type": "string",
+              "minLength": 1,
+              "description": "repo-relative path to the retained rights/hash evidence JSON (verified at build time)"
+            },
+            "provenance": { "$ref": "#/$defs/provenance" }
           }
         },
         {
@@ -158,7 +239,8 @@
               "type": "string",
               "pattern": "^https://",
               "description": "where the learner goes if the embed cannot load"
-            }
+            },
+            "provenance": { "$ref": "#/$defs/provenance" }
           }
         }
       ]

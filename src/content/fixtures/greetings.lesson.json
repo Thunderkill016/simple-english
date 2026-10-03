@@ -1,16 +1,12 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "id": "greetings",
   "title": "Greetings",
   "level": "beginner",
-  "source": {
-    "id": "se-fixture",
-    "title": "SE synthetic fixture lesson",
-    "license": "MIT",
-    "url": "https://github.com/Thunderkill016/simple-english",
-    "adapted": false,
-    "synthetic": true
-  },
+  "summary": "Say hello in English.",
+  "capability": "The learner can greet someone in English.",
+  "authoredBy": "SE fixture",
+  "sourceRefs": [],
   "blocks": [
     {
       "type": "heading",

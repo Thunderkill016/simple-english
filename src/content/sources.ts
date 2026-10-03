@@ -1,4 +1,7 @@
+import americanEnglishEverydayConversations from "./sources/american-english-everyday-conversations.json";
+import evergreenBeginningLs from "./sources/evergreen-beginning-listening-speaking.json";
 import pccEsolDigitalWorkbook from "./sources/pcc-esol-digital-workbook.json";
+import voaLetsLearnEnglish1 from "./sources/voa-lets-learn-english-level-1.json";
 
 // Source registry — canonical machine-readable provenance records
 // (LRMI-aligned, see docs/sources/README.md). Lessons reference these by
@@ -16,7 +19,7 @@ export interface SourceRecord {
   contentType?: string[];
   levels?: string[];
   subjects?: string[];
-  reuseStatus: "approved" | "review-required" | "prohibited";
+  reuseStatus: "approved" | "review-required" | "reference-only" | "prohibited";
   provenanceNotes?: string;
   verifiedAt?: string;
   verifiedBy?: string;
@@ -44,8 +47,11 @@ export interface SourceRecord {
 }
 
 const pcc = pccEsolDigitalWorkbook as SourceRecord;
+const voa = voaLetsLearnEnglish1 as SourceRecord;
+const evergreen = evergreenBeginningLs as SourceRecord;
+const ae = americanEnglishEverydayConversations as SourceRecord;
 
-export const sourceRecords: readonly SourceRecord[] = [pcc];
+export const sourceRecords: readonly SourceRecord[] = [pcc, voa, evergreen, ae];
 
 export function getSourceRecord(id: string): SourceRecord | undefined {
   return sourceRecords.find((s) => s.id === id);

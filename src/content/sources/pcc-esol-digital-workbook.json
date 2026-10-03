@@ -11,7 +11,7 @@
   "levels": ["beginner"],
   "subjects": ["ESOL", "English language"],
   "reuseStatus": "approved",
-  "provenanceNotes": "Book-level license is CC BY 4.0 'except where otherwise noted'; embedded items carry their own licenses and are dispositioned per item (REUSE/ADAPT → EXTERNAL_EMBED → LINK_ONLY → OMIT). Per-item dispositions for the Greetings chapter (chapter-1-2): H5P 'Greetings 01' fill-in-the-blank dialogue — CC0 1.0 by Tim Krause → REUSE/ADAPT (evidence retained). H5P 'Greetings 02' memory game — CC0 but per-image copyrights unverified → LINK_ONLY (original host's embed endpoint blocked cross-origin by CloudFront — verified live 2026-10-03). YouTube 'Hello. How are you?' (AzES-nhQFzk) — third-party → EXTERNAL_EMBED via official player. YouTube 'More Greetings' (uqgKvNxhCvQ) — third-party → LINK_ONLY. H5P 'Useful Expressions' and 'Greetings Extra' — license 'U' undisclosed → LINK_ONLY via chapter link.",
+  "provenanceNotes": "Book-level license is CC BY 4.0 'except where otherwise noted'; embedded items carry their own licenses and are dispositioned per item (REUSE/ADAPT → EXTERNAL_EMBED → LINK_ONLY → OMIT). Per-item dispositions for the Greetings chapter (chapter-1-2): H5P 'Greetings 01' fill-in-the-blank dialogue — CC0 1.0 by Tim Krause → ADAPT-eligible (evidence retained; previously used in the superseded lesson pcc-esol-l1m1-greetings). H5P 'Greetings 02' memory game — CC0 but per-image copyrights unverified → LINK_ONLY (original host's embed endpoint blocked cross-origin by CloudFront — verified live 2026-10-03). YouTube 'Hello. How are you?' (AzES-nhQFzk) — third-party → EXTERNAL_EMBED-eligible via official player. YouTube 'More Greetings' (uqgKvNxhCvQ) — third-party → LINK_ONLY. H5P 'Useful Expressions' and 'Greetings Extra' — license 'U' undisclosed → LINK_ONLY via chapter link. Current role: exercise-mechanics reference for se-a1-meet-someone — its greeting content teaches 'How are you?' (a later capability).",
   "verifiedAt": "2026-10-03",
   "verifiedBy": "Devin",
   "adaptationLog": [
@@ -20,7 +20,7 @@
       "itemUrl": "https://openoregon.pressbooks.pub/esol23/chapter/chapter-1-2/",
       "itemLicense": "CC0 1.0",
       "itemAuthors": ["Tim Krause"],
-      "usedIn": "src/content/lessons/pcc-esol-l1m1-greetings.lesson.json",
+      "usedIn": "(previously src/content/lessons/pcc-esol-l1m1-greetings.lesson.json — removed 2026-10-03, superseded by se-a1-meet-someone)",
       "evidence": "docs/sources/evidence/pcc-esol-l1m1-greetings.h5p-metadata.json",
       "notes": "Conversation text (Hello / Hi / How are you? / Fine, thank you / Good. Thank you.) restructured into SE lesson blocks; one multiple-choice exercise derived from the original item's learning goal."
     }
@@ -34,7 +34,7 @@
       "rightsStatus": "embed-only",
       "reason": "Third-party video, not covered by the book license — embedding via the official YouTube player preserves the learning value while rights stay with the original holder.",
       "verifiedAt": "2026-10-03",
-      "usedIn": "src/content/lessons/pcc-esol-l1m1-greetings.lesson.json"
+      "usedIn": "(previously src/content/lessons/pcc-esol-l1m1-greetings.lesson.json — removed 2026-10-03; embed no longer part of the curriculum)"
     }
   ]
 }

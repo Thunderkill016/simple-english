@@ -2,24 +2,33 @@
 // Fixture content is validated against the JSON Schema by the pipeline
 // (pnpm validate:content / build); these types are the code-side contract.
 // Keep the two in sync when the schema evolves.
+//
+// v2: lessons are SE-authored multi-source syntheses. Single-source
+// `source` was replaced by authoredBy + sourceRefs + block provenance.
 
-export interface LessonSource {
-  /** registry key — must match a src/content/sources/ record for
-   *  non-synthetic content; item-level fields below override record defaults */
+/** How SE uses a source item — "reference" contributes no copied content. */
+export type SourceUse = "reused" | "adapted" | "reference";
+
+export interface SourceRef {
+  /** local key blocks' provenance.sourceRef points to */
   id: string;
-  title?: string;
-  license?: string;
-  url?: string;
-  /** canonical URL of the source license deed */
-  licenseUrl?: string;
-  /** true when SE adapted this from an external source */
-  adapted: boolean;
-  /** material adaptations made from the source, for traceability */
-  adaptationNotes?: string[];
-  /** true when content is SE-authored fixture/test data, not real curriculum */
-  synthetic?: boolean;
-  /** attribution line satisfying the source license obligations */
-  attribution?: string;
+  /** registry key — must match a src/content/sources/ record */
+  sourceId: string;
+  itemTitle?: string;
+  /** canonical URL of the specific source item used */
+  itemUrl: string;
+  /** what this source contributes, e.g. "primary-language-model" */
+  role: string;
+  use: SourceUse;
+}
+
+/** Origin of a block's English content. Translations are always SE-authored. */
+export type ProvenanceKind = "reused" | "adapted" | "se-authored" | "reference";
+
+export interface BlockProvenance {
+  kind: ProvenanceKind;
+  /** sourceRefs[].id — required for reused/adapted/reference, forbidden for se-authored */
+  sourceRef?: string;
 }
 
 export type LessonLevel = "beginner" | "elementary" | "intermediate";
@@ -27,17 +36,21 @@ export type LessonLevel = "beginner" | "elementary" | "intermediate";
 export interface HeadingBlock {
   type: "heading";
   text: string;
+  provenance?: BlockProvenance;
 }
 
 export interface TextBlock {
   type: "text";
   text: string;
+  provenance?: BlockProvenance;
 }
 
 export interface ExampleBlock {
   type: "example";
   text: string;
+  /** secondary-language support — always SE-authored */
   translation?: string;
+  provenance?: BlockProvenance;
 }
 
 export interface MultipleChoiceOption {
@@ -52,6 +65,19 @@ export interface MultipleChoiceBlock {
   options: MultipleChoiceOption[];
   /** id of the correct option */
   answer: string;
+  provenance?: BlockProvenance;
+}
+
+export interface AudioBlock {
+  type: "audio";
+  title: string;
+  /** local static asset — SE hosts only rights-verified media */
+  src: string;
+  /** full transcript — keeps the lesson usable when audio fails */
+  transcript: string;
+  /** repo-relative path to retained rights/hash evidence JSON */
+  evidence: string;
+  provenance?: BlockProvenance;
 }
 
 export interface ExternalEmbedBlock {
@@ -67,6 +93,7 @@ export interface ExternalEmbedBlock {
   purpose: string;
   /** where the learner goes if the embed cannot load */
   fallbackUrl: string;
+  provenance?: BlockProvenance;
 }
 
 export type LessonBlock =
@@ -74,13 +101,28 @@ export type LessonBlock =
   | TextBlock
   | ExampleBlock
   | MultipleChoiceBlock
+  | AudioBlock
   | ExternalEmbedBlock;
 
+export interface LessonCompletion {
+  /** capability-completion sentence shown on the completion panel */
+  statement: string;
+  /** what the learner practiced */
+  skills: string[];
+}
+
 export interface Lesson {
-  schemaVersion: 1;
+  schemaVersion: 2;
   id: string;
   title: string;
   level: LessonLevel;
-  source: LessonSource;
+  /** one-sentence learner-facing description shown on Today/Learn */
+  summary: string;
+  /** what the learner can do after completing the lesson */
+  capability: string;
+  /** 'Simple English' for canonical lessons, 'SE fixture' for synthetic content */
+  authoredBy: string;
+  sourceRefs: SourceRef[];
+  completion?: LessonCompletion;
   blocks: LessonBlock[];
 }

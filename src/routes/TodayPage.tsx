@@ -33,7 +33,6 @@ export function TodayPage() {
   }
 
   const completed = progress?.status === "completed";
-  const intro = lesson.blocks.find((b) => b.type === "text");
 
   return (
     <section className="space-y-6">
@@ -59,9 +58,7 @@ export function TodayPage() {
           </p>
           <div className="space-y-2">
             <h2 className="text-lg font-semibold">{lesson.title}</h2>
-            {intro?.type === "text" ? (
-              <p className="text-muted">{intro.text}</p>
-            ) : null}
+            <p className="text-muted">{lesson.summary}</p>
             <p className="text-sm text-muted capitalize">{lesson.level}</p>
           </div>
           <Link to={`/learn?lesson=${lesson.id}`} className="btn btn-primary">

@@ -1,9 +1,11 @@
 import Ajv2020 from "ajv/dist/2020.js";
 import { describe, expect, it } from "vitest";
 import fixture from "./fixtures/greetings.lesson.json";
+import canonical from "./lessons/se-a1-meet-someone.lesson.json";
 import schema from "./schema/lesson.schema.json";
 import sourceSchema from "./schema/source.schema.json";
 import sourceRecord from "./sources/pcc-esol-digital-workbook.json";
+import { sourceRecords } from "./sources";
 
 const ajv = new Ajv2020({ strict: true, allErrors: true });
 const validate = ajv.compile(schema);
@@ -12,6 +14,10 @@ const validateSource = ajv.compile(sourceSchema);
 describe("lesson JSON Schema", () => {
   it("accepts the greetings fixture", () => {
     expect(validate(fixture), ajv.errorsText(validate.errors)).toBe(true);
+  });
+
+  it("accepts the canonical multi-source lesson", () => {
+    expect(validate(canonical), ajv.errorsText(validate.errors)).toBe(true);
   });
 
   it("rejects a lesson missing a required property", () => {
@@ -45,6 +51,48 @@ describe("lesson JSON Schema", () => {
     expect(validate(invalid)).toBe(false);
   });
 
+  it("rejects an unknown provenance kind", () => {
+    const invalid = {
+      ...fixture,
+      blocks: [
+        { type: "text", text: "x", provenance: { kind: "copied" } },
+      ],
+    };
+    expect(validate(invalid)).toBe(false);
+  });
+
+  it("rejects an audio block pointing at an external URL", () => {
+    const invalid = {
+      ...fixture,
+      blocks: [
+        {
+          type: "audio",
+          title: "x",
+          src: "https://example.com/a.mp3",
+          transcript: "t",
+          evidence: "docs/sources/evidence/voa-lle1-conversation.json",
+        },
+      ],
+    };
+    expect(validate(invalid)).toBe(false);
+  });
+
+  it("rejects a lesson with the legacy v1 single-source shape", () => {
+    const invalid = {
+      schemaVersion: 2,
+      id: "x",
+      title: "x",
+      level: "beginner",
+      summary: "x",
+      capability: "x",
+      authoredBy: "x",
+      sourceRefs: [],
+      source: { id: "pcc-esol-digital-workbook", adapted: true },
+      blocks: fixture.blocks,
+    };
+    expect(validate(invalid)).toBe(false);
+  });
+
   const validEmbed = {
     type: "external-embed",
     provider: "youtube",
@@ -73,9 +121,12 @@ describe("lesson JSON Schema", () => {
 });
 
 describe("source record JSON Schema (load-bearing provenance)", () => {
-  it("accepts the PCC source record", () => {
-    expect(validateSource(sourceRecord), ajv.errorsText(validateSource.errors)).toBe(true);
-  });
+  it.each(sourceRecords.map((s) => [s.id, s] as const))(
+    "accepts every registry record: %s",
+    (_id, record) => {
+      expect(validateSource(record), ajv.errorsText(validateSource.errors)).toBe(true);
+    },
+  );
 
   it.each(["authors", "publisher", "licenseUrl", "verifiedAt", "reuseStatus"] as const)(
     "rejects a record missing %s",

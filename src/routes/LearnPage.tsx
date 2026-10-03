@@ -49,7 +49,6 @@ export function LearnPage() {
       <ol className="space-y-4">
         {curriculum.map((l, i) => {
           const completed = completedIds.has(l.id);
-          const intro = l.blocks.find((b) => b.type === "text");
           return (
             <li key={l.id} className="flex gap-4">
               <span
@@ -69,9 +68,7 @@ export function LearnPage() {
                     </span>
                   ) : null}
                 </p>
-                {intro?.type === "text" ? (
-                  <p className="text-sm text-muted">{intro.text}</p>
-                ) : null}
+                <p className="text-sm text-muted">{l.summary}</p>
                 <p className="text-sm text-muted capitalize">{l.level}</p>
                 <div className="pt-2">
                   <Link
