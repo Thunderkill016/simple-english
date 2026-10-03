@@ -44,17 +44,21 @@
       "sourceId": "american-english-everyday-conversations",
       "itemTitle": "Everyday Conversations — Introductions (dialogues 1-3/1-4 + language notes)",
       "itemUrl": "https://americanenglish.state.gov/resources/everyday-conversations-learning-american-english",
-      "role": "attested '…, too' response to an introduction + 'Good night' farewell distractor",
+      "role": "first-meeting usage note + 'Good night' farewell distractor",
+      "use": "adapted"
+    },
+    {
+      "id": "ae-forum-trythis",
+      "sourceId": "ae-english-teaching-forum",
+      "itemTitle": "English Teaching Forum — TRY THIS: Role-Play Party (Small-Talk Function Chart)",
+      "itemUrl": "https://americanenglish.state.gov/files/ae/resource_files/53-2_10_trythis.pdf",
+      "role": "verbatim cloze starters + 'Nice to meet you, too.' response",
       "use": "adapted"
     }
   ],
   "completion": {
     "statement": "You practiced meeting someone in English.",
-    "skills": [
-      "Say hello",
-      "Say your name",
-      "Respond to an introduction"
-    ],
+    "skills": ["Say hello", "Say your name", "Respond to an introduction"],
     "note": "One practice session — real meetings take more practice. Come back and try again."
   },
   "blocks": [
@@ -70,12 +74,12 @@
     },
     {
       "type": "text",
-      "text": "Anna and Pete meet for the first time. What do they say?",
+      "text": "Two people are talking. Is this their first time meeting? Listen.",
       "provenance": { "kind": "se-authored" }
     },
     {
       "type": "audio",
-      "title": "Anna and Pete meet for the first time",
+      "title": "Anna and Pete — a conversation",
       "src": "/media/voa-lle1-conversation.mp3",
       "transcript": "Pete: Hi! Are you Anna?\nAnna: Yes! Hi there! Are you Pete?\nPete: I am Pete.\nAnna: Nice to meet you.\nAnna: Let's try that again. I'm Anna. Nice to meet you.\nPete: I'm Pete.",
       "evidence": "docs/sources/evidence/voa-lle1-conversation.json",
@@ -83,7 +87,7 @@
     },
     {
       "type": "text",
-      "text": "Listen again and read the important parts below — the parts you use when you meet someone.",
+      "text": "They meet for the first time. Now listen again and read the important parts below — the parts you use when you meet someone.",
       "provenance": { "kind": "se-authored" }
     },
     {
@@ -94,21 +98,26 @@
     },
     {
       "type": "example",
-      "text": "— Nice to meet you too.",
+      "text": "— Nice to meet you, too.",
       "translation": "— Tôi cũng rất vui được gặp bạn.",
-      "provenance": { "kind": "adapted", "sourceRef": "ae-introductions" }
+      "provenance": { "kind": "adapted", "sourceRef": "ae-forum-trythis" }
     },
     {
       "type": "text",
-      "text": "“I'm” means “I am”. “I'm Anna” is how you say your name. “Nice to meet you” is what people say when they meet someone for the first time.",
+      "text": "“I'm” means “I am”. “I'm Anna” says her name.",
       "provenance": { "kind": "adapted", "sourceRef": "evergreen-ch1" }
+    },
+    {
+      "type": "text",
+      "text": "“Nice to meet you” is what people say when they meet someone for the first time.",
+      "provenance": { "kind": "adapted", "sourceRef": "ae-introductions" }
     },
     {
       "type": "multiple-choice",
       "id": "q-nice-to-meet-you",
       "prompt": "Anna says “Nice to meet you.” What is a good answer?",
       "options": [
-        { "id": "a", "text": "Nice to meet you too." },
+        { "id": "a", "text": "Nice to meet you, too." },
         { "id": "b", "text": "Good night." },
         { "id": "c", "text": "I am Pete." }
       ],
@@ -127,9 +136,9 @@
     },
     {
       "type": "example",
-      "text": "— Hi, I'm ______.\n— Nice to meet you.\n— Nice to meet you too.",
+      "text": "— Hi, I'm ______.\n— Nice to meet you.\n— Nice to meet you, too.",
       "translation": "— Chào, tôi là ______.\n— Rất vui được gặp bạn.\n— Tôi cũng rất vui được gặp bạn.",
-      "provenance": { "kind": "adapted", "sourceRef": "evergreen-ch1" }
+      "provenance": { "kind": "adapted", "sourceRef": "ae-forum-trythis" }
     }
   ]
 }

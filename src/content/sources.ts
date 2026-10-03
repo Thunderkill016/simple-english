@@ -1,4 +1,5 @@
 import americanEnglishEverydayConversations from "./sources/american-english-everyday-conversations.json";
+import aeEnglishTeachingForum from "./sources/ae-english-teaching-forum.json";
 import evergreenBeginningLs from "./sources/evergreen-beginning-listening-speaking.json";
 import pccEsolDigitalWorkbook from "./sources/pcc-esol-digital-workbook.json";
 import voaLetsLearnEnglish1 from "./sources/voa-lets-learn-english-level-1.json";
@@ -50,8 +51,15 @@ const pcc = pccEsolDigitalWorkbook as SourceRecord;
 const voa = voaLetsLearnEnglish1 as SourceRecord;
 const evergreen = evergreenBeginningLs as SourceRecord;
 const ae = americanEnglishEverydayConversations as SourceRecord;
+const aeForum = aeEnglishTeachingForum as SourceRecord;
 
-export const sourceRecords: readonly SourceRecord[] = [pcc, voa, evergreen, ae];
+export const sourceRecords: readonly SourceRecord[] = [
+  pcc,
+  voa,
+  evergreen,
+  ae,
+  aeForum,
+];
 
 export function getSourceRecord(id: string): SourceRecord | undefined {
   return sourceRecords.find((s) => s.id === id);

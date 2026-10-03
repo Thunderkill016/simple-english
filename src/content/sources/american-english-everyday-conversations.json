@@ -21,7 +21,7 @@
       "itemLicense": "Public domain (17 U.S.C. §105)",
       "itemAuthors": ["U.S. Bureau of International Informational Programs"],
       "usedIn": "src/content/lessons/se-a1-meet-someone.lesson.json",
-      "notes": "Response 'Nice to meet you too.' composed from VOA's eliciting phrase + the source's attested '…, too' response pattern — documented, not verbatim any single source. Distractor 'Good night.' is verbatim from the source's language notes."
+      "notes": "Used for the first-meeting usage note ('Nice to meet you' is what people say when meeting someone for the first time) and distractor 'Good night.' verbatim from the source's language notes. The 'Nice to meet you, too.' response is now sourced verbatim from ae-english-teaching-forum — post-re-audit fix removing the SE composition."
     }
   ]
 }

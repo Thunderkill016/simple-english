@@ -4,6 +4,7 @@ Canonical educational specification. The JSON implementation
 (`src/content/lessons/se-a1-meet-someone.lesson.json`) must match this.
 
 Evidence bases:
+
 - Content: `docs/research/lesson-001-source-comparison.md`
 - Pedagogy: `docs/research/lesson-design-frameworks.md`
 - Contract: `docs/curriculum/lesson-design-contract.md`
@@ -46,25 +47,23 @@ proficiency. Completion copy is practice-bounded.
 
 ```
 Hi.                        VOA (reused)
-I'm + name.                VOA ("I'm Anna.", "I'm Pete.")
+I'm + name.                VOA ("I'm Anna.", "I'm Pete.") + Forum chart ("I'm ______.")
 Nice to meet you.          VOA
-Nice to meet you too.      adapted — AE attested "...too" response
-Good night.                AE verbatim (distractor; a farewell per AE)
+Nice to meet you, too.     English Teaching Forum chart (verbatim)
+Good night.                AE verbatim (distractor; a farewell per AE notes)
 I am Pete.                 VOA verbatim (distractor)
 ```
 
 ## Source components & roles
 
-| sourceRef | Source | Role | Use |
-|---|---|---|---|
-| voa-lle1-welcome | VOA LLE L1 "Welcome!" | primary language model | adapted |
-| voa-lle1-audio | VOA LLE L1 conversation MP3 | listening input (local) | reused |
-| evergreen-ch1 | Evergreen "Listening & Speaking" ch.1 | contraction + cloze-frame material | adapted |
-| ae-introductions | American English, Everyday Conversations | response pattern + farewell distractor | adapted |
-| pcc-greetings | PCC Digital Workbook | exercise-mechanics reference | reference |
-
-Evergreen and AE retain additional `reference`-role rows only where
-documented; blocks needing their material use the `adapted` refs above.
+| sourceRef        | Source                                           | Role                                               | Use       |
+| ---------------- | ------------------------------------------------ | -------------------------------------------------- | --------- |
+| voa-lle1-welcome | VOA LLE L1 "Welcome!"                            | primary language model                             | adapted   |
+| voa-lle1-audio   | VOA LLE L1 conversation MP3                      | listening input (local)                            | reused    |
+| evergreen-ch1    | Evergreen ch.1 Grammar                           | I am→I'm contraction                               | adapted   |
+| ae-introductions | AE Everyday Conversations                        | first-meeting usage note + "Good night" distractor | adapted   |
+| ae-forum-trythis | English Teaching Forum, TRY THIS Role-Play Party | verbatim cloze starters + "Nice to meet you, too." | adapted   |
+| pcc-greetings    | PCC Digital Workbook                             | exercise-mechanics reference                       | reference |
 
 ## Lesson stages (derived; see stage map for citations)
 
@@ -72,25 +71,29 @@ Planning: ACTFL Backward Design. Listening spine: BC
 pre/while/post-listening. Practice: ARC Restricted → freer production.
 
 1. **Outcome** — one sentence (SE glue).
-2. **Pre-listening** — "Anna and Pete meet for the first time. Listen
-   first — just listen. What do they say?" (SE glue).
-3. **First listen (gist)** — VOA MP3; transcript behind a `<details>`
-   reveal so the first listen is listening, not reading.
-4. **Re-listen + read** — "Listen again and read the important parts —
-   the parts you use when you meet someone."
+2. **Pre-listening + gist question** — "Two people are talking. Is this
+   their first time meeting? Listen." — a real overall-understanding
+   task (situation/relationship, not detail; answer not pre-revealed).
+   Evergreen True/False-style comprehension mechanic.
+3. **First listen (gist)** — VOA MP3 (neutral title so the gist answer
+   isn't leaked); transcript behind a `<details>` reveal.
+4. **Gist check + re-listen** — "They meet for the first time. Now
+   listen again and read the important parts…" — self-check answer,
+   then detail focus.
 5. **Chunks** — adapted VOA exchange (ARC Clarification).
-6. **Response** — "Nice to meet you too." adapted from AE's attested
-   "...too" response pattern (composition disclosed in stage map).
-7. **Meaning note** — "I'm" = "I am" (Evergreen contraction) +
-   "Nice to meet you" as first-meeting formula (AE note); one line,
-   no grammar table.
+6. **Response** — "Nice to meet you, too." verbatim from the English
+   Teaching Forum Small-Talk Function Chart.
+7. **Meaning notes** — "'I'm' means 'I am'." (Evergreen contraction) and
+   "'Nice to meet you' is what people say when they meet someone for
+   the first time." (AE note) — split so each block's provenance points
+   at its actual source; no grammar table.
 8. **Check** — MC "Anna says 'Nice to meet you.' What is a good
-   answer?" — options: a. adapted AE pattern; b. "Good night." (AE;
-   the source itself notes it is a farewell); c. "I am Pete." (VOA).
-   Instant correct/incorrect feedback (ACTFL: timely, minimal).
+   answer?" — options: a. Forum-verbatim; b. "Good night." (AE
+   verbatim, a farewell per its own notes); c. "I am Pete." (VOA
+   verbatim). Instant correct/incorrect feedback.
 9. **Your turn** — speak-aloud cloze "Hi, I'm ______. / Nice to meet
-   you. / Nice to meet you too." (Evergreen own-information pattern,
-   adapted to honest solo self-practice).
+   you. / Nice to meet you, too." — Forum chart starters verbatim;
+   honest solo self-practice.
 10. **Completion** — practice-bounded statement + skills + honest note;
     CTA remains after all blocks.
 

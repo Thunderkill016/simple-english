@@ -1,6 +1,6 @@
 import { expect, test, type Page, type Request } from "@playwright/test";
 
-const OPTION_LABEL = "Nice to meet you too.";
+const OPTION_LABEL = "Nice to meet you, too.";
 const WRONG_OPTION = "Good night.";
 const LESSON_TITLE = "Meet Someone";
 const LESSON_ID = "se-a1-meet-someone";
@@ -9,7 +9,9 @@ const COMPLETION_STATEMENT = "✓ You practiced meeting someone in English.";
 
 async function openLesson(page: Page) {
   await page.goto("/");
-  await expect(page.getByRole("heading", { name: "Today", exact: true })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Today", exact: true }),
+  ).toBeVisible();
   await page.getByRole("link", { name: "Start lesson", exact: true }).click();
   await expect(
     page.getByRole("heading", { name: LESSON_TITLE, exact: true }),
@@ -46,7 +48,7 @@ async function answerAndComplete(page: Page) {
     if (!heading || !button) return false;
     return Boolean(
       heading.compareDocumentPosition(button) &
-        Node.DOCUMENT_POSITION_FOLLOWING,
+      Node.DOCUMENT_POSITION_FOLLOWING,
     );
   });
   expect(ctaAfterProduction).toBe(true);
@@ -58,7 +60,9 @@ async function answerAndComplete(page: Page) {
   const completion = page.getByText(COMPLETION_STATEMENT);
   await expect(completion).toBeVisible();
   await expect(completion).not.toContainText("Correct");
-  await expect(page.getByRole("link", { name: "Back to Learn", exact: true })).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Back to Learn", exact: true }),
+  ).toBeVisible();
 }
 
 test.describe("local-first learning slice", () => {
@@ -70,12 +74,19 @@ test.describe("local-first learning slice", () => {
     // Lesson 001 scope: 'How are you?' content must not be in this lesson.
     await expect(page.getByText("How are you?")).toHaveCount(0);
 
-    // Source-backed listening design: a pre-listening purpose precedes
-    // the audio block (gist question), transcript starts collapsed.
+    // Source-backed listening design: a real gist question precedes the
+    // audio block (situation/relationship, not detail) without giving away
+    // the answer; transcript starts collapsed; the answer is revealed
+    // after the listen.
     await expect(
       page.getByRole("heading", { name: "First, just listen" }),
     ).toBeVisible();
-    await expect(page.getByText("What do they say?")).toBeVisible();
+    await expect(
+      page.getByText("Is this their first time meeting?"),
+    ).toBeVisible();
+    await expect(
+      page.getByText("They meet for the first time.", { exact: false }),
+    ).toBeVisible();
 
     await answerAndComplete(page);
 
@@ -88,7 +99,9 @@ test.describe("local-first learning slice", () => {
       page.getByRole("listitem").filter({ hasText: "Say hello" }),
     ).toBeVisible();
     await expect(
-      page.getByRole("listitem").filter({ hasText: "Respond to an introduction" }),
+      page
+        .getByRole("listitem")
+        .filter({ hasText: "Respond to an introduction" }),
     ).toBeVisible();
 
     // Reload — completion must come back from IndexedDB, not the network.
@@ -104,10 +117,14 @@ test.describe("local-first learning slice", () => {
     await expect(
       page.getByRole("link", { name: /Lesson 1: Welcome!/ }),
     ).toHaveAttribute("href", /learningenglish\.voanews\.com/);
-    await expect(page.getByRole("link", { name: "license ↗" }).first()).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: "license ↗" }).first(),
+    ).toBeVisible();
 
     // Back to Learn shows the lesson as completed
-    await page.getByRole("link", { name: "Back to Learn", exact: true }).click();
+    await page
+      .getByRole("link", { name: "Back to Learn", exact: true })
+      .click();
     await expect(page.getByText("Completed")).toBeVisible();
 
     // Today reflects completion with a truthful next action
@@ -140,27 +157,24 @@ test.describe("local-first learning slice", () => {
     await answerAndComplete(page);
 
     // Progress landed in IndexedDB while offline
-    const persisted = await page.evaluate(
-      async (lessonId) => {
-        const req = indexedDB.open("simple-english");
-        const database: IDBDatabase = await new Promise((resolve, reject) => {
-          req.onsuccess = () => resolve(req.result);
-          req.onerror = () => reject(req.error);
-        });
-        const tx = database.transaction("lessonProgress", "readonly");
-        const record = await new Promise<{ status?: string } | undefined>(
-          (resolve, reject) => {
-            const get = tx.objectStore("lessonProgress").get(lessonId);
-            get.onsuccess = () =>
-              resolve(get.result as { status?: string } | undefined);
-            get.onerror = () => reject(get.error);
-          },
-        );
-        database.close();
-        return record;
-      },
-      LESSON_ID,
-    );
+    const persisted = await page.evaluate(async (lessonId) => {
+      const req = indexedDB.open("simple-english");
+      const database: IDBDatabase = await new Promise((resolve, reject) => {
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+      });
+      const tx = database.transaction("lessonProgress", "readonly");
+      const record = await new Promise<{ status?: string } | undefined>(
+        (resolve, reject) => {
+          const get = tx.objectStore("lessonProgress").get(lessonId);
+          get.onsuccess = () =>
+            resolve(get.result as { status?: string } | undefined);
+          get.onerror = () => reject(get.error);
+        },
+      );
+      database.close();
+      return record;
+    }, LESSON_ID);
     expect(persisted?.status).toBe("completed");
 
     // And no runtime API calls were made at any point
@@ -179,7 +193,10 @@ test.describe("local-first learning slice", () => {
       const url = new URL(req.url());
       // Compare against the page's current origin at request time — the
       // listener registers before navigation, when url is about:blank.
-      if (url.origin !== new URL(page.url()).origin && page.url() !== "about:blank") {
+      if (
+        url.origin !== new URL(page.url()).origin &&
+        page.url() !== "about:blank"
+      ) {
         thirdParty.push(req);
       }
     });
@@ -211,23 +228,29 @@ test.describe("local-first learning slice", () => {
     page,
   }) => {
     await page.goto("/learn");
-    await expect(page.getByRole("heading", { name: "Learn", exact: true })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Learn", exact: true }),
+    ).toBeVisible();
 
     await page.goto("/review");
-    await expect(page.getByRole("heading", { name: "Review", exact: true })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Review", exact: true }),
+    ).toBeVisible();
 
     await page.goto("/progress");
-    await expect(page.getByRole("heading", { name: "Progress", exact: true })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Progress", exact: true }),
+    ).toBeVisible();
   });
 
-  test("synthetic fixture is not reachable in production", async ({
-    page,
-  }) => {
+  test("synthetic fixture is not reachable in production", async ({ page }) => {
     // ?lesson=greetings is a test-only fixture — production must show a
     // deliberate not-found state, never the fixture lesson.
     await page.goto("/learn?lesson=greetings");
     await expect(page.getByText("Lesson not found")).toBeVisible();
-    await expect(page.getByRole("link", { name: "Back to Learn", exact: true })).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: "Back to Learn", exact: true }),
+    ).toBeVisible();
     await expect(
       page.getByRole("heading", { name: "Greetings", exact: true }),
     ).toHaveCount(0);
@@ -242,17 +265,25 @@ test.describe("local-first learning slice", () => {
 
   test("main navigation works across all four surfaces", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByRole("heading", { name: "Today", exact: true })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Today", exact: true }),
+    ).toBeVisible();
 
     await page.getByRole("link", { name: "Learn", exact: true }).click();
-    await expect(page.getByRole("heading", { name: "Learn", exact: true })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Learn", exact: true }),
+    ).toBeVisible();
 
     await page.getByRole("link", { name: "Review", exact: true }).click();
-    await expect(page.getByRole("heading", { name: "Review", exact: true })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Review", exact: true }),
+    ).toBeVisible();
     await expect(page.getByText("Nothing to review yet")).toBeVisible();
 
     await page.getByRole("link", { name: "Progress", exact: true }).click();
-    await expect(page.getByRole("heading", { name: "Progress", exact: true })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Progress", exact: true }),
+    ).toBeVisible();
   });
 
   test("accessibility smoke: headings, names, keyboard reachability, focus", async ({
@@ -286,7 +317,11 @@ test.describe("local-first learning slice", () => {
       const el = document.activeElement;
       if (!el) return false;
       const s = getComputedStyle(el);
-      return s.outlineStyle !== "none" || s.outlineWidth !== "0px" || s.boxShadow !== "none";
+      return (
+        s.outlineStyle !== "none" ||
+        s.outlineWidth !== "0px" ||
+        s.boxShadow !== "none"
+      );
     });
     expect(hasFocusStyle).toBe(true);
 

@@ -5,8 +5,8 @@
 > content, software, open-source projects and free technology instead of
 > rebuilding solved problems from scratch.**
 
-Internal motto: *Research first. Reuse first. Build only what matters. Keep
-learning simple.*
+Internal motto: _Research first. Reuse first. Build only what matters. Keep
+learning simple._
 
 This philosophy is load-bearing. Do not dilute it.
 

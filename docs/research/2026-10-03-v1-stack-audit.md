@@ -22,13 +22,13 @@ integration complexity.
 - **Bundle cost:** react + react-dom ≈ 40–50 kB gzip — the single largest
   fixed dependency, acceptable inside the initial-payload budget (§12).
 - **Alternatives considered:**
-  - *Preact (~4 kB, compat layer)* — materially smaller but adds a
+  - _Preact (~4 kB, compat layer)_ — materially smaller but adds a
     compatibility shim; some React ecosystem packages (Radix, React Router
     edge cases) are tested against React, not Preact.
-  - *Lit / plain Web Components + TS* — smallest runtime, but SE would then
+  - _Lit / plain Web Components + TS_ — smallest runtime, but SE would then
     hand-build routing, state, and accessible primitives that the React
     ecosystem provides free — violates reuse-first.
-  - *Vanilla TS* — same conclusion, worse.
+  - _Vanilla TS_ — same conclusion, worse.
 - **Verdict:** **ACCEPT.** React's ecosystem value (accessible primitives,
   React Router, Dexie React hooks, testing tools) exceeds its ~45 kB cost.
   Preact/`preact/compat` documented as the exit path if bundle pressure
@@ -52,9 +52,9 @@ integration complexity.
 - **Problem:** client-side routing between Today/Learn/Review/Progress.
 - **License/cost:** MIT, free.
 - **Modes (official docs, reactrouter.com/start/modes):**
-  - *Declarative* — basic routing, `<Routes>`, full control.
-  - *Data* — adds loaders/actions/pending states around a data-router model.
-  - *Framework* — adds Vite plugin, SSR/SSG strategies, type-safe routes.
+  - _Declarative_ — basic routing, `<Routes>`, full control.
+  - _Data_ — adds loaders/actions/pending states around a data-router model.
+  - _Framework_ — adds Vite plugin, SSR/SSG strategies, type-safe routes.
 - **Decisive evidence:** the official docs recommend Declarative mode when you
   "have a data layer that either skips pending states (**like local first,
   background data replication/sync**) or has its own abstractions" — SE's
@@ -78,7 +78,7 @@ integration complexity.
 
 ## 5. shadcn/ui (components)
 
-- **Model (official docs):** not a library — source code is *copied* into the
+- **Model (official docs):** not a library — source code is _copied_ into the
   repo (Radix UI primitives + Tailwind), MIT licensed. No dependency lock-in
   by design; code is owned once copied.
 - **Verdict:** **Conditional accept — native/simple components first.**
@@ -90,14 +90,14 @@ integration complexity.
 
 - **Need:** validate normalized OER content + source-registry records.
 - **Options:**
-  - *JSON Schema (Draft 2020-12) + Ajv* — the standard, language-neutral
+  - _JSON Schema (Draft 2020-12) + Ajv_ — the standard, language-neutral
     contract format; Ajv runs at import/build time as a devDependency →
     **zero runtime cost**. Types can be generated from schemas.
-  - *Zod* — better TS ergonomics (~12–16 kB runtime); Zod 4 can
+  - _Zod_ — better TS ergonomics (~12–16 kB runtime); Zod 4 can
     emit/ingest JSON Schema, but conversion of complex schemas is still
     partial. Runtime cost only justified if validation happens in the
     client.
-  - *TypeScript types only* — compile-time safety, zero runtime validation;
+  - _TypeScript types only_ — compile-time safety, zero runtime validation;
     insufficient alone for untrusted imported content.
 - **Verdict:** **JSON Schema as the canonical contract; Ajv in the
   import/build pipeline (devDependency).** Content shipped to the client is
@@ -142,7 +142,7 @@ integration complexity.
   1000/day, password-reset emails 150/day). Phone auth is Blaze-only
   (billed per SMS) — not needed for V1.
 - **Design consequence:** auth is optional and post-first-use. Initial sign-in
-  of *any* kind (including anonymous) is a network call → auth can never be
+  of _any_ kind (including anonymous) is a network call → auth can never be
   on the first-run or interaction path.
 
 ### Firestore
@@ -155,11 +155,11 @@ integration complexity.
   and it cannot serve a learner who has never signed in (any sign-in is a
   network call).
 - **Dexie + Firestore vs Firestore-only — explicit answer:**
-  - *Firestore-only* fails three requirements: (a) no account → no usable
+  - _Firestore-only_ fails three requirements: (a) no account → no usable
     store on first run; (b) the canonical learner store would live inside a
     proprietary vendor format/cache → lock-in + export friction; (c) SDK cost
     on every learner's critical path.
-  - *Dexie + Firestore-sync* gives a vendor-neutral local source of truth, an
+  - _Dexie + Firestore-sync_ gives a vendor-neutral local source of truth, an
     account-free first run, and keeps Firestore confined to a background
     sync adapter.
   - **Verdict: Dexie is the canonical local store; Firestore is a
@@ -171,12 +171,12 @@ integration complexity.
 
 Official Firestore locations in range (firebase.google.com/docs/firestore/locations):
 
-| Location | Region | Notes |
-| --- | --- | --- |
-| `asia-southeast3` | Bangkok | Launched Jan 2026 (GCP $1B Thailand investment); geographically closest to VN |
-| `asia-southeast1` | Singapore | Most mature SEA region |
-| `asia-southeast2` | Jakarta | Farther east; unlikely to win |
-| `asia-east2` | Hong Kong | Worth including in RTT test for northern VN (Hanoi) |
+| Location          | Region    | Notes                                                                         |
+| ----------------- | --------- | ----------------------------------------------------------------------------- |
+| `asia-southeast3` | Bangkok   | Launched Jan 2026 (GCP $1B Thailand investment); geographically closest to VN |
+| `asia-southeast1` | Singapore | Most mature SEA region                                                        |
+| `asia-southeast2` | Jakarta   | Farther east; unlikely to win                                                 |
+| `asia-east2`      | Hong Kong | Worth including in RTT test for northern VN (Hanoi)                           |
 
 - Region choice is **immutable** once the database is created.
 - Pricing: per-location rate tables exist; differences between the candidate
@@ -196,7 +196,7 @@ Official Firestore locations in range (firebase.google.com/docs/firestore/locati
 - **Format check (reuse-first):** surveyed 1EdTech standards — Common
   Cartridge (LMS packaging), QTI (assessment exchange), CASE (competency
   alignment), xAPI/Caliper (learning records), H5P (interactive exercises —
-  the *source* format inside the PCC workbook). These are interop/packaging
+  the _source_ format inside the PCC workbook). These are interop/packaging
   standards between systems, not in-app render formats. None is the right
   normalized representation for SE's client.
 - **Verdict:** custom **JSON + JSON Schema** for the normalized content
@@ -220,25 +220,25 @@ Official Firestore locations in range (firebase.google.com/docs/firestore/locati
 
 **Hard architectural requirements** (violations are bugs, not misses):
 
-| Rule | Requirement |
-| --- | --- |
-| Exercise feedback | no network round-trip on the path; perceived < 100 ms |
-| Lesson/route transition | no network round-trip; perceived < 100 ms post-load |
-| Progress write | UI proceeds without awaiting persistence; local write typical < 50 ms |
-| Progress restore | rendered from IndexedDB without network |
-| Cloud SDKs | absent from initial bundle; loaded on account intent only |
-| First run | learning works with zero account; static assets only |
+| Rule                    | Requirement                                                           |
+| ----------------------- | --------------------------------------------------------------------- |
+| Exercise feedback       | no network round-trip on the path; perceived < 100 ms                 |
+| Lesson/route transition | no network round-trip; perceived < 100 ms post-load                   |
+| Progress write          | UI proceeds without awaiting persistence; local write typical < 50 ms |
+| Progress restore        | rendered from IndexedDB without network                               |
+| Cloud SDKs              | absent from initial bundle; loaded on account intent only             |
+| First run               | learning works with zero account; static assets only                  |
 
 **Measurement goals** (tuned to mid-tier Android on Vietnam mobile networks;
 verify with Lighthouse/Playwright in CI):
 
-| Metric | Target |
-| --- | --- |
-| Initial JS (gzip) | ≤ 180 kB goal, 250 kB hard cap |
-| Initial CSS (gzip) | ≤ 25 kB |
-| LCP / first useful render | < 2.5 s on Fast-4G-class throttling |
-| Time to interactive lesson | < 3.5 s same conditions |
-| IndexedDB read for resume | < 50 ms typical |
+| Metric                     | Target                              |
+| -------------------------- | ----------------------------------- |
+| Initial JS (gzip)          | ≤ 180 kB goal, 250 kB hard cap      |
+| Initial CSS (gzip)         | ≤ 25 kB                             |
+| LCP / first useful render  | < 2.5 s on Fast-4G-class throttling |
+| Time to interactive lesson | < 3.5 s same conditions             |
+| IndexedDB read for resume  | < 50 ms typical                     |
 
 Rationale: 2.5 s LCP aligns with public Core Web Vitals "good" thresholds;
 payload caps sized from measured dependency costs (React ~45 kB + RR ~10 kB +
@@ -266,17 +266,17 @@ Dexie ~30 kB + Tailwind ~10–20 kB CSS + app code) with headroom.
 
 ## Summary matrix
 
-| Decision | Result | Key evidence |
-| --- | --- | --- |
-| React | accept | ecosystem > ~45 kB cost; Preact = exit |
-| Vite 7 | accept | official static build; Node 20.19+/22.12+ |
-| React Router | Declarative mode | official docs name local-first as the case |
-| Tailwind v4 | accept | zero-runtime, Vite plugin, tree-shaken CSS |
-| shadcn/ui | selective later | MIT copy-in; native first |
-| Content schema | JSON Schema + Ajv (pipeline) | standard contract, 0 runtime cost; Zod deferred |
-| Local store | Dexie | ~30 kB; removes IDB boilerplate; Apache-2.0 |
-| Cloud | Firebase Auth + Firestore sync-only | Spark free quotas cover V1; auth optional |
-| Firestore region | asia-southeast3 candidate; RTT-test vs southeast1/east2 | immutable choice → verify before provisioning |
-| Content | versioned JSON via CDN | never in Firestore |
-| Hosting | GitHub + Vercel Hobby | static exit path documented; non-commercial caveat |
-| Testing | Vitest + Playwright | conventional for stack |
+| Decision         | Result                                                  | Key evidence                                       |
+| ---------------- | ------------------------------------------------------- | -------------------------------------------------- |
+| React            | accept                                                  | ecosystem > ~45 kB cost; Preact = exit             |
+| Vite 7           | accept                                                  | official static build; Node 20.19+/22.12+          |
+| React Router     | Declarative mode                                        | official docs name local-first as the case         |
+| Tailwind v4      | accept                                                  | zero-runtime, Vite plugin, tree-shaken CSS         |
+| shadcn/ui        | selective later                                         | MIT copy-in; native first                          |
+| Content schema   | JSON Schema + Ajv (pipeline)                            | standard contract, 0 runtime cost; Zod deferred    |
+| Local store      | Dexie                                                   | ~30 kB; removes IDB boilerplate; Apache-2.0        |
+| Cloud            | Firebase Auth + Firestore sync-only                     | Spark free quotas cover V1; auth optional          |
+| Firestore region | asia-southeast3 candidate; RTT-test vs southeast1/east2 | immutable choice → verify before provisioning      |
+| Content          | versioned JSON via CDN                                  | never in Firestore                                 |
+| Hosting          | GitHub + Vercel Hobby                                   | static exit path documented; non-commercial caveat |
+| Testing          | Vitest + Playwright                                     | conventional for stack                             |

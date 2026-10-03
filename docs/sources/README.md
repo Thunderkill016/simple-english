@@ -17,19 +17,19 @@ supplemented by Dublin Core conventions where useful.
 
 Field mapping:
 
-| Registry field | LRMI / schema.org / DC term |
-| --- | --- |
-| `title` | `name` |
-| `authors` | `author` / `creator` |
-| `publisher` | `publisher` |
-| `url` | `url` |
-| `license` | `license` |
-| `licenseUrl` | `useRightsUrl` / `license` (URL form) |
-| `contentType` | `learningResourceType` |
-| `levels` | `educationalLevel` (+ `educationalAlignment` for frameworks such as CEFR) |
-| `subjects` | `teaches` / `about` |
-| `adaptedFrom` | `isBasedOnUrl` (for SE adaptations) |
-| `reuseStatus`, `provenanceNotes`, `verifiedAt`, `verifiedBy` | SE-specific verification fields (no standard equivalent) |
+| Registry field                                               | LRMI / schema.org / DC term                                               |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------- |
+| `title`                                                      | `name`                                                                    |
+| `authors`                                                    | `author` / `creator`                                                      |
+| `publisher`                                                  | `publisher`                                                               |
+| `url`                                                        | `url`                                                                     |
+| `license`                                                    | `license`                                                                 |
+| `licenseUrl`                                                 | `useRightsUrl` / `license` (URL form)                                     |
+| `contentType`                                                | `learningResourceType`                                                    |
+| `levels`                                                     | `educationalLevel` (+ `educationalAlignment` for frameworks such as CEFR) |
+| `subjects`                                                   | `teaches` / `about`                                                       |
+| `adaptedFrom`                                                | `isBasedOnUrl` (for SE adaptations)                                       |
+| `reuseStatus`, `provenanceNotes`, `verifiedAt`, `verifiedBy` | SE-specific verification fields (no standard equivalent)                  |
 
 This keeps SE records conceptually compatible with the wider OER ecosystem
 (OER Commons, Open Textbook Library, Pressbooks catalogs all emit LRMI-flavored
@@ -72,12 +72,12 @@ field.
 
 ## Initial sources
 
-| id | Title | License | Status |
-| --- | --- | --- | --- |
-| `pcc-esol-digital-workbook` | A Digital Workbook for Beginning ESOL (PCC / Open Oregon) — [record](../../src/content/sources/pcc-esol-digital-workbook.json) | CC BY 4.0 (per-item licenses vary) | approved — canonical V1 beginner source; book-level license verified, embedded items audited per item before adaptation (first adaptation: Greetings dialogue item, CC0, 2026-10-03) |
-| `pcc-portland-people-and-places` | Portland People and Places (Timothy Krause, PCC) | CC BY 4.0 | review-required — license verified 2026-10-03; adaptation review pending |
-| `pcc-green-tea-intermediate` | Green Tea Intermediate English Communication OER (Dodson, Diniz, Leiton; PCC / Open Oregon, 2020) | CC BY 4.0 | review-required — license verified 2026-10-03; adaptation review pending |
-| `american-english-state-dept` | American English / U.S. Dept. of State materials | per item | review-required — reuse rights vary; not automatically public domain |
+| id                               | Title                                                                                                                          | License                            | Status                                                                                                                                                                               |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `pcc-esol-digital-workbook`      | A Digital Workbook for Beginning ESOL (PCC / Open Oregon) — [record](../../src/content/sources/pcc-esol-digital-workbook.json) | CC BY 4.0 (per-item licenses vary) | approved — canonical V1 beginner source; book-level license verified, embedded items audited per item before adaptation (first adaptation: Greetings dialogue item, CC0, 2026-10-03) |
+| `pcc-portland-people-and-places` | Portland People and Places (Timothy Krause, PCC)                                                                               | CC BY 4.0                          | review-required — license verified 2026-10-03; adaptation review pending                                                                                                             |
+| `pcc-green-tea-intermediate`     | Green Tea Intermediate English Communication OER (Dodson, Diniz, Leiton; PCC / Open Oregon, 2020)                              | CC BY 4.0                          | review-required — license verified 2026-10-03; adaptation review pending                                                                                                             |
+| `american-english-state-dept`    | American English / U.S. Dept. of State materials                                                                               | per item                           | review-required — reuse rights vary; not automatically public domain                                                                                                                 |
 
 Machine-readable records live in `src/content/sources/` — a single canonical
 location imported both by the app runtime (attribution rendering) and by the

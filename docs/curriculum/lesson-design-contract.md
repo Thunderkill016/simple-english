@@ -118,7 +118,7 @@ don't overwhelm; reflective feedback supports self-evaluation)._
 - ❌ Diagnostic tasks for absolute beginners in solo lessons (TESOL TTT
   needs live diagnosis by a teacher).
 - ❌ "Complete N exercises to prove the skill" — no source sets an
-  exercise count; evidence rules bound the *kind* of evidence.
+  exercise count; evidence rules bound the _kind_ of evidence.
 - ❌ Celebratory/gamified completion — nothing pedagogical requires it;
   calm self-assessment is closer to ACTFL's reflective feedback.
 

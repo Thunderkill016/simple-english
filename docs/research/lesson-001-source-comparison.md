@@ -8,6 +8,7 @@ Task: `task/005-multisource-lesson-001`
 
 > A learner meets someone for the first time.
 > They should be able to:
+>
 > 1. say hello
 > 2. say their name
 > 3. respond when another person introduces themselves
@@ -231,14 +232,14 @@ Potential SE role: **naturalness benchmark** (rejected as supplier).
 
 ## Scores at a glance
 
-| Source | Ed. score | Rights | Decision |
-|---|---|---|---|
-| VOA Let's Learn English L1 | 88 | Public domain (credit) | **Primary** — adapt model + reuse audio |
-| USA Learns | 75 | Copyrighted (Sacramento COE) | Reference only |
-| Evergreen Valley (LibreTexts) | 67 | CC BY 4.0 | Reference — staging pattern |
-| Oxford Online English | 54 | Copyrighted | Reference only |
-| PCC / Open Oregon | 53 | CC BY 4.0 (item-level varies) | Reference — exercise mechanics |
-| American English | 48 | Public domain (17 USC §105) | Reference — naturalness benchmark |
+| Source                        | Ed. score | Rights                        | Decision                                |
+| ----------------------------- | --------- | ----------------------------- | --------------------------------------- |
+| VOA Let's Learn English L1    | 88        | Public domain (credit)        | **Primary** — adapt model + reuse audio |
+| USA Learns                    | 75        | Copyrighted (Sacramento COE)  | Reference only                          |
+| Evergreen Valley (LibreTexts) | 67        | CC BY 4.0                     | Reference — staging pattern             |
+| Oxford Online English         | 54        | Copyrighted                   | Reference only                          |
+| PCC / Open Oregon             | 53        | CC BY 4.0 (item-level varies) | Reference — exercise mechanics          |
+| American English              | 48        | Public domain (17 USC §105)   | Reference — naturalness benchmark       |
 
 Educational quality is scored independently of rights; a copyrighted
 source keeps its pedagogy score but passes through the reuse gate
@@ -255,7 +256,7 @@ Learn English Level 1, Lesson 1 "Welcome!"** — hypothesis **confirmed**.
   domain — so SE can legally serve the audio locally instead of relying
   on a third-party embed.
 - What it still lacks: a scoped lesson (spelling/address is inside its
-  dialogue — SE trims the *model* to the target lines while keeping the
+  dialogue — SE trims the _model_ to the target lines while keeping the
   full audio + transcript as authentic input); an interactive practice
   surface (SE supplies its own exercise); an explicit capability
   statement (SE supplies it).

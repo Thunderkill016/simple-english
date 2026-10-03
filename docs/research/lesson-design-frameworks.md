@@ -41,7 +41,7 @@ What it says:
 What it does NOT say:
 
 - No fixed stage list, no mandated order of activities. Backward design
-  governs *planning logic* (outcome → evidence → experiences), not a
+  governs _planning logic_ (outcome → evidence → experiences), not a
   classroom recipe.
 
 Applies to Lesson 001: **YES — planning frame.** The lesson spec must
@@ -67,7 +67,7 @@ What it says:
 
 What it does NOT say:
 
-- Does not define how a *solo* software product should emulate a live
+- Does not define how a _solo_ software product should emulate a live
   interlocutor. Interpersonal communication presumes a partner.
 
 Applies to Lesson 001: **YES, with an honest limitation.** A local app
@@ -125,7 +125,7 @@ language must describe lesson-level practice evidence, not proficiency.
 What it says:
 
 - **Pre-listening**: prepare learners — motivation, contextualization,
-  preparation. Language/knowledge needed to *complete the task* should
+  preparation. Language/knowledge needed to _complete the task_ should
   be handled before listening so the challenge is listening, not
   decoding the task.
 - **While-listening**: tasks that focus attention on the text and guide
@@ -160,11 +160,11 @@ Applies to Lesson 001: **YES — governs the listening spine.**
 What it says:
 
 - Plans need **clear and realistic aims**; writing aims that include the
-  *concept* (the meaning the target language carries in natural use)
+  _concept_ (the meaning the target language carries in natural use)
   keeps planning focused and prevents confusion.
 - Lessons divide into **coherent stages**, each with its own aim,
   building toward the outcome.
-- Ordering guidance is deliberately soft: *"as a very general rule"* —
+- Ordering guidance is deliberately soft: _"as a very general rule"_ —
   introduction → new language → controlled practice → freer practice →
   review/feedback. ESA elements are "useful to keep in mind," not a law.
 - Controlled practice = restricted production of the target language;
@@ -211,14 +211,14 @@ What it says:
 - The learner is a **social agent** who must accomplish real-life tasks;
   learning is organized around purposeful action, learner **agency**,
   and authentic materials; can-do descriptors orient goals toward what
-  learners *can* do (proficiency view) rather than gaps.
-- Full action-oriented *scenarios* span several lessons and culminate in
+  learners _can_ do (proficiency view) rather than gaps.
+- Full action-oriented _scenarios_ span several lessons and culminate in
   collaborative tasks/artefacts.
 
 Limits for Lesson 001:
 
 - A single solo lesson cannot implement a full scenario or a
-  collaborative task — we borrow the *orientation* (real-world purpose,
+  collaborative task — we borrow the _orientation_ (real-world purpose,
   agency, can-do framing), not the full apparatus.
 
 Applies to Lesson 001: **YES — orienting principle only.** The desired
@@ -262,7 +262,7 @@ What it says (Topic 4.2, verbatim criteria):
   timings."
 - Topic 4.4: select, adapt and evaluate materials "with due regard for
   the provisions of copyright."
-- 4.1: choose lesson *types* appropriate to particular learners.
+- 4.1: choose lesson _types_ appropriate to particular learners.
 
 Applies to Lesson 001: **YES — quality-control checklist, not a
 sequence.** Our spec mirrors it: aim, learner profile, staged
@@ -292,19 +292,19 @@ model before practice, guided → independent progression.
 
 ## Cross-source comparison
 
-| Framework | What it's for | Prescriptive? | Sequence claim | Fits a 10-min solo lesson? |
-|---|---|---|---|---|
-| ACTFL Backward Design | planning logic | outcome→evidence→experiences | none about activities | YES — frame |
-| BC listening framework | listening lessons | stage types, not order | pre→while→post | YES — governs listening |
-| BC lesson planning | general ELT planning | soft | controlled→freer "as a very general rule"; ESA optional | YES — supports |
-| ARC | stage labeling | no — any order | none | YES — vocabulary |
-| CEFR action-oriented | curriculum orientation | no | scenario over many lessons | PARTIAL — orientation |
-| TESOL TTT | classroom TBLT | pattern, not universal | task→teach→task | NO — needs live diagnosis |
-| CELTA | teacher-training QC | plan components, not order | staged procedures | YES — checklist |
-| Rosenshine | general instruction | principles, not recipe | model→guided→independent | YES — supports |
-| ACTFL feedback | feedback quality | qualities, not format | n/a | YES |
-| ACTFL communicative tasks | task design | qualities | n/a | PARTIAL — partner absent |
-| ACTFL Can-Do | goal/self-assessment | descriptors | n/a | YES — honesty bound |
+| Framework                 | What it's for          | Prescriptive?                | Sequence claim                                          | Fits a 10-min solo lesson? |
+| ------------------------- | ---------------------- | ---------------------------- | ------------------------------------------------------- | -------------------------- |
+| ACTFL Backward Design     | planning logic         | outcome→evidence→experiences | none about activities                                   | YES — frame                |
+| BC listening framework    | listening lessons      | stage types, not order       | pre→while→post                                          | YES — governs listening    |
+| BC lesson planning        | general ELT planning   | soft                         | controlled→freer "as a very general rule"; ESA optional | YES — supports             |
+| ARC                       | stage labeling         | no — any order               | none                                                    | YES — vocabulary           |
+| CEFR action-oriented      | curriculum orientation | no                           | scenario over many lessons                              | PARTIAL — orientation      |
+| TESOL TTT                 | classroom TBLT         | pattern, not universal       | task→teach→task                                         | NO — needs live diagnosis  |
+| CELTA                     | teacher-training QC    | plan components, not order   | staged procedures                                       | YES — checklist            |
+| Rosenshine                | general instruction    | principles, not recipe       | model→guided→independent                                | YES — supports             |
+| ACTFL feedback            | feedback quality       | qualities, not format        | n/a                                                     | YES                        |
+| ACTFL communicative tasks | task design            | qualities                    | n/a                                                     | PARTIAL — partner absent   |
+| ACTFL Can-Do              | goal/self-assessment   | descriptors                  | n/a                                                     | YES — honesty bound        |
 
 ## What the sources collectively do NOT support
 
@@ -312,7 +312,7 @@ model before practice, guided → independent progression.
   hedged ("very general rule"); ARC explicitly permits any order; TTT
   contradicts ARC's default; ESA is presented as an option.
 - That listening must always come before language focus — it does for a
-  *listening* lesson, by the listening framework's own logic.
+  _listening_ lesson, by the listening framework's own logic.
 - That a solo app can claim interpersonal proficiency.
 - That one successful attempt demonstrates mastery.
 - That distractors, explanations or example sentences may be invented
