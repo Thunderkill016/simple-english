@@ -16,6 +16,7 @@ type Feedback = "correct" | "incorrect" | null;
 export function LessonView({ lesson }: { lesson: Lesson }) {
   const [progress, setProgress] = useState<LessonProgress | undefined>(undefined);
   const [feedback, setFeedback] = useState<Feedback>(null);
+  const [persistError, setPersistError] = useState(false);
 
   const exercise = lesson.blocks.find(
     (b): b is MultipleChoiceBlock => b.type === "multiple-choice",
@@ -43,11 +44,12 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
   function handleSelect(optionId: string) {
     if (!exercise) return;
     setFeedback(null);
+    setPersistError(false);
     // UI responds immediately; persistence follows (SPEC §9).
     setProgress((prev) =>
       progressAfterAnswer(prev, lesson.id, optionId, new Date().toISOString()),
     );
-    void saveAnswer(lesson.id, optionId);
+    void saveAnswer(lesson.id, optionId).catch(() => setPersistError(true));
   }
 
   function handleCheck() {
@@ -56,11 +58,17 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
   }
 
   function handleComplete() {
+    const previous = progress;
+    setPersistError(false);
     // UI responds immediately; persistence follows.
     setProgress((prev) =>
       progressAfterComplete(prev, lesson.id, new Date().toISOString()),
     );
-    void completeLesson(lesson.id);
+    void completeLesson(lesson.id).catch(() => {
+      setPersistError(true);
+      // Revert — the UI must not claim a persisted state the write never made true.
+      setProgress(previous);
+    });
   }
 
   return (
@@ -112,6 +120,11 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
             ) : null}
             {completed ? (
               <span className="text-emerald-700">Lesson complete.</span>
+            ) : null}
+            {persistError ? (
+              <span role="alert" className="text-amber-700">
+                Couldn't save progress locally — it may not be there after reload.
+              </span>
             ) : null}
           </p>
         </div>

@@ -81,6 +81,16 @@ test.describe("local-first learning slice", () => {
     expect(apiRequests).toEqual([]);
   });
 
+  test("deep links render routes directly (SPA static hosting)", async ({
+    page,
+  }) => {
+    await page.goto("/learn");
+    await expect(page.getByRole("heading", { name: "Learn" })).toBeVisible();
+
+    await page.goto("/progress");
+    await expect(page.getByRole("heading", { name: "Progress" })).toBeVisible();
+  });
+
   test("main navigation works across all four surfaces", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByRole("heading", { name: "Today" })).toBeVisible();

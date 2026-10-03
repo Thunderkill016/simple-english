@@ -8,6 +8,7 @@ import { readdirSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import Ajv2020 from "ajv/dist/2020.js";
+import { checkLessonSemantics } from "./content-checks.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const schema = JSON.parse(
@@ -23,12 +24,16 @@ const files = readdirSync(fixturesDir).filter((f) => f.endsWith(".json"));
 
 for (const file of files) {
   const data = JSON.parse(readFileSync(join(fixturesDir, file), "utf8"));
-  if (validate(data)) {
+  const schemaErrors = validate(data) ? [] : [ajv.errorsText(validate.errors)];
+  const semanticErrors = schemaErrors.length === 0 ? checkLessonSemantics(data) : [];
+  if (schemaErrors.length === 0 && semanticErrors.length === 0) {
     console.log(`✓ ${file}`);
   } else {
     failed = true;
     console.error(`✗ ${file}`);
-    console.error(ajv.errorsText(validate.errors, { separator: "\n  " }));
+    for (const err of [...schemaErrors, ...semanticErrors]) {
+      console.error(`  ${err}`);
+    }
   }
 }
 
