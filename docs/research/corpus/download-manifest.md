@@ -20,6 +20,8 @@ In gitignored `research_cache/` — inspected for structure only, never committe
 | `research_cache/pearson/speakout-a1-sb.pdf` (+ `.txt`) | pearson.pl official sample | ~2 MB | Speakout 3e A1 Unit 1 reproduction |
 | `research_cache/ngl/we-sample.pdf` (+ `.txt`) | NGL World English L1 3e sample | ~1 MB | Goal/GOAL-CHECK structure |
 | `research_cache/voa/voa-l1-lessonplan.pdf` (+ `.txt`) | docs.voanews.eu | 1.3 MB | 8-page official lesson plan (PD) |
+| `research_cache/cambridge/empower2e-starter-sample.pdf` (+ `.txt`) | eltbooks.com (Cambridge-authorized retailer) | 20 MB | **Empower 2e Starter/A1 official sample — complete Scope & Sequence + sample Unit 5 (Correction A evidence)** |
+| `research_cache/cambridge/eltbooks.html` | eltbooks.com | 81 KB | sample-download provenance |
 | `research_cache/voa/voa-l1-page.html` | learningenglish.voanews.com | 163 KB | Full lesson page — media inventory source |
 | `research_cache/voa/quiz1-12.html` | learningenglish.voanews.com /Quiz/Start | ~25 KB ea | All 6 quiz questions + media IDs + option sets |
 | `research_cache/voa/voa-lle1-*.mp4` (9 files) | voa-video.voanews.eu (VOA CDN) | ~3.5 MB | Quiz stems ×6, Speaking Practice, Pronunciation — PD, retained for inspection |

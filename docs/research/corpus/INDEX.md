@@ -33,11 +33,70 @@ Claims are tagged `CONFIRMED` / `PARTIAL` / `UNKNOWN` where source visibility is
 ### R1.1 — Cambridge
 
 - `cambridge-system-map.md` — how the Cambridge learning system works end to end.
-- `cambridge-empower-a1-deep-dive.md` — unit/lesson structure of Empower Starter Unit 1, extracted from an official distributor reproduction.
-- `cambridge-assessment-system.md` — LOA, Principles of Good Practice, Empower progress/competency tests, Write&Improve / Speak&Improve.
-- `english-profile-analysis.md` — EP programme, EGP, EVP, Cambridge Learner Corpus connection.
+- `cambridge-empower-a1-deep-dive.md` — unit/lesson structure of Empower Starter Unit 1 (**LEGACY / FIRST-EDITION internal evidence**; 2e cross-confirmed at skeleton level).
+- `empower-edition-diff.md` — 1e Starter Unit 1 vs 2e Starter/A1 Unit 1 (SAME/CHANGED/UNKNOWN per dimension). **2e evidence wins conflicts.**
+- `cambridge-assessment-system.md` — LOA, Principles of Good Practice, Empower progress/competency tests, Write&Improve / Speak&Improve (formative estimate per Correction C).
+- `english-profile-analysis.md` — EP programme, EGP, EVP — **REFERENCE_ONLY per ChatGPT Decision 3**.
 - `cambridge-corpus-analysis.md` — which corpora exist, how Cambridge uses them, what is public/licensed.
 - `cambridge-rights-boundary.md` — what may be inspected vs what may be reused.
+
+---
+
+## CHATGPT REVIEW DECISIONS (2026-10-04)
+
+R1.1 accepted with corrections; recorded per mission §39.
+
+**Reference hierarchy (locked):**
+
+```text
+FOUNDATIONAL EVIDENCE      CEFR + SLA research + ACTFL + British Council + TESOL
+PRIMARY PROFESSIONAL BENCHMARK   Cambridge Empower Second Edition
+SPECIALIST PROFESSIONAL BENCHMARKS  English File / Speakout / Roadmap-GSE / Outcomes
+IMPLEMENTABLE CONTENT      VOA / American English / OER / open data
+→ SE
+```
+
+Cambridge is the structural benchmark, not sole truth — it does not override
+stronger foundational evidence or self-study product constraints. Deviations
+from classroom mechanics need their own evidence.
+
+**Depth principle (locked):**
+
+SE targets **coverage depth**, not exercise counts. Four distinct scopes:
+
+```text
+UNIT depth    = the capability cluster (Cambridge unit ≈ SE unit)
+LESSON depth  = one objective-titled skills chain
+SECTION depth = one stage inside a lesson (input / language / pron / practice / production / check)
+SESSION depth = what one web sitting actually covers — a lesson may span
+                multiple resumable sessions
+```
+
+Do NOT cut curriculum to make a short session. Do NOT copy Cambridge's
+~25-item exercise count into a web lesson.
+
+**EGP/EVP (locked):** REFERENCE_ONLY — research queries + cited findings;
+no bulk ingestion, repo snapshot, runtime dependency, commercial-use
+assumption, or "English Profile informed" claim. Terms:
+`englishprofile.org/?menu=evp-terms-of-use`, `?menu=contact-us`.
+
+**Speaking evidence (locked for SE v1):** self-practice / record / replay /
+reflect = PRACTICE EVIDENCE ONLY. Never claim speaking competency from it.
+Machine scoring = formative estimate unless independently validated.
+Human+rubric review = possible stronger evidence later. Interpersonal
+ability cannot be inferred from solo repetition.
+
+**Speak & Improve / Write & Improve:** formative practice estimates —
+not Cambridge-exam-equivalent proficiency evidence (official help docs).
+
+**R1.2 scope (locked):** same beginner problem (meet/greet/introduce/basic
+personal info) across Empower 2e Starter/A1, English File 5e Beginner,
+Speakout 3e A1, Roadmap 2e/GSE beginner, Outcomes 3e Beginner. Ten questions
+on recurring patterns, Cambridge-specifics, specialist deltas, depth,
+unit/lesson/section/session boundaries, pronunciation integration,
+controlled-vs-personalized production, review, assessment-vs-completion,
+and classroom mechanics that don't transfer to solo web. No scores, no
+winner, no new SE curriculum.
 
 ### Cross-cutting
 

@@ -1,5 +1,14 @@
 # Empower Starter/A1 Deep Dive — Unit 1 Reconstruction
 
+> **VERSION NOTICE (CHATGPT CORRECTION A, 2026-10-04):** the lesson-internal
+> evidence in this document is **LEGACY / FIRST-EDITION EVIDENCE** —
+> Cambridge English Empower Starter (ISBN 9781107465947) via the Klett
+> distributor reproduction. The benchmark target is **Empower Second Edition
+> Starter/A1 (2022, ISBN 9781108961691)**. Second Edition Scope & Sequence
+> confirms the same unit architecture (see `empower-edition-diff.md`), so the
+> *mechanics* documented here remain valid as the structural model; specific
+> content names/scripts are first-edition and must not be attributed to 2e.
+
 Evidence base: `research_cache/cambridge/klett-empower.pdf` (official Cambridge
 distributor teaching doc containing Empower Starter Unit 1 page reproductions
 with remote-teaching notes) + `oxico-empower.pdf` (official excerpt, Unit 1

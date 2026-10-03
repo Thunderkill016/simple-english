@@ -30,7 +30,7 @@ center + customer stories, Cambridge Language Sciences resource page.
 | In-lesson "Check Your Progress" | n/a | taught items | self-check |
 | Unit Progress Test | 2 | unit objectives | evidence of learning |
 | Mid-/End-course Competency Test | 1 | CEFR | evidence of proficiency |
-| Write & Improve / Speak & Improve | free retries | CEFR scale | external proficiency feedback |
+| Write & Improve / Speak & Improve | free retries | CEFR-scaled *estimate* | **formative practice feedback — NOT proficiency evidence** (see correction below) |
 
 - Post-test loop (customer story): review answers → platform suggests
   specific content to review → re-test later.
@@ -43,8 +43,9 @@ Correct performance on items tied to what was taught — unit objective items,
 two chances, classroom-adjacent stakes.
 
 **What is evidence of proficiency?**
-CEFR-mapped competency tests + calibrated free tools — single-attempt,
-independent of the taught sequence.
+CEFR-mapped competency tests (and externally, full-QA Cambridge exams) —
+independent of the taught sequence. NOT the free practice tools: those give
+formative estimates only (Correction C).
 
 **How is feedback generated / when is reassessment used?**
 Score → review-answer stage → platform-recommended content → re-attempt.
@@ -67,9 +68,17 @@ for impact+practicality, high-stakes exams for reliability+validity.
    retest. "Not quite — try again" is the seed of the same loop.
 3. Attempt policy is a design signal, not friction: allow retries where the
    goal is learning; forbid them where the goal is measurement.
-4. Write&Improve/Speak&Improve prove Cambridge trusts *external, skill-
-   specific, machine-scored* feedback for production — the two skills SE
-   cannot honestly self-score are the ones Cambridge built free tools for.
+4. ~~Write&Improve/Speak&Improve prove Cambridge trusts machine-scored
+   feedback as proficiency evidence~~ → **CHATGPT CORRECTION C (2026-10-04):**
+   Cambridge's own help pages state Speak & Improve gives only an *automatic
+   estimate*, is for research/practice, is **not** a Cambridge English exam,
+   and does not go through the full QA of high-stakes assessment
+   (`help.writeandimprove.com/en/articles/4397300`). Write & Improve likewise
+   = submit → feedback → revise loop (`cambridgeenglish.org/vn/learning-english/
+   write-and-improve/`). Reclassified: **FORMATIVE / PRACTICE ESTIMATE**, not
+   validated proficiency certification. What they actually prove: Cambridge
+   trusts machine scoring *for practice loops* — exactly the tier where a
+   self-study product may use it, with honest labeling.
 
 ## OPEN QUESTIONS
 

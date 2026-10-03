@@ -20,50 +20,80 @@ catalog entry, Wikipedia programme summary.
   ISBN 9781107493988).
 - **Access**: EGP described as "publicly available free-of-charge for
   non-commercial use" (Wikipedia/programme docs); EGP Online also circulates
-  as an official .xlsx. EVP access terms UNKNOWN.
+  as an official .xlsx.
 - **Empirical surprises the corpus produced** (O'Keeffe & Mark): mismatches
   between ELT syllabi and measured competence; e.g. learners producing past
   simple at A1; error and competence not mutually exclusive; adjective
   sequences marking the A1→A2 transition.
 
+## RIGHTS — CHATGPT REVIEW DECISION (2026-10-04): REFERENCE_ONLY
+
+Official English Profile Terms of Use located by reviewer:
+
+- EVP Terms (`https://englishprofile.org/?menu=evp-terms-of-use`): material
+  may be used for **personal non-commercial research/teaching or internal
+  circulation**; use beyond that scope requires Cambridge consent.
+- Contact/Terms (`https://englishprofile.org/?menu=contact-us`): Cambridge
+  **does not license EVP/EGP data for commercial purposes**.
+- EGP page (`https://englishprofile.org/?menu=english-grammar-profile`):
+  free online resource under its own Terms of Use.
+
+**Locked policy:**
+
+```text
+EGP = REFERENCE_ONLY
+EVP = REFERENCE_ONLY
+commercial_use:            NO
+bulk production ingestion: NO
+repository snapshot:       NO
+runtime dependency:        NO
+"English Profile informed" marketing claim: NO (requires permission)
+```
+
+Allowed: researcher queries EGP/EVP → checks a proposed grammar/vocabulary
+decision → records a high-level finding + citation.
+Forbidden: downloading profiles into the repo, exposing them through the
+product, building a runtime leveling engine on them. Open substitutes must be
+found in R1.3 (language-data-landscape) for any production leveling.
+
 ## Answers to the mission's questions
 
 **Can it help SE decide vocabulary level?**
-Yes — EVP is purpose-built for this; it is the single most authoritative
-public level-map for English words. License check required before storing
-any word list.
+Yes for *research-level checks*: EVP is purpose-built as a level-map —
+citable findings, no stored data (see rights policy above). Any production
+leveling needs open substitutes (R1.3).
 
 **Can it help SE decide grammar sequence?**
-Yes — EGP gives empirical level + FORM/USE split per structure, i.e. it can
-answer "is `be`-contraction realistic at beginner level?" with data rather
-than intuition.
+Yes at research level — EGP gives empirical level + FORM/USE split per
+structure, i.e. it can answer "is `be`-contraction realistic at beginner
+level?" with data rather than intuition, recorded as a cited finding.
 
 **What can legally be stored?**
-EGP is free for *non-commercial* use — SE's reuse posture must be decided
-(open product, no monetization yet) — flagged for ChatGPT decision. Corpus
-itself: proprietary; nothing may be stored.
+Nothing at statement/data level (Terms: personal non-commercial
+research/teaching or internal circulation only; no commercial licensing).
+Only citations + high-level findings.
 
 **What requires licensing/account/API?**
 Full EVP database access (partial paywall per catalog descriptions);
 Cambridge Learner Corpus (licensed research corpus).
 
 **What can only be used as reference?**
-The profiles' *methodology* and headline findings — freely citeable;
-statement-level data only under the non-commercial terms.
+Everything — per the locked policy above.
 
 ## DEVIN ANALYSIS
 
 English Profile is the strongest available answer to "what is level-
 appropriate content" — and it is empirically built from what learners *do*,
-not what teachers assume. Two implications for SE: (a) level claims in SE
-content can be checked against EGP/EVP rather than guessed; (b) learner-error
-evidence could eventually drive sequencing the same way Cambridge uses CLC —
-but SE has no learner corpus today, so this is a reference layer now.
+not what teachers assume. For SE it is a **research-time check layer only**
+(per the locked rights policy): proposed level decisions can be validated
+against EGP/EVP findings and cited — the production leveling mechanism must
+come from open substitutes (R1.3) or SE's own learner-error data later.
 
 ## OPEN QUESTIONS
 
-- EVP/EGP exact license text and whether programmatic snapshotting is allowed.
 - Pre-A1 coverage — EGP is A1–C2; VOA/Cambridge Starter-level material sits
   partly below the grid.
 - Whether a public EGP→structure download endpoint exists (the .xlsx)
-  or only UI search.
+  or only UI search (moot for production — research queries only).
+- Open substitutes for level-appropriate vocabulary/grammar lists — moved to
+  R1.3 language-data-landscape.
