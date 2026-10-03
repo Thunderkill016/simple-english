@@ -10,6 +10,7 @@ import {
   type LessonProgress,
 } from "../progress/progress";
 import { Block } from "./blocks";
+import { getSourceRecord } from "../../content/sources";
 
 type Feedback = "correct" | "incorrect" | null;
 
@@ -71,6 +72,19 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
     });
   }
 
+  const record = getSourceRecord(lesson.source.id);
+  const resolved = {
+    title: lesson.source.title ?? record?.title,
+    url: lesson.source.url ?? record?.url,
+    license: lesson.source.license ?? record?.license,
+    licenseUrl: lesson.source.licenseUrl ?? record?.licenseUrl,
+    attribution:
+      lesson.source.attribution ??
+      (record
+        ? `Based on “${record.title}” by ${record.authors.join(", ")} (${record.publisher}), ${record.license}. Adapted by Simple English.`
+        : undefined),
+  };
+
   return (
     <article className="space-y-4">
       <header className="space-y-1">
@@ -131,8 +145,39 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
       ) : null}
 
       <footer className="pt-2 text-xs text-slate-500">
-        Source: {lesson.source.title} — {lesson.source.license}
-        {lesson.source.synthetic ? " (synthetic fixture)" : null}
+        <p>
+          Source:{" "}
+          {resolved.url ? (
+            <a
+              href={resolved.url}
+              target="_blank"
+              rel="noreferrer"
+              className="underline decoration-slate-300 underline-offset-2 hover:text-slate-700"
+            >
+              {resolved.title}
+            </a>
+          ) : (
+            resolved.title
+          )}
+          {" — "}
+          {resolved.licenseUrl ? (
+            <a
+              href={resolved.licenseUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="underline decoration-slate-300 underline-offset-2 hover:text-slate-700"
+            >
+              {resolved.license}
+            </a>
+          ) : (
+            resolved.license
+          )}
+          {lesson.source.adapted ? " (adapted)" : null}
+          {lesson.source.synthetic ? " (synthetic fixture)" : null}
+        </p>
+        {resolved.attribution ? (
+          <p className="mt-1">{resolved.attribution}</p>
+        ) : null}
       </footer>
     </article>
   );

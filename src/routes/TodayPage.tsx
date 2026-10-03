@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import { lessons } from "../content/lessons";
+import { curriculum } from "../content/curriculum";
 import { getLessonProgress, type LessonProgress } from "../features/progress/progress";
 
 export function TodayPage() {
   // Vertical slice: exactly one lesson, one obvious next action.
-  const lesson = lessons[0];
+  const lesson = curriculum[0];
   const [progress, setProgress] = useState<LessonProgress | undefined>(undefined);
 
   useEffect(() => {

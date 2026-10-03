@@ -1,6 +1,7 @@
 import { expect, test, type Page, type Request } from "@playwright/test";
 
-const OPTION_LABEL = "Hello!";
+const OPTION_LABEL = "Fine, thank you.";
+const LESSON_TITLE = "Greetings: How are you?";
 
 async function openLesson(page: Page) {
   await page.goto("/");
@@ -8,7 +9,7 @@ async function openLesson(page: Page) {
   await expect(page.getByRole("heading", { name: "Learn" })).toBeVisible();
   await page.getByRole("link", { name: "Start" }).click();
   await expect(
-    page.getByRole("heading", { name: "Greetings" }),
+    page.getByRole("heading", { name: LESSON_TITLE }),
   ).toBeVisible();
 }
 
@@ -31,6 +32,14 @@ test.describe("local-first learning slice", () => {
     await page.reload();
     await expect(page.getByText("Lesson complete.")).toBeVisible();
     await expect(page.getByRole("radio", { name: OPTION_LABEL })).toBeChecked();
+
+    // Provenance survives rendering (reuse-first principle)
+    await expect(
+      page.getByRole("link", { name: /Digital Workbook for Beginning ESOL/ }),
+    ).toHaveAttribute("href", /openoregon\.pressbooks\.pub/);
+    await expect(
+      page.getByText(/Adapted from 'Level 01 Module 01 Greetings 01' by Tim Krause/),
+    ).toBeVisible();
 
     // Today reflects completion
     await page.getByRole("link", { name: "Today" }).click();
@@ -67,7 +76,7 @@ test.describe("local-first learning slice", () => {
       const tx = database.transaction("lessonProgress", "readonly");
       const record = await new Promise<{ status?: string } | undefined>(
         (resolve, reject) => {
-          const get = tx.objectStore("lessonProgress").get("greetings");
+          const get = tx.objectStore("lessonProgress").get("pcc-esol-l1m1-greetings");
           get.onsuccess = () => resolve(get.result as { status?: string } | undefined);
           get.onerror = () => reject(get.error);
         },
@@ -81,6 +90,39 @@ test.describe("local-first learning slice", () => {
     expect(apiRequests).toEqual([]);
   });
 
+  test("external embeds are click-to-load and never block learning", async ({
+    page,
+    context,
+  }) => {
+    // Third-party requests fail hard — the learning flow must not care.
+    await context.route("**/youtube.com/**", (r) => r.abort());
+    await context.route("**/youtube-nocookie.com/**", (r) => r.abort());
+
+    await openLesson(page);
+
+    // Placeholder with honest third-party boundary — no eager iframe
+    await expect(page.getByText("Watch: Hello. How are you?")).toBeVisible();
+    await expect(page.getByText(/Loads content from www\.youtube\.com/)).toBeVisible();
+    await expect(page.locator("iframe")).toHaveCount(0);
+
+    // Accessible title + fallback link before anything loads
+    await expect(
+      page.getByRole("link", { name: "Open original ↗" }).first(),
+    ).toBeVisible();
+
+    // Click-to-load inserts the iframe with restrictive sandbox
+    await page.getByRole("button", { name: "Load video" }).click();
+    const iframe = page.locator('iframe[title="Watch: Hello. How are you?"]');
+    await expect(iframe).toBeVisible();
+    await expect(iframe).toHaveAttribute("sandbox", /allow-scripts/);
+    await expect(iframe).toHaveAttribute("loading", "lazy");
+
+    // Even with every third-party request dead, SE flow is intact
+    await answerAndComplete(page);
+    await page.reload();
+    await expect(page.getByText("Lesson complete.")).toBeVisible();
+  });
+
   test("deep links render routes directly (SPA static hosting)", async ({
     page,
   }) => {
@@ -89,6 +131,18 @@ test.describe("local-first learning slice", () => {
 
     await page.goto("/progress");
     await expect(page.getByRole("heading", { name: "Progress" })).toBeVisible();
+  });
+
+  test("synthetic fixture is not reachable in production", async ({
+    page,
+  }) => {
+    // ?lesson=greetings is a test-only fixture — production must render the
+    // Learn list, never the fixture lesson.
+    await page.goto("/learn?lesson=greetings");
+    await expect(page.getByRole("heading", { name: "Learn" })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Greetings", exact: true }),
+    ).toHaveCount(0);
   });
 
   test("main navigation works across all four surfaces", async ({ page }) => {

@@ -4,14 +4,22 @@
 // Keep the two in sync when the schema evolves.
 
 export interface LessonSource {
+  /** registry key — must match a src/content/sources/ record for
+   *  non-synthetic content; item-level fields below override record defaults */
   id: string;
-  title: string;
-  license: string;
-  url: string;
+  title?: string;
+  license?: string;
+  url?: string;
+  /** canonical URL of the source license deed */
+  licenseUrl?: string;
   /** true when SE adapted this from an external source */
   adapted: boolean;
+  /** material adaptations made from the source, for traceability */
+  adaptationNotes?: string[];
   /** true when content is SE-authored fixture/test data, not real curriculum */
   synthetic?: boolean;
+  /** attribution line satisfying the source license obligations */
+  attribution?: string;
 }
 
 export type LessonLevel = "beginner" | "elementary" | "intermediate";
@@ -46,7 +54,27 @@ export interface MultipleChoiceBlock {
   answer: string;
 }
 
-export type LessonBlock = HeadingBlock | TextBlock | ExampleBlock | MultipleChoiceBlock;
+export interface ExternalEmbedBlock {
+  type: "external-embed";
+  /** allowlisted provider — semantic checks map it to permitted hosts */
+  provider: "youtube";
+  title: string;
+  /** https embed URL on the original host — never a copied/rehosted asset */
+  src: string;
+  /** original canonical URL (watch page / chapter page) */
+  sourceUrl: string;
+  /** why this external item contributes to the lesson */
+  purpose: string;
+  /** where the learner goes if the embed cannot load */
+  fallbackUrl: string;
+}
+
+export type LessonBlock =
+  | HeadingBlock
+  | TextBlock
+  | ExampleBlock
+  | MultipleChoiceBlock
+  | ExternalEmbedBlock;
 
 export interface Lesson {
   schemaVersion: 1;

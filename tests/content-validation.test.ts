@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { checkLessonSemantics } from "../scripts/content-checks.mjs";
 import fixture from "../src/content/fixtures/greetings.lesson.json";
+import { curriculum } from "../src/content/curriculum";
 
 describe("semantic content checks (beyond JSON Schema)", () => {
   it("accepts the greetings fixture", () => {
@@ -27,5 +28,62 @@ describe("semantic content checks (beyond JSON Schema)", () => {
     const errors = checkLessonSemantics(invalid);
     expect(errors.length).toBe(1);
     expect(errors[0]).toContain("duplicate option ids");
+  });
+
+  it("rejects an embed whose host does not match its provider", () => {
+    const lesson = curriculum[0];
+    if (!lesson) throw new Error("expected at least one real lesson");
+    const invalid = structuredClone(lesson);
+    const embed = invalid.blocks.find((b) => b.type === "external-embed");
+    if (embed?.type === "external-embed") embed.src = "https://evil.example/x";
+    const errors = checkLessonSemantics(invalid);
+    expect(errors.some((e) => e.includes("does not allow embed host"))).toBe(true);
+  });
+
+  it.each(curriculum.map((l) => [l.id, l] as const))(
+    "curriculum lesson %s passes semantic checks",
+    (_id, lesson) => {
+      expect(checkLessonSemantics(lesson)).toEqual([]);
+    },
+  );
+
+  it("curriculum excludes synthetic fixtures", () => {
+    expect(curriculum.length).toBeGreaterThan(0);
+    expect(curriculum.every((l) => !l.source.synthetic)).toBe(true);
+  });
+});
+
+describe("provenance requirements (non-synthetic lessons)", () => {
+  const real = curriculum[0];
+  if (!real) throw new Error("expected at least one real lesson");
+
+  it("rejects a source.id that is not in the registry", () => {
+    const invalid = structuredClone(real);
+    invalid.source.id = "not-a-source";
+    expect(checkLessonSemantics(invalid)).toContain(
+      'source.id "not-a-source" is not a registered source (src/content/sources/)',
+    );
+  });
+
+  it("rejects an adapted lesson without adaptationNotes", () => {
+    const invalid = structuredClone(real);
+    delete invalid.source.adaptationNotes;
+    expect(checkLessonSemantics(invalid)).toContain(
+      "adapted lesson must record source.adaptationNotes",
+    );
+  });
+
+  it("rejects non-synthetic content that resolves no license", () => {
+    const invalid = structuredClone(real);
+    delete invalid.source.license;
+    delete invalid.source.url;
+    invalid.source.id = "ghost-source"; // unregistered → no record fallback
+    const errors = checkLessonSemantics(invalid);
+    expect(errors).toContain(
+      "no license information (source.license or registry record)",
+    );
+    expect(errors).toContain(
+      "no provenance URL (source.url or registry record)",
+    );
   });
 });
