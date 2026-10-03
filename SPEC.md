@@ -1,10 +1,29 @@
 # Simple English — Product Specification
 
-Status: Foundation draft
+Status: CANONICAL — LOCKED V1 FOUNDATION
 Last updated: 2026-10-03
 
 This document is the canonical product specification for Simple English. When
 other project documents conflict with this file, this file wins.
+
+## Governance
+
+Core product philosophy, learning philosophy, reuse-first philosophy, and
+canonical architecture principles may not be silently changed by
+implementation work.
+
+Changes to those principles require:
+
+```text
+explicit product decision
++
+SPEC update
++
+ADR when architectural
+```
+
+Implementation tasks are not permission to reinterpret the project
+philosophy.
 
 ## 1. Identity
 
@@ -66,6 +85,9 @@ SE does not receive extra credit for inventing something itself.
 10. Don't reinvent curriculum without evidence that it is necessary.
 11. Don't reinvent software infrastructure without evidence that it is
     necessary.
+12. Performance is part of the product experience, not an optimization phase.
+13. Local first: the network is not on the critical path of normal learning
+    interactions.
 
 ## 4. Canonical decision test
 
@@ -268,7 +290,86 @@ architecture.
 
 Complexity may exist internally. It must not be transferred to learners.
 
-## 9. Non-goals
+## 9. Performance and local-first principles
+
+Performance is not an optimization phase. It is part of the product
+experience.
+
+> **Normal learning interactions must feel immediate.**
+
+> **The network must not be on the critical path of normal learning
+> interactions unless the operation fundamentally requires a server.**
+
+Expected behavior:
+
+```text
+answer exercise      → immediate
+next step            → immediate
+lesson navigation    → immediate
+save local progress  → immediate
+restore progress     → local first
+cloud synchronization → asynchronous
+```
+
+Bad architecture:
+
+```text
+tap
+↓
+network request
+↓
+wait
+↓
+update UI
+```
+
+Preferred architecture:
+
+```text
+tap
+↓
+update UI
+↓
+persist locally
+↓
+background sync
+```
+
+Hard architectural rules (not targets — requirements):
+
+- Exercise feedback must not await a network round trip.
+- Learner state is written to the local database first; cloud sync is a
+  background consequence, never a prerequisite.
+- First-run learning works without an account and without network beyond the
+  initial asset fetch.
+- Cloud SDKs (auth, sync) are not in the initial bundle critical path; they
+  load on demand when the learner opts into an account.
+
+Measurement goals and budgets live in ADR-0002 and are enforced in CI as the
+application is built.
+
+## 10. V1 architecture direction
+
+Validated in [ADR-0002](docs/adr/0002-v1-web-architecture.md) against official
+documentation and primary sources:
+
+```text
+Frontend           React 19 + TypeScript + Vite 7
+Routing            React Router — Declarative mode (not Data/Framework mode)
+Styling            Tailwind CSS v4 (official Vite plugin)
+Components         native/simple first; shadcn/ui selectively if needed
+Content            versioned structured JSON validated by JSON Schema
+                   at import/build time; served as static assets/CDN
+Local persistence  IndexedDB via Dexie (canonical learner store)
+Cloud              Firebase Auth + Cloud Firestore — background sync only
+Hosting            GitHub (repo) + Vercel (static SPA hosting)
+Testing            Vitest (unit) + Playwright (E2E)
+```
+
+The cloud layer is a synchronization/backup layer. It is not the learning
+runtime and must never sit on the interaction path (see §9).
+
+## 11. Non-goals
 
 Do not start building:
 
@@ -293,7 +394,7 @@ Do not start building:
 
 Complexity must be earned by a demonstrated requirement.
 
-## 10. Source registry
+## 12. Source registry
 
 SE maintains a registry of educational sources with licensing and provenance
 metadata. Direction and record schema: [`docs/sources/README.md`](docs/sources/README.md).
@@ -302,7 +403,9 @@ The registry aligns with the existing **LRMI / schema.org LearningResource**
 metadata standard rather than inventing a new one, extended with SE-specific
 reuse-verification fields.
 
-## 11. Licensing
+## 13. Licensing
+
+Canonical statement: [`LICENSING.md`](LICENSING.md).
 
 | Layer | License |
 | --- | --- |
@@ -323,7 +426,8 @@ Rationale:
   attribution and license obligations are preserved via the source registry.
 - Educational content is deliberately not mixed into the software license.
 
-## 12. Status
+## 14. Status
 
-Foundation stage. No product features are implemented. The next step is the
-`R1` research issue: an audit of the best reusable foundation for SE V1.
+V1 foundation locked. Architecture validated in ADR-0002. No product features
+are implemented. Active research track: Issue R1 (wider reusable-ecosystem
+audit + ongoing challenge of the accepted stack).
