@@ -27,8 +27,7 @@ Claims are tagged `CONFIRMED` / `PARTIAL` / `UNKNOWN` where source visibility is
 | R1.3 | Open content & rights | DONE — PASS WITH CORRECTIONS |
 | R1.4 | SLA evidence & digital systems | PARTIAL PASS → R1.4A opened |
 | R1.4A | USA Learns deep reverse-engineering (observed as registered learner) | DONE — PASS w/ final corrections |
-| Final | SE evidence base synthesis | DONE — pending ChatGPT review |
-| Final | Evidence-base synthesis | Pending |
+| Final | SE evidence base synthesis | DONE — ACCEPTED WITH FINAL CLEANUP |
 
 ## Documents
 
@@ -305,6 +304,23 @@ email verification). Clean-room rule honored — behavior only.
 Temporary inspection copies live in gitignored `research_cache/` (`cambridge/`,
 `voa/`, `pearson/`, `ngl/`, `oup/`). Nothing copyrighted is committed.
 See `download-manifest.md` for the exact inventory.
+
+**ChatGPT R1 FINAL REVIEW — ACCEPTED WITH FINAL CLEANUP.** R1 is
+closed after a 5-point cleanup (Human Content Gate provenance
+classes; pilot authority = complete VOA LLE L1 Lesson 1 source
+pack, not an AI-selected micro-capability; OSS content provenance
+corrected — OpenLingo/freelingo prohibited, LibreLingo per-course,
+OmniLingo Common Voice; efficacy claim softened — no causal
+evidence for USAL's exact architecture or SE's system,
+context-specific app studies exist; market claim removed,
+architecture renamed "provisional evidence-backed architecture
+candidate"). After cleanup: run doc validation, commit, merge
+PR #9 to main, stop. Task 006 pilot begins separately from fresh
+main with 7 gates: SOURCE INTEGRITY / NORMALIZATION / RESUME
+CORRECTNESS / STATE ORTHOGONALITY / SOURCE-BACKED FEEDBACK
+FEASIBILITY / FSRS REVIEW INTEGRATION / OFFLINE+MEDIA PACKAGING.
+Pilot success establishes architecture coherence only — NOT
+learning efficacy.
 
 **ChatGPT R1.4A REVIEW — PASS WITH FINAL CORRECTIONS. R1 FINAL
 SYNTHESIS AUTHORIZED** after correction pass:

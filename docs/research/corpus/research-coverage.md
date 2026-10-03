@@ -56,6 +56,10 @@ reuse inventory.
 MEDIUM: session-size intuitions, cue-feedback design, FSRS
 integration granularity, self-report calibration.
 
-LOW/OPEN: learning-outcome efficacy of any digital product vs
-alternatives (no public causal evidence found — treat ALL efficacy
-claims, including ours, accordingly).
+LOW/OPEN: learning-outcome efficacy. R1 identified no causal
+evidence validating USA Learns' exact architecture or SE's proposed
+integrated system. Experimental evidence exists for some
+language-app interventions and individual features (e.g. published
+Duolingo randomized studies), but results are context- and
+intervention-specific and do not validate SE. Treat ALL efficacy
+claims, including ours, accordingly.

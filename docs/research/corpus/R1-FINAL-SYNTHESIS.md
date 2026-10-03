@@ -50,8 +50,12 @@ what we don't know, and what the smallest honest pilot should test.
   without per-item bespoke writing.
 - Whether FSRS scheduling at item granularity integrates cleanly
   with lesson-grouped review (SE-specific design space).
-- Learning-outcome efficacy of ANY self-study product — no public
-  causal data exists; SE's own claims must stay measured.
+- Learning-outcome efficacy — R1 identified no causal evidence
+  validating USA Learns' exact architecture or SE's proposed
+  integrated system. Experimental evidence exists for some
+  language-app interventions and individual features, but those
+  results are context-specific and do not validate SE. SE's own
+  claims must stay measured.
 - Whether local-first's privacy/offline win outweighs USAL-style
   server features (teacher monitoring, cross-device) for SE's users.
 
@@ -107,7 +111,7 @@ what we don't know, and what the smallest honest pilot should test.
 | Interactive exercise types | H5P-compatible patterns (study; layered licenses) | mixed | study/import-compat only |
 | Reading-tool mechanics | LUTE/LinguaCafe patterns | AGPL (study only) | design reference |
 | Video delivery | VOA assets direct (local/PD) + YT embed fallback | PD / platform | in product pattern |
-| NOT reused | LibreLingo/OmniLingo content (AI-gen), USAL code/content, EGP/EVP bulk | — | PROHIBITED/REFERENCE_ONLY |
+| NOT reused | OpenLingo/freelingo/explicitly LLM-generated content, USAL code/content, EGP/EVP bulk | — | PROHIBITED/REFERENCE_ONLY |
 
 ## 8. What SE genuinely must build
 
@@ -116,11 +120,21 @@ what we don't know, and what the smallest honest pilot should test.
 - Item-cursor resume (resolved items never repeat on re-entry).
 - The content pipeline: open human-authored assets → normalized
   lesson items → rights/provenance metadata → validated package.
-- Lesson authoring: SE-written connective tissue (goals, cues,
-  noticing prompts, comprehension stems) around sourced media —
-  the editorial work USAL did for VOA, done for SE's corpus.
-- Feedback engine: bounded attempts + cue templates where
-  deterministic; reveal as last resort.
+- Content assembly under the HUMAN CONTENT GATE: all learner-facing
+  instructional English — learning goals, examples, grammar
+  explanations, cues/hints, noticing explanations, comprehension
+  stems, answer options/distractors, pronunciation material,
+  speaking frames, writing prompts, review content — must be
+  HUMAN_AUTHORED_SOURCE, HUMAN_AUTHORED_ADAPTATION,
+  HUMAN_EDITOR_APPROVED, or a DETERMINISTIC_TRANSFORMATION of a
+  verified source. Never LLM-authored learner curriculum/content
+  (Devin/ChatGPT/Claude included). AI may author ordinary
+  product/UI chrome that is not instructional English. Where a
+  source-backed cue does not exist, do not invent one — use the
+  simpler verified feedback path.
+- Feedback engine: bounded attempts + deterministic reveal as last
+  resort; cue/hint layers only where human-authored or a
+  deterministic transformation of verified source.
 - FSRS adapter mapping attempt outcomes → review state (never
   curriculum order, mastery, or CEFR).
 - Self-evaluation surface (Learning Log equivalent).
@@ -140,11 +154,16 @@ what we don't know, and what the smallest honest pilot should test.
 ## 10. The smallest evidence-backed pilot
 
 ```text
-PILOT = ONE deep lesson on the meet/greet capability
-        built the USAL way from VOA source material
-        inside SE's local-first shell
-        with all four progress channels instrumented.
+PILOT = the complete VOA Let's Learn English Level 1 Lesson 1
+        source pack, wrapped for self-study the USAL way
+        inside SE's local-first shell, with all four
+        progress channels instrumented.
 ```
+
+Pilot authority is the source pack itself: meet/greet/introduce is
+its primary communicative theme, but the pilot preserves the
+COMPLETE source-defined lesson scope — it is not an AI-selected
+micro-capability slice.
 
 Concretely — a single lesson whose pipeline covers: ORIENT (goals) →
 PREPARE (key words, ≥3 exposures) → INPUT (VOA L1 conversation
@@ -154,12 +173,20 @@ dictation/matching with bounded attempts + reveal) → PRODUCTION
 (record→replay self-intro) → REFLECT (learning log words + can-do)
 → REVIEW (FSRS-scheduled items at next visit).
 
-It tests the actual risk list: normalization cost, cue authoring,
-resume granularity, channel instrumentation, offline packaging of
-VOA media — at ONE lesson's scope. Not a course. If this lesson
-works, the pattern scales; if it doesn't, we learned at lesson cost.
+Pilot gates (from the R1-final review): SOURCE INTEGRITY,
+NORMALIZATION, RESUME CORRECTNESS, STATE ORTHOGONALITY,
+SOURCE-BACKED FEEDBACK FEASIBILITY, FSRS REVIEW INTEGRATION,
+OFFLINE/MEDIA PACKAGING. 100% of learner-facing instructional
+English must carry human provenance (see Human Content Gate).
 
-## Provisional architecture map (locked shape)
+It tests the actual risk list: normalization cost, cue feasibility,
+resume granularity, channel instrumentation, offline packaging of
+VOA media — at ONE lesson's scope. Not a course. Pilot success
+establishes only that the architecture can turn human-authored
+material into a coherent self-study experience — NOT learning
+efficacy; that requires learner testing afterward.
+
+## Provisional evidence-backed architecture candidate
 
 ```text
 PROFESSIONAL CURRICULUM REFERENCE   (Empower 2e + specialists)
@@ -181,4 +208,4 @@ LEARNER                             (honest signals, honest labels)
 
 SE = professional-depth human-authored content + proven self-study
 wrapper + modern local-first mechanics + honest progress channels.
-Nobody else occupies exactly this position.
+This combination is the current working product direction for SE.

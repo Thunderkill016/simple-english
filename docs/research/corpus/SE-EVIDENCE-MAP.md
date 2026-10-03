@@ -66,7 +66,7 @@ Every claim carries a channel:
 | Dexie/IndexedDB local-first is validated | STRONG | SE Task 002B live product |
 | H5P = STUDY/IMPORT-COMPATIBILITY candidate; licensing split per layer (runtime/types/content/deps) | LOCKED | R1.4 correction |
 | Full page reload per item, ads in activities, Flash fallbacks, bare embeds = dated mechanics to REJECT | STRONG | USAL observed |
-| LibreLingo/OmniLingo course content (AI-generated) is PROHIBITED for learner-facing use even if code is OSS | LOCKED | R1.4 + registry policy |
+| Explicitly LLM-generated course content (OpenLingo/freelingo and similar) is PROHIBITED for learner-facing use even if code is OSS. LibreLingo = community-authored courses → provenance/rights per course. OmniLingo = Common Voice/community speech → supplementary dataset/mechanics, not curriculum authority. Human Gate is provenance-based, not project-name-based | LOCKED | R1.4 + registry policy |
 | LUTE/LinguaCafe = reading-tool study references, not curriculum engines | STRONG | R1.4 map |
 
 ## E. Legal & provenance
@@ -77,4 +77,5 @@ Every claim carries a channel:
 | USA Learns platform+content = REFERENCE_ONLY (SCOE copyright); VOA source assets reusable at SOURCE | LOCKED | R1.4A |
 | Clean-room methodology claim wording (functional patterns implementable; protected expression never) | LOCKED | Correction E |
 | AI-generated curriculum/lesson content for learners | FORBIDDEN | registry policy + reviews |
+| HUMAN CONTENT GATE: all learner-facing instructional English — goals, examples, grammar explanations, cues/hints, noticing explanations, comprehension stems, answer options/distractors, pronunciation material, speaking frames, writing prompts, review content — must be HUMAN_AUTHORED_SOURCE, HUMAN_AUTHORED_ADAPTATION, HUMAN_EDITOR_APPROVED, or a DETERMINISTIC_TRANSFORMATION of a verified source; LLM-authored learner content (Devin/ChatGPT/Claude) is prohibited; AI may author non-instructional product/UI chrome only; where no source-backed cue exists, use the simpler verified feedback path rather than inventing one | LOCKED | R1-final verdict, Correction 1 |
 | Rights are decided ASSET-LEVEL, never domain-level | LOCKED | R1.3 correction |
