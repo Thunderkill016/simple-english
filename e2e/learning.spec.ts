@@ -33,6 +33,24 @@ async function answerAndComplete(page: Page) {
   await page.getByRole("button", { name: "Check answer" }).click();
   await expect(page.getByText(/✓ Correct/)).toBeVisible();
 
+  // Completion is gated behind the production step: "Complete lesson" must
+  // come AFTER "Your turn" in document order — the learner can't finish
+  // without passing the production block first.
+  const ctaAfterProduction = await page.evaluate(() => {
+    const heading = [...document.querySelectorAll("h2")].find(
+      (h) => h.textContent === "Your turn",
+    );
+    const button = [...document.querySelectorAll("button")].find(
+      (b) => b.textContent?.trim() === "Complete lesson",
+    );
+    if (!heading || !button) return false;
+    return Boolean(
+      heading.compareDocumentPosition(button) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    );
+  });
+  expect(ctaAfterProduction).toBe(true);
+
   await page.getByRole("button", { name: "Complete lesson" }).click();
 
   // Feedback and completion are SEPARATE semantic states (regression:

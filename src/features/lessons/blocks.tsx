@@ -146,6 +146,8 @@ const OPTION_CLASSES: Record<ReturnType<typeof optionState>, string> = {
 /**
  * The exercise is ONE interaction surface: prompt, choices, check action
  * and feedback belong together — feedback/completion stay separate.
+ * Lesson completion is deliberately NOT here: LessonView renders it after
+ * the last block so the learner finishes every step first.
  */
 export function Exercise({
   block,
@@ -155,7 +157,6 @@ export function Exercise({
   persistError,
   onSelect,
   onCheck,
-  onComplete,
 }: {
   block: MultipleChoiceBlock;
   selected: string | undefined;
@@ -164,7 +165,6 @@ export function Exercise({
   persistError: boolean;
   onSelect: (optionId: string) => void;
   onCheck: () => void;
-  onComplete: () => void;
 }) {
   const selectedText = block.options.find((o) => o.id === selected)?.text;
 
@@ -192,26 +192,16 @@ export function Exercise({
         </div>
       </fieldset>
 
-      {!completed ? (
+      {!completed && feedback !== "correct" ? (
         <div className="flex items-center gap-3">
-          {feedback === "correct" ? (
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={onComplete}
-            >
-              Complete lesson
-            </button>
-          ) : (
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={onCheck}
-              disabled={selected === undefined}
-            >
-              Check answer
-            </button>
-          )}
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={onCheck}
+            disabled={selected === undefined}
+          >
+            Check answer
+          </button>
         </div>
       ) : null}
 

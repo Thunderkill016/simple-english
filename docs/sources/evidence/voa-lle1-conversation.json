@@ -7,12 +7,13 @@
   "rightsBasis": "Public domain — VOA Learning English content policy: 'Learning English texts, MP3s, photos and videos are in the public domain… for educational and commercial purposes, with credit to learningenglish.voanews.com.' Agency wire material (AP/Reuters/AFP) is excluded by the same policy; this asset is VOA-produced (VOA byline on the page, hosted on VOA's own CDN).",
   "rightsUrl": "https://learningenglish.voanews.com/p/6861.html",
   "mediaType": "audio/mpeg",
-  "durationSeconds": 29.6,
-  "bytes": 236944,
-  "sha256": "f9bd90edddbb8736f64fb5cb3a34ab5a27aecd6e99510977e7b820caf47c5cf7",
+  "durationSeconds": 19.9,
+  "bytes": 159737,
+  "sha256": "11d3ee8a7f52615988b98f1e4addacaee35b0486cd6c8d8e7a08cf32b65a123b",
   "retrievedAt": "2026-10-03",
   "localPath": "public/media/voa-lle1-conversation.mp3",
-  "transcript": "Pete: Hi! Are you Anna?\nAnna: Yes! Hi there! Are you Pete?\nPete: I am Pete.\nAnna: Nice to meet you.\nAnna: Let's try that again. I'm Anna. Nice to meet you.\nPete: I'm Pete. \"Anna\" Is that A-N-A?\nAnna: No. A-N-N-A\nPete: Well, Anna with two \"n's\" ... Welcome to ... 1400 Irving Street!\nAnna: My new apartment! Yes!",
+  "transcript": "Pete: Hi! Are you Anna?\nAnna: Yes! Hi there! Are you Pete?\nPete: I am Pete.\nAnna: Nice to meet you.\nAnna: Let's try that again. I'm Anna. Nice to meet you.\nPete: I'm Pete.",
+  "editNote": "Excerpt — mechanically trimmed at 19.9s (original full file: 29.6s, sha256 f9bd90edddbb8736f64fb5cb3a34ab5a27aecd6e99510977e7b820caf47c5cf7) to keep only the meet-someone exchange; the source asset continues with spelling ('A-N-N-A'), an address and apartment lines that are outside this lesson's declared capability. Content is unmodified within the kept range.",
   "usedIn": "src/content/lessons/se-a1-meet-someone.lesson.json",
-  "notes": "Served as a local static asset: reliability, speed and offline-capable core listening. Full dialogue retained as authentic input; the lesson's readable model extracts only the meet-someone exchange (see docs/curriculum/lesson-001-meet-someone.md)."
+  "notes": "Served as a local static asset: reliability, speed and offline-capable core listening."
 }

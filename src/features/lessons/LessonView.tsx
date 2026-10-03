@@ -108,12 +108,33 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
             persistError={persistError}
             onSelect={handleSelect}
             onCheck={handleCheck}
-            onComplete={handleComplete}
           />
         ) : (
           <Block key={i} block={block} />
         ),
       )}
+
+      {/* Completion CTA lives AFTER all content — the learner reaches it
+          only past the production step, not mid-lesson. */}
+      {!completed && (!exercise || feedback === "correct" || correctSelected) ? (
+        <section className="panel space-y-3">
+          <p className="font-semibold">
+            Finished your turn? Complete the lesson.
+          </p>
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={handleComplete}
+          >
+            Complete lesson
+          </button>
+          {persistError ? (
+            <p role="alert" className="text-sm text-warning">
+              Couldn't save progress locally — it may not be there after reload.
+            </p>
+          ) : null}
+        </section>
+      ) : null}
 
       {completed ? (
         <section className="panel space-y-3 border-success/30 bg-success-soft/60">

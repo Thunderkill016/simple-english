@@ -71,7 +71,7 @@
       "type": "audio",
       "title": "Anna and Pete meet — listen and repeat",
       "src": "/media/voa-lle1-conversation.mp3",
-      "transcript": "Pete: Hi! Are you Anna?\nAnna: Yes! Hi there! Are you Pete?\nPete: I am Pete.\nAnna: Nice to meet you.\nAnna: Let's try that again. I'm Anna. Nice to meet you.\nPete: I'm Pete. \"Anna\" Is that A-N-A?\nAnna: No. A-N-N-A\nPete: Well, Anna with two \"n's\" ... Welcome to ... 1400 Irving Street!\nAnna: My new apartment! Yes!",
+      "transcript": "Pete: Hi! Are you Anna?\nAnna: Yes! Hi there! Are you Pete?\nPete: I am Pete.\nAnna: Nice to meet you.\nAnna: Let's try that again. I'm Anna. Nice to meet you.\nPete: I'm Pete.",
       "evidence": "docs/sources/evidence/voa-lle1-conversation.json",
       "provenance": { "kind": "reused", "sourceRef": "voa-lle1-audio" }
     },
@@ -82,9 +82,15 @@
     },
     {
       "type": "example",
-      "text": "— Hi! I'm Anna.\n— I'm Pete. Nice to meet you.\n— Nice to meet you too.",
-      "translation": "— Chào! Tôi là Anna.\n— Tôi là Pete. Rất vui được gặp bạn.\n— Tôi cũng rất vui được gặp bạn.",
+      "text": "— Hi! I'm Anna.\n— I'm Pete. Nice to meet you.",
+      "translation": "— Chào! Tôi là Anna.\n— Tôi là Pete. Rất vui được gặp bạn.",
       "provenance": { "kind": "adapted", "sourceRef": "voa-lle1-welcome" }
+    },
+    {
+      "type": "example",
+      "text": "— Nice to meet you too.",
+      "translation": "— Tôi cũng rất vui được gặp bạn.",
+      "provenance": { "kind": "se-authored" }
     },
     {
       "type": "text",
