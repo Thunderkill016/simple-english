@@ -28,6 +28,7 @@ In gitignored `research_cache/` — inspected for structure only, never committe
 | `research_cache/pearson/roadmap-gse-a1.pdf` (+ `rgse.txt`) | pearson.com official | ~500 KB | Roadmap A1 GSE Mapping Booklet — per-objective GSE scores |
 | `research_cache/pearson/roadmap-a1-contents.pdf` | prestige.bg distributor | ~150 KB | Roadmap A1 SB contents — alternating lesson structure |
 | `research_cache/ngl/outcomes2e-intro.pdf` (+ `outi.txt`) | eltngl.com official | ~300 KB | Outcomes Beginner methodology — 7 documented design deviations |
+| `research_cache/pearson/roadmap-2e/` (2 PDFs + 2 txt) | pearson.com official roadmap-2e-sample-pack.zip | ~2.1 MB | Roadmap 2e A1 U1 SB + Extended route — Correction-3 edition verification |
 | `research_cache/voa/voa-l1-page.html` | learningenglish.voanews.com | 163 KB | Full lesson page — media inventory source |
 | `research_cache/voa/quiz1-12.html` | learningenglish.voanews.com /Quiz/Start | ~25 KB ea | All 6 quiz questions + media IDs + option sets |
 | `research_cache/voa/voa-lle1-*.mp4` (9 files) | voa-video.voanews.eu (VOA CDN) | ~3.5 MB | Quiz stems ×6, Speaking Practice, Pronunciation — PD, retained for inspection |

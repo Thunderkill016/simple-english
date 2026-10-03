@@ -98,12 +98,62 @@ controlled-vs-personalized production, review, assessment-vs-completion,
 and classroom mechanics that don't transfer to solo web. No scores, no
 winner, no new SE curriculum.
 
+## CHATGPT REVIEW DECISIONS — R1.2 (2026-10-04)
+
+R1.2 = PASS WITH CORRECTIONS. PR #9 stays open; same research branch.
+
+1. **Pirated-source ban is absolute** — no mirrored/leaked scans may
+   support, corroborate, or raise confidence in any claim, even
+   TOC-level facts. Official publisher or authorized reproductions
+   only; otherwise the claim is PARTIAL/UNKNOWN.
+2. **Sample-scoped language** — "observed in the inspected
+   five-course beginner sample" ≠ "professional universal".
+   Unit is the stable depth envelope; lesson depth varies.
+3. **Edition verification** — Roadmap 2e verified (official A1 U1
+   sample pack: SAME core structure, DYS moved to Extended book,
+   new Soft skills strand, I-can statements in Check and reflect).
+   Outcomes 3e Beginner exists (ISBN 9798214179261, 2024) but no
+   official sample in bounded pass → 2e internals = LEGACY.
+4. **Human Authorship Gate (new, locked)** — every R1.3+ source row
+   carries `authorship_provenance`, `human_authored_status`,
+   `ai_generated_status`. Statuses: HUMAN_AUTHORED_VERIFIED /
+   HUMAN_EDITED_VERIFIED / AI_GENERATED / UNKNOWN.
+   **AI_GENERATED and UNKNOWN content are forbidden as SE
+   learner-facing curriculum/content.** Software mechanics of
+   AI-using projects may still be studied; their AI-generated
+   lesson content may not.
+
+**Countries/alphabet:** COMMON PROFESSIONAL PATTERN, not a
+curriculum requirement. Inclusion undecided — resolved later by
+target-learner + reference curriculum + level evidence + recycling
+value + available human-authored content.
+
+**Session gap:** confirmed research priority — R1.4 must include
+self-paced digital product + open-source system reverse
+engineering (Duolingo/Busuu/Babbel/Speak/ELSA/LingQ/Language
+Reactor/Migaku/Anki + LibreLingo/Lingo Lessons/Sotto/LUTE/
+LinguaCafe/OmniLingo/H5P/FSRS): lesson→session, resume, next
+action, review due, mistakes, progress, SRS, content packs,
+offline/local state, assessment separation.
+
+**R1.3 scope (locked):** two layers —
+A) NARROW: can human-authored open content match professional
+coverage depth for meet/greet/introduce/personal-info?
+B) BROAD: landscape audit of complete human-authored open
+resources (courses, textbooks, teacher resources, listening,
+speaking, grammar, vocabulary, pronunciation, reading, writing,
+review, assessment). Mandatory fields: exact item, author/org,
+human-authorship status, original URL, license, commercial use,
+adaptation, redistribution, third-party exceptions, level,
+skill/function, completeness. No AI gap-filling. GAP = GAP.
+
 ### R1.2 — Professional course comparison
 
 - `professional-course-comparison.md` — five-course Unit-1 comparison
   (Empower 2e / EF 5e / Speakout 3e / Roadmap A1-GSE / Outcomes 2e)
-  answering the ten locked questions. Edition flags: Roadmap evidence is
-  1e (2e unverified); Outcomes Beginner is 2e (3e availability UNKNOWN).
+  answering the ten locked questions + R1.2-review correction pass
+  (pirated-source purge, sample-scoped language, Roadmap 2e verified,
+  Outcomes 3e-exists-but-legacy note, human-authorship gate).
 
 ### Cross-cutting
 

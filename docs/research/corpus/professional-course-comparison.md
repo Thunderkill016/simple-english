@@ -17,8 +17,8 @@ Status labels: `CONFIRMED` = official publisher sample/TOC inspected;
 | Cambridge Empower Starter/A1 | **2e (2022)** | U1 "Hello!" — 3 lessons + Getting Started + Unit Progress Test | CONFIRMED — official sample Scope & Sequence (`research_cache/cambridge/empower2e-starter-sample.*`) |
 | Oxford English File Beginner (Spain A1) | **5e (2024–25)** | File 1 — 2 lessons + Practical English Ep1 + Workbook + Revise&Check | CONFIRMED — official OUP TOC + TB sample (`research_cache/oup/ef5e-a1-*`) |
 | Pearson Speakout A1 | **3e** | U1 — 4 lessons (1A–1D) + Unit Review | CONFIRMED — official Pearson SB sample (`research_cache/pearson/speakout-a1-sb.*`) |
-| Pearson Roadmap A1 / GSE | **1e (2021); 2e check PARTIAL** | U1 — 4 main lessons + 3 Develop-your-skills + English in Action + Check and Reflect | CONFIRMED — official GSE Mapping Booklet + contents PDF (`research_cache/pearson/roadmap-*`) |
-| NGL Outcomes Beginner | **2e (2019); 3e exists at higher levels — Beginner 3e UNKNOWN** | U1 "People and places" — goal-driven unit + Review and speaking + video + Writing section | CONFIRMED methodology (official NGL introduction `research_cache/ngl/outcomes2e-intro.*`); PARTIAL page internals |
+| Pearson Roadmap A1 / GSE | **2e VERIFIED (official sample pack)** | U1 — 4 main lessons + 1D Functional language + Check and Reflect (Core); 3 Develop-your-skills lessons in separate Extended route | CONFIRMED — official 2e A1 U1 SB + Extended PDFs + GSE Mapping Booklet (1e) (`research_cache/pearson/roadmap-*`) |
+| NGL Outcomes Beginner | **2e (2019); 3e Beginner confirmed exists (2024) — official sample NOT obtained in bounded pass** | U1 "People and places" — goal-driven unit + Review and speaking + video + Writing section | CONFIRMED methodology (official NGL introduction `research_cache/ngl/outcomes2e-intro.*`); unit goal list PARTIAL (no official TOC obtained); internals LEGACY |
 
 ---
 
@@ -115,9 +115,29 @@ GSE objectives (official mapping, verbatim):
 | Can exchange personal details (where they live, things they have) | 28 | A1 | 1D EIA |
 | Can write a few basic sentences introducing themselves and giving basic personal information, given prompts or a model | 26 | A1 | 1C DYW |
 
-### NGL Outcomes 2e Beginner — Unit 1 "People and places" (CONFIRMED goals + internals PARTIAL)
+### Roadmap edition check — 1e vs 2e (Correction 3 verdict)
 
-Official unit goals ("IN THIS UNIT YOU LEARN HOW TO"):
+Verified against the official `roadmap-2e-sample-pack.zip` A1 U1 SB +
+Extended PDFs (pearson.com, dated 2026-07-30):
+
+| Dimension | Verdict |
+|-----------|---------|
+| Main lessons (Hello / Jobs / Nationalities + functional slot) | SAME — same be split, same vocabulary sets, same speaking goals |
+| Develop-your-skills lessons | CHANGED LOCATION — same three lessons (DYR online profile/capital letters; DYL personal-details conversations/answers to questions; DYW personal profile/capital letters + full stops) now live in a separate **Extended route** book instead of interleaved pages 86–88 |
+| Route naming | CHANGED — fast-track/extended → **Core / Extended** |
+| Functional strand | CHANGED — "English in action" → **1D Functional language** (ask for/check/give information) with a NEW **Soft skills** strand (Communication: polite checking phrases — "Sorry, can you say that again?") |
+| Check and reflect | CHANGED — now ends with explicit **I-can statements** ("I can introduce myself to other students", "I can ask for and give contact information") |
+| Pronunciation | SAME — short forms of be in every main lesson |
+| Speaking goal framing | CHANGED — "speaking goal" → named **Speaking scenario** with Prepare/Perform stages |
+| Digital layer | NEW — official page advertises AI lesson planning, Speaking Tutor, Pearson Languages+ (marketing-level evidence only) |
+| GSE objective model | SAME (GSE 21–88, A1–C2 per official page; U1 objectives confirmed via 1e booklet) |
+
+### NGL Outcomes 2e Beginner — Unit 1 "People and places" (methodology CONFIRMED; goal list PARTIAL)
+
+Unit goals ("IN THIS UNIT YOU LEARN HOW TO" — PARTIAL: reproduced
+from a secondary contents listing; the official NGL introduction
+corroborates the Unit-1 design below but the verbatim goal list was
+not confirmed from a publisher document):
 
 ```
 describe people and places        introduce yourself
@@ -144,16 +164,30 @@ a reference section (p.139).
 
 ### Q1. Which structural patterns recur across professional courses?
 
-Recurring in **all five**:
+> Scope note (ChatGPT R1.2 review, Correction 2): "observed in the
+> inspected five-course beginner sample" is not the same as
+> "professional universal". Findings below are OBSERVED IN THE
+> SAMPLE — a strong signal for a shared convention, not proof of
+> one.
 
-1. **Objective-titled lessons** — lessons are named by capability,
-   not grammar ("Say your name and country", "Nice to meet you",
-   "Checking in", "Hello", "introduce yourself").
+Observed in **all five inspected samples**:
+
+1. **Capability-framed lesson titles** — lessons are named for a
+   communicative purpose rather than a grammar point ("Say your
+   name and country", "Checking in", "Hello", "Nice to meet you").
+   Strictness varies: Roadmap titles map onto GSE objective
+   statements, while EF's "Nice to meet you" is communicative
+   framing rather than a formal objective statement — so the
+   accurate claim is *purpose-first titling*, not universal
+   formal objectives.
 2. **be-verb decomposition** — `be` split across 2–3 lessons by
    person set (I/you → he/she/it → we/they). Ordering varies; the
    decomposition does not.
-3. **Pronunciation in every lesson** — never a separate appendix
-   strand only; always tied to the lesson's language.
+3. **Pronunciation attached to lessons** — in the inspected
+   samples every Unit-1 lesson row carries a pronunciation
+   element tied to that lesson's language (not only a back
+   appendix). Whether this holds across all units/levels is
+   beyond this sample.
 4. **A dedicated functional/survival strand inside the unit** —
    Empower 1C Everyday English; EF Practical English; Speakout 1C
    How-to; Roadmap English in Action; Outcomes conversation
@@ -165,12 +199,12 @@ Recurring in **all five**:
 6. **Personal profile writing** — appears explicitly in Empower
    and Roadmap (identical framing: capital letters + full stops);
    EF Writing Bank and Outcomes Forms cover it at back.
-7. **Embedded video** — all five ship video inside Unit 1
+7. **Embedded video** — all five inspected samples ship video inside Unit 1
    (EF drama serial; Speakout BBC street interviews; Outcomes
    NatGeo; Roadmap video; Empower 2e video).
 8. **Reference banks at the back** — Grammar/Vocabulary(/Sound/
    Mediation) Banks or Grammar Reference + Vocabulary Builder in
-   every course.
+   every inspected course.
 
 Recurring in **most**:
 
@@ -241,10 +275,13 @@ Recurring in **most**:
 - Outcomes U1: fewer exercise-count-dense pages; depth moved into
   conversation-practice cycles and review sections.
 
-**Consistent finding:** a professional beginner unit = 3–8
-lesson-spreads + functional strand + review + reference support.
-The *unit* is the real depth unit; single lessons are shallow by
-design except when they carry a skills focus.
+**Consistent finding within the inspected sample:** a
+professional beginner unit = 3–8 lesson-spreads + functional
+strand + review + reference support. The *unit* is the more
+stable depth envelope for comparison; lesson depth varies
+considerably by course and lesson type (e.g., Empower 1C is a
+deep skills lesson, while Roadmap main lessons are deliberately
+single-goal).
 
 ### Q5. How do UNIT / LESSON / SECTION / SESSION boundaries differ?
 
@@ -290,7 +327,7 @@ goal" up front.
 ### Q8. How is review handled?
 
 - In-lesson: Empower Check/Review Your Progress.
-- Unit-end: all five (test, review, or reflect format).
+- Unit-end: all five inspected courses (test, review, or reflect format).
 - Cross-unit: EF Revise and Check every 2 Files; Outcomes
   engineered recycling (openers, dialogues, Grammar reference
   pron work, Vocabulary Builder); Roadmap extended route re-runs
@@ -319,7 +356,7 @@ channel mapped to CEFR.
 
 ### Q10. Which classroom mechanics cannot transfer directly to solo web learning?
 
-1. **Pair/group conversation practice** — every course's
+1. **Pair/group conversation practice** — every inspected course's
    production stage assumes a live partner ("work in pairs",
    "show photos on your phone", "check names of other people in
    the class").
@@ -385,10 +422,12 @@ itself.
 | EF5e A1 File 1 TOC + architecture | oup.es official TOC + TB sample | CONFIRMED |
 | Speakout 3e A1 U1 internals | pearson.pl official SB sample | CONFIRMED |
 | Roadmap U1 structure + GSE objectives | pearson.com official GSE Mapping Booklet + distributor contents PDF | CONFIRMED (1e) |
-| Outcomes U1 goals + design rationale | eltngl.com official series introduction | CONFIRMED (2e methodology); internals PARTIAL |
-| Outcomes U1 goal list ("People and places") | scanned TOC via djvu.online — corroborated by official intro | PARTIAL |
+| Outcomes U1 design rationale + lexical-set choice | eltngl.com official series introduction | CONFIRMED (2e methodology) |
+| Outcomes U1 verbatim goal list ("People and places") | no publisher document obtained | PARTIAL — goal-level only, pending official TOC |
 
-Pirated-scan sources (scribd/pdfcoffee/djvu/vk) were used only to
-corroborate TOC-level facts already evidenced by official
-publisher documents; no content from them is stored in the repo
-or quoted beyond goal-level facts.
+**Evidence policy (ChatGPT R1.2 review, Correction 1):** only
+official publisher documents and authorized distributor
+reproductions count as evidence. Mirrored/leaked scans of
+copyrighted books are not used to support, corroborate, or raise
+confidence in any claim; a claim that cannot be supported by
+legitimate sources is recorded as PARTIAL or UNKNOWN.
