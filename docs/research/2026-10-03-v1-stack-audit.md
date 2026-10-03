@@ -127,14 +127,20 @@ integration complexity.
 
 ## 8. Cloud — Firebase Auth + Cloud Firestore
 
-### Auth (official pricing/limits docs)
+### Auth (official pricing/limits docs, corrected wording)
 
-- Spark plan: Google/social sign-in and email/password are no-cost products
-  at effectively unlimited scale; anonymous auth included.
-- Limits that matter: email-link (passwordless) sign-in capped at
-  **5 emails/day on Spark** → unusable for passwordless; use Google +
-  email/password (verification 1000/day, reset 150/day). Phone auth is
-  Blaze-only (billed per SMS) — not needed for V1.
+- **Base Firebase Authentication (Spark):** no-cost Firebase product —
+  Google/social providers, email/password, and anonymous auth carry no
+  per-MAU charge on the base product. "No-cost product" is Google's
+  category; per-day operational limits still apply (below).
+- **Authentication with Identity Platform:** the upgraded product is billed
+  per monthly active user — 50K MAU free, then ~$0.0055/MAU and tiered
+  beyond. SE does not need Identity Platform for V1.
+- **Operational limits on Spark that matter:** email-link (passwordless)
+  sign-in is capped at **5 emails/day** → unusable for passwordless on
+  Spark; use Google + email/password instead (address-verification emails
+  1000/day, password-reset emails 150/day). Phone auth is Blaze-only
+  (billed per SMS) — not needed for V1.
 - **Design consequence:** auth is optional and post-first-use. Initial sign-in
   of *any* kind (including anonymous) is a network call → auth can never be
   on the first-run or interaction path.

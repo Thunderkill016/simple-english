@@ -1,0 +1,58 @@
+// Content model — mirrors src/content/schema/lesson.schema.json.
+// Fixture content is validated against the JSON Schema by the pipeline
+// (pnpm validate:content / build); these types are the code-side contract.
+// Keep the two in sync when the schema evolves.
+
+export interface LessonSource {
+  id: string;
+  title: string;
+  license: string;
+  url: string;
+  /** true when SE adapted this from an external source */
+  adapted: boolean;
+  /** true when content is SE-authored fixture/test data, not real curriculum */
+  synthetic?: boolean;
+}
+
+export type LessonLevel = "beginner" | "elementary" | "intermediate";
+
+export interface HeadingBlock {
+  type: "heading";
+  text: string;
+}
+
+export interface TextBlock {
+  type: "text";
+  text: string;
+}
+
+export interface ExampleBlock {
+  type: "example";
+  text: string;
+  translation?: string;
+}
+
+export interface MultipleChoiceOption {
+  id: string;
+  text: string;
+}
+
+export interface MultipleChoiceBlock {
+  type: "multiple-choice";
+  id: string;
+  prompt: string;
+  options: MultipleChoiceOption[];
+  /** id of the correct option */
+  answer: string;
+}
+
+export type LessonBlock = HeadingBlock | TextBlock | ExampleBlock | MultipleChoiceBlock;
+
+export interface Lesson {
+  schemaVersion: 1;
+  id: string;
+  title: string;
+  level: LessonLevel;
+  source: LessonSource;
+  blocks: LessonBlock[];
+}
