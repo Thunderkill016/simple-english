@@ -2,30 +2,28 @@ import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router";
 import { curriculum, getLesson } from "../content/curriculum";
 import { LessonView } from "../features/lessons/LessonView";
-import {
-  getLessonProgress,
-  type LessonProgress,
-} from "../features/progress/progress";
+import { listCompletedProgress } from "../features/progress/progress";
 import { EmptyState, PageHeader } from "../components/ui";
 
 export function LearnPage() {
   const [params] = useSearchParams();
   const lessonId = params.get("lesson");
   const lesson = lessonId ? getLesson(lessonId) : undefined;
-  const [progress, setProgress] = useState<LessonProgress | undefined>(undefined);
+  const [completedIds, setCompletedIds] = useState<ReadonlySet<string>>(
+    new Set(),
+  );
 
-  const firstLesson = curriculum[0];
-
+  // Completed state comes from all local progress rows, so the path stays
+  // correct as the curriculum grows past one lesson.
   useEffect(() => {
-    if (!firstLesson) return;
     let cancelled = false;
-    void getLessonProgress(firstLesson.id).then((p) => {
-      if (!cancelled) setProgress(p);
+    void listCompletedProgress().then((rows) => {
+      if (!cancelled) setCompletedIds(new Set(rows.map((r) => r.lessonId)));
     });
     return () => {
       cancelled = true;
     };
-  }, [firstLesson]);
+  }, []);
 
   if (lesson) {
     return <LessonView lesson={lesson} />;
@@ -50,8 +48,7 @@ export function LearnPage() {
       <PageHeader title="Learn" />
       <ol className="space-y-4">
         {curriculum.map((l, i) => {
-          const completed =
-            progress?.lessonId === l.id && progress.status === "completed";
+          const completed = completedIds.has(l.id);
           const intro = l.blocks.find((b) => b.type === "text");
           return (
             <li key={l.id} className="flex gap-4">

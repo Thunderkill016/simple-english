@@ -100,6 +100,29 @@ function ExternalEmbed({ block }: { block: ExternalEmbedBlock }) {
 export type ExerciseFeedback = "correct" | "incorrect" | null;
 
 /**
+ * Visual state of one option. Learning feedback must never be ambiguous:
+ * a wrong selection reads as warning, a correct one as success — never as
+ * the same neutral green as an unchecked selection.
+ */
+export function optionState(
+  isSelected: boolean,
+  feedback: ExerciseFeedback,
+  completed: boolean,
+): "neutral" | "selected" | "incorrect" | "correct" {
+  if (!isSelected) return "neutral";
+  if (feedback === "incorrect") return "incorrect";
+  if (feedback === "correct" || completed) return "correct";
+  return "selected";
+}
+
+const OPTION_CLASSES: Record<ReturnType<typeof optionState>, string> = {
+  neutral: "border-border",
+  selected: "border-primary bg-primary-soft",
+  incorrect: "border-warning bg-warning-soft",
+  correct: "border-success bg-success-soft",
+};
+
+/**
  * The exercise is ONE interaction surface: prompt, choices, check action
  * and feedback belong together — feedback/completion stay separate.
  */
@@ -132,7 +155,7 @@ export function Exercise({
           {block.options.map((option) => (
             <label
               key={option.id}
-              className="flex cursor-pointer items-center gap-3 rounded-lg border border-border px-3 py-3 transition-colors has-checked:border-primary has-checked:bg-primary-soft"
+              className={`flex cursor-pointer items-center gap-3 rounded-lg border px-3 py-3 transition-colors ${OPTION_CLASSES[optionState(selected === option.id, feedback, completed)]}`}
             >
               <input
                 type="radio"
