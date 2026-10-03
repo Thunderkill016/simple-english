@@ -1,0 +1,4 @@
+# OS / editor noise only — no build system exists yet
+.DS_Store
+Thumbs.db
+*.swp
