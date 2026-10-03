@@ -24,8 +24,9 @@ Claims are tagged `CONFIRMED` / `PARTIAL` / `UNKNOWN` where source visibility is
 | --- | --- | --- |
 | R1.1 | Cambridge ecosystem (deepest) | IN PROGRESS — reported to ChatGPT |
 | R1.2 | Professional course comparison (Empower / English File / Speakout / Roadmap-GSE / Outcomes) | DONE — reported to ChatGPT, awaiting review |
-| R1.3 | Open content & rights | Pending |
-| R1.4 | SLA evidence & digital systems | Complete (pending ChatGPT review) |
+| R1.3 | Open content & rights | DONE — PASS WITH CORRECTIONS |
+| R1.4 | SLA evidence & digital systems | PARTIAL PASS → R1.4A opened |
+| R1.4A | USA Learns deep reverse-engineering (observed as registered learner) | DONE — pending ChatGPT review |
 | Final | Evidence-base synthesis | Pending |
 
 ## Documents
@@ -227,13 +228,32 @@ resumability, explicit learner state, completion ≠ mastery,
 progress survives leaving/reloading. H5P = STUDY/IMPORT-COMPAT
 only. Speaking → USA Learns mechanics, not Sotto.
 
-**R1.4A MISSION (in progress):** USA Learns = primary self-study
+**R1.4A MISSION (complete, pending review):** USA Learns = primary self-study
 product reference; English 1 Plus (built on VOA Let's Learn
 English) is the highest-priority case — VOA ORIGINAL vs USA
 LEARNS TRANSFORMATION vs future SE. Clean-room rule: document
 behavior/architecture/state transitions only; never copy code,
 exercises, prose, media, or layout. Subsystems scored
 SOLVED_BY_REFERENCE / PARTIALLY_SOLVED / NOT_SOLVED.
+
+
+### R1.4A — USA Learns (clean-room, REFERENCE_ONLY)
+
+- `usa-learns-system-deep-dive.md` — full system audit: IA, state
+  machine, feedback cycle, attempt model, speaking, assessment,
+  media, mobile; observed live via research account.
+- `usa-learns-state-machine.md` — verified entity/lifecycle model
+  (activity tri-state, orthogonal score, next-incomplete pointer,
+  2-attempt→reveal, activity-level resume).
+- `usa-learns-voa-transformation.md` — VOA→self-study wrapper map:
+  per-component analysis of E1+ 1.1 (21 activities/8 sections);
+  what SE can legally reimplement (pattern YES, USAL content NO).
+- `usa-learns-vs-se-needs.md` — subsystem scores
+  (7 SOLVED_BY_REFERENCE / 5 PARTIALLY_SOLVED / 1 NOT_SOLVED) and
+  the revised fork/build verdict.
+
+Method note: research account (free registration, math captcha, no
+email verification). Clean-room rule honored — behavior only.
 
 ### R1.4 — Learning science + existing systems
 

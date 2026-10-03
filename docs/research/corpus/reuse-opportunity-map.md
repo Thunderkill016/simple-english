@@ -46,13 +46,30 @@ forking it instead of continuing the current custom build:
    (ts-fsrs) or widgets (H5P content types) into the existing
    React+Dexie shell — no platform adoption needed.
 
-**Provisional verdict: lean custom shell + imported libraries
-(ts-fsrs) and widgets (H5P-compatible); FINAL call deferred to
-the USA Learns audit — the question is whether SE clean-room
-reimplements a proven self-study architecture, not whether it
-forks code. Classification set expanded per R1.4A mandate:
+**R1.4A RESOLVED: USA Learns = STUDY_ONLY platform (proprietary,
+no source, copyrighted content) + CLEAN_ROOM_REIMPLEMENT for its
+learning architecture. The deep audit confirmed the right build
+was never "fork USAL" — it is "reimplement USAL's proven
+self-study wrapper over the same open assets (VOA PD) inside
+SE's local-first shell". Final verdict: lean custom shell +
+ts-fsrs + selective CLEAN_ROOM reimplementation of USAL
+mechanics documented in usa-learns-*.md. Classification set:
 REUSE CODE / REUSE OPEN CONTENT / CLEAN_ROOM_REIMPLEMENT /
 STUDY_ONLY / REJECT.**
+
+### R1.4A additions — USA Learns observations
+
+| SE NEED | Existing solution | License | Fit | Evidence | Verdict |
+|---|---|---|---|---|---|
+| Sectioned lesson skeleton over a source asset | USAL E1+ lesson pattern (8 sections/21 activities) | n/a (pattern, not code) | HIGH — designed for exactly this | usa-learns-voa-transformation.md | CLEAN_ROOM_REIMPLEMENT |
+| Linear course nav + next-incomplete pointer | USAL menus + "Go to my next activity" | n/a | HIGH | usa-learns-state-machine.md | CLEAN_ROOM_REIMPLEMENT |
+| Tri-state completion + orthogonal % score + self-declared mastery | USAL ✓/Score/—,• + Learning Log | n/a | HIGH — proves completion≠mastery in production | usa-learns-system-deep-dive.md | CLEAN_ROOM_REIMPLEMENT |
+| Bounded retry feedback (2 attempts → reveal) | USAL item cycle | n/a | HIGH | observed live | CLEAN_ROOM_REIMPLEMENT |
+| Speaking self-practice (record→playback→rerecord) | USAL Say it!/Your Turn | n/a | HIGH — validates SE's practice-only policy | observed live | CLEAN_ROOM_REIMPLEMENT |
+| Self-eval can-do/word checklist | USAL Learning Log | n/a | HIGH — ready-made metacognition layer | observed live | CLEAN_ROOM_REIMPLEMENT |
+| USAL source code / content / recordings / readings | usalearns.org | Copyrighted (SCOE) | — | — | STUDY_ONLY / REJECT (never copy) |
+| USAL's video assets | VOA Let's Learn English | PD at asset level | — | already registered | REUSE OPEN CONTENT (from VOA, not via USAL) |
+| Spaced review scheduling | (none at USAL) | — | — | confirmed absent | BUILD on ts-fsrs as planned |
 
 ## Things SE should definitely NOT rebuild
 

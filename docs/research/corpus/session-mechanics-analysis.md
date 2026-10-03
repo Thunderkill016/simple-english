@@ -155,3 +155,29 @@ Constraints pulled from the evidence:
 - Whether review-first vs lesson-first ordering matters for
   completion — apps pick review-first for habit, but evidence
   is engagement-data, not learning-data.
+
+## R1.4A addendum — USA Learns (observed live, the missing case)
+
+USAL answers several open questions with a *minimal* model:
+
+- **No session concept at all.** No timeboxing, no daily plan, no
+  session sizing. Learner navigates menus freely; "Go to my next
+  activity" is the only resume CTA. Sessions emerge from the learner,
+  not the system — and LINCS reviewers call the uniform flow easy
+  anyway. Evidence AGAINST over-engineering session rules.
+- **Resume granularity = activity.** Mid-activity exit discards item
+  progress (new attempt GUID on re-entry, restart at item 1). The
+  pointer = first-incomplete-activity in linear order. SE's planned
+  section-level resume is FINER than USAL; USAL shows coarser is
+  survivable but we keep finer for deep lessons.
+- **Completion ≠ mastery proven in production:** a 22% activity marks
+  FULL; the 80% rule is advisory text. No gate anywhere.
+- **Mistake recovery = bounded retry + reveal** (2 attempts, then
+  "See the correct answer above"). No re-queue, no remediation branch.
+- **Next action = "Go to my next activity"** deep link + chained
+  Next at activity end (auto-flow into the next activity).
+- **"Start over"** is offered as a normal course action — explicit
+  full reset, user-initiated.
+- **Review = unit-level retrieval lesson only** (E1+ 1.6: vocab,
+  spelling, cloze, conversation completion, Your Turn). No due queue
+  or scheduling — consistent with review-first staying a hypothesis.

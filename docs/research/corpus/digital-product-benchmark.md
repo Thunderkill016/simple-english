@@ -174,3 +174,29 @@ are engagement economics, not learning evidence. The learning-
 science-relevant takeaways are modest: session sizing by budget,
 review-interleaving, resume-at-queue semantics, and assessment
 channel separation.
+
+## R1.4A — USA Learns (observed as a real learner)
+
+USAL occupies a category the prior matrix missed: **government OER-era
+self-study courseware** — deep pedagogical lessons rather than
+consumer-app loops.
+
+| Mechanic | USA Learns (observed) |
+|---|---|
+| Session definition | none — free navigation, no sizing/timeboxing |
+| Resume | "Go to my next activity" = first-incomplete deep link; activity-internal restart (new attempt per entry) |
+| Completion | tri-state per activity (□/◧/■); finishing at 22% still counts COMPLETE |
+| Score | orthogonal % on scored items only; advisory 80%, never a gate |
+| Review | unit-level retrieval lesson; NO spaced scheduling/due queue |
+| Feedback | 2 attempts → reveal; "Incorrect. Try again." / "See the correct answer above." |
+| Speaking | record→playback→self-review, 100% unscored |
+| Self-eval | Learning Log: "words I know" + can-do checkboxes every lesson |
+| Media | YouTube embeds + self-hosted MP3; ads inside activities; Flash fallback remnants |
+| Persistence | server-side account only; no offline |
+| Monetization | none (government); AdSense present anyway |
+
+Benchmark position: USAL is the reference for **pedagogical session
+architecture** (sectioned deep lessons); consumer apps remain the
+reference for **habit mechanics**. SE sits between: USAL's lesson
+depth + app-grade resume/due mechanics + local-first persistence
+neither has.
