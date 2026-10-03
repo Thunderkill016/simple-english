@@ -101,3 +101,7 @@ export async function completeLesson(lessonId: string): Promise<LessonProgress> 
 export function countCompletedLessons(): Promise<number> {
   return db.lessonProgress.where("status").equals("completed").count();
 }
+
+export function listCompletedProgress(): Promise<LessonProgress[]> {
+  return db.lessonProgress.where("status").equals("completed").toArray();
+}
