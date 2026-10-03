@@ -109,6 +109,8 @@ export interface LessonCompletion {
   statement: string;
   /** what the learner practiced */
   skills: string[];
+  /** honest bound on the claim — one attempt is practice, not mastery */
+  note?: string;
 }
 
 export interface Lesson {

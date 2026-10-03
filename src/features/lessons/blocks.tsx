@@ -54,7 +54,9 @@ const PROVIDER_LABEL: Record<ExternalEmbedBlock["provider"], string> = {
 
 /**
  * Listening — a local, rights-verified audio asset on native controls.
- * The full transcript keeps the lesson usable when audio can't play.
+ * Transcript starts collapsed: the first listen is listening, not
+ * reading (gist before detail — BC listening framework). It stays one
+ * tap away, so the lesson still works when audio can't play.
  */
 function Audio({ block }: { block: AudioBlock }) {
   return (
@@ -67,7 +69,14 @@ function Audio({ block }: { block: AudioBlock }) {
         aria-label={block.title}
         className="w-full"
       />
-      <p className="text-lesson whitespace-pre-line">{block.transcript}</p>
+      <details className="text-sm text-muted">
+        <summary className="cursor-pointer font-medium text-ink">
+          Read the conversation
+        </summary>
+        <p className="text-lesson mt-3 whitespace-pre-line">
+          {block.transcript}
+        </p>
+      </details>
     </section>
   );
 }

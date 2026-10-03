@@ -5,7 +5,7 @@ const WRONG_OPTION = "Good night.";
 const LESSON_TITLE = "Meet Someone";
 const LESSON_ID = "se-a1-meet-someone";
 const AUDIO_SRC = "/media/voa-lle1-conversation.mp3";
-const COMPLETION_STATEMENT = "✓ You can meet someone in English.";
+const COMPLETION_STATEMENT = "✓ You practiced meeting someone in English.";
 
 async function openLesson(page: Page) {
   await page.goto("/");
@@ -70,9 +70,20 @@ test.describe("local-first learning slice", () => {
     // Lesson 001 scope: 'How are you?' content must not be in this lesson.
     await expect(page.getByText("How are you?")).toHaveCount(0);
 
+    // Source-backed listening design: a pre-listening purpose precedes
+    // the audio block (gist question), transcript starts collapsed.
+    await expect(
+      page.getByRole("heading", { name: "First, just listen" }),
+    ).toBeVisible();
+    await expect(page.getByText("What do they say?")).toBeVisible();
+
     await answerAndComplete(page);
 
-    // Capability completion — skills listed, not just "done".
+    // Capability completion — skills listed, plus an honest bound:
+    // one practice session is not mastery.
+    await expect(
+      page.getByText("One practice session", { exact: false }),
+    ).toBeVisible();
     await expect(
       page.getByRole("listitem").filter({ hasText: "Say hello" }),
     ).toBeVisible();
@@ -181,8 +192,12 @@ test.describe("local-first learning slice", () => {
     await expect(audio).toHaveAttribute("src", AUDIO_SRC);
     await expect(page.locator("iframe")).toHaveCount(0);
 
-    // The language model stays usable with audio dead — transcript text.
-    await expect(page.getByText("I'm Anna.", { exact: false }).first()).toBeVisible();
+    // Gist-first listening: the transcript starts collapsed so the first
+    // listen is listening, not reading — but stays one tap away.
+    const transcriptText = page.getByText("Pete: Hi! Are you Anna?");
+    await expect(transcriptText).toBeHidden();
+    await page.getByText("Read the conversation").click();
+    await expect(transcriptText).toBeVisible();
 
     await answerAndComplete(page);
     await page.reload();

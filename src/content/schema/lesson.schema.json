@@ -92,6 +92,11 @@
           "minItems": 1,
           "items": { "type": "string", "minLength": 1 },
           "description": "what the learner practiced, shown on completion"
+        },
+        "note": {
+          "type": "string",
+          "minLength": 1,
+          "description": "honest bound on the claim — e.g. one practice session is not mastery"
         }
       }
     },

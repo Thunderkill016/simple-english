@@ -153,6 +153,9 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
                   </li>
                 ))}
               </ul>
+              {lesson.completion.note ? (
+                <p className="text-sm text-muted">{lesson.completion.note}</p>
+              ) : null}
             </>
           ) : (
             <>
@@ -212,7 +215,7 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
               </ul>
             </div>
           ) : null}
-          <p>Explanations, exercises and translations are {lesson.authoredBy}&rsquo;s own.</p>
+          <p>Instructions, exercises and translations are {lesson.authoredBy}&rsquo;s own.</p>
         </div>
       </details>
     </article>
