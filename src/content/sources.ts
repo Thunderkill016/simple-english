@@ -30,6 +30,17 @@ export interface SourceRecord {
     evidence?: string;
     notes?: string;
   }[];
+  /** third-party items embedded from their original host (not copied) */
+  externalAssets?: {
+    item: string;
+    provider: string;
+    originalUrl: string;
+    embedSrc: string;
+    rightsStatus: "redistributable" | "embed-only" | "link-only" | "unknown";
+    reason: string;
+    verifiedAt: string;
+    usedIn?: string;
+  }[];
 }
 
 const pcc = pccEsolDigitalWorkbook as SourceRecord;

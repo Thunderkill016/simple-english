@@ -91,6 +91,12 @@ licenses and are approved only per item, recorded in the record's
 `adaptationLog`/`provenanceNotes` — an approved book does not approve
 everything inside it.
 
+Per-asset disposition classes: `REUSE`, `ADAPT`, `EXTERNAL_EMBED`,
+`LINK_ONLY`, `REPLACE`, `OMIT`, `UNKNOWN`. Unclear redistribution rights do
+**not** mean deletion — assets are embedded from their original host when
+the provider supports it (`externalAssets` in the record documents why
+embedding is used instead of copying), and `OMIT` is the last resort.
+
 Item-level license evidence is retained in `evidence/` — metadata snapshots
 (and hashes) of the artifacts a license claim was verified from, so a claim
 like "this item is CC0" can be re-checked without trusting the importer's

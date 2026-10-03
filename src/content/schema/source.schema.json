@@ -48,6 +48,27 @@
           "notes": { "type": "string" }
         }
       }
+    },
+    "externalAssets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["item", "provider", "originalUrl", "embedSrc", "rightsStatus", "reason", "verifiedAt"],
+        "additionalProperties": false,
+        "properties": {
+          "item": { "type": "string", "minLength": 1 },
+          "provider": { "type": "string", "minLength": 1 },
+          "originalUrl": { "type": "string" },
+          "embedSrc": { "type": "string" },
+          "rightsStatus": {
+            "type": "string",
+            "enum": ["redistributable", "embed-only", "link-only", "unknown"]
+          },
+          "reason": { "type": "string", "minLength": 1 },
+          "verifiedAt": { "type": "string", "minLength": 1 },
+          "usedIn": { "type": "string" }
+        }
+      }
     }
   }
 }

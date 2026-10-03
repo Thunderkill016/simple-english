@@ -30,6 +30,16 @@ describe("semantic content checks (beyond JSON Schema)", () => {
     expect(errors[0]).toContain("duplicate option ids");
   });
 
+  it("rejects an embed whose host does not match its provider", () => {
+    const lesson = curriculum[0];
+    if (!lesson) throw new Error("expected at least one real lesson");
+    const invalid = structuredClone(lesson);
+    const embed = invalid.blocks.find((b) => b.type === "external-embed");
+    if (embed?.type === "external-embed") embed.src = "https://evil.example/x";
+    const errors = checkLessonSemantics(invalid);
+    expect(errors.some((e) => e.includes("does not allow embed host"))).toBe(true);
+  });
+
   it.each(curriculum.map((l) => [l.id, l] as const))(
     "curriculum lesson %s passes semantic checks",
     (_id, lesson) => {

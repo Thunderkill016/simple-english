@@ -54,7 +54,27 @@ export interface MultipleChoiceBlock {
   answer: string;
 }
 
-export type LessonBlock = HeadingBlock | TextBlock | ExampleBlock | MultipleChoiceBlock;
+export interface ExternalEmbedBlock {
+  type: "external-embed";
+  /** allowlisted provider — semantic checks map it to permitted hosts */
+  provider: "youtube" | "h5p";
+  title: string;
+  /** https embed URL on the original host — never a copied/rehosted asset */
+  src: string;
+  /** original canonical URL (watch page / chapter page) */
+  sourceUrl: string;
+  /** why this external item contributes to the lesson */
+  purpose: string;
+  /** where the learner goes if the embed cannot load */
+  fallbackUrl: string;
+}
+
+export type LessonBlock =
+  | HeadingBlock
+  | TextBlock
+  | ExampleBlock
+  | MultipleChoiceBlock
+  | ExternalEmbedBlock;
 
 export interface Lesson {
   schemaVersion: 1;

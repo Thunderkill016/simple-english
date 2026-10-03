@@ -44,6 +44,32 @@ describe("lesson JSON Schema", () => {
     };
     expect(validate(invalid)).toBe(false);
   });
+
+  const validEmbed = {
+    type: "external-embed",
+    provider: "youtube",
+    title: "A video",
+    src: "https://www.youtube.com/embed/abc123",
+    sourceUrl: "https://www.youtube.com/watch?v=abc123",
+    purpose: "Watch",
+    fallbackUrl: "https://www.youtube.com/watch?v=abc123",
+  };
+
+  it("accepts a valid external-embed block", () => {
+    expect(
+      validate({ ...fixture, blocks: [...fixture.blocks, validEmbed] }),
+    ).toBe(true);
+  });
+
+  it.each([
+    ["unknown provider", { ...validEmbed, provider: "vimeo" }],
+    ["non-HTTPS src", { ...validEmbed, src: "http://www.youtube.com/embed/x" }],
+    ["javascript: src", { ...validEmbed, src: "javascript:alert(1)" }],
+    ["missing sourceUrl", Object.fromEntries(Object.entries(validEmbed).filter(([k]) => k !== "sourceUrl"))],
+    ["missing fallbackUrl", Object.fromEntries(Object.entries(validEmbed).filter(([k]) => k !== "fallbackUrl"))],
+  ])("rejects an external-embed with %s", (_name, embed) => {
+    expect(validate({ ...fixture, blocks: [...fixture.blocks, embed] })).toBe(false);
+  });
 });
 
 describe("source record JSON Schema (load-bearing provenance)", () => {

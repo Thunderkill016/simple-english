@@ -126,6 +126,40 @@
               "description": "id of the correct option"
             }
           }
+        },
+        {
+          "type": "object",
+          "required": ["type", "provider", "title", "src", "sourceUrl", "purpose", "fallbackUrl"],
+          "additionalProperties": false,
+          "properties": {
+            "type": { "const": "external-embed" },
+            "provider": {
+              "type": "string",
+              "enum": ["youtube", "h5p"],
+              "description": "allowlisted embed provider — extend only when a real lesson needs it"
+            },
+            "title": { "type": "string", "minLength": 1 },
+            "src": {
+              "type": "string",
+              "pattern": "^https://",
+              "description": "https embed URL on the original host — never a copied/rehosted asset"
+            },
+            "sourceUrl": {
+              "type": "string",
+              "pattern": "^https://",
+              "description": "original canonical URL (watch page / chapter page)"
+            },
+            "purpose": {
+              "type": "string",
+              "minLength": 1,
+              "description": "why this external item contributes to the lesson"
+            },
+            "fallbackUrl": {
+              "type": "string",
+              "pattern": "^https://",
+              "description": "where the learner goes if the embed cannot load"
+            }
+          }
         }
       ]
     }

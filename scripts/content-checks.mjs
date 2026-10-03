@@ -50,11 +50,30 @@ export function checkLessonSemantics(lesson) {
     }
   }
 
-  // Exercise semantics
+  // Exercise + embed semantics
+  const EMBED_HOSTS = {
+    youtube: ["www.youtube.com", "www.youtube-nocookie.com"],
+    h5p: ["openoregon.pressbooks.pub"],
+  };
   const mcIds = [];
   (lesson.blocks ?? []).forEach((block, i) => {
+    const label = `blocks[${i}] (${block.id ?? block.title ?? "?"})`;
+    if (block?.type === "external-embed") {
+      // Provider label must match the actual embed host — prevents the
+      // allowlist being used to smuggle arbitrary iframes.
+      try {
+        const host = new URL(block.src).hostname;
+        if (!(EMBED_HOSTS[block.provider] ?? []).includes(host)) {
+          errors.push(
+            `${label}: provider "${block.provider}" does not allow embed host "${host}"`,
+          );
+        }
+      } catch {
+        errors.push(`${label}: src is not a valid URL`);
+      }
+      return;
+    }
     if (block?.type !== "multiple-choice") return;
-    const label = `blocks[${i}] (${block.id ?? "?"})`;
     if (mcIds.includes(block.id)) {
       errors.push(`${label}: duplicate exercise id "${block.id}"`);
     }

@@ -31,18 +31,50 @@ actually looked like, and what it taught us about the pipeline.
   **CC0 1.0 by Tim Krause**, while the book is CC BY 4.0 by three authors.
   Lesson-level `source` overrides exist for exactly this case.
 - Embedded media (YouTube, images inside card exercises) could not be
-  licensed per item — omitted entirely.
+  licensed per item — resolved via EXTERNAL_EMBED / LINK_ONLY rather than
+  deletion (see audit below).
 
 ## Asset audit (Greetings chapter)
 
-| Asset | Class | Note |
-| --- | --- | --- |
-| H5P `greetings-01-17` (dialogue text) | REUSE | CC0 1.0, Tim Krause — adapted |
-| H5P `greetings-02-18` memory game | OMIT | CC0 but per-image copyrights unverified |
-| H5P `useful-expressions-19` cards | OMIT | license "U" undisclosed |
-| H5P `greetings-extra-20` dialogue | OMIT | license "U" undisclosed |
-| 2× YouTube embeds | OMIT | third-party, not covered by book license |
-| Source page URL | LINK_ONLY | attribution/provenance link in lesson footer |
+Revised per the canonical asset decision: reuse → embed → link → omit.
+Unclear redistribution rights no longer mean deletion — items are embedded
+from their original host (rights and hosting stay upstream) or linked.
+
+| Asset | Redistribution | Class | Disposition |
+| --- | --- | --- | --- |
+| H5P `greetings-01-17` (dialogue text) | CC0 1.0, Tim Krause | REUSE/ADAPT | adapted into SE blocks |
+| YouTube `AzES-nhQFzk` "Hello. How are you?" | third-party, not reusable | EXTERNAL_EMBED | official YouTube player, click-to-load |
+| YouTube `uqgKvNxhCvQ` "More Greetings" | third-party, not reusable | LINK_ONLY | on-topic but second video would dilute one focused lesson |
+| H5P `greetings-02-18` memory game | CC0; per-image copyrights unverified | EXTERNAL_EMBED | original-host embed `admin-ajax.php?action=h5p_embed&id=18` (verified 200, no frame-ancestors block) |
+| H5P `useful-expressions-19` cards | license "U" | LINK_ONLY | embeddable technically, but excluded for lesson focus; reachable via chapter link |
+| H5P `greetings-extra-20` dialogue | license "U" | LINK_ONLY | same |
+| Source page URL | — | LINK_ONLY | attribution/provenance link in lesson footer |
+
+Nothing was classified OMIT — every asset turned out to be embeddable or
+linkable; nothing needed deletion on rights grounds alone.
+
+## External embed architecture
+
+- New minimal block `external-embed`: provider-allowlisted (`youtube`,
+  `h5p`), https-only URLs, required `sourceUrl`/`fallbackUrl`/`purpose`.
+  Semantic checks map provider → permitted embed host so the label can't
+  smuggle arbitrary iframes.
+- Embeds are **optional infrastructure**: click-to-load placeholder
+  (honest "loads content from {host}" boundary) → lazy iframe with
+  least-privilege sandbox + persistent "Open original ↗" fallback link.
+  No eager third-party bytes at lesson render.
+- Iframe attrs: youtube = `sandbox="allow-scripts allow-same-origin
+  allow-presentation allow-popups"` + `allow="fullscreen;
+  picture-in-picture"`; h5p = `sandbox="allow-scripts allow-same-origin
+  allow-forms"`. No arbitrary embed HTML anywhere.
+- Offline/failure: SE content, exercises, progress unaffected — embed
+  degrades to its fallback link. Proven by E2E with all third-party
+  requests aborted.
+- CSP directions (when a policy is deployed): `frame-src www.youtube.com
+  openoregon.pressbooks.pub`; `img-src`/`media-src` need nothing extra
+  (no thumbnails/proxied media). No `*`.
+- Runtime impact: 2 embeds, both click-to-load → zero third-party bytes
+  until learner opts in; measured SE bundle unaffected.
 
 ## Licensing friction
 

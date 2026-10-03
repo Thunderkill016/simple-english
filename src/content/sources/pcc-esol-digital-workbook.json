@@ -24,5 +24,27 @@
       "evidence": "docs/sources/evidence/pcc-esol-l1m1-greetings.h5p-metadata.json",
       "notes": "Conversation text (Hello / Hi / How are you? / Fine, thank you / Good. Thank you.) restructured into SE lesson blocks; one multiple-choice exercise derived from the original item's learning goal."
     }
+  ],
+  "externalAssets": [
+    {
+      "item": "English with Jennifer — 'Hello. How are you?' (YouTube AzES-nhQFzk, embedded in the source chapter)",
+      "provider": "youtube",
+      "originalUrl": "https://www.youtube.com/watch?v=AzES-nhQFzk",
+      "embedSrc": "https://www.youtube.com/embed/AzES-nhQFzk",
+      "rightsStatus": "embed-only",
+      "reason": "Third-party video, not covered by the book license — embedding via the official YouTube player preserves the learning value while rights stay with the original holder.",
+      "verifiedAt": "2026-10-03",
+      "usedIn": "src/content/lessons/pcc-esol-l1m1-greetings.lesson.json"
+    },
+    {
+      "item": "H5P 'Level 01 Module 01 Greetings 02' (memory game, embedded in the source chapter)",
+      "provider": "h5p",
+      "originalUrl": "https://openoregon.pressbooks.pub/esol23/chapter/chapter-1-2/",
+      "embedSrc": "https://openoregon.pressbooks.pub/esol23/wp-admin/admin-ajax.php?action=h5p_embed&id=18",
+      "rightsStatus": "embed-only",
+      "reason": "Item is CC0 but its picture-card copyrights are unverified — embedding the original host serves the activity without redistributing any asset.",
+      "verifiedAt": "2026-10-03",
+      "usedIn": "src/content/lessons/pcc-esol-l1m1-greetings.lesson.json"
+    }
   ]
 }

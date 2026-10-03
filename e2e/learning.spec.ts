@@ -90,6 +90,39 @@ test.describe("local-first learning slice", () => {
     expect(apiRequests).toEqual([]);
   });
 
+  test("external embeds are click-to-load and never block learning", async ({
+    page,
+    context,
+  }) => {
+    // Third-party requests fail hard — the learning flow must not care.
+    await context.route("**/youtube.com/**", (r) => r.abort());
+    await context.route("**/openoregon.pressbooks.pub/**", (r) => r.abort());
+
+    await openLesson(page);
+
+    // Placeholder with honest third-party boundary — no eager iframe
+    await expect(page.getByText("Watch: Hello. How are you?")).toBeVisible();
+    await expect(page.getByText(/Loads content from www\.youtube\.com/)).toBeVisible();
+    await expect(page.locator("iframe")).toHaveCount(0);
+
+    // Accessible title + fallback link before anything loads
+    await expect(
+      page.getByRole("link", { name: "Open original ↗" }).first(),
+    ).toBeVisible();
+
+    // Click-to-load inserts the iframe with restrictive sandbox
+    await page.getByRole("button", { name: "Load video" }).click();
+    const iframe = page.locator('iframe[title="Watch: Hello. How are you?"]');
+    await expect(iframe).toBeVisible();
+    await expect(iframe).toHaveAttribute("sandbox", /allow-scripts/);
+    await expect(iframe).toHaveAttribute("loading", "lazy");
+
+    // Even with every third-party request dead, SE flow is intact
+    await answerAndComplete(page);
+    await page.reload();
+    await expect(page.getByText("Lesson complete.")).toBeVisible();
+  });
+
   test("deep links render routes directly (SPA static hosting)", async ({
     page,
   }) => {
