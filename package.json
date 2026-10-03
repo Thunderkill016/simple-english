@@ -1,0 +1,40 @@
+{
+  "name": "simple-english",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "packageManager": "pnpm@10.15.0",
+  "engines": {
+    "node": ">=20.19",
+    "pnpm": ">=10"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "pnpm typecheck && pnpm validate:content && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "validate:content": "node scripts/validate-content.mjs",
+    "test": "vitest run",
+    "test:e2e": "pnpm build && playwright test"
+  },
+  "dependencies": {
+    "dexie": "4.4.6",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "react-router": "7.18.4"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.62.1",
+    "@tailwindcss/vite": "4.3.3",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "5.2.0",
+    "ajv": "8.20.0",
+    "fake-indexeddb": "6.2.5",
+    "tailwindcss": "4.3.3",
+    "typescript": "5.9.3",
+    "vite": "7.3.6",
+    "vitest": "5.0.2"
+  }
+}

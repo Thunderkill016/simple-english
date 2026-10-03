@@ -36,10 +36,24 @@ learning simple.*
 
 ## Current status
 
-**Early foundation / research stage.** This repository contains the project
-specification, principles, and decision records — not a working product yet.
-The next step is a research audit of the best reusable foundations for V1
-(see the open `R1` issue).
+**Foundation stage — first local-first slice exists.** The repo contains a
+minimal working slice: one synthetic fixture lesson renders, a learner can
+answer an exercise, and completion persists locally (IndexedDB) across
+reloads — no account, no backend. It proves the architecture in ADR-0002, not
+the product. See the open `R1` issue for the ongoing research track.
+
+## Local development
+
+Requires Node.js ≥ 20.19 and pnpm ≥ 10.
+
+```bash
+pnpm install          # install dependencies
+pnpm dev              # dev server
+pnpm test             # unit tests (Vitest)
+pnpm validate:content # validate lesson content against JSON Schema
+pnpm build            # typecheck + content validation + production build
+pnpm test:e2e         # build + Playwright end-to-end tests
+```
 
 ## Documentation
 
