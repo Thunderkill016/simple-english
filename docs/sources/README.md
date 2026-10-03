@@ -74,13 +74,22 @@ field.
 
 | id | Title | License | Status |
 | --- | --- | --- | --- |
-| `pcc-esol-digital-workbook` | A Digital Workbook for Beginning ESOL (PCC / Open Oregon) — [record](pcc-esol-digital-workbook.json) | CC BY 4.0 (per-item licenses vary) | approved — canonical V1 beginner source; embedded items audited per item before adaptation (first adaptation: Greetings dialogue, CC0, 2026-10-03) |
+| `pcc-esol-digital-workbook` | A Digital Workbook for Beginning ESOL (PCC / Open Oregon) — [record](../../src/content/sources/pcc-esol-digital-workbook.json) | CC BY 4.0 (per-item licenses vary) | approved — canonical V1 beginner source; book-level license verified, embedded items audited per item before adaptation (first adaptation: Greetings dialogue item, CC0, 2026-10-03) |
 | `pcc-portland-people-and-places` | Portland People and Places (Timothy Krause, PCC) | CC BY 4.0 | review-required — license verified 2026-10-03; adaptation review pending |
 | `pcc-green-tea-intermediate` | Green Tea Intermediate English Communication OER (Dodson, Diniz, Leiton; PCC / Open Oregon, 2020) | CC BY 4.0 | review-required — license verified 2026-10-03; adaptation review pending |
 | `american-english-state-dept` | American English / U.S. Dept. of State materials | per item | review-required — reuse rights vary; not automatically public domain |
 
-Machine-readable records will be added as JSON files in this directory when
-adaptation work actually starts — not before.
+Machine-readable records live in `src/content/sources/` — a single canonical
+location imported both by the app runtime (attribution rendering) and by the
+content-validation pipeline (provenance checks). This directory documents the
+registry process and indexes those records; records are added when adaptation
+work actually starts — not before.
+
+`reuseStatus: approved` means the work-level license was verified at the
+original source. Embedded items (media, exercises, cards) carry their own
+licenses and are approved only per item, recorded in the record's
+`adaptationLog`/`provenanceNotes` — an approved book does not approve
+everything inside it.
 
 ## Adding a source
 

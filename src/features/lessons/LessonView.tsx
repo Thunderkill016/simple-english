@@ -10,6 +10,7 @@ import {
   type LessonProgress,
 } from "../progress/progress";
 import { Block } from "./blocks";
+import { getSourceRecord } from "../../content/sources";
 
 type Feedback = "correct" | "incorrect" | null;
 
@@ -70,6 +71,19 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
       setProgress(previous);
     });
   }
+
+  const record = getSourceRecord(lesson.source.id);
+  const resolved = {
+    title: lesson.source.title ?? record?.title,
+    url: lesson.source.url ?? record?.url,
+    license: lesson.source.license ?? record?.license,
+    licenseUrl: lesson.source.licenseUrl ?? record?.licenseUrl,
+    attribution:
+      lesson.source.attribution ??
+      (record
+        ? `Based on “${record.title}” by ${record.authors.join(", ")} (${record.publisher}), ${record.license}. Adapted by Simple English.`
+        : undefined),
+  };
 
   return (
     <article className="space-y-4">
@@ -133,32 +147,36 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
       <footer className="pt-2 text-xs text-slate-500">
         <p>
           Source:{" "}
-          <a
-            href={lesson.source.url}
-            target="_blank"
-            rel="noreferrer"
-            className="underline decoration-slate-300 underline-offset-2 hover:text-slate-700"
-          >
-            {lesson.source.title}
-          </a>
-          {" — "}
-          {lesson.source.licenseUrl ? (
+          {resolved.url ? (
             <a
-              href={lesson.source.licenseUrl}
+              href={resolved.url}
               target="_blank"
               rel="noreferrer"
               className="underline decoration-slate-300 underline-offset-2 hover:text-slate-700"
             >
-              {lesson.source.license}
+              {resolved.title}
             </a>
           ) : (
-            lesson.source.license
+            resolved.title
+          )}
+          {" — "}
+          {resolved.licenseUrl ? (
+            <a
+              href={resolved.licenseUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="underline decoration-slate-300 underline-offset-2 hover:text-slate-700"
+            >
+              {resolved.license}
+            </a>
+          ) : (
+            resolved.license
           )}
           {lesson.source.adapted ? " (adapted)" : null}
           {lesson.source.synthetic ? " (synthetic fixture)" : null}
         </p>
-        {lesson.source.attribution ? (
-          <p className="mt-1">{lesson.source.attribution}</p>
+        {resolved.attribution ? (
+          <p className="mt-1">{resolved.attribution}</p>
         ) : null}
       </footer>
     </article>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router";
-import { curriculum, getLesson } from "../content/lessons";
+import { curriculum, getLesson } from "../content/curriculum";
 import { LessonView } from "../features/lessons/LessonView";
 import { getLessonProgress, type LessonProgress } from "../features/progress/progress";
 

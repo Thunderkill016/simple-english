@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import { curriculum } from "../content/lessons";
+import { curriculum } from "../content/curriculum";
 import { getLessonProgress, type LessonProgress } from "../features/progress/progress";
 
 export function TodayPage() {

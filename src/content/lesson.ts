@@ -4,14 +4,18 @@
 // Keep the two in sync when the schema evolves.
 
 export interface LessonSource {
+  /** registry key — must match a src/content/sources/ record for
+   *  non-synthetic content; item-level fields below override record defaults */
   id: string;
-  title: string;
-  license: string;
-  url: string;
+  title?: string;
+  license?: string;
+  url?: string;
   /** canonical URL of the source license deed */
   licenseUrl?: string;
   /** true when SE adapted this from an external source */
   adapted: boolean;
+  /** material adaptations made from the source, for traceability */
+  adaptationNotes?: string[];
   /** true when content is SE-authored fixture/test data, not real curriculum */
   synthetic?: boolean;
   /** attribution line satisfying the source license obligations */

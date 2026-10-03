@@ -11,7 +11,7 @@
   "levels": ["beginner"],
   "subjects": ["ESOL", "English language"],
   "reuseStatus": "approved",
-  "provenanceNotes": "Book-level license is CC BY 4.0 'except where otherwise noted'; embedded items carry their own licenses and were audited per item before adaptation. Per-item audit of the Greetings chapter (chapter-1-2): H5P 'Level 01 Module 01 Greetings 01' (fill-in-the-blank dialogue) is CC0 1.0 by Tim Krause — adapted into src/content/library/greetings-how-are-you.lesson.json. H5P 'Level 01 Module 01 Greetings 02' (memory game) is CC0 but its picture cards were not reused (per-image copyrights unverified). H5P 'Useful Expressions' dialog cards and 'Greetings Extra' carry license 'U' (undisclosed) — NOT reused. Two embedded YouTube videos are third-party — NOT reused.",
+  "provenanceNotes": "Book-level license is CC BY 4.0 'except where otherwise noted'; embedded items carry their own licenses and were audited per item before adaptation. Per-item audit of the Greetings chapter (chapter-1-2): H5P 'Level 01 Module 01 Greetings 01' (fill-in-the-blank dialogue) is CC0 1.0 by Tim Krause — adapted into src/content/lessons/pcc-esol-l1m1-greetings.lesson.json. H5P 'Level 01 Module 01 Greetings 02' (memory game) is CC0 but its picture cards were not reused (per-image copyrights unverified). H5P 'Useful Expressions' dialog cards and 'Greetings Extra' carry license 'U' (undisclosed) — NOT reused. Two embedded YouTube videos are third-party — NOT reused.",
   "verifiedAt": "2026-10-03",
   "verifiedBy": "Devin",
   "adaptationLog": [
@@ -20,7 +20,7 @@
       "itemUrl": "https://openoregon.pressbooks.pub/esol23/chapter/chapter-1-2/",
       "itemLicense": "CC0 1.0",
       "itemAuthors": ["Tim Krause"],
-      "usedIn": "src/content/library/greetings-how-are-you.lesson.json",
+      "usedIn": "src/content/lessons/pcc-esol-l1m1-greetings.lesson.json",
       "notes": "Conversation text (Hello / Hi / How are you? / Fine, thank you / Good. Thank you.) restructured into SE lesson blocks; one multiple-choice exercise derived from the original item's learning goal."
     }
   ]

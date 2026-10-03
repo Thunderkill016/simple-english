@@ -76,7 +76,7 @@ test.describe("local-first learning slice", () => {
       const tx = database.transaction("lessonProgress", "readonly");
       const record = await new Promise<{ status?: string } | undefined>(
         (resolve, reject) => {
-          const get = tx.objectStore("lessonProgress").get("greetings-how-are-you");
+          const get = tx.objectStore("lessonProgress").get("pcc-esol-l1m1-greetings");
           get.onsuccess = () => resolve(get.result as { status?: string } | undefined);
           get.onerror = () => reject(get.error);
         },

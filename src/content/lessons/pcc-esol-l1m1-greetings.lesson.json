@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "greetings-how-are-you",
+  "id": "pcc-esol-l1m1-greetings",
   "title": "Greetings: How are you?",
   "level": "beginner",
   "source": {
@@ -10,8 +10,13 @@
     "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
     "url": "https://openoregon.pressbooks.pub/esol23/chapter/chapter-1-2/",
     "adapted": true,
-    "synthetic": false,
-    "attribution": "Adapted from 'Level 01 Module 01 Greetings 01' by Tim Krause, A Digital Workbook for Beginning ESOL (Portland Community College / Open Oregon Educational Resources), CC0 1.0. Restructured into SE lesson format; example lines are taken from the original exercise's accepted answers."
+    "adaptationNotes": [
+      "Source item is an H5P fill-in-the-blank dialogue; reformatted into heading/text/example blocks with the conversation reconstructed from the exercise's accepted answers.",
+      "Fill-in-the-blank interaction converted to one multiple-choice question with the same learning goal (choosing a reply to 'How are you?').",
+      "Vietnamese translations on example blocks added by SE (not present in the source).",
+      "Two embedded YouTube videos and three other H5P items on the source page were not reused (third-party or undisclosed license)."
+    ],
+    "attribution": "Adapted from 'Level 01 Module 01 Greetings 01' by Tim Krause, A Digital Workbook for Beginning ESOL (Portland Community College / Open Oregon Educational Resources), CC0 1.0. Adapted by Simple English."
   },
   "blocks": [
     {
