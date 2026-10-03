@@ -1,0 +1,524 @@
+{
+  "schemaVersion": 3,
+  "id": "voa-lle1",
+  "title": "Let's Learn English - Level 1",
+  "sourcePack": "voa-lle1-lesson1",
+  "units": [
+    {
+      "id": "voa-lle1-unit-course",
+      "title": "Level 1",
+      "lessons": [
+        {
+          "id": "voa-lle1-lesson-1",
+          "title": "Lesson 1: Welcome!",
+          "sections": [
+            {
+              "id": "s-orient",
+              "function": "orient",
+              "title": {
+                "text": "welcome!",
+                "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim lesson title line" }
+              },
+              "activities": [
+                {
+                  "id": "orient-goals",
+                  "title": { "text": "Goals", "prov": { "kind": "source", "ref": "lesson-plan" } },
+                  "scored": false,
+                  "items": [
+                    {
+                      "type": "read",
+                      "id": "orient-topics",
+                      "blocks": [
+                        { "text": "Meeting people", "prov": { "kind": "source", "ref": "lesson-plan", "note": "Topics" } },
+                        { "text": "Introduce yourself", "prov": { "kind": "source", "ref": "lesson-plan", "note": "Topics" } }
+                      ]
+                    },
+                    {
+                      "type": "read",
+                      "id": "orient-goals-list",
+                      "blocks": [
+                        { "text": "Grammar: Verb BE (I am) in introductions; BE + location", "prov": { "kind": "source", "ref": "lesson-plan", "note": "Goals" } },
+                        { "text": "Speaking: Meeting people; Ask question and answer “Are you (name)?”", "prov": { "kind": "source", "ref": "lesson-plan", "note": "Goals" } },
+                        { "text": "Review alphabet and numbers 1-20", "prov": { "kind": "source", "ref": "lesson-plan", "note": "Goals" } },
+                        { "text": "Pronunciation: Pronouncing linked sounds", "prov": { "kind": "source", "ref": "lesson-plan", "note": "Goals" } }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "orient-set-goal",
+                  "title": { "text": "Learning Strategy", "prov": { "kind": "source", "ref": "lesson-plan" } },
+                  "scored": false,
+                  "items": [
+                    {
+                      "type": "read",
+                      "id": "orient-strategy",
+                      "blocks": [
+                        { "text": "Set a Goal", "prov": { "kind": "source", "ref": "lesson-plan", "note": "Learning Strategy" } },
+                        { "text": "It is best to set a short-term and small goal. Remind them to focus on this goal as they study.", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim plan sentence (teacher voice retained)" } }
+                      ]
+                    },
+                    {
+                      "type": "note",
+                      "id": "orient-goal-note",
+                      "prompt": { "text": "What do you want to do in English after studying for three months?", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim plan question" } }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "s-prepare",
+              "function": "prepare",
+              "title": { "text": "Teach Key Words", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim plan heading" } },
+              "activities": [
+                {
+                  "id": "prepare-key-words",
+                  "title": { "text": "Key Words", "prov": { "kind": "source", "ref": "lesson-plan" } },
+                  "scored": false,
+                  "items": [
+                    {
+                      "type": "read",
+                      "id": "kw-apartment",
+                      "blocks": [
+                        { "text": "apartment - n. a usually rented room or set of rooms that is part of a building and is used as a place to live", "prov": { "kind": "source", "ref": "lesson-plan" } }
+                      ]
+                    },
+                    {
+                      "type": "read",
+                      "id": "kw-meet",
+                      "blocks": [
+                        { "text": "meet - v. to see and speak to someone for the first time", "prov": { "kind": "source", "ref": "lesson-plan" } }
+                      ]
+                    },
+                    {
+                      "type": "read",
+                      "id": "kw-new",
+                      "blocks": [
+                        { "text": "new - adj. not known before; recently bought or rented", "prov": { "kind": "source", "ref": "lesson-plan" } }
+                      ]
+                    },
+                    {
+                      "type": "read",
+                      "id": "kw-nice",
+                      "blocks": [
+                        { "text": "nice - adj. good and enjoyable", "prov": { "kind": "source", "ref": "lesson-plan" } }
+                      ]
+                    },
+                    {
+                      "type": "read",
+                      "id": "kw-street",
+                      "blocks": [
+                        { "text": "street - n. a road in a city, town, or village", "prov": { "kind": "source", "ref": "lesson-plan" } }
+                      ]
+                    },
+                    {
+                      "type": "read",
+                      "id": "kw-try",
+                      "blocks": [
+                        { "text": "try - v. to make an effort to do something", "prov": { "kind": "source", "ref": "lesson-plan" } }
+                      ]
+                    },
+                    {
+                      "type": "read",
+                      "id": "kw-welcome",
+                      "blocks": [
+                        { "text": "welcome - interjection. used as a friendly greeting to someone who has arrived at a place", "prov": { "kind": "source", "ref": "lesson-plan" } }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "prepare-speaking-practice",
+                  "title": { "text": "Speaking Practice", "prov": { "kind": "source", "ref": "lesson-plan" } },
+                  "scored": false,
+                  "items": [
+                    {
+                      "type": "media",
+                      "id": "prep-sp-video",
+                      "media": { "kind": "video", "src": "/media/voa-lle1/voa-lle1-speaking-practice.mp4", "sha256": "b5f4fe7107ad537c897ad5a171d114928159348202e89e3e7f554be05d58a519" },
+                      "title": { "text": "Speaking Practice", "prov": { "kind": "source", "ref": "speaking-practice-video" } },
+                      "transcript": { "text": "Here’s how to practice.\nListen. (video recording of “apartment” plays)\nRecord yourself.\n“Apartment.”\nThen listen.\n“Apartment”", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim Speaking Practice video script" } }
+                    }
+                  ]
+                },
+                {
+                  "id": "prepare-letters-numbers",
+                  "title": { "text": "Review the Alphabet", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim plan heading" } },
+                  "scored": false,
+                  "items": [
+                    {
+                      "type": "read",
+                      "id": "prep-alphabet",
+                      "blocks": [
+                        { "text": "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z", "prov": { "kind": "derived", "ref": "lesson-plan", "note": "mechanical enumeration of the named set authorized by the verified objective 'Review alphabet and numbers 1-20'; the set itself is a universal fact, not authored text" } }
+                      ]
+                    },
+                    {
+                      "type": "media",
+                      "id": "prep-alphabet-video",
+                      "media": { "kind": "embed", "provider": "youtube", "embedSrc": "https://www.youtube.com/embed/IpIhzFh0yw8", "sourceUrl": "https://youtu.be/IpIhzFh0yw8" },
+                      "title": { "text": "alphabet song", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim from plan instruction 'teach the alphabet song. Use the link'" } }
+                    },
+                    {
+                      "type": "read",
+                      "id": "prep-numbers",
+                      "blocks": [
+                        { "text": "Numbers from 1 - 20", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim plan heading" } },
+                        { "text": "one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen, twenty", "prov": { "kind": "derived", "ref": "lesson-plan", "note": "mechanical enumeration of cardinal number names 1-20 authorized by the verified objective; universal fact, not authored text" } }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "s-input",
+              "function": "input",
+              "title": { "text": "Present the Conversation", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim plan heading" } },
+              "activities": [
+                {
+                  "id": "input-main-video",
+                  "title": { "text": "Main Video Script – Lesson 1", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim plan heading" } },
+                  "scored": false,
+                  "items": [
+                    {
+                      "type": "media",
+                      "id": "input-video",
+                      "media": { "kind": "video", "src": "/media/voa-lle1/voa-lle1-main-video.mp4", "sha256": "a7bc9ee8405a07196a162e87fe68b52071c4c576289dc03840d9d4bfd97dce98" },
+                      "title": { "text": "welcome!", "prov": { "kind": "source", "ref": "lesson-plan" } },
+                      "transcript": { "text": "1. Listen: Hi. Speak: Hi!\n2. Listen: I am Pete. Speak and say your name: I am ________.\n3. Listen: Nice to meet you. Speak: Nice to meet you.\n4. Listen: I’m Anna. A-N-N-A. Speak and say your name. Then spell your name: I am ____________. __ __ ___ __ ___.", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim Main Video Script" } }
+                    }
+                  ]
+                },
+                {
+                  "id": "input-conversation",
+                  "title": { "text": "Conversation", "prov": { "kind": "source", "ref": "lesson-plan" } },
+                  "scored": false,
+                  "items": [
+                    {
+                      "type": "media",
+                      "id": "input-convo-audio",
+                      "media": { "kind": "audio", "src": "/media/voa-lle1/conversation.mp3", "sha256": "11d3ee8a7f52615988b98f1e4addacaee35b0486cd6c8d8e7a08cf32b65a123b" },
+                      "title": { "text": "Conversation", "prov": { "kind": "source", "ref": "lesson-plan" } },
+                      "transcript": { "text": "Pete: Hi! Are you Anna?\nAnna: Yes! Hi there! Are you Pete?\nPete: I am Pete.\nAnna: Nice to meet you.\nAnna: Let’s try that again. I’m Anna.\nPete: I’m Pete. “Anna” Is that A-N-A?\nAnna: No. A-N-N-A.\nPete: Well, Anna with two “n’s” … Welcome to … 1400 Irving Street!\nAnna: My new apartment! Yes!", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim Resources: Conversation" } }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "s-comprehension",
+              "function": "comprehension",
+              "title": { "text": "Listening Quiz", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim plan heading" } },
+              "activities": [
+                {
+                  "id": "comp-quiz",
+                  "title": { "text": "Quiz - Level 1, Lesson 1: Welcome", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim quiz heading" } },
+                  "scored": true,
+                  "items": [
+                    {
+                      "type": "mc",
+                      "id": "quiz-q1",
+                      "prompt": { "text": "Listen. Circle the letter of the correct answer.\n1. Who is she?", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim quiz instruction + question" } },
+                      "media": { "kind": "video", "src": "/media/voa-lle1/voa-lle1-quiz-q1.mp4", "sha256": "3e0735627a2ffa7357a79a458d2f547af909acb43c28fe7802abdcc33daa36fe" },
+                      "options": [
+                        { "id": "a", "text": { "text": "Melissa", "prov": { "kind": "source", "ref": "lesson-plan" } } },
+                        { "id": "b", "text": { "text": "Mary", "prov": { "kind": "source", "ref": "lesson-plan" } } },
+                        { "id": "c", "text": { "text": "Maurice", "prov": { "kind": "source", "ref": "lesson-plan" } } },
+                        { "id": "d", "text": { "text": "Meghan", "prov": { "kind": "source", "ref": "lesson-plan" } } }
+                      ],
+                      "answer": "b",
+                      "attempts": 2
+                    },
+                    {
+                      "type": "mc",
+                      "id": "quiz-q2",
+                      "prompt": { "text": "2. Who is he?", "prov": { "kind": "source", "ref": "lesson-plan" } },
+                      "media": { "kind": "video", "src": "/media/voa-lle1/voa-lle1-quiz-q2.mp4", "sha256": "d6928e2eaef54193f8d2bc3dbda9b215d73ff7f3b1b94be13f298d31f517d419" },
+                      "options": [
+                        { "id": "a", "text": { "text": "Joseph", "prov": { "kind": "source", "ref": "lesson-plan" } } },
+                        { "id": "b", "text": { "text": "Shawn", "prov": { "kind": "source", "ref": "lesson-plan" } } },
+                        { "id": "c", "text": { "text": "John", "prov": { "kind": "source", "ref": "lesson-plan" } } },
+                        { "id": "d", "text": { "text": "Josh", "prov": { "kind": "source", "ref": "lesson-plan" } } }
+                      ],
+                      "answer": "c",
+                      "attempts": 2
+                    },
+                    {
+                      "type": "mc",
+                      "id": "quiz-q3",
+                      "prompt": { "text": "3. What does the person say?", "prov": { "kind": "source", "ref": "lesson-plan" } },
+                      "media": { "kind": "video", "src": "/media/voa-lle1/voa-lle1-quiz-q3.mp4", "sha256": "86fa266e48b955b9e0d1ce4d9ab9cbab1ea6a87f2a6288385767bb5f597895bf" },
+                      "options": [
+                        { "id": "a", "text": { "text": "Hello. My name is Russell. Are you Sarah?", "prov": { "kind": "source", "ref": "lesson-plan" } } },
+                        { "id": "b", "text": { "text": "What is your name?", "prov": { "kind": "source", "ref": "lesson-plan" } } },
+                        { "id": "c", "text": { "text": "Hello. What is your name? My name is John.", "prov": { "kind": "source", "ref": "lesson-plan" } } },
+                        { "id": "d", "text": { "text": "Hi. I am Jill. Are you John?", "prov": { "kind": "source", "ref": "lesson-plan" } } }
+                      ],
+                      "answer": "d",
+                      "attempts": 2
+                    },
+                    {
+                      "type": "mc",
+                      "id": "quiz-q4",
+                      "prompt": { "text": "4. What does the person say?", "prov": { "kind": "source", "ref": "lesson-plan" } },
+                      "media": { "kind": "video", "src": "/media/voa-lle1/voa-lle1-quiz-q4.mp4", "sha256": "b2ecd1558c23d4b83a103dcfda6933e6fedae901f44ac440661525fd023898a9" },
+                      "options": [
+                        { "id": "a", "text": { "text": "Hi. I am Ross. Are you Jill’s friend?", "prov": { "kind": "source", "ref": "lesson-plan" } } },
+                        { "id": "b", "text": { "text": "Hello. I am Pete. Are you Anna?", "prov": { "kind": "source", "ref": "lesson-plan" } } },
+                        { "id": "c", "text": { "text": "Hi. I am Russell. Are you Anna’s friend?", "prov": { "kind": "source", "ref": "lesson-plan" } } },
+                        { "id": "d", "text": { "text": "Hello. I am John. Are you Mary?", "prov": { "kind": "source", "ref": "lesson-plan" } } }
+                      ],
+                      "answer": "c",
+                      "attempts": 2
+                    },
+                    {
+                      "type": "mc",
+                      "id": "quiz-q5",
+                      "prompt": { "text": "5. What does Anna say?", "prov": { "kind": "source", "ref": "lesson-plan" } },
+                      "media": { "kind": "video", "src": "/media/voa-lle1/voa-lle1-quiz-q5.mp4", "sha256": "1b66dcdfef809b69e09d1c258b389373c4e0f1d86071b8a33a90180839c73016" },
+                      "options": [
+                        { "id": "a", "text": { "text": "Yes, Sam.", "prov": { "kind": "source", "ref": "lesson-plan" } } },
+                        { "id": "b", "text": { "text": "Yes ma’am.", "prov": { "kind": "source", "ref": "lesson-plan" } } },
+                        { "id": "c", "text": { "text": "Yes. I am.", "prov": { "kind": "source", "ref": "lesson-plan" } } }
+                      ],
+                      "answer": "c",
+                      "attempts": 2
+                    },
+                    {
+                      "type": "mc",
+                      "id": "quiz-q6",
+                      "prompt": { "text": "6. What does Anna say?", "prov": { "kind": "source", "ref": "lesson-plan" } },
+                      "media": { "kind": "video", "src": "/media/voa-lle1/voa-lle1-quiz-q6.mp4", "sha256": "902fda2aae1d39b5d0f4a0d5cbe0763471523a5d4f2bd32d36015d11325a108e" },
+                      "options": [
+                        { "id": "a", "text": { "text": "Ice cream, please!", "prov": { "kind": "source", "ref": "lesson-plan" } } },
+                        { "id": "b", "text": { "text": "Nice to meet you!", "prov": { "kind": "source", "ref": "lesson-plan" } } },
+                        { "id": "c", "text": { "text": "Nice to chew food!", "prov": { "kind": "source", "ref": "lesson-plan" } } },
+                        { "id": "d", "text": { "text": "Have a nice weekend!", "prov": { "kind": "source", "ref": "lesson-plan" } } }
+                      ],
+                      "answer": "b",
+                      "attempts": 2
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "s-language-focus",
+              "function": "language-focus",
+              "title": { "text": "Explain Questions and Answers Using BE", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim plan heading" } },
+              "activities": [
+                {
+                  "id": "focus-notice-be",
+                  "title": { "text": "Explain Questions and Answers Using BE", "prov": { "kind": "source", "ref": "lesson-plan" } },
+                  "scored": false,
+                  "items": [
+                    {
+                      "type": "read",
+                      "id": "focus-be-lines",
+                      "blocks": [
+                        { "text": "The conversation between Anna and Pete has questions and answers with the verb BE.", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim plan sentence" } },
+                        { "text": "Are you Anna?\nAre you Pete?\nI am Pete.\nI’m Anna.\nI’m Pete.\nIs that A-N-A?", "prov": { "kind": "derived", "ref": "lesson-plan", "note": "mechanical selection: verbatim Conversation lines containing a BE form; no rewording" } }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "focus-pronunciation",
+                  "title": { "text": "Pronunciation Practice", "prov": { "kind": "source", "ref": "lesson-plan" } },
+                  "scored": false,
+                  "items": [
+                    {
+                      "type": "media",
+                      "id": "focus-pron-video",
+                      "media": { "kind": "video", "src": "/media/voa-lle1/voa-lle1-pronunciation.mp4", "sha256": "5b280b0ab61b432d3f94e1e28b585083719786056e6f0e11e7a5fba09bc89c30" },
+                      "title": { "text": "Pronunciation Practice", "prov": { "kind": "source", "ref": "lesson-plan" } },
+                      "transcript": { "text": "1. Slow Speech: I am Pete. Fast Speech: I’m Pete.\n2. I am → I’m. Now you try it. Say your name. I’m ___________.", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim Pronunciation Practice Video Script" } }
+                    },
+                    {
+                      "type": "record",
+                      "id": "focus-pron-record",
+                      "prompt": { "text": "Now you try it. Say your name.", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim script cue" } },
+                      "model": { "text": "I’m ___________.", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim script model" } }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "s-practice",
+              "function": "practice",
+              "title": { "text": "Listening Quiz", "prov": { "kind": "source", "ref": "lesson-plan", "note": "practice reuses the plan's own listen→answer mechanic" } },
+              "activities": [
+                {
+                  "id": "practice-dictation",
+                  "title": { "text": "Listening Quiz", "prov": { "kind": "source", "ref": "lesson-plan" } },
+                  "scored": true,
+                  "items": [
+                    {
+                      "type": "dictation",
+                      "id": "dict-q1",
+                      "prompt": { "text": "Listen.", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim excerpt of the quiz instruction" } },
+                      "media": { "kind": "video", "src": "/media/voa-lle1/voa-lle1-quiz-q1.mp4", "sha256": "3e0735627a2ffa7357a79a458d2f547af909acb43c28fe7802abdcc33daa36fe" },
+                      "answer": { "text": "Hi, I am Mary.", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim read-aloud stem sentence 1" } },
+                      "attempts": 2
+                    },
+                    {
+                      "type": "dictation",
+                      "id": "dict-q3",
+                      "prompt": { "text": "Listen.", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim excerpt of the quiz instruction" } },
+                      "media": { "kind": "video", "src": "/media/voa-lle1/voa-lle1-quiz-q3.mp4", "sha256": "86fa266e48b955b9e0d1ce4d9ab9cbab1ea6a87f2a6288385767bb5f597895bf" },
+                      "answer": { "text": "Hi, I am Jill. Are you John?", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim read-aloud stem sentence 3" } },
+                      "attempts": 2
+                    },
+                    {
+                      "type": "dictation",
+                      "id": "dict-q6",
+                      "prompt": { "text": "Listen.", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim excerpt of the quiz instruction" } },
+                      "media": { "kind": "video", "src": "/media/voa-lle1/voa-lle1-quiz-q6.mp4", "sha256": "902fda2aae1d39b5d0f4a0d5cbe0763471523a5d4f2bd32d36015d11325a108e" },
+                      "answer": { "text": "Nice to meet you!", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim read-aloud stem sentence 6" } },
+                      "attempts": 2
+                    }
+                  ]
+                },
+                {
+                  "id": "practice-cloze",
+                  "title": { "text": "Explain Questions and Answers Using BE", "prov": { "kind": "source", "ref": "lesson-plan" } },
+                  "scored": true,
+                  "items": [
+                    {
+                      "type": "cloze",
+                      "id": "cloze-are-anna",
+                      "text": { "text": "Hi! __ you Anna?", "prov": { "kind": "derived", "ref": "lesson-plan", "note": "verbatim Conversation line 'Hi! Are you Anna?' with the BE token blanked" } },
+                      "answer": { "text": "Are", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim token from the same line" } },
+                      "attempts": 2
+                    },
+                    {
+                      "type": "cloze",
+                      "id": "cloze-are-pete",
+                      "text": { "text": "Yes! Hi there! __ you Pete?", "prov": { "kind": "derived", "ref": "lesson-plan", "note": "verbatim Conversation line 'Yes! Hi there! Are you Pete?' with the BE token blanked" } },
+                      "answer": { "text": "Are", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim token from the same line" } },
+                      "attempts": 2
+                    },
+                    {
+                      "type": "cloze",
+                      "id": "cloze-am-pete",
+                      "text": { "text": "I __ Pete.", "prov": { "kind": "derived", "ref": "lesson-plan", "note": "verbatim Conversation line 'I am Pete.' with the BE token blanked" } },
+                      "answer": { "text": "am", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim token from the same line" } },
+                      "attempts": 2
+                    },
+                    {
+                      "type": "cloze",
+                      "id": "cloze-is-spelling",
+                      "text": { "text": "“Anna” __ that A-N-A?", "prov": { "kind": "derived", "ref": "lesson-plan", "note": "verbatim Conversation line '“Anna” Is that A-N-A?' with the BE token blanked" } },
+                      "answer": { "text": "Is", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim token from the same line" } },
+                      "attempts": 2
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "s-production",
+              "function": "production",
+              "title": { "text": "Writing", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim plan heading" } },
+              "activities": [
+                {
+                  "id": "production-say",
+                  "title": { "text": "Speaking", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim from the plan's Speaking goal line" } },
+                  "scored": false,
+                  "items": [
+                    {
+                      "type": "record",
+                      "id": "prod-intro-record",
+                      "prompt": { "text": "Speak and say your name. Then spell your name.", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim Main Video Script cue" } },
+                      "model": { "text": "I am ____________. __ __ ___ __ ___.", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim Main Video Script model" } }
+                    }
+                  ]
+                },
+                {
+                  "id": "production-write",
+                  "title": { "text": "Writing", "prov": { "kind": "source", "ref": "lesson-plan" } },
+                  "scored": false,
+                  "items": [
+                    {
+                      "type": "write",
+                      "id": "prod-convo-write",
+                      "prompt": { "text": "Write a conversation between themselves and another student. They can model it on the lesson conversation. Or, they can make changes by using the names of teachers or classmates.", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim plan instruction (Day 5 Writing); teacher voice retained — no rewording" } },
+                      "model": { "text": "Pete: Hi! Are you Anna?\nAnna: Yes! Hi there! Are you Pete?\nPete: I am Pete.\nAnna: Nice to meet you.\nAnna: Let’s try that again. I’m Anna.\nPete: I’m Pete. “Anna” Is that A-N-A?\nAnna: No. A-N-N-A.\nPete: Well, Anna with two “n’s” … Welcome to … 1400 Irving Street!\nAnna: My new apartment! Yes!", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim Conversation" } }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "s-reflect",
+              "function": "reflect",
+              "title": { "text": "Review", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim plan heading" } },
+              "activities": [
+                {
+                  "id": "reflect-learning-log",
+                  "title": { "text": "Review", "prov": { "kind": "source", "ref": "lesson-plan" } },
+                  "scored": false,
+                  "items": [
+                    {
+                      "type": "selfeval",
+                      "id": "log-goal-grammar",
+                      "statement": { "text": "Verb BE (I am) in introductions; BE + location", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim Goals line" } },
+                      "options": [
+                        { "id": "practiced", "text": { "text": "I practiced this", "prov": { "kind": "editor", "ref": "task006-spec" } } },
+                        { "id": "confident", "text": { "text": "I can do this with confidence", "prov": { "kind": "editor", "ref": "task006-spec" } } },
+                        { "id": "needs", "text": { "text": "Needs more practice", "prov": { "kind": "editor", "ref": "task006-spec" } } }
+                      ]
+                    },
+                    {
+                      "type": "selfeval",
+                      "id": "log-goal-speaking",
+                      "statement": { "text": "Meeting people; Ask question and answer “Are you (name)?”", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim Goals line" } },
+                      "options": [
+                        { "id": "practiced", "text": { "text": "I practiced this", "prov": { "kind": "editor", "ref": "task006-spec" } } },
+                        { "id": "confident", "text": { "text": "I can do this with confidence", "prov": { "kind": "editor", "ref": "task006-spec" } } },
+                        { "id": "needs", "text": { "text": "Needs more practice", "prov": { "kind": "editor", "ref": "task006-spec" } } }
+                      ]
+                    },
+                    {
+                      "type": "selfeval",
+                      "id": "log-goal-review",
+                      "statement": { "text": "Review alphabet and numbers 1-20", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim Goals line" } },
+                      "options": [
+                        { "id": "practiced", "text": { "text": "I practiced this", "prov": { "kind": "editor", "ref": "task006-spec" } } },
+                        { "id": "confident", "text": { "text": "I can do this with confidence", "prov": { "kind": "editor", "ref": "task006-spec" } } },
+                        { "id": "needs", "text": { "text": "Needs more practice", "prov": { "kind": "editor", "ref": "task006-spec" } } }
+                      ]
+                    },
+                    {
+                      "type": "selfeval",
+                      "id": "log-goal-pron",
+                      "statement": { "text": "Pronouncing linked sounds", "prov": { "kind": "source", "ref": "lesson-plan", "note": "verbatim Goals line" } },
+                      "options": [
+                        { "id": "practiced", "text": { "text": "I practiced this", "prov": { "kind": "editor", "ref": "task006-spec" } } },
+                        { "id": "confident", "text": { "text": "I can do this with confidence", "prov": { "kind": "editor", "ref": "task006-spec" } } },
+                        { "id": "needs", "text": { "text": "Needs more practice", "prov": { "kind": "editor", "ref": "task006-spec" } } }
+                      ]
+                    },
+                    {
+                      "type": "selfeval",
+                      "id": "log-words",
+                      "statement": { "text": "apartment · meet · new · nice · street · try · welcome", "prov": { "kind": "derived", "ref": "lesson-plan", "note": "mechanical join of the verbatim Key Words list; no added text" } },
+                      "options": [
+                        { "id": "practiced", "text": { "text": "I practiced this", "prov": { "kind": "editor", "ref": "task006-spec" } } },
+                        { "id": "confident", "text": { "text": "I can do this with confidence", "prov": { "kind": "editor", "ref": "task006-spec" } } },
+                        { "id": "needs", "text": { "text": "Needs more practice", "prov": { "kind": "editor", "ref": "task006-spec" } } }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

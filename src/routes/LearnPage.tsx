@@ -1,88 +1,90 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router";
-import { curriculum, getLesson } from "../content/curriculum";
-import { LessonView } from "../features/lessons/LessonView";
-import { listCompletedProgress } from "../features/progress/progress";
+import { activityIndex, lesson, titleText, type ActivityRef } from "../content/course";
+import { activityScore, type ActivityState } from "../features/state/model";
+import { listActivityStates } from "../features/state/store";
 import { EmptyState, PageHeader } from "../components/ui";
+
+const TRI: Record<ActivityState["status"], string> = {
+  none: "□",
+  started: "◧",
+  completed: "■",
+};
 
 export function LearnPage() {
   const [params] = useSearchParams();
-  const lessonId = params.get("lesson");
-  const lesson = lessonId ? getLesson(lessonId) : undefined;
-  const [completedIds, setCompletedIds] = useState<ReadonlySet<string>>(
-    new Set(),
-  );
+  const [states, setStates] = useState<Map<string, ActivityState>>(new Map());
 
-  // Completed state comes from all local progress rows, so the path stays
-  // correct as the curriculum grows past one lesson.
   useEffect(() => {
     let cancelled = false;
-    void listCompletedProgress().then((rows) => {
-      if (!cancelled) setCompletedIds(new Set(rows.map((r) => r.lessonId)));
+    void listActivityStates().then((rows) => {
+      if (!cancelled)
+        setStates(new Map(rows.map((r) => [r.activityId, r])));
     });
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [params]);
 
-  if (lesson) {
-    return <LessonView lesson={lesson} />;
+  const sections = new Map<string, ActivityRef[]>();
+  for (const ref of activityIndex) {
+    const list = sections.get(ref.section.id) ?? [];
+    list.push(ref);
+    sections.set(ref.section.id, list);
   }
 
-  if (lessonId) {
+  if (activityIndex.length === 0) {
     return (
       <section className="space-y-6">
         <PageHeader title="Learn" />
-        <EmptyState
-          title="Lesson not found"
-          body="This lesson isn't available."
-          ctaLabel="Back to Learn"
-          ctaTo="/learn"
-        />
+        <EmptyState title="Nothing to learn yet" body="No lessons are available." />
       </section>
     );
   }
 
   return (
-    <section className="space-y-6">
-      <PageHeader title="Learn" />
-      <ol className="space-y-4">
-        {curriculum.map((l, i) => {
-          const completed = completedIds.has(l.id);
-          return (
-            <li key={l.id} className="flex gap-4">
-              <span
-                aria-hidden="true"
-                className={`mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full text-sm font-semibold ${
-                  completed ? "bg-success-soft text-success" : "bg-primary-soft text-primary"
-                }`}
-              >
-                {completed ? "✓" : String(i + 1).padStart(2, "0")}
-              </span>
-              <div className="min-w-0 flex-1 space-y-1">
-                <p className="font-semibold">
-                  {l.title}
-                  {completed ? (
-                    <span className="ml-2 text-sm font-medium text-success">
-                      Completed
-                    </span>
-                  ) : null}
-                </p>
-                <p className="text-sm text-muted">{l.summary}</p>
-                <p className="text-sm text-muted capitalize">{l.level}</p>
-                <div className="pt-2">
+    <section className="space-y-8">
+      <PageHeader title={lesson.title} lede="Let's Learn English - Level 1" />
+      {lesson.sections.map((section) => (
+        <div key={section.id} className="space-y-3">
+          <h2 className="text-sm font-medium tracking-wide text-muted uppercase" lang="en">
+            {titleText(section.title)}
+          </h2>
+          <ol className="space-y-2">
+            {(sections.get(section.id) ?? []).map(({ activity }) => {
+              const st = states.get(activity.id);
+              const status = st?.status ?? "none";
+              const score =
+                activity.scored && st ? activityScore(st, activity.items.length) : null;
+              return (
+                <li key={activity.id}>
                   <Link
-                    to={`/learn?lesson=${l.id}`}
-                    className={completed ? "btn btn-secondary" : "btn btn-primary"}
+                    to={`/learn/activity/${activity.id}`}
+                    className="panel flex items-center gap-3 transition-colors hover:border-primary"
                   >
-                    {completed ? "Practice again" : "Start"}
+                    <span
+                      aria-hidden="true"
+                      className={`text-lg ${status === "completed" ? "text-success" : status === "started" ? "text-primary" : "text-muted"}`}
+                    >
+                      {TRI[status]}
+                    </span>
+                    <span className="min-w-0 flex-1 font-medium" lang="en">
+                      {titleText(activity.title)}
+                    </span>
+                    {activity.scored ? (
+                      <span className="text-sm text-muted">
+                        {score === null ? "•" : `${score}%`}
+                      </span>
+                    ) : (
+                      <span className="text-sm text-muted">—</span>
+                    )}
                   </Link>
-                </div>
-              </div>
-            </li>
-          );
-        })}
-      </ol>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+      ))}
     </section>
   );
 }

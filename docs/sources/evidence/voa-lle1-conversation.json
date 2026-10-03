@@ -14,6 +14,6 @@
   "localPath": "public/media/voa-lle1-conversation.mp3",
   "transcript": "Pete: Hi! Are you Anna?\nAnna: Yes! Hi there! Are you Pete?\nPete: I am Pete.\nAnna: Nice to meet you.\nAnna: Let's try that again. I'm Anna. Nice to meet you.\nPete: I'm Pete.",
   "editNote": "Excerpt — mechanically trimmed at 19.9s (original full file: 29.6s, sha256 f9bd90edddbb8736f64fb5cb3a34ab5a27aecd6e99510977e7b820caf47c5cf7) to keep only the meet-someone exchange; the source asset continues with spelling ('A-N-N-A'), an address and apartment lines that are outside this lesson's declared capability. Content is unmodified within the kept range.",
-  "usedIn": "src/content/lessons/se-a1-meet-someone.lesson.json",
+  "usedIn": "src/content/lessons/voa-lle1.lesson1.lesson.json",
   "notes": "Served as a local static asset: reliability, speed and offline-capable core listening."
 }

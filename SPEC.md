@@ -195,17 +195,23 @@ Categories SE should generally reuse rather than reinvent:
 
 ## 6. Learning approach
 
-### 6.1 Initial curriculum decision
+### 6.1 Content model decision (updated — ADR-0003)
 
-The initial canonical beginner source for V1 is:
+SE does not author curriculum. The canonical content model is the
+**source pack**: a verified bundle of human-authored assets (documents, media,
+quizzes) with per-asset rights and provenance, normalized into the
+course hierarchy `COURSE → UNIT → LESSON → SECTION → ACTIVITY → ITEM`.
 
-- **A Digital Workbook for Beginning ESOL** — Eric Dodson, Davida Jordan, Tim
-  Krause; Portland Community College / Open Oregon Educational Resources;
-  licensed **CC BY 4.0** (verified from source, 2026-10-03).
-  <https://openoregon.pressbooks.pub/esol23/>
+The first source pack is **VOA Let's Learn English Level 1, Lesson 1**
+(`src/content/sourcepacks/voa-lle1-lesson1.sourcepack.json`), and all
+learner-facing instructional English in the normalized course must pass the
+Human Content Gate (`scripts/content-gate.mjs`) at build time.
 
-It is selected because it provides existing structured beginner ESOL material
-with an open license suitable for adaptation.
+Earlier direction (superseded): the PCC ESOL Digital Workbook was previously
+named the initial canonical beginner source, and an SE-authored "Lesson 001"
+was drafted from it. That authored lesson is retired
+(`docs/curriculum/archive/`); the workbook remains a *registered reusable
+source* for future packs, not the canonical curriculum.
 
 Candidate secondary sources (see `docs/sources/` for registry status):
 

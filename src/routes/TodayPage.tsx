@@ -1,71 +1,69 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import { curriculum } from "../content/curriculum";
-import { getLessonProgress, type LessonProgress } from "../features/progress/progress";
+import { titleText, type ActivityRef } from "../content/course";
+import { dueCards, listCards } from "../features/review/fsrs";
+import { nextActivityToDo } from "../features/state/store";
 import { EmptyState, PageHeader } from "../components/ui";
 
 /** Today answers "what should I learn now?" — exactly one primary action. */
 export function TodayPage() {
-  const lesson = curriculum[0];
-  const [progress, setProgress] = useState<LessonProgress | undefined>(undefined);
+  const [next, setNext] = useState<ActivityRef | undefined | null>(null);
+  const [dueCount, setDueCount] = useState(0);
 
   useEffect(() => {
-    if (!lesson) return;
     let cancelled = false;
-    void getLessonProgress(lesson.id).then((p) => {
-      if (!cancelled) setProgress(p);
+    void nextActivityToDo().then((r) => {
+      if (!cancelled) setNext(r ?? null);
+    });
+    void listCards().then((rows) => {
+      if (!cancelled) setDueCount(dueCards(rows, new Date()).length);
     });
     return () => {
       cancelled = true;
     };
-  }, [lesson]);
+  }, []);
 
-  if (!lesson) {
+  if (next === undefined) return null;
+  if (next === null) {
     return (
       <section className="space-y-6">
         <PageHeader title="Today" />
         <EmptyState
-          title="Nothing to learn yet"
-          body="No lessons are available right now."
+          title="Lesson complete"
+          body="You finished every activity in Lesson 1."
+          ctaLabel="View learning path"
+          ctaTo="/learn"
         />
       </section>
     );
   }
 
-  const completed = progress?.status === "completed";
-
   return (
     <section className="space-y-6">
       <PageHeader title="Today" />
-
-      {completed ? (
-        <div className="space-y-4">
-          <div className="panel space-y-2">
-            <p className="font-semibold text-success">✓ Lesson complete</p>
-            <h2 className="font-semibold">{lesson.title}</h2>
-            <p className="text-sm text-muted">
-              You finished the available lesson.
-            </p>
-          </div>
-          <Link to="/learn" className="btn btn-primary">
-            View learning path
-          </Link>
-        </div>
-      ) : (
-        <div className="space-y-4">
-          <p className="text-sm font-medium tracking-wide text-muted uppercase">
-            Continue learning
+      <div className="space-y-4">
+        <p className="text-sm font-medium tracking-wide text-muted uppercase">
+          Continue learning
+        </p>
+        <div className="space-y-2">
+          <h2 className="text-lg font-semibold" lang="en">
+            {titleText(next.activity.title)}
+          </h2>
+          <p className="text-sm text-muted">
+            {next.lesson.title} · <span lang="en">{titleText(next.section.title)}</span>
           </p>
-          <div className="space-y-2">
-            <h2 className="text-lg font-semibold">{lesson.title}</h2>
-            <p className="text-muted">{lesson.summary}</p>
-            <p className="text-sm text-muted capitalize">{lesson.level}</p>
-          </div>
-          <Link to={`/learn?lesson=${lesson.id}`} className="btn btn-primary">
-            Start lesson
-          </Link>
         </div>
-      )}
+        <Link to={`/learn/activity/${next.activity.id}`} className="btn btn-primary">
+          Continue
+        </Link>
+        {dueCount > 0 ? (
+          <p className="text-sm">
+            <Link to="/review" className="text-primary hover:underline">
+              {dueCount} {dueCount === 1 ? "item" : "items"} to review →
+            </Link>
+          </p>
+        ) : null}
+      </div>
     </section>
   );
 }

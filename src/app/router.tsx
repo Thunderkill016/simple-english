@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router";
+import { ActivityPage } from "../routes/ActivityPage";
 import { LearnPage } from "../routes/LearnPage";
 import { ProgressPage } from "../routes/ProgressPage";
 import { ReviewPage } from "../routes/ReviewPage";
@@ -13,6 +14,7 @@ export function AppRoutes() {
     <Routes>
       <Route path="/" element={<TodayPage />} />
       <Route path="/learn" element={<LearnPage />} />
+      <Route path="/learn/activity/:activityId" element={<ActivityPage />} />
       <Route path="/review" element={<ReviewPage />} />
       <Route path="/progress" element={<ProgressPage />} />
       <Route path="*" element={<p>Page not found.</p>} />

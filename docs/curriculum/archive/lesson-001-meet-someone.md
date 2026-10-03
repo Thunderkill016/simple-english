@@ -1,9 +1,12 @@
 # SE Lesson 001 — Meet Someone
 
-Canonical educational specification. The JSON implementation
-(`src/content/lessons/se-a1-meet-someone.lesson.json`) must match this.
+> **DEPRECATED (ADR-0003, Task 006).** This document specified an SE-authored
+> lesson. Under the source-driven model, SE does not author curriculum — it
+> normalizes human-authored source packs. Retained for history only; the
+> active content model is `src/content/schema/lesson-v3.schema.json` and the
+> pilot is `src/content/lessons/voa-lle1.lesson1.lesson.json`.
 
-Evidence base: `docs/research/lesson-001-source-comparison.md`.
+~~Canonical educational specification.~~ (Former canonical spec — see above.)
 
 ## Identity
 

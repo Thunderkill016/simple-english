@@ -1,5 +1,4 @@
-import { Link, NavLink, useLocation, useSearchParams } from "react-router";
-import { getLesson } from "../content/curriculum";
+import { Link, NavLink, useLocation } from "react-router";
 import { AppRoutes } from "./router";
 
 const navItems = [
@@ -20,11 +19,11 @@ function navClass({ isActive }: { isActive: boolean }) {
  */
 export function App() {
   const { pathname } = useLocation();
-  const [params] = useSearchParams();
-  const lessonId = pathname === "/learn" ? params.get("lesson") : null;
-  const focusLesson = lessonId ? getLesson(lessonId) : undefined;
+  // Focus mode: inside an activity all top-level navigation disappears —
+  // the runner provides its own way out (design spec §19).
+  const focused = pathname.startsWith("/learn/activity/");
 
-  if (focusLesson) {
+  if (focused) {
     return (
       <main className="mx-auto w-full max-w-[42rem] px-4 py-6 md:py-10">
         <AppRoutes />

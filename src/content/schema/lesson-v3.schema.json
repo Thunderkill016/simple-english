@@ -1,0 +1,607 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://simple-english.dev/schema/lesson-v3.schema.json",
+  "title": "SE source-driven course (v3)",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "id",
+    "title",
+    "sourcePack",
+    "units"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 3
+    },
+    "id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "sourcePack": {
+      "type": "string"
+    },
+    "units": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/unit"
+      }
+    }
+  },
+  "$defs": {
+    "prov": {
+      "type": "object",
+      "required": [
+        "kind",
+        "ref"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "source",
+            "adapted",
+            "editor",
+            "derived"
+          ]
+        },
+        "ref": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "field": {
+      "type": "object",
+      "required": [
+        "text",
+        "prov"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "prov": {
+          "$ref": "#/$defs/prov"
+        }
+      }
+    },
+    "title": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "$ref": "#/$defs/field"
+        }
+      ]
+    },
+    "localMedia": {
+      "type": "object",
+      "required": [
+        "kind",
+        "src",
+        "sha256"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "video",
+            "audio"
+          ]
+        },
+        "src": {
+          "type": "string",
+          "pattern": "^/media/"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "option": {
+      "type": "object",
+      "required": [
+        "id",
+        "text"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "text": {
+          "$ref": "#/$defs/field"
+        }
+      }
+    },
+    "item": {
+      "type": "object",
+      "required": [
+        "type",
+        "id"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "read",
+            "media",
+            "mc",
+            "dictation",
+            "cloze",
+            "record",
+            "write",
+            "note",
+            "selfeval"
+          ]
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "read"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "blocks"
+            ],
+            "properties": {
+              "type": {
+                "const": "read"
+              },
+              "id": {
+                "type": "string"
+              },
+              "blocks": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/$defs/field"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "media"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "media",
+              "title"
+            ],
+            "properties": {
+              "type": {
+                "const": "media"
+              },
+              "id": {
+                "type": "string"
+              },
+              "media": {
+                "oneOf": [
+                  {
+                    "$ref": "#/$defs/localMedia"
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "kind",
+                      "provider",
+                      "embedSrc",
+                      "sourceUrl"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                      "kind": {
+                        "const": "embed"
+                      },
+                      "provider": {
+                        "const": "youtube"
+                      },
+                      "embedSrc": {
+                        "type": "string",
+                        "pattern": "^https://www\\.youtube\\.com/embed/"
+                      },
+                      "sourceUrl": {
+                        "type": "string",
+                        "pattern": "^https://"
+                      }
+                    }
+                  }
+                ]
+              },
+              "title": {
+                "$ref": "#/$defs/field"
+              },
+              "transcript": {
+                "$ref": "#/$defs/field"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "mc"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "prompt",
+              "options",
+              "answer",
+              "attempts"
+            ],
+            "properties": {
+              "type": {
+                "const": "mc"
+              },
+              "id": {
+                "type": "string"
+              },
+              "prompt": {
+                "$ref": "#/$defs/field"
+              },
+              "media": {
+                "$ref": "#/$defs/localMedia"
+              },
+              "options": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "$ref": "#/$defs/option"
+                }
+              },
+              "answer": {
+                "type": "string"
+              },
+              "attempts": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "dictation"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "prompt",
+              "media",
+              "answer",
+              "attempts"
+            ],
+            "properties": {
+              "type": {
+                "const": "dictation"
+              },
+              "id": {
+                "type": "string"
+              },
+              "prompt": {
+                "$ref": "#/$defs/field"
+              },
+              "media": {
+                "$ref": "#/$defs/localMedia"
+              },
+              "answer": {
+                "$ref": "#/$defs/field"
+              },
+              "attempts": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "cloze"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "text",
+              "answer",
+              "attempts"
+            ],
+            "properties": {
+              "type": {
+                "const": "cloze"
+              },
+              "id": {
+                "type": "string"
+              },
+              "text": {
+                "$ref": "#/$defs/field"
+              },
+              "answer": {
+                "$ref": "#/$defs/field"
+              },
+              "attempts": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "record"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "prompt"
+            ],
+            "properties": {
+              "type": {
+                "const": "record"
+              },
+              "id": {
+                "type": "string"
+              },
+              "prompt": {
+                "$ref": "#/$defs/field"
+              },
+              "model": {
+                "$ref": "#/$defs/field"
+              },
+              "mediaModel": {
+                "$ref": "#/$defs/localMedia"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "write"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "prompt"
+            ],
+            "properties": {
+              "type": {
+                "const": "write"
+              },
+              "id": {
+                "type": "string"
+              },
+              "prompt": {
+                "$ref": "#/$defs/field"
+              },
+              "model": {
+                "$ref": "#/$defs/field"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "note"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "prompt"
+            ],
+            "properties": {
+              "type": {
+                "const": "note"
+              },
+              "id": {
+                "type": "string"
+              },
+              "prompt": {
+                "$ref": "#/$defs/field"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "selfeval"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "statement",
+              "options"
+            ],
+            "properties": {
+              "type": {
+                "const": "selfeval"
+              },
+              "id": {
+                "type": "string"
+              },
+              "statement": {
+                "$ref": "#/$defs/field"
+              },
+              "options": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "$ref": "#/$defs/option"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      ]
+    },
+    "activity": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "scored",
+        "items"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "$ref": "#/$defs/title"
+        },
+        "scored": {
+          "type": "boolean"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/item"
+          }
+        }
+      }
+    },
+    "section": {
+      "type": "object",
+      "required": [
+        "id",
+        "function",
+        "title",
+        "activities"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "function": {
+          "enum": [
+            "orient",
+            "prepare",
+            "input",
+            "comprehension",
+            "language-focus",
+            "practice",
+            "production",
+            "reflect"
+          ]
+        },
+        "title": {
+          "$ref": "#/$defs/title"
+        },
+        "activities": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/activity"
+          }
+        }
+      }
+    },
+    "lesson": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "sections"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "sections": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/section"
+          }
+        }
+      }
+    },
+    "unit": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "lessons"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "lessons": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/lesson"
+          }
+        }
+      }
+    }
+  }
+}

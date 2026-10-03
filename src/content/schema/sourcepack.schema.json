@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://simple-english.dev/schema/sourcepack.schema.json",
+  "title": "SE source pack",
+  "type": "object",
+  "required": ["id", "title", "canonicalUrl", "assets"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string" },
+    "title": { "type": "string" },
+    "canonicalUrl": { "type": "string", "pattern": "^https://" },
+    "assets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "creator",
+          "url",
+          "assetType",
+          "humanAuthorship",
+          "rights",
+          "license",
+          "role"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "creator": { "type": "string" },
+          "url": { "type": "string" },
+          "assetType": {
+            "enum": ["document", "video", "audio", "quiz", "embed", "directive", "page"]
+          },
+          "humanAuthorship": {
+            "enum": ["human-authored", "human-approved", "community", "unknown"]
+          },
+          "rights": {
+            "enum": ["reusable", "embed-only", "link-only", "reference"]
+          },
+          "license": { "type": "string" },
+          "local": { "type": "string", "pattern": "^public/" },
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "role": { "type": "string" },
+          "notes": { "type": "string" }
+        },
+        "allOf": [
+          {
+            "if": {
+              "required": ["local"],
+              "properties": { "local": { "type": "string" } }
+            },
+            "then": {
+              "required": ["sha256"],
+              "properties": { "sha256": { "type": "string" } }
+            }
+          },
+          {
+            "if": { "properties": { "rights": { "const": "reusable" } } },
+            "then": {
+              "properties": {
+                "humanAuthorship": { "enum": ["human-authored", "human-approved", "community"] }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

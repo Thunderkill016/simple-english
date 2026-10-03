@@ -1,72 +1,92 @@
 import { useEffect, useState } from "react";
-import { curriculum } from "../content/curriculum";
-import {
-  listCompletedProgress,
-  type LessonProgress,
-} from "../features/progress/progress";
-import { EmptyState, PageHeader } from "../components/ui";
+import { activityIndex, titleText } from "../content/course";
+import { listCards } from "../features/review/fsrs";
+import { activityScore, type ActivityState } from "../features/state/model";
+import { listActivityStates, listSelfReports } from "../features/state/store";
+import { PageHeader } from "../components/ui";
 
+/** Four honest channels — completion, formative score, self-report, review. */
 export function ProgressPage() {
-  const [completed, setCompleted] = useState<LessonProgress[] | undefined>(
-    undefined,
-  );
+  const [states, setStates] = useState<ActivityState[]>([]);
+  const [reports, setReports] = useState(0);
+  const [cards, setCards] = useState(0);
 
   useEffect(() => {
     let cancelled = false;
-    void listCompletedProgress().then((p) => {
-      if (!cancelled) setCompleted(p);
+    void Promise.all([
+      listActivityStates(),
+      listSelfReports(),
+      listCards(),
+    ]).then(([a, s, c]) => {
+      if (cancelled) return;
+      setStates(a);
+      setReports(s.length);
+      setCards(c.length);
     });
     return () => {
       cancelled = true;
     };
   }, []);
 
-  const items = (completed ?? [])
-    .map((p) => ({
-      progress: p,
-      lesson: curriculum.find((l) => l.id === p.lessonId),
-    }))
-    .filter((i) => i.lesson !== undefined);
+  const byId = new Map(states.map((s) => [s.activityId, s]));
+  const done = states.filter((s) => s.status === "completed").length;
+  const scored = activityIndex.filter((r) => r.activity.scored);
 
   return (
     <section className="space-y-6">
-      <PageHeader title="Progress" lede="Beginner" />
+      <PageHeader title="Progress" lede="What you've done — not a level or a grade" />
 
-      {items.length === 0 && completed !== undefined ? (
-        <EmptyState
-          title="No completed lessons yet"
-          body="Finish a lesson and it will show up here."
-          ctaLabel="Start learning"
-          ctaTo="/"
-        />
-      ) : (
-        <>
-          <p>
-            <span className="text-2xl font-bold">{items.length}</span>{" "}
-            <span className="text-muted">
-              {items.length === 1 ? "lesson" : "lessons"} completed
-            </span>
-          </p>
-          <div className="space-y-2">
-            <h2 className="text-sm font-medium tracking-wide text-muted uppercase">
-              Recently completed
-            </h2>
-            <ul className="space-y-2">
-              {items.map(({ lesson }) => (
-                <li
-                  key={lesson!.id}
-                  className="flex items-center gap-2 font-medium"
-                >
-                  <span aria-hidden="true" className="text-success">
-                    ✓
-                  </span>
-                  {lesson!.title}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </>
-      )}
+      <div className="space-y-2">
+        <h2 className="text-sm font-medium tracking-wide text-muted uppercase">
+          Completed
+        </h2>
+        <p>
+          <span className="text-2xl font-bold">{done}</span>{" "}
+          <span className="text-muted">
+            of {activityIndex.length} activities
+          </span>
+        </p>
+      </div>
+
+      <div className="space-y-2">
+        <h2 className="text-sm font-medium tracking-wide text-muted uppercase">
+          Practice scores
+        </h2>
+        <ul className="space-y-1">
+          {scored.map(({ activity }) => {
+            const st = byId.get(activity.id);
+            const score = st ? activityScore(st, activity.items.length) : null;
+            return (
+              <li key={activity.id} className="flex items-center gap-2 text-sm">
+                <span className="text-muted w-10">{score === null ? "—" : `${score}%`}</span>
+                <span lang="en">{titleText(activity.title)}</span>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+
+      <div className="space-y-2">
+        <h2 className="text-sm font-medium tracking-wide text-muted uppercase">
+          Your notes
+        </h2>
+        <p className="text-sm text-muted">
+          {reports === 0
+            ? "No self-reports yet."
+            : `${reports} self-reported ${reports === 1 ? "item" : "items"} — goals and how practice felt.`}
+        </p>
+      </div>
+
+      <div className="space-y-2">
+        <h2 className="text-sm font-medium tracking-wide text-muted uppercase">
+          Review
+        </h2>
+        <p className="text-sm text-muted">
+          {cards === 0
+            ? "No review items yet."
+            : `${cards} items scheduled for later practice.`}
+        </p>
+      </div>
     </section>
   );
 }
