@@ -147,6 +147,28 @@ human-authorship status, original URL, license, commercial use,
 adaptation, redistribution, third-party exceptions, level,
 skill/function, completeness. No AI gap-filling. GAP = GAP.
 
+### R1.3 — Open content and rights audit
+
+- `oer-unit1-feasibility.md` — NARROW layer: 15 professional
+  requirement slots vs human-authored open replacements for
+  meet/greet/introduce/personal-info. Verdict: 14/15 slots
+  fillable; the GAP is validated open proficiency assessment
+  (formative layer covered; proficiency channel = Learning
+  System spec question, not AI-fillable content).
+- `open-content-landscape.md` — BROAD layer: landscape audit
+  across full courses, graded reading, listening, speaking,
+  grammar, vocabulary, pronunciation, writing, teacher
+  resources, assessment, and exclusions. Registry grew to 55
+  rows; new verified rows include Communication Beginnings
+  (CC BY-NC), English Storybooks (CC BY), USA Learns
+  (LINK_ONLY), NGSL (CC BY-SA — the open EVP substitute),
+  VOA L2 + graded news + grammar series (PD), Tatoeba/Common
+  Voice/SE Wikipedia (community-human, per-item checks),
+  Let's Teach English (PD), StoryWeaver (verify-per-item),
+  UBC EAL OER (CC BY-NC-SA), CEFR descriptors (REFERENCE_ONLY),
+  DIALANG/ELLLO (LINK_ONLY), and an explicit
+  community-content-bank exclusion row.
+
 ### R1.2 — Professional course comparison
 
 - `professional-course-comparison.md` — five-course Unit-1 comparison
@@ -163,7 +185,7 @@ skill/function, completeness. No AI gap-filling. GAP = GAP.
 ### Planned (not yet created)
 
 - R1.2: `english-file-analysis.md`, `speakout-analysis.md`, `roadmap-gse-analysis.md`, `outcomes-analysis.md`
-- R1.3: `open-content-landscape.md`, `language-data-landscape.md`, `speech-landscape.md`
+- R1.3 remaining: `language-data-landscape.md`, `speech-landscape.md`
 - R1.4: `sla-evidence-map.md`, `open-source-software-map.md`, `digital-product-benchmark.md`, `pedagogy-authorities.md`
 - Final: `SE-EVIDENCE-MAP.md`, `contradictions-and-tradeoffs.md`, `research-coverage.md`
 

@@ -33,6 +33,20 @@ In gitignored `research_cache/` — inspected for structure only, never committe
 | `research_cache/voa/quiz1-12.html` | learningenglish.voanews.com /Quiz/Start | ~25 KB ea | All 6 quiz questions + media IDs + option sets |
 | `research_cache/voa/voa-lle1-*.mp4` (9 files) | voa-video.voanews.eu (VOA CDN) | ~3.5 MB | Quiz stems ×6, Speaking Practice, Pronunciation — PD, retained for inspection |
 
+## R1.3 WEB-VERIFIED SOURCES (no downloads)
+
+All R1.3 candidates were verified from official pages via web
+fetch — licenses/authorship read directly at source, nothing
+downloaded. Rows recorded in `source-registry.csv`:
+english-storybooks.org (CC-BY 4.0 footer), usalearns.org
+(© SCOE), newgeneralservicelist.com (CC BY-SA 4.0),
+communication-beginnings (CC BY-NC 4.0), tatoeba.org ToS
+(per-item CC-BY), commonvoice.mozilla.org (CC0),
+simple.wikipedia.org (CC BY-SA), storyweaver.org.in
+(terms 404 — PARTIAL), education.ok.ubc.ca EAL OER
+(CC BY-NC-SA), coe.int CEFR (REFERENCE_ONLY),
+dialangweb.lancaster.ac.uk (LINK_ONLY), elllo.org (LINK_ONLY).
+
 ## LINK-ONLY SOURCES
 
 | Source | Reason |
