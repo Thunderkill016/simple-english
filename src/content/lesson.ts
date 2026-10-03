@@ -8,10 +8,14 @@ export interface LessonSource {
   title: string;
   license: string;
   url: string;
+  /** canonical URL of the source license deed */
+  licenseUrl?: string;
   /** true when SE adapted this from an external source */
   adapted: boolean;
   /** true when content is SE-authored fixture/test data, not real curriculum */
   synthetic?: boolean;
+  /** attribution line satisfying the source license obligations */
+  attribution?: string;
 }
 
 export type LessonLevel = "beginner" | "elementary" | "intermediate";

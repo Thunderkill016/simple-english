@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router";
-import { getLesson, lessons } from "../content/lessons";
+import { curriculum, getLesson } from "../content/lessons";
 import { LessonView } from "../features/lessons/LessonView";
 import { getLessonProgress, type LessonProgress } from "../features/progress/progress";
 
@@ -10,7 +10,7 @@ export function LearnPage() {
   const lesson = lessonId ? getLesson(lessonId) : undefined;
   const [progress, setProgress] = useState<LessonProgress | undefined>(undefined);
 
-  const firstLesson = lessons[0];
+  const firstLesson = curriculum[0];
 
   useEffect(() => {
     if (!firstLesson) return;
@@ -38,7 +38,7 @@ export function LearnPage() {
     <section className="space-y-4">
       <h1 className="text-2xl font-bold">Learn</h1>
       <ul className="space-y-3">
-        {lessons.map((l) => {
+        {curriculum.map((l) => {
           const completed = progress?.lessonId === l.id && progress.status === "completed";
           return (
             <li key={l.id} className="card flex items-center justify-between gap-4">

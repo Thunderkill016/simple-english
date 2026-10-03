@@ -36,11 +36,13 @@ learning simple.*
 
 ## Current status
 
-**Foundation stage — first local-first slice exists.** The repo contains a
-minimal working slice: one synthetic fixture lesson renders, a learner can
-answer an exercise, and completion persists locally (IndexedDB) across
-reloads — no account, no backend. It proves the architecture in ADR-0002, not
-the product. See the open `R1` issue for the ongoing research track.
+**Foundation stage — local-first slice with first real lesson.** The app
+serves one adapted lesson ("Greetings: How are you?", from PCC's
+*A Digital Workbook for Beginning ESOL*, CC0 — see `docs/sources/`), plus a
+synthetic fixture used by tests. A learner can answer an exercise and
+completion persists locally (IndexedDB) across reloads — no account, no
+backend. It proves the architecture in ADR-0002, not the product. See the
+open `R1` issue for the ongoing research track.
 
 ## Local development
 

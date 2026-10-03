@@ -24,6 +24,10 @@
         "title": { "type": "string", "minLength": 1 },
         "license": { "type": "string", "minLength": 1 },
         "url": { "type": "string", "minLength": 1 },
+        "licenseUrl": {
+          "type": "string",
+          "description": "canonical URL of the source license deed"
+        },
         "adapted": {
           "type": "boolean",
           "description": "true when SE adapted this from an external source"
@@ -31,6 +35,10 @@
         "synthetic": {
           "type": "boolean",
           "description": "true when content is SE-authored fixture/test data, not real curriculum"
+        },
+        "attribution": {
+          "type": "string",
+          "description": "attribution line satisfying the source license obligations (author, work, license, changes)"
         }
       }
     },

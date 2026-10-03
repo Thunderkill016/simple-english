@@ -74,7 +74,7 @@ field.
 
 | id | Title | License | Status |
 | --- | --- | --- | --- |
-| `pcc-esol-digital-workbook` | A Digital Workbook for Beginning ESOL (PCC / Open Oregon) | CC BY 4.0 | approved — canonical V1 beginner source; embedded third-party media needs per-item review |
+| `pcc-esol-digital-workbook` | A Digital Workbook for Beginning ESOL (PCC / Open Oregon) — [record](pcc-esol-digital-workbook.json) | CC BY 4.0 (per-item licenses vary) | approved — canonical V1 beginner source; embedded items audited per item before adaptation (first adaptation: Greetings dialogue, CC0, 2026-10-03) |
 | `pcc-portland-people-and-places` | Portland People and Places (Timothy Krause, PCC) | CC BY 4.0 | review-required — license verified 2026-10-03; adaptation review pending |
 | `pcc-green-tea-intermediate` | Green Tea Intermediate English Communication OER (Dodson, Diniz, Leiton; PCC / Open Oregon, 2020) | CC BY 4.0 | review-required — license verified 2026-10-03; adaptation review pending |
 | `american-english-state-dept` | American English / U.S. Dept. of State materials | per item | review-required — reuse rights vary; not automatically public domain |

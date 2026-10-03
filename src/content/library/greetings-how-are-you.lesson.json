@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "id": "greetings-how-are-you",
+  "title": "Greetings: How are you?",
+  "level": "beginner",
+  "source": {
+    "id": "pcc-esol-digital-workbook",
+    "title": "Level 01 Module 01 Greetings 01 — A Digital Workbook for Beginning ESOL",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "url": "https://openoregon.pressbooks.pub/esol23/chapter/chapter-1-2/",
+    "adapted": true,
+    "synthetic": false,
+    "attribution": "Adapted from 'Level 01 Module 01 Greetings 01' by Tim Krause, A Digital Workbook for Beginning ESOL (Portland Community College / Open Oregon Educational Resources), CC0 1.0. Restructured into SE lesson format; example lines are taken from the original exercise's accepted answers."
+  },
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "Saying hello"
+    },
+    {
+      "type": "text",
+      "text": "In English, we greet people with short phrases like “Hello” or “Hi”."
+    },
+    {
+      "type": "example",
+      "text": "— Hello.\n— Hi.",
+      "translation": "— Xin chào.\n— Chào bạn."
+    },
+    {
+      "type": "text",
+      "text": "After the greeting, people often ask “How are you?”. A friendly answer is “Fine, thank you.”"
+    },
+    {
+      "type": "example",
+      "text": "— How are you?\n— Fine, thank you. How are you?\n— Good. Thank you.",
+      "translation": "— Bạn có khỏe không?\n— Tôi khỏe, cảm ơn. Còn bạn?\n— Tôi ổn. Cảm ơn bạn."
+    },
+    {
+      "type": "multiple-choice",
+      "id": "q-how-are-you",
+      "prompt": "A friend says “How are you?” What is a good answer?",
+      "options": [
+        { "id": "a", "text": "Fine, thank you." },
+        { "id": "b", "text": "Good night." },
+        { "id": "c", "text": "See you tomorrow." }
+      ],
+      "answer": "a"
+    }
+  ]
+}

@@ -14,23 +14,33 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const schema = JSON.parse(
   readFileSync(join(root, "src/content/schema/lesson.schema.json"), "utf8"),
 );
-const fixturesDir = join(root, "src/content/fixtures");
+const contentDir = join(root, "src/content");
 
 const ajv = new Ajv2020({ strict: true, allErrors: true });
 const validate = ajv.compile(schema);
 
-let failed = false;
-const files = readdirSync(fixturesDir).filter((f) => f.endsWith(".json"));
+/** Recursively collect *.lesson.json files (fixtures + real curriculum). */
+function* lessonFiles(dir) {
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const path = join(dir, entry.name);
+    if (entry.isDirectory()) yield* lessonFiles(path);
+    else if (entry.name.endsWith(".lesson.json")) yield path;
+  }
+}
 
-for (const file of files) {
-  const data = JSON.parse(readFileSync(join(fixturesDir, file), "utf8"));
+let failed = false;
+const files = [...lessonFiles(contentDir)];
+
+for (const path of files) {
+  const name = path.slice(contentDir.length + 1);
+  const data = JSON.parse(readFileSync(path, "utf8"));
   const schemaErrors = validate(data) ? [] : [ajv.errorsText(validate.errors)];
   const semanticErrors = schemaErrors.length === 0 ? checkLessonSemantics(data) : [];
   if (schemaErrors.length === 0 && semanticErrors.length === 0) {
-    console.log(`✓ ${file}`);
+    console.log(`✓ ${name}`);
   } else {
     failed = true;
-    console.error(`✗ ${file}`);
+    console.error(`✗ ${name}`);
     for (const err of [...schemaErrors, ...semanticErrors]) {
       console.error(`  ${err}`);
     }

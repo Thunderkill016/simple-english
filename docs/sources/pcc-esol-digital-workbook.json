@@ -1,0 +1,27 @@
+{
+  "id": "pcc-esol-digital-workbook",
+  "type": "LearningResource",
+  "title": "A Digital Workbook for Beginning ESOL",
+  "authors": ["Eric Dodson", "Davida Jordan", "Tim Krause"],
+  "publisher": "Portland Community College / Open Oregon Educational Resources",
+  "url": "https://openoregon.pressbooks.pub/esol23/",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "contentType": ["workbook", "interactive-exercises"],
+  "levels": ["beginner"],
+  "subjects": ["ESOL", "English language"],
+  "reuseStatus": "approved",
+  "provenanceNotes": "Book-level license is CC BY 4.0 'except where otherwise noted'; embedded items carry their own licenses and were audited per item before adaptation. Per-item audit of the Greetings chapter (chapter-1-2): H5P 'Level 01 Module 01 Greetings 01' (fill-in-the-blank dialogue) is CC0 1.0 by Tim Krause — adapted into src/content/library/greetings-how-are-you.lesson.json. H5P 'Level 01 Module 01 Greetings 02' (memory game) is CC0 but its picture cards were not reused (per-image copyrights unverified). H5P 'Useful Expressions' dialog cards and 'Greetings Extra' carry license 'U' (undisclosed) — NOT reused. Two embedded YouTube videos are third-party — NOT reused.",
+  "verifiedAt": "2026-10-03",
+  "verifiedBy": "Devin",
+  "adaptationLog": [
+    {
+      "item": "Greetings chapter — H5P 'Level 01 Module 01 Greetings 01' (fill-in-the-blank greeting dialogue)",
+      "itemUrl": "https://openoregon.pressbooks.pub/esol23/chapter/chapter-1-2/",
+      "itemLicense": "CC0 1.0",
+      "itemAuthors": ["Tim Krause"],
+      "usedIn": "src/content/library/greetings-how-are-you.lesson.json",
+      "notes": "Conversation text (Hello / Hi / How are you? / Fine, thank you / Good. Thank you.) restructured into SE lesson blocks; one multiple-choice exercise derived from the original item's learning goal."
+    }
+  ]
+}

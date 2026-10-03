@@ -17,11 +17,11 @@ function Text({ block }: { block: TextBlock }) {
 function Example({ block }: { block: ExampleBlock }) {
   return (
     <figure className="card border-l-4 border-l-sky-600">
-      <p lang="en" className="font-medium">
+      <p lang="en" className="font-medium whitespace-pre-line">
         {block.text}
       </p>
       {block.translation ? (
-        <figcaption lang="vi" className="mt-1 text-sm text-slate-600">
+        <figcaption lang="vi" className="mt-1 text-sm text-slate-600 whitespace-pre-line">
           {block.translation}
         </figcaption>
       ) : null}

@@ -131,8 +131,35 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
       ) : null}
 
       <footer className="pt-2 text-xs text-slate-500">
-        Source: {lesson.source.title} — {lesson.source.license}
-        {lesson.source.synthetic ? " (synthetic fixture)" : null}
+        <p>
+          Source:{" "}
+          <a
+            href={lesson.source.url}
+            target="_blank"
+            rel="noreferrer"
+            className="underline decoration-slate-300 underline-offset-2 hover:text-slate-700"
+          >
+            {lesson.source.title}
+          </a>
+          {" — "}
+          {lesson.source.licenseUrl ? (
+            <a
+              href={lesson.source.licenseUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="underline decoration-slate-300 underline-offset-2 hover:text-slate-700"
+            >
+              {lesson.source.license}
+            </a>
+          ) : (
+            lesson.source.license
+          )}
+          {lesson.source.adapted ? " (adapted)" : null}
+          {lesson.source.synthetic ? " (synthetic fixture)" : null}
+        </p>
+        {lesson.source.attribution ? (
+          <p className="mt-1">{lesson.source.attribution}</p>
+        ) : null}
       </footer>
     </article>
   );

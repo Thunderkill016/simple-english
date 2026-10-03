@@ -1,6 +1,7 @@
 import { expect, test, type Page, type Request } from "@playwright/test";
 
-const OPTION_LABEL = "Hello!";
+const OPTION_LABEL = "Fine, thank you.";
+const LESSON_TITLE = "Greetings: How are you?";
 
 async function openLesson(page: Page) {
   await page.goto("/");
@@ -8,7 +9,7 @@ async function openLesson(page: Page) {
   await expect(page.getByRole("heading", { name: "Learn" })).toBeVisible();
   await page.getByRole("link", { name: "Start" }).click();
   await expect(
-    page.getByRole("heading", { name: "Greetings" }),
+    page.getByRole("heading", { name: LESSON_TITLE }),
   ).toBeVisible();
 }
 
@@ -31,6 +32,14 @@ test.describe("local-first learning slice", () => {
     await page.reload();
     await expect(page.getByText("Lesson complete.")).toBeVisible();
     await expect(page.getByRole("radio", { name: OPTION_LABEL })).toBeChecked();
+
+    // Provenance survives rendering (reuse-first principle)
+    await expect(
+      page.getByRole("link", { name: /Digital Workbook for Beginning ESOL/ }),
+    ).toHaveAttribute("href", /openoregon\.pressbooks\.pub/);
+    await expect(
+      page.getByText(/Adapted from 'Level 01 Module 01 Greetings 01' by Tim Krause/),
+    ).toBeVisible();
 
     // Today reflects completion
     await page.getByRole("link", { name: "Today" }).click();
@@ -67,7 +76,7 @@ test.describe("local-first learning slice", () => {
       const tx = database.transaction("lessonProgress", "readonly");
       const record = await new Promise<{ status?: string } | undefined>(
         (resolve, reject) => {
-          const get = tx.objectStore("lessonProgress").get("greetings");
+          const get = tx.objectStore("lessonProgress").get("greetings-how-are-you");
           get.onsuccess = () => resolve(get.result as { status?: string } | undefined);
           get.onerror = () => reject(get.error);
         },
