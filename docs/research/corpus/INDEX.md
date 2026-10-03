@@ -147,6 +147,34 @@ human-authorship status, original URL, license, commercial use,
 adaptation, redistribution, third-party exceptions, level,
 skill/function, completeness. No AI gap-filling. GAP = GAP.
 
+**ChatGPT R1.3 REVIEW (received, applied) — PASS WITH
+CORRECTIONS:**
+
+1. Slot coverage regraded FULL/PARTIAL/GAP (6-criterion FULL:
+   same pedagogical function, target relevance, level, human
+   authorship verified, rights verified, sufficient
+   quality/completeness). Aggregate "directly sourceable"
+   percentage claim removed — no defensible denominator.
+   Result: 7 FULL / 7 PARTIAL / 1 GAP.
+2. NGSL locked to OPEN FREQUENCY / PRIORITY REFERENCE —
+   frequency, prioritization, coverage, candidate pool, one
+   difficulty signal. Forbidden: NGSL=CEFR-level claims,
+   curriculum-order decisions, EVP developmental-level
+   replacement.
+3. Content tiers locked — TIER A professional/institutional;
+   TIER B named community/OER (editorial QA gate); TIER C
+   community corpora (supplementary only). Registry carries
+   `content_tier` column (50 A / 1 B / 3 C / 1 NA).
+4. Rights are asset/item-level — no blanket domain
+   classification; VOA-produced vs third-party assets
+   distinguished; American English publications verified
+   per item.
+
+**Assessment decision (locked):** FORMATIVE ASSESSMENT and
+PROFICIENCY MEASUREMENT are separate systems. Open formative
+content is adequate to continue; validated proficiency
+measurement remains GAP; no AI-generated proficiency test.
+
 ### R1.3 — Open content and rights audit
 
 - `oer-unit1-feasibility.md` — NARROW layer: 15 professional
@@ -161,7 +189,8 @@ skill/function, completeness. No AI gap-filling. GAP = GAP.
   resources, assessment, and exclusions. Registry grew to 55
   rows; new verified rows include Communication Beginnings
   (CC BY-NC), English Storybooks (CC BY), USA Learns
-  (LINK_ONLY), NGSL (CC BY-SA — the open EVP substitute),
+  (LINK_ONLY), NGSL (CC BY-SA — OPEN FREQUENCY / PRIORITY
+  REFERENCE, not a CEFR-leveling substitute),
   VOA L2 + graded news + grammar series (PD), Tatoeba/Common
   Voice/SE Wikipedia (community-human, per-item checks),
   Let's Teach English (PD), StoryWeaver (verify-per-item),
@@ -186,7 +215,23 @@ skill/function, completeness. No AI gap-filling. GAP = GAP.
 
 - R1.2: `english-file-analysis.md`, `speakout-analysis.md`, `roadmap-gse-analysis.md`, `outcomes-analysis.md`
 - R1.3 remaining: `language-data-landscape.md`, `speech-landscape.md`
-- R1.4: `sla-evidence-map.md`, `open-source-software-map.md`, `digital-product-benchmark.md`, `pedagogy-authorities.md`
+- R1.4 (locked output set): `sla-evidence-map.md`,
+  `open-source-software-map.md`, `digital-product-benchmark.md`,
+  `session-mechanics-analysis.md`, `reuse-opportunity-map.md`
+  — two tracks: (A) learning-science/pedagogy evidence,
+  (B) existing digital systems / reuse. Track B answers the
+  core question: does an existing open-source system already
+  solve enough of SE's non-content learning infrastructure
+  that adapting/forking beats continuing the custom build?
+  Per-project fields: license, maintenance, architecture,
+  course/unit/lesson/session models, content format, human-vs-AI
+  provenance, exercise engine, media, progress, mistakes, SRS,
+  resume, next-action, offline/local-first, sync, assessment
+  separation, speaking, reading, accessibility, test quality —
+  classified REUSE_DIRECTLY / ADAPT / STUDY_ONLY / REJECT.
+  Human-content rule remains hard: AI-generated lesson content
+  forbidden as SE learner content; code may still be studied.
+  Software quality ≠ curriculum quality — kept separate.
 - Final: `SE-EVIDENCE-MAP.md`, `contradictions-and-tradeoffs.md`, `research-coverage.md`
 
 ## Working files

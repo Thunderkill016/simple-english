@@ -30,43 +30,56 @@ Unit 1 into these requirement slots:
 
 ## Slot → human-authored open replacement map
 
-| Slot | Open replacement | Author / org | Human status | License | Commercial | Adapt | Redistribute | Notes |
-|------|------------------|--------------|--------------|---------|-----------|-------|--------------|-------|
-| 1 Model dialogue | VOA LLE L1 "Welcome!" video (Anna meets Pete) + Everyday Conversations greeting dialogues | VOA / US Dept of State | HUMAN_AUTHORED_VERIFIED | Public domain | yes | yes | yes | Two independent models available |
-| 2 Natural audio | VOA conversation MP3 (29.6 s) + quiz stem videos | VOA | HUMAN_AUTHORED_VERIFIED | PD | yes | yes | yes | Downloaded, hash-verified |
-| 3 Grammar (be) | PCC Digital Workbook grammar units + Evergreen grammar component | Dodson/Jordan/Krause (PCC); Pham et al. (EVC) | HUMAN_AUTHORED_VERIFIED | CC BY 4.0 both | yes | yes | yes | Both decompose be progressively |
-| 4 Vocabulary sets | NGSL top-100 word coverage + VOA Word Book glossaries | Browne/Culligan/Phillips; VOA | HUMAN_AUTHORED_VERIFIED | CC BY-SA 4.0; PD | yes | yes | yes | NGSL = open substitute for EVP-style leveling |
-| 5 Pronunciation | VOA pronunciation video (L1) + Evergreen pronunciation component (dedicated author + audio performers) | VOA; Lawson et al. | HUMAN_AUTHORED_VERIFIED | PD; CC BY 4.0 | yes | yes | yes | Evergreen has a full per-chapter pron strand |
-| 6 Functional phrases | Everyday Conversations greeting/introduction dialogues + VOA Speaking Practice video | US State Dept; VOA | HUMAN_AUTHORED_VERIFIED | PD | yes | yes | yes | Direct greeting/introduce functional bank |
-| 7 Listening tasks | VOA 6-item listening quiz (video stems + options) | VOA | HUMAN_AUTHORED_VERIFIED | PD | yes | yes | yes | Real professional-format item bank |
-| 8 Guided practice | PCC workbook H5P self-correcting exercises | PCC / Open Oregon | HUMAN_AUTHORED_VERIFIED | CC BY 4.0 (per-item exceptions noted) | yes | yes | yes | Interactive, already dispositioned per-item |
-| 9 Speaking model + practice | VOA Speaking Practice video (2:27) + Everyday Conversations audio | VOA; US State Dept | HUMAN_AUTHORED_VERIFIED | PD | yes | yes | yes | Model exists; practice loop must be SE-built (no open source provides it) |
-| 10 Reading | Multilingual English Storybooks L1 (illustrated + audio) + VOA Level 1 news | Global Storybooks / African Storybook; VOA | HUMAN_AUTHORED_VERIFIED | CC BY 4.0; PD | yes | yes | yes | Leveled 1–5, 40 stories |
-| 11 Writing (profile) | PCC workbook writing exercises; profile model from VOA lesson plan activity | PCC; VOA | HUMAN_AUTHORED_VERIFIED | CC BY 4.0; PD | yes | yes | yes | Capital-letters/full-stops micro-skill covered |
-| 12 Review / self-check | VOA lesson-plan review day + PCC unit reviews | VOA; PCC | HUMAN_AUTHORED_VERIFIED | PD; CC BY 4.0 | yes | yes | yes | Source-side review exists; spaced review is SE system work |
-| 13 Assessment | **GAP** — no open validated instrument; nearest: CEFR self-assessment grid (REFERENCE_ONLY, Council of Europe doc) + VOA quiz as content-check | Council of Europe (framework); VOA | n/a | free doc / PD | ref | no | no | Open, validated proficiency assessment does not exist; self-check ≠ assessment |
-| 14 Media | VOA videos (main/speaking/pron) + Storybooks illustrations | VOA; African Storybook | HUMAN_AUTHORED_VERIFIED | PD; CC BY 4.0 | yes | yes | yes | |
-| 15 Alphabet/spelling | VOA alphabet segment (YouTube-hosted — third-party flag) + PCC spelling exercises | VOA via YouTube; PCC | HUMAN_AUTHORED_VERIFIED | PD content but platform-hosted; CC BY 4.0 | yes | yes | yes | VOA clip is hosted on VOA's own YouTube channel — embed/link per VOA policy, don't ingest from YouTube |
+Grading (locked by ChatGPT R1.3 review — replaces the earlier
+binary "fillable" framing):
+
+- **FULL** requires ALL of: same pedagogical function; target
+  relevance (this specific capability, not just the skill
+  category); appropriate learner level; human authorship
+  verified; rights verified; sufficient quality/completeness.
+- **PARTIAL** = some criteria met, real content exists, but
+  target-specific coverage is incomplete or an asset-level
+  caveat applies.
+- **GAP** = no adequate open source found. GAP = GAP.
+
+| Slot | Grade | Open replacement | Author / org | Human status | License | Comm. | Notes |
+|------|-------|------------------|--------------|--------------|---------|-------|-------|
+| 1 Model dialogue | **FULL** | VOA LLE L1 "Welcome!" video (Anna meets Pete) + Everyday Conversations greeting dialogues | VOA / US Dept of State | HUMAN_AUTHORED_VERIFIED | PD | yes | Two independent on-target models, level-appropriate, rights clean |
+| 2 Natural audio | **FULL** | VOA conversation MP3 (29.6 s) + quiz stem videos | VOA | HUMAN_AUTHORED_VERIFIED | PD | yes | Hash-verified local copies |
+| 3 Grammar (be) | **FULL** | PCC Digital Workbook grammar units + Evergreen grammar component | Dodson/Jordan/Krause (PCC); Pham et al. (EVC) | HUMAN_AUTHORED_VERIFIED | CC BY 4.0 | yes | Both explicitly teach `be` at beginning level; staging differs from professional sequencing but function is covered |
+| 4 Vocabulary sets | **PARTIAL** | VOA lesson key words + NGSL frequency pool | VOA; Browne/Culligan/Phillips | HUMAN_AUTHORED_VERIFIED | PD; CC BY-SA | yes | On-target sets (greetings/introductions/countries) exist in VOA key words but scattered; NGSL is a frequency pool, not a curated thematic set — curation is SE work |
+| 5 Pronunciation | **FULL** | VOA L1 pronunciation video + Evergreen per-chapter pron strand (dedicated author + performers) | VOA; Lawson et al. | HUMAN_AUTHORED_VERIFIED | PD; CC BY 4.0 | yes | Real on-target pron instruction + a reusable full pron curriculum component |
+| 6 Functional phrases | **FULL** | Everyday Conversations greeting/introduction dialogues + VOA Speaking Practice video | US State Dept; VOA | HUMAN_AUTHORED_VERIFIED | PD | yes | Direct greeting/introduce functional banks |
+| 7 Listening tasks | **FULL** | VOA 6-item listening quiz (video stems + options) | VOA | HUMAN_AUTHORED_VERIFIED | PD | yes | Professional-format item bank on exactly this target |
+| 8 Guided practice | **PARTIAL** | PCC workbook H5P self-correcting exercises | PCC / Open Oregon | HUMAN_AUTHORED_VERIFIED | CC BY 4.0 (per-item exceptions) | yes | Same function exists but on-target coverage is scattered across units; no single controlled→personalized chain for this capability |
+| 9 Speaking model + practice | **PARTIAL** | VOA Speaking Practice video (2:27) + Everyday Conversations audio | VOA; US State Dept | HUMAN_AUTHORED_VERIFIED | PD | yes | Model = FULL. Practice loop = no open source provides it — SE system work. Interpersonal assessment remains out of scope entirely |
+| 10 Reading | **PARTIAL** | Multilingual English Storybooks L1 + VOA Level 1 news | Global Storybooks; VOA | HUMAN_AUTHORED_VERIFIED | CC BY 4.0; PD | yes | Leveled reading exists but the professional slot wants profile-type texts tied to introductions; generic stories ≠ target-relevant texts |
+| 11 Writing (profile) | **PARTIAL** | PCC writing exercises + VOA lesson-plan profile task | PCC; VOA | HUMAN_AUTHORED_VERIFIED | CC BY 4.0; PD | yes | Writing mechanics (capitals/full stops) covered; a personal-profile model text is thin |
+| 12 Review / self-check | **PARTIAL** | VOA lesson-plan review day + PCC unit reviews | VOA; PCC | HUMAN_AUTHORED_VERIFIED | PD; CC BY 4.0 | yes | Source-side review exists; a learner-facing self-check assembled for THIS target does not — spaced review is SE system work |
+| 13 Assessment | **GAP** | none — CEFR self-assessment grid is REFERENCE_ONLY; VOA quiz is a content check | Council of Europe (framework) | n/a | free doc | ref | Locked decision: FORMATIVE ≠ PROFICIENCY. Formative layer covered by slots 7/8/12 sources; validated open proficiency measurement does not exist — do not AI-generate one |
+| 14 Media | **FULL** | VOA videos (main/speaking/pron) + Storybooks illustrations | VOA; African Storybook | HUMAN_AUTHORED_VERIFIED | PD; CC BY 4.0 | yes | |
+| 15 Alphabet/spelling | **PARTIAL** | VOA alphabet segment (YouTube-hosted — link only) + PCC spelling exercises | VOA via own YouTube channel; PCC | HUMAN_AUTHORED_VERIFIED | PD content on third-party platform; CC BY 4.0 | yes | Asset-level rights caveat: embed/link per VOA policy, no ingestion from YouTube |
 
 ## Feasibility verdict
 
-**14 / 15 professional slots are fillable with verified
-human-authored open content.** The only hard GAP is a validated,
-open proficiency-assessment instrument — and even there, the
-professional consensus (R1.2 Q9) says in-course gates are
-formative anyway: VOA quizzes + PCC self-checks cover the
-formative layer; the proficiency channel is an open design
-question for the Learning System spec, not a content gap AI
-should fill.
+**7 FULL / 7 PARTIAL / 1 GAP** under the six-criterion grading.
 
-Composition estimate for the narrow target: roughly
-**two-thirds of a professional-depth Unit 1 is directly
-sourceable** (VOA supplies the dialogue/media/quiz spine;
-PCC+Evergreen supply grammar/pron/practice; Everyday
-Conversations supplies functional range). The remainder is
-sequencing/joinery work — normalization of these pieces into one
-coherent flow — which is SE's actual build problem, not a
-content problem.
+Interpretation, stated plainly:
+
+- A real on-target core exists — model dialogue, audio, grammar,
+  pronunciation, functional phrases, listening items and media
+  are all FULL with clean rights.
+- Everything PARTIAL is a **curation/coherence deficit**, not a
+  raw-material deficit: the content exists scattered across
+  sources and must be normalized into one controlled→personalized
+  flow. That is SE's actual build problem.
+- The single GAP (validated open proficiency assessment) stays a
+  GAP. Locked policy: formative assessment and proficiency
+  measurement are separate systems; no AI-generated proficiency
+  test.
+
+(No aggregate "directly sourceable" percentage is claimed — the
+denominator would be arbitrary.)
 
 ## What is NOT allowed to fill gaps
 

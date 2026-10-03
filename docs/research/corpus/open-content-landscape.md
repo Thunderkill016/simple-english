@@ -8,6 +8,26 @@
 > redistribution, third-party exceptions, level, skill, completeness.
 > Statuses: REUSE / ADAPT / LINK_ONLY / REFERENCE_ONLY / EXCLUDED.
 
+**Content tiers (locked, ChatGPT R1.3 review):**
+
+- **TIER A** — professional/institutional human-authored → may
+  serve core learner content after rights verification.
+- **TIER B** — named/attributed human-authored community/OER →
+  may serve learner content after editorial QA.
+- **TIER C** — community datasets / collaborative corpora →
+  supplementary only unless individually validated.
+
+Every registry row carries `content_tier` accordingly.
+Institutional authorship is NOT mandatory — but tiers bound
+where each source may sit in the product.
+
+**Rights are asset/item-level (locked):** no blanket
+classification of a whole government/OER domain from one rights
+assumption. For American English, verify each selected
+publication/asset. For VOA, retain the VOA-produced vs
+third-party/platform-hosted distinction (e.g. the alphabet clip
+hosted on VOA's YouTube channel is embed/link only).
+
 ## 1. Full beginner courses
 
 | Source | Author/Org | Human status | URL | License | Comm. | Adapt | Redist. | Exceptions | Level | Completeness | Status |
@@ -26,7 +46,7 @@
 |--------|-----------|--------------|---------|-------|-------|--------------|--------|
 | Multilingual English Storybooks | Global Storybooks / African Storybook (Bonaventure project) | HUMAN_AUTHORED_VERIFIED | CC BY 4.0 | yes | L1–L5 (~A1–B1) | 40 illustrated stories, text+downloadable audio, multilingual | **REUSE** |
 | VOA Learning English news/features (Level 1–3) | VOA | HUMAN_AUTHORED_VERIFIED | PD | yes | A1–B1 | thousands of graded articles + MP3 | **REUSE** |
-| Simple English Wikipedia | Wikimedia community | COMMUNITY — editorial review exists but authorship distributed | CC BY-SA 3.0 | yes | ~A2+ | huge, ungraded | REUSE w/ selection care |
+| Simple English Wikipedia | Wikimedia community | TIER C — community-edited | CC BY-SA 3.0 | yes | ~A2+ | huge, ungraded | reading source candidate w/ selection care, not pedagogy authority |
 | Lit2Go | Florida Center for Instructional Technology | HUMAN_AUTHORED_VERIFIED | free for education, copyrighted | n/a | varies | large audio+text library | LINK_ONLY |
 | LibriVox + Project Gutenberg | volunteers / PD texts | HUMAN (public-domain works) | PD | yes | ungraded | huge, no leveling | REUSE (later levels) |
 | Breaking News English | Sean Banville | HUMAN_AUTHORED | free for teacher use, copyrighted | n/a | graded | lesson packs w/ audio | LINK_ONLY |
@@ -39,8 +59,8 @@
 | VOA media (conversation/speaking/pron/quiz videos + MP3s) | PD | VERIFIED | yes | REUSE |
 | Evergreen L&S recorded audio | CC BY 4.0 | VERIFIED | yes | REUSE |
 | Everyday Conversations audio | PD | VERIFIED | yes | REUSE |
-| Tatoeba (sentences + native-speaker audio) | CC-BY per item (audio licenses vary) | COMMUNITY — human but unverified quality | yes w/ attribution | REUSE w/ per-item license+quality check |
-| Common Voice | CC0 | community voices | yes | REUSE (speech data, not lesson content) |
+| Tatoeba (sentences + native-speaker audio) | CC-BY per item (audio licenses vary) | TIER C — community human, unverified quality | yes w/ attribution | REUSE w/ per-item license+quality check; supplementary only |
+| Common Voice | CC0 | TIER C — community voices | yes | REUSE (speech dataset, not curriculum) |
 | ELLLO, Randall's ESL Lab, TED, BBC LE | copyrighted free | human | n/a | LINK_ONLY |
 
 ## 4. Speaking + functional language
@@ -69,7 +89,7 @@
 
 | Source | License | Comm. | Status |
 |--------|---------|-------|--------|
-| **NGSL family** (NGSL 1.2 core, NAWL academic, BSL business, TSL, NDL children, spoken lists) | **CC BY-SA 4.0 incl. commercial** | yes | **REUSE — the open EVP substitute**. Official site: newgeneralservelist.com only (.org hijacked) |
+| **NGSL family** (NGSL 1.2 core, NAWL academic, BSL business, TSL, NDL children, spoken lists) | **CC BY-SA 4.0 incl. commercial** | yes | **REUSE — OPEN FREQUENCY / PRIORITY REFERENCE** (locked role). Allowed: lexical frequency, vocabulary prioritization, text coverage, candidate vocab pool, one difficulty signal. FORBIDDEN: NGSL=CEFR-level claims, curriculum-order decisions, replacing EVP developmental-level function. Official site: newgeneralservelist.com only (.org hijacked) |
 | VOA Word Book + glossary tools | PD | yes | REUSE |
 | Wiktionary | CC BY-SA | yes | REUSE (per-entry data; watch attribution) |
 | Princeton WordNet | WordNet license (BSD-like) | yes | REUSE (lexical data) |
@@ -134,7 +154,7 @@
   assessment.** The open library is real and deep at A1: VOA+State
   Dept alone supply a complete media backbone; OER textbooks supply
   grammar/pron/practice; Storybooks supply graded reading; NGSL
-  supplies leveling data.
+  supplies frequency/priority data (not CEFR leveling).
 - **License mix is workable**: PD (US gov) and CC-BY dominate the
   core; CC-BY-NC/-SA items are usable with flags; LINK_ONLY covers
   high-quality copyrighted-free services (USA Learns, BBC, BC, ELLLO).
