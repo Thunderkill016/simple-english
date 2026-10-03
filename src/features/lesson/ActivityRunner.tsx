@@ -9,6 +9,7 @@ import {
   type ActivityRef,
 } from "../../content/course";
 import type { Item } from "../../content/model";
+import { fieldText } from "../../content/model";
 import {
   activityScore,
   firstUnresolvedIndex,
@@ -114,7 +115,7 @@ export function ActivityRunner({ activityId }: { activityId: string }) {
         </Link>
         <div className="space-y-1">
           <p className="text-sm text-muted">
-            {lesson.title} · {titleText(section.title)}
+            {titleText(lesson.title)} · {titleText(section.title)}
           </p>
           <h1 className="text-2xl font-bold tracking-tight" lang="en">
             {titleText(activity.title)}
@@ -260,10 +261,10 @@ function ResolvedView({ item, state }: { item: Item; state: ItemState }) {
       ) : (
         <div className="space-y-2" lang="en">
           {"prompt" in item && item.prompt ? (
-            <p className="whitespace-pre-line font-medium">{item.prompt.text}</p>
+            <p className="whitespace-pre-line font-medium">{fieldText(item.prompt)}</p>
           ) : null}
           {"text" in item && item.text ? (
-            <p className="whitespace-pre-line font-medium">{item.text.text}</p>
+            <p className="whitespace-pre-line font-medium">{fieldText(item.text)}</p>
           ) : null}
           {answerText ? (
             <p className="text-sm">

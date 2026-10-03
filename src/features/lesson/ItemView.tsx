@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import type {
   ClozeItem,
   DictationItem,
+  Field,
   Item,
   McItem,
   MediaItem,
@@ -13,6 +14,7 @@ import type {
   SelfEvalItem,
   WriteItem,
 } from "../../content/model";
+import { isGapField } from "../../content/model";
 import type { ItemOutcome } from "../state/model";
 import { evaluate, normalizeAnswer } from "../feedback/feedback";
 import { recorderSupported, startRecording } from "../recorder/recorder";
@@ -22,6 +24,29 @@ type Feedback =
   | { kind: "retry"; attemptsLeft: number }
   | { kind: "revealed"; answer: string }
   | null;
+
+// UI chrome — not instructional content, no provenance required.
+const SELF_EVAL_OPTIONS = [
+  { id: "practiced", label: "I practiced this" },
+  { id: "confident", label: "I can do this with confidence" },
+  { id: "needs", label: "Needs more practice" },
+];
+
+/** renders a field's text, or nothing instructional when the field is a GAP */
+function FieldText({ field, className }: { field: Field; className?: string }) {
+  if (isGapField(field)) {
+    return (
+      <p className={className ?? "text-lesson"} data-gap={field.prov.ref}>
+        <span className="text-muted">Wording awaiting editor approval.</span>
+      </p>
+    );
+  }
+  return (
+    <p lang="en" className={`${className ?? "text-lesson"} whitespace-pre-line`}>
+      {field.text}
+    </p>
+  );
+}
 
 function MediaBlock({ item }: { item: MediaItem }) {
   const [loadEmbed, setLoadEmbed] = useState(false);
@@ -60,18 +85,16 @@ function MediaBlock({ item }: { item: MediaItem }) {
       ) : (
         <audio controls preload="none" src={m.src} className="w-full" aria-label={item.title.text} />
       )}
-      {item.transcript ? (
-        <p lang="en" className="text-lesson whitespace-pre-line">{item.transcript.text}</p>
-      ) : null}
+      {item.transcript ? <FieldText field={item.transcript} /> : null}
     </div>
   );
 }
 
-function ReadBlock({ blocks }: { blocks: { text: string }[] }) {
+function ReadBlock({ blocks }: { blocks: Field[] }) {
   return (
-    <div className="space-y-3" lang="en">
+    <div className="space-y-3">
       {blocks.map((b, i) => (
-        <p key={i} className="text-lesson whitespace-pre-line">{b.text}</p>
+        <FieldText key={i} field={b} />
       ))}
     </div>
   );
@@ -265,10 +288,8 @@ function RecordView({ item, onResolve }: { item: RecordItem; onResolve: (o: Item
 
   return (
     <div className="space-y-4">
-      <p lang="en" className="font-semibold whitespace-pre-line">{item.prompt.text}</p>
-      {item.model ? (
-        <p lang="en" className="text-lesson whitespace-pre-line">{item.model.text}</p>
-      ) : null}
+      <FieldText field={item.prompt} className="font-semibold" />
+      {item.model ? <FieldText field={item.model} /> : null}
       {item.mediaModel ? (
         <video controls preload="metadata" src={item.mediaModel.src} className="w-full rounded-lg border border-border" />
       ) : null}
@@ -295,10 +316,8 @@ function WriteView({ item, onResolve }: { item: WriteItem; onResolve: (o: ItemOu
   const [value, setValue] = useState("");
   return (
     <div className="space-y-4">
-      <p lang="en" className="font-semibold whitespace-pre-line">{item.prompt.text}</p>
-      {item.model ? (
-        <p lang="en" className="text-lesson whitespace-pre-line">{item.model.text}</p>
-      ) : null}
+      <FieldText field={item.prompt} className="font-semibold" />
+      {item.model ? <FieldText field={item.model} /> : null}
       <textarea
         value={value}
         onChange={(e) => setValue(e.target.value)}
@@ -322,7 +341,7 @@ function NoteView({ item, onResolve }: { item: NoteItem; onResolve: (o: ItemOutc
   const [value, setValue] = useState("");
   return (
     <div className="space-y-4">
-      <p lang="en" className="font-semibold whitespace-pre-line">{item.prompt.text}</p>
+      <FieldText field={item.prompt} className="font-semibold" />
       <textarea
         value={value}
         onChange={(e) => setValue(e.target.value)}
@@ -346,9 +365,9 @@ function SelfEvalView({ item, onResolve }: { item: SelfEvalItem; onResolve: (o: 
   const [picked, setPicked] = useState<string>();
   return (
     <div className="space-y-3">
-      <p lang="en" className="font-semibold whitespace-pre-line">{item.statement.text}</p>
+      <FieldText field={item.statement} className="font-semibold" />
       <div className="space-y-2">
-        {item.options.map((o) => (
+        {SELF_EVAL_OPTIONS.map((o) => (
           <label
             key={o.id}
             className={`flex cursor-pointer items-center gap-3 rounded-lg border px-3 py-3 ${picked === o.id ? "border-primary bg-primary-soft" : "border-border"}`}
@@ -363,7 +382,7 @@ function SelfEvalView({ item, onResolve }: { item: SelfEvalItem; onResolve: (o: 
               }}
               className="size-4 accent-primary"
             />
-            <span lang="en">{o.text.text}</span>
+            <span>{o.label}</span>
           </label>
         ))}
       </div>

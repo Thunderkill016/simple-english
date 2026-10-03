@@ -3,37 +3,13 @@
 // Canonical hierarchy: COURSE → UNIT → LESSON → SECTION → ACTIVITY → ITEM.
 // SESSION is not an entity — a session is only a runtime visit.
 //
-// Human Content Gate: every learner-facing instructional English field is a
-// `Field` carrying provenance. Fields whose text teaches English (prompts,
-// options, transcripts, goals, definitions, can-do statements, models, stems)
-// must resolve to a declared source-pack asset. Mechanical UI chrome
-// (button labels, input placeholders, navigation titles) is plain `string`
-// and is not instructional content.
-
-/** Provenance classes allowed for learner-facing instructional English. */
-export type ProvenanceKind =
-  /** verbatim content from a verified human-authored source */
-  | "source"
-  /** human-authored adaptation of a verified source */
-  | "adapted"
-  /** human-editor-approved text (approval recorded in the source pack) */
-  | "editor"
-  /** deterministic transformation of a verified source — no invented text */
-  | "derived";
-
-export interface Provenance {
-  kind: ProvenanceKind;
-  /** id into the lesson's source pack `assets[]` */
-  ref: string;
-  /** for kind "derived"/"adapted": the mechanical transform applied */
-  note?: string;
-}
-
-/** A learner-facing instructional English field — always provenanced. */
-export interface Field {
-  text: string;
-  prov: Provenance;
-}
+// Human Content Gate v2 (Task 006.1): every learner-facing instructional
+// English field carries provenance that resolves to a verbatim source
+// FRAGMENT (contiguous substring of a declared asset's sourceText), a
+// recomputed deterministic transform over fragments, a recorded editor
+// approval, or an explicit GAP pointing at the withheld teacher-voice
+// fragment. UI chrome (button labels, placeholders, self-eval response
+// choices) lives in code and is not instructional content.
 
 // ---------- Source pack ----------
 
@@ -46,6 +22,13 @@ export type AssetRights =
   /** reference evidence — informs design, contributes no content */
   | "reference";
 
+export type RightsStatus = "VERIFIED" | "THIRD_PARTY" | "UNVERIFIED";
+
+export type ThirdPartyStatus =
+  | "NONE_OBSERVED"
+  | "PRESENT"
+  | "UNKNOWN";
+
 export interface SourceAsset {
   id: string;
   title: string;
@@ -57,7 +40,6 @@ export interface SourceAsset {
     | "audio"
     | "quiz"
     | "embed"
-    | "directive"
     | "page";
   humanAuthorship:
     | "human-authored"
@@ -72,6 +54,63 @@ export interface SourceAsset {
   /** instructional role inside the source lesson */
   role: string;
   notes?: string;
+  /** rights evidence (Task 006.1 B6) */
+  rightsStatus: RightsStatus;
+  /** authoritative rights-policy URL the status was checked against */
+  rightsEvidenceUrl?: string;
+  /** ISO date the status was verified */
+  rightsVerifiedAt?: string;
+  thirdPartyStatus: ThirdPartyStatus;
+  thirdPartyNotes?: string;
+  /**
+   * verbatim extraction of the asset's text — the ground truth every
+   * fragment's exactText is verified against (text assets only)
+   */
+  sourceText?: string;
+}
+
+/**
+ * Who may see a fragment. TEACHER text is never learner-facing: it may
+ * only be referenced by a gap field (withheld pending human-approved
+ * learner wording).
+ */
+export type FragmentAudience = "LEARNER" | "METADATA" | "ASSESSMENT" | "TEACHER";
+
+export type FragmentRole =
+  | "title"
+  | "heading"
+  | "topic"
+  | "goal"
+  | "vocab-def"
+  | "script"
+  | "prompt"
+  | "option"
+  | "stem"
+  | "instruction"
+  | "model"
+  | "advice"
+  | "note";
+
+/** verbatim substring of an asset's sourceText — the unit of provenance */
+export interface SourceFragment {
+  id: string;
+  assetRef: string;
+  audience: FragmentAudience;
+  role: FragmentRole;
+  /** human locator — page/section inside the source document */
+  locator: string;
+  exactText: string;
+  /** sha256(exactText) — computed by scripts/build-sourcepack.mjs */
+  exactTextHash: string;
+}
+
+/** recorded human-editor approval — backs kind:"editor" fields */
+export interface Approval {
+  id: string;
+  text: string;
+  approvedBy: string;
+  approvedAt: string;
+  note?: string;
 }
 
 export interface SourcePack {
@@ -79,6 +118,67 @@ export interface SourcePack {
   title: string;
   canonicalUrl: string;
   assets: SourceAsset[];
+  fragments: SourceFragment[];
+  approvals: Approval[];
+}
+
+// ---------- Provenance & transforms ----------
+
+/**
+ * Deterministic transform allowlist (Task 006.1 B2). The gate recomputes
+ * every derived field from its transform + referenced fragments and
+ * requires an exact match — derived text is verified, not trusted.
+ */
+export type Transform =
+  /** field text === fragment exactText (normalized) */
+  | { op: "VERBATIM"; ref: string }
+  /** field text === picks.join(sep); each pick ⊆ one of refs */
+  | { op: "SELECT_LINES"; refs: string[]; picks: string[]; sep: string }
+  /** field text === source with `token` replaced by "__"; source ⊆ ref */
+  | { op: "BLANK_TOKEN"; ref: string; source: string; token: string }
+  /** field text === token; token ⊆ ref */
+  | { op: "TOKEN"; ref: string; token: string }
+  /** field text === each ref's head word joined by sep (vocab lists) */
+  | { op: "JOIN_VERBATIM_ITEMS"; refs: string[]; sep: string; extract: "head" }
+  /** mechanical alphabet enumeration authorized by `ref` */
+  | { op: "ENUMERATE_ALPHABET"; ref: string }
+  /** mechanical cardinal-number enumeration authorized by `ref` */
+  | { op: "ENUMERATE_CARDINALS"; ref: string; from: number; to: number };
+
+export type Provenance =
+  /** verbatim field — ref is a source-pack fragment id */
+  | { kind: "source"; ref: string; note?: string }
+  /** deterministic transform over fragments — gate recomputes */
+  | { kind: "derived"; transform: Transform; note?: string }
+  /** human-editor-approved — ref is a source-pack approval id */
+  | { kind: "editor"; ref: string; note?: string }
+  /**
+   * withheld instructional wording — ref is a TEACHER-audience fragment
+   * quoting the source text the field withholds; renders no English
+   */
+  | { kind: "gap"; ref: string; note: string };
+
+/** learner-facing field carrying provenanced text */
+export interface TextField {
+  text: string;
+  prov: Exclude<Provenance, { kind: "gap" }>;
+}
+
+/** withheld field — references the teacher-voice fragment it replaces */
+export interface GapField {
+  prov: { kind: "gap"; ref: string; note: string };
+}
+
+export type Field = TextField | GapField;
+
+export function isGapField(f: Field): f is GapField {
+  return f.prov.kind === "gap";
+}
+
+/** display text for a field; gap fields render a non-instructional marker */
+export function fieldText(f: Field | string): string {
+  if (typeof f === "string") return f;
+  return isGapField(f) ? "" : f.text;
 }
 
 // ---------- Items ----------
@@ -102,20 +202,20 @@ export interface MediaItem {
         embedSrc: string;
         sourceUrl: string;
       };
-  title: Field;
+  title: TextField;
   transcript?: Field;
 }
 
 export interface McOption {
   id: string;
-  text: Field;
+  text: TextField;
 }
 
 /** multiple-choice — scored when inside a scored activity */
 export interface McItem {
   type: "mc";
   id: string;
-  prompt: Field;
+  prompt: TextField;
   media?: { kind: "video" | "audio"; src: string; sha256: string };
   options: McOption[];
   /** id of the correct option — provenance asserted by the validator */
@@ -127,9 +227,9 @@ export interface McItem {
 export interface DictationItem {
   type: "dictation";
   id: string;
-  prompt: Field;
+  prompt: TextField;
   media: { kind: "video" | "audio"; src: string; sha256: string };
-  answer: Field;
+  answer: TextField;
   attempts: number;
 }
 
@@ -137,10 +237,10 @@ export interface DictationItem {
 export interface ClozeItem {
   type: "cloze";
   id: string;
-  /** verbatim source text containing the blanked token */
-  text: Field;
+  /** source line with the blanked token (BLANK_TOKEN transform) */
+  text: TextField;
   /** the blanked token(s) — deterministic excerpt of `text` */
-  answer: Field;
+  answer: TextField;
   attempts: number;
 }
 
@@ -169,12 +269,15 @@ export interface NoteItem {
   prompt: Field;
 }
 
-/** Learning-Log-style self-evaluation — self-report channel only */
+/**
+ * Learning-Log-style self-evaluation — self-report channel only.
+ * Response choices are UI chrome (fixed constant in ItemView), not
+ * instructional content — they carry no provenance.
+ */
 export interface SelfEvalItem {
   type: "selfeval";
   id: string;
   statement: Field;
-  options: McOption[];
 }
 
 export type Item =
@@ -192,8 +295,8 @@ export type Item =
 
 export interface Activity {
   id: string;
-  /** mechanical navigation label or verbatim source heading */
-  title: Field | string;
+  /** verbatim source heading or metadata fragment — never a bare string */
+  title: Field;
   /** scored activities compute a formative % from resolved items */
   scored: boolean;
   items: Item[];
@@ -213,26 +316,26 @@ export type SectionFunction =
 export interface Section {
   id: string;
   function: SectionFunction;
-  title: Field | string;
+  title: Field;
   activities: Activity[];
 }
 
 export interface Lesson {
   id: string;
-  title: string;
+  title: Field;
   sections: Section[];
 }
 
 export interface Unit {
   id: string;
-  title: string;
+  title: Field;
   lessons: Lesson[];
 }
 
 export interface Course {
   schemaVersion: 3;
   id: string;
-  title: string;
+  title: Field;
   sourcePack: string;
   units: Unit[];
 }

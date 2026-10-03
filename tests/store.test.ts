@@ -41,6 +41,34 @@ describe("activity lifecycle", () => {
   });
 });
 
+describe("resolveItem idempotency", () => {
+  it("a second resolution of the same item is a no-op", async () => {
+    const ref = activityIndex.find((r) =>
+      r.activity.items.some((i) => i.type === "mc"),
+    )!;
+    const mc = ref.activity.items.find((i) => i.type === "mc")!;
+    await resolveItem(ref.activity.id, mc.id, "correct", 1);
+    await resolveItem(ref.activity.id, mc.id, "revealed", 3);
+    const row = await db.itemStates.get(mc.id);
+    expect(row!.outcome).toBe("correct");
+    expect(row!.attempts).toBe(1);
+  });
+
+  it("concurrent resolutions collapse to one recorded outcome", async () => {
+    const ref = activityIndex.find((r) =>
+      r.activity.items.some((i) => i.type === "mc"),
+    )!;
+    const mc = ref.activity.items.find((i) => i.type === "mc")!;
+    await Promise.all([
+      resolveItem(ref.activity.id, mc.id, "correct", 1),
+      resolveItem(ref.activity.id, mc.id, "revealed", 2),
+    ]);
+    expect(await db.itemStates.where("itemId").equals(mc.id).count()).toBe(1);
+    const { aState } = (await loadActivity(ref.activity.id))!;
+    expect(aState!.resolvedCount).toBe(1);
+  });
+});
+
 describe("resume — item cursor granularity (finer than USA Learns)", () => {
   it("resumes at the first unresolved item after a mid-activity exit", async () => {
     const ref = activityIndex.find((r) => r.activity.items.length > 2)!;

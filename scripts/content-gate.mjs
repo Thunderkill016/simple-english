@@ -1,12 +1,42 @@
-// Human Content Gate (ADR-0003) — build/test-time enforcement that every
-// learner-facing instructional English field has valid human provenance.
+// Human Content Gate v2 (ADR-0003, Task 006.1) — build/test-time enforcement
+// that every learner-facing instructional English field resolves to verbatim
+// source fragments, a recomputed deterministic transform, a recorded editor
+// approval, or an explicit GAP at a teacher-voice fragment.
 // Pure logic, no fs access here: callers pass {exists, sha256} resolvers.
 
-const ALLOWED_KINDS = new Set(["source", "adapted", "editor", "derived"]);
+import { createHash } from "node:crypto";
+
+const norm = (s) => s.replace(/\s+/g, " ").trim();
+const sha256 = (s) => createHash("sha256").update(s, "utf8").digest("hex");
+
+const CARDINAL_NAMES = [
+  "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
+  "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen",
+  "seventeen", "eighteen", "nineteen", "twenty",
+];
+const ALPHABET = "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z";
+
+/** audience permitted per field position */
+const AUDIENCE_RULES = {
+  title: new Set(["METADATA", "LEARNER"]),
+  display: new Set(["LEARNER", "METADATA"]),
+  assessment: new Set(["LEARNER", "ASSESSMENT"]),
+};
+const GAP_CONTEXTS = new Set(["display"]);
+
+const TRANSFORM_OPS = new Set([
+  "VERBATIM",
+  "SELECT_LINES",
+  "BLANK_TOKEN",
+  "TOKEN",
+  "JOIN_VERBATIM_ITEMS",
+  "ENUMERATE_ALPHABET",
+  "ENUMERATE_CARDINALS",
+]);
 
 /**
  * Walk every instructional Field in a course and check provenance against
- * its source pack. Returns a list of violation strings; [] means pass.
+ * its source pack. Returns {errors, audit}; errors [] means pass.
  *
  * @param {object} course   parsed *.lesson.json (schemaVersion 3)
  * @param {object} pack     parsed *.sourcepack.json
@@ -16,76 +46,244 @@ const ALLOWED_KINDS = new Set(["source", "adapted", "editor", "derived"]);
 export function checkHumanContentGate(course, pack, io = {}) {
   const errors = [];
   const assets = new Map(pack.assets.map((a) => [a.id, a]));
-  const seen = [];
+  const fragments = new Map((pack.fragments ?? []).map((f) => [f.id, f]));
+  const approvals = new Map((pack.approvals ?? []).map((a) => [a.id, a]));
 
-  const asset = (ref) => assets.get(ref);
+  const audit = {
+    fieldCount: 0,
+    byKind: { source: 0, derived: 0, editor: 0, gap: 0 },
+    fragmentsUsed: new Set(),
+    transformsUsed: {},
+    approvalsUsed: new Set(),
+    gaps: [],
+    audiences: {},
+  };
 
-  function checkField(field, path) {
+  const frag = (ref) => fragments.get(ref);
+  const fragAsset = (f) => assets.get(f.assetRef);
+
+  // ---------- pack integrity: fragments ⊆ asset sourceText, hashes honest ----
+  for (const f of pack.fragments ?? []) {
+    const a = assets.get(f.assetRef);
+    if (!a) {
+      errors.push(`fragment ${f.id}: assetRef '${f.assetRef}' does not resolve`);
+      continue;
+    }
+    if (a.sourceText && !norm(a.sourceText).includes(norm(f.exactText))) {
+      errors.push(
+        `fragment ${f.id}: exactText is not a contiguous substring of asset '${f.assetRef}'`,
+      );
+    }
+    if (sha256(f.exactText) !== f.exactTextHash) {
+      errors.push(`fragment ${f.id}: exactTextHash does not match sha256(exactText)`);
+    }
+  }
+
+  // ---------- pack integrity: rights evidence --------------------------------
+  for (const a of pack.assets ?? []) {
+    if (a.rights === "reusable") {
+      if (a.rightsStatus !== "VERIFIED")
+        errors.push(`asset ${a.id}: reusable but rightsStatus=${a.rightsStatus}`);
+      if (!a.rightsEvidenceUrl?.startsWith("https://"))
+        errors.push(`asset ${a.id}: reusable without https rightsEvidenceUrl`);
+      if (!a.rightsVerifiedAt)
+        errors.push(`asset ${a.id}: reusable without rightsVerifiedAt`);
+      if (a.thirdPartyStatus === "UNKNOWN")
+        errors.push(`asset ${a.id}: reusable with unknown third-party status`);
+    }
+    if ((a.rights === "embed-only" || a.rights === "link-only") && a.local) {
+      errors.push(`asset ${a.id}: ${a.rights} asset must not be ingested (has local)`);
+    }
+  }
+
+  function refAudience(f, ctx) {
+    return AUDIENCE_RULES[ctx].has(f.audience)
+      ? null
+      : `${f.audience} fragment '${f.id}' may not back a ${ctx} field`;
+  }
+
+  /** recompute a derived transform; returns {result} or {error} */
+  function recompute(t, path) {
+    const need = (ref) => {
+      const f = frag(ref);
+      if (!f) errors.push(`${path}: transform ref '${ref}' does not resolve to a fragment`);
+      return f;
+    };
+    switch (t.op) {
+      case "VERBATIM": {
+        const f = need(t.ref);
+        return f ? { result: f.exactText, refs: [t.ref] } : { refs: [t.ref] };
+      }
+      case "SELECT_LINES": {
+        const sources = t.refs.map(need).filter(Boolean);
+        for (const pick of t.picks) {
+          if (!sources.some((f) => norm(f.exactText).includes(norm(pick)))) {
+            errors.push(`${path}: SELECT_LINES pick '${pick.slice(0, 40)}…' not found in refs`);
+          }
+        }
+        return { result: t.picks.join(t.sep), refs: t.refs };
+      }
+      case "BLANK_TOKEN": {
+        const f = need(t.ref);
+        if (!f) return { refs: [t.ref] };
+        if (!norm(f.exactText).includes(norm(t.source))) {
+          errors.push(`${path}: BLANK_TOKEN source not found in fragment '${t.ref}'`);
+        }
+        if (!t.source.includes(t.token)) {
+          errors.push(`${path}: BLANK_TOKEN token '${t.token}' absent from source`);
+        }
+        return { result: t.source.replace(t.token, "__"), refs: [t.ref] };
+      }
+      case "TOKEN": {
+        const f = need(t.ref);
+        if (f && !norm(f.exactText).includes(norm(t.token))) {
+          errors.push(`${path}: TOKEN '${t.token}' not found in fragment '${t.ref}'`);
+        }
+        return { result: t.token, refs: [t.ref] };
+      }
+      case "JOIN_VERBATIM_ITEMS": {
+        const heads = t.refs.map((ref) => {
+          const f = need(ref);
+          return f ? norm(f.exactText).split(/\s+-\s+/)[0] : "";
+        });
+        return { result: heads.join(t.sep), refs: t.refs };
+      }
+      case "ENUMERATE_ALPHABET":
+        need(t.ref);
+        return { result: ALPHABET, refs: [t.ref] };
+      case "ENUMERATE_CARDINALS": {
+        need(t.ref);
+        if (t.to > CARDINAL_NAMES.length) {
+          errors.push(`${path}: ENUMERATE_CARDINALS only supports 1..${CARDINAL_NAMES.length}`);
+        }
+        return {
+          result: CARDINAL_NAMES.slice(t.from - 1, t.to).join(", "),
+          refs: [t.ref],
+        };
+      }
+      default:
+        errors.push(`${path}: transform op '${t.op}' is not in the deterministic allowlist`);
+        return { refs: [] };
+    }
+  }
+
+  function checkField(field, path, ctx) {
+    audit.fieldCount++;
     if (field == null || typeof field !== "object" || field.prov == null) {
       errors.push(`${path}: instructional field missing provenance`);
       return;
     }
+    const prov = field.prov;
+
+    if (prov.kind === "gap") {
+      if (!GAP_CONTEXTS.has(ctx)) {
+        errors.push(`${path}: gap field not allowed in ${ctx} position`);
+      }
+      if ("text" in field) {
+        errors.push(`${path}: gap field must not carry text (withheld wording)`);
+      }
+      const f = frag(prov.ref);
+      if (!f) {
+        errors.push(`${path}: gap ref '${prov.ref}' does not resolve to a fragment`);
+      } else {
+        if (f.audience !== "TEACHER") {
+          errors.push(
+            `${path}: gap ref '${prov.ref}' must point at a TEACHER-audience fragment`,
+          );
+        }
+        audit.fragmentsUsed.add(prov.ref);
+      }
+      audit.byKind.gap++;
+      audit.gaps.push({ path, ref: prov.ref, note: prov.note });
+      return;
+    }
+
     if (typeof field.text !== "string" || field.text.trim().length === 0) {
-      errors.push(`${path}: empty instructional text`);
-    }
-    const { kind, ref, note } = field.prov ?? {};
-    if (!ALLOWED_KINDS.has(kind)) {
-      errors.push(`${path}: provenance kind '${kind}' is not human-provenanced`);
+      errors.push(`${path}: instructional field has empty text`);
       return;
     }
-    if (typeof ref !== "string" || !asset(ref)) {
-      errors.push(`${path}: sourceRef '${ref}' does not resolve in source pack`);
+
+    if (prov.kind === "source") {
+      const f = frag(prov.ref);
+      if (!f) {
+        errors.push(`${path}: source ref '${prov.ref}' does not resolve to a fragment`);
+        return;
+      }
+      audit.fragmentsUsed.add(prov.ref);
+      audit.audiences[f.audience] = (audit.audiences[f.audience] ?? 0) + 1;
+      const rule = refAudience(f, ctx);
+      if (rule) errors.push(`${path}: ${rule}`);
+      if (norm(field.text) !== norm(f.exactText)) {
+        errors.push(
+          `${path}: text ≠ verbatim fragment '${prov.ref}' (${f.locator})`,
+        );
+      }
+      const a = fragAsset(f);
+      if (a && a.rights !== "reusable") {
+        errors.push(`${path}: fragment backed by non-reusable asset '${f.assetRef}'`);
+      }
+      audit.byKind.source++;
       return;
     }
-    const a = asset(ref);
-    if (a.rights === "link-only" || a.rights === "embed-only") {
-      errors.push(
-        `${path}: '${ref}' is ${a.rights} — cannot back instructional content`,
-      );
-    }
-    if (kind === "source" || kind === "adapted") {
-      if (a.rights !== "reusable") {
+
+    if (prov.kind === "derived") {
+      const t = prov.transform;
+      if (!t || !TRANSFORM_OPS.has(t.op)) {
+        errors.push(`${path}: derived field missing allowlisted transform`);
+        return;
+      }
+      const { result, refs } = recompute(t, path);
+      for (const ref of refs ?? []) {
+        const f = frag(ref);
+        if (!f) continue;
+        audit.fragmentsUsed.add(ref);
+        audit.audiences[f.audience] = (audit.audiences[f.audience] ?? 0) + 1;
+        if (f.audience === "TEACHER") {
+          errors.push(`${path}: transform reads TEACHER fragment '${ref}'`);
+        }
+        const rule = refAudience(f, ctx);
+        if (rule) errors.push(`${path}: ${rule}`);
+      }
+      audit.transformsUsed[t.op] = (audit.transformsUsed[t.op] ?? 0) + 1;
+      if (result !== undefined && norm(result) !== norm(field.text)) {
         errors.push(
-          `${path}: '${kind}' field backed by non-reusable asset '${ref}' (${a.rights})`,
+          `${path}: transform ${t.op} recomputes to '${norm(result).slice(0, 60)}…' ≠ field text`,
         );
       }
-      if (a.humanAuthorship === "unknown") {
-        errors.push(`${path}: '${ref}' has unknown human authorship`);
-      }
+      audit.byKind.derived++;
+      return;
     }
-    if (kind === "derived") {
-      if (a.rights !== "reusable" && a.rights !== "reference") {
-        errors.push(
-          `${path}: derived field backed by '${ref}' (${a.rights}) — transforms require a reusable or reference source`,
-        );
+
+    if (prov.kind === "editor") {
+      const a = approvals.get(prov.ref);
+      if (!a) {
+        errors.push(`${path}: editor ref '${prov.ref}' does not resolve to an approval`);
+        return;
       }
-      if (!note || note.trim().length === 0) {
-        errors.push(`${path}: derived field must declare its transform (prov.note)`);
+      audit.approvalsUsed.add(prov.ref);
+      if (norm(field.text) !== norm(a.text)) {
+        errors.push(`${path}: text ≠ approved text '${prov.ref}'`);
       }
+      audit.byKind.editor++;
+      return;
     }
-    if (kind === "editor" && a.humanAuthorship !== "human-approved") {
-      errors.push(
-        `${path}: editor-approved field backed by '${ref}' which is not human-approved`,
-      );
-    }
-    seen.push({ path, ref });
+
+    errors.push(`${path}: provenance kind '${prov.kind}' is not human-provenanced`);
   }
 
   function checkLocalMedia(media, path) {
     if (!media || media.kind === "embed") return;
-    const owning = pack.assets.find((a) => a.local && `media/${a.local.split("/").slice(1).join("/")}` === media.src);
     const declared = pack.assets.find(
       (a) => a.local && media.src.endsWith(a.local.replace(/^public\//, "")),
     );
-    const a = owning ?? declared;
-    if (!a) {
+    if (!declared) {
       errors.push(`${path}: media src '${media.src}' not declared in source pack`);
     } else {
-      if (a.rights !== "reusable") {
-        errors.push(`${path}: media '${media.src}' backed by non-reusable asset '${a.id}'`);
+      if (declared.rights !== "reusable") {
+        errors.push(`${path}: media '${media.src}' backed by non-reusable asset '${declared.id}'`);
       }
-      if (a.sha256 && a.sha256 !== media.sha256) {
-        errors.push(`${path}: media sha256 in item ≠ source-pack sha256 for '${a.id}'`);
+      if (declared.sha256 && declared.sha256 !== media.sha256) {
+        errors.push(`${path}: media sha256 in item ≠ source-pack sha256 for '${declared.id}'`);
       }
     }
     if (io.exists && !io.exists(media.src)) {
@@ -109,69 +307,77 @@ export function checkHumanContentGate(course, pack, io = {}) {
     if (!a) errors.push(`${path}: embed has no embed-only source-pack asset`);
   }
 
+  const ASSESSMENT_ITEMS = new Set(["mc", "dictation", "cloze"]);
+
   function checkItem(item, path) {
     const p = `${path}/item:${item.id}`;
+    const ctx = ASSESSMENT_ITEMS.has(item.type) ? "assessment" : "display";
     switch (item.type) {
       case "read":
-        item.blocks.forEach((b, i) => checkField(b, `${p}/blocks[${i}]`));
+        item.blocks.forEach((b, i) => checkField(b, `${p}/blocks[${i}]`, ctx));
         break;
       case "media":
-        checkField(item.title, `${p}/title`);
-        if (item.transcript) checkField(item.transcript, `${p}/transcript`);
+        checkField(item.title, `${p}/title`, "title");
+        if (item.transcript) checkField(item.transcript, `${p}/transcript`, ctx);
         if (item.media.kind === "embed") checkEmbed(item.media, p);
         else checkLocalMedia(item.media, p);
         break;
       case "mc":
-        checkField(item.prompt, `${p}/prompt`);
+        checkField(item.prompt, `${p}/prompt`, ctx);
         if (item.media) checkLocalMedia(item.media, `${p}/stem`);
-        item.options.forEach((o, i) => checkField(o.text, `${p}/options[${i}]`));
+        item.options.forEach((o, i) => checkField(o.text, `${p}/options[${i}]`, ctx));
         if (!item.options.some((o) => o.id === item.answer)) {
           errors.push(`${p}: answer '${item.answer}' is not an option id`);
         }
         break;
       case "dictation":
-        checkField(item.prompt, `${p}/prompt`);
-        checkField(item.answer, `${p}/answer`);
+        checkField(item.prompt, `${p}/prompt`, ctx);
+        checkField(item.answer, `${p}/answer`, ctx);
         checkLocalMedia(item.media, `${p}/stem`);
         break;
       case "cloze":
-        checkField(item.text, `${p}/text`);
-        checkField(item.answer, `${p}/answer`);
-        if (!item.text.text.includes("__")) {
+        checkField(item.text, `${p}/text`, ctx);
+        checkField(item.answer, `${p}/answer`, ctx);
+        if (fieldText(item.text) && !fieldText(item.text).includes("__")) {
           errors.push(`${p}: cloze text has no blank marker`);
         }
         break;
       case "record":
-        checkField(item.prompt, `${p}/prompt`);
-        if (item.model) checkField(item.model, `${p}/model`);
+        checkField(item.prompt, `${p}/prompt`, ctx);
+        if (item.model) checkField(item.model, `${p}/model`, ctx);
         if (item.mediaModel) checkLocalMedia(item.mediaModel, `${p}/mediaModel`);
         break;
       case "write":
-        checkField(item.prompt, `${p}/prompt`);
-        if (item.model) checkField(item.model, `${p}/model`);
+        checkField(item.prompt, `${p}/prompt`, ctx);
+        if (item.model) checkField(item.model, `${p}/model`, ctx);
         break;
       case "note":
-        checkField(item.prompt, `${p}/prompt`);
+        checkField(item.prompt, `${p}/prompt`, ctx);
         break;
       case "selfeval":
-        checkField(item.statement, `${p}/statement`);
-        item.options.forEach((o, i) => checkField(o.text, `${p}/options[${i}]`));
+        checkField(item.statement, `${p}/statement`, ctx);
         break;
       default:
         errors.push(`${p}: unknown item type '${item.type}'`);
     }
   }
 
-  for (const unit of course.units)
-    for (const lesson of unit.lessons)
+  const fieldText = (f) => (f && typeof f === "object" ? f.text : undefined);
+
+  checkField(course.title, `${course.id}/title`, "title");
+  for (const unit of course.units) {
+    checkField(unit.title, `${unit.id}/title`, "title");
+    for (const lesson of unit.lessons) {
+      checkField(lesson.title, `${lesson.id}/title`, "title");
       for (const section of lesson.sections) {
-        if (typeof section.title === "object") checkField(section.title, `${section.id}/title`);
+        checkField(section.title, `${section.id}/title`, "title");
         for (const activity of section.activities) {
-          if (typeof activity.title === "object")
-            checkField(activity.title, `${activity.id}/title`);
+          checkField(activity.title, `${activity.id}/title`, "title");
           activity.items.forEach((item) => checkItem(item, activity.id));
         }
       }
+    }
+  }
 
-  return { errors, fieldCount: seen.length };
+  return { errors, audit };
 }

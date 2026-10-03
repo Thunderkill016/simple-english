@@ -80,6 +80,9 @@ export async function resolveItem(
   attempts: number,
 ): Promise<void> {
   await db.transaction("rw", [db.itemStates, db.activityStates, db.reviewCards], async () => {
+    // idempotent: a resolved item is never re-resolved — double invocations
+    // (double-click, resume race) collapse to the first recorded outcome
+    if (await db.itemStates.get(itemId)) return;
     const t = now();
     await db.itemStates.put({ itemId, outcome, attempts, updatedAt: t });
 

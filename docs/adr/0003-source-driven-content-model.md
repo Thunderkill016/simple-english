@@ -15,8 +15,9 @@ The reviewed synthesis fixed two hard constraints:
    not a license to ship an AI-selected micro-capability.
 2. **Human Content Gate** — every learner-facing instructional English field
    must carry provenance (`source`, `adapted`, `editor`, or `derived` from a
-   verified asset). LLM-authored instructional text is prohibited; AI may only
-   write non-instructional UI chrome.
+   verified asset; the Task 006.1 amendment below replaces this set with
+   `source`/`derived`/`editor`/`gap`). LLM-authored instructional text is
+   prohibited; AI may only write non-instructional UI chrome.
 
 ## Decision
 
@@ -73,3 +74,39 @@ loaded lesson needs no network. YouTube stays click-to-load embed-only.
   violation, and emits `docs/pilots/<pack>/gate-audit.json`.
 - The pilot proves the architecture can ingest human material — it claims
   nothing about learning efficacy, CEFR, or proficiency.
+
+## Amendment — Task 006.1 hardening (provenance to fragment granularity)
+
+Review found the v1 gate too weak: a `source` ref named only an *asset*, so
+field text was trusted, not verified; teacher-voice strings reached learners;
+titles bypassed the gate; an internal spec document posed as a provenance
+source; and `resolveItem` could double-resolve. Hardened as follows:
+
+- **Source fragments** — the unit of provenance is now a verbatim, normalized-
+  contiguous substring of a text asset's embedded `sourceText`: `{ id,
+  assetRef, locator, exactText, exactTextHash, audience, role }`. Extraction
+  is reproducible (`scripts/build-sourcepack.mjs`); both the generator and
+  the gate verify containment + sha256. Media assets keep file-level hashes.
+- **Deterministic transform allowlist** — `VERBATIM`, `SELECT_LINES`,
+  `BLANK_TOKEN`, `TOKEN`, `JOIN_VERBATIM_ITEMS`, `ENUMERATE_ALPHABET`,
+  `ENUMERATE_CARDINALS`. Every `derived` field declares a transform; the gate
+  recomputes the result and requires an exact match. Transforms may not read
+  TEACHER fragments.
+- **Fragment audiences** — `LEARNER` (any field), `METADATA` (titles +
+  display only), `ASSESSMENT` (scored items only), `TEACHER` (never
+  learner-facing — `gap` refs only). Enforced per field position.
+- **GAP dispositions** — teacher-voice fields are withheld: `{ prov:
+  { kind: "gap", ref: <TEACHER fragment>, note } }` renders no instructional
+  English until an editor approves learner-facing wording (recorded in
+  `approvals[]`, gated as `kind: "editor"`). See `editorial-packet.md`.
+- **Titles are Fields** — every title at every level must carry provenance;
+  bare-string titles fail schema validation. Self-eval response choices are
+  UI chrome in code, not instructional content.
+- **Rights evidence** — reusable assets carry `rightsStatus`,
+  `rightsEvidenceUrl`, `rightsVerifiedAt`, `thirdPartyStatus` (+notes when
+  PRESENT); the official VOA copyright statement
+  (`learningenglish.voanews.com/p/6021.html`) is the evidence URL.
+- **Idempotent `resolveItem`** — a resolved item is never re-resolved inside
+  the transaction; concurrent/double invocations collapse to one outcome.
+- **Spec documents are never provenance** — the `task006-spec` directive
+  asset was removed; internal instructions cannot back learner-facing text.

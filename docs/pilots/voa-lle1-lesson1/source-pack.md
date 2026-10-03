@@ -1,20 +1,44 @@
 # Source pack — VOA Let's Learn English Level 1, Lesson 1 ("Welcome!")
 
-Canonical page: <https://learningenglish.voanews.com/a/lets-learn-english-level-1-lesson-1-welcome/4566771.html>
+Canonical page: <https://learningenglish.voanews.com/a/lets-learn-english-lesson-one/3111026.html>
 Machine-readable inventory: `src/content/sourcepacks/voa-lle1-lesson1.sourcepack.json`
+(reproducibly generated + fragment-verified by `scripts/build-sourcepack.mjs`)
 
-## Asset inventory
+## Asset inventory (14)
 
-| # | Asset | Type | Rights | Human authorship | Local copy |
-|---|-------|------|--------|------------------|------------|
-| 1 | Lesson 1 page (script, quiz text, key words) | page | reusable | VOA Learning English (US federal work) | extracted text |
-| 2 | Lesson plan PDF (Day 1–5 teacher plan) | document | reusable | VOA Learning English | extracted text |
-| 3 | Main video (~5:00, 360p) | video | reusable | VOA | `public/media/voa-lle1/voa-lle1-main-video.mp4` |
-| 4 | Conversation audio | audio | reusable | VOA | `public/media/voa-lle1/conversation.mp3` |
-| 5 | Pronunciation video | video | reusable | VOA | `public/media/voa-lle1/voa-lle1-pronunciation.mp4` |
-| 6–11 | Quiz question clips q1–q6 | video | reusable | VOA | `public/media/voa-lle1/voa-lle1-quiz-q{1..6}.mp4` |
-| 12 | Speaking-practice video | video | reusable | VOA | `public/media/voa-lle1/voa-lle1-speaking-practice.mp4` |
-| 13 | YouTube embed (same main video) | embed | embed-only | VOA | link only |
+| # | Asset | Type | Rights | Third-party | Local copy |
+|---|-------|------|--------|-------------|------------|
+| 1 | Lesson plan PDF (Day 1–5 teacher plan) | document | reusable · VERIFIED | NONE_OBSERVED | embedded `sourceText` |
+| 2 | Lesson 1 learner page | page | reusable · VERIFIED | PRESENT (YouTube embed, chrome) | embedded `sourceText` |
+| 3 | Main video (~5:00) | video | reusable · VERIFIED | NONE_OBSERVED | `public/media/voa-lle1/voa-lle1-main-video.mp4` |
+| 4 | Conversation audio (0:29) | audio | reusable · VERIFIED | NONE_OBSERVED | `public/media/voa-lle1/conversation.mp3` |
+| 5 | Speaking-practice video (2:27) | video | reusable · VERIFIED | NONE_OBSERVED | `public/media/voa-lle1/voa-lle1-speaking-practice.mp4` |
+| 6 | Pronunciation video (0:29) | video | reusable · VERIFIED | NONE_OBSERVED | `public/media/voa-lle1/voa-lle1-pronunciation.mp4` |
+| 7–12 | Quiz question clips q1–q6 | video | reusable · VERIFIED | NONE_OBSERVED | `public/media/voa-lle1/voa-lle1-quiz-q{1..6}.mp4` |
+| 13 | Alphabet-song YouTube embed | embed | embed-only · THIRD_PARTY | PRESENT (entire asset) | never ingested |
+| 14 | Activity Sheets (referenced) | document | reference · UNVERIFIED | UNKNOWN | not located — GAP |
+
+Rights evidence for every reusable asset: the official VOA copyright
+statement at <https://learningenglish.voanews.com/p/6021.html> — "All text,
+audio and video material produced exclusively by the Voice of America is in
+the public domain" (credit required; the same page notes the third-party
+carve-out). Verified 2026-10-03.
+
+## Fragment layer (88 fragments)
+
+Every instructional field in the lesson cites a **fragment**: a verbatim,
+normalized-contiguous substring of a text asset's `sourceText`, sha256-pinned
+(`exactTextHash`), and audience-classified:
+
+| Audience | Count | May back |
+|---|---|---|
+| METADATA | 33 | titles, goal/topic display, self-eval statements |
+| LEARNER | 19 | any field — scripts, definitions, prompts, models |
+| ASSESSMENT | 31 | scored items only — quiz/dictation stems, prompts, options |
+| TEACHER | 5 | `gap` refs only — never learner-facing |
+
+The generator re-verifies every fragment's containment on each run; the build
+gate re-verifies containment + hashes again at validation time.
 
 ## Integrity (SHA-256)
 
@@ -34,17 +58,13 @@ b5f4fe7107ad537c897ad5a171d114928159348202e89e3e7f554be05d58a519  voa-lle1-speak
 Authoritative hashes live in the sourcepack JSON — the build verifies every
 declared `local` file's SHA-256 against disk (`pnpm validate:content`).
 
-## Rights reasoning
-
-VOA Learning English content is produced by the U.S. federal government
-(VOA); the video/audio files and lesson text are treated as reusable U.S.
-government works for this pilot (per-asset verification recorded in the pack).
-The YouTube copy of the main video is kept **embed-only**: a separate
-distribution channel with its own terms — the packaged mp4 is used instead.
-
 ## What was deliberately NOT extracted
 
 - Page chrome, navigation, ads, unrelated lessons.
-- Teacher-voice plan text that addresses teachers ("they can…") is kept only
-  where the plan itself is the instructional source (e.g. the Day-5 writing
-  prompt), marked verbatim with `prov.note`.
+- Teacher-voice plan text is extracted as TEACHER-audience fragments but is
+  **never shown to learners**: the three fields that would have needed it are
+  withheld as GAP dispositions (`editorial-packet.md`), rendering no
+  instructional English until a human editor approves learner-facing wording.
+- The alphabet-song video is referenced embed-only; the plan's "Activity
+  Sheets" file could not be located and is recorded as a GAP rather than
+  substituted.

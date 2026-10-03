@@ -82,13 +82,17 @@ for (const path of jsonFiles(contentDir, ".lesson.json")) {
     console.error(`✗ ${name}: sourcePack '${course.sourcePack}' not found`);
     continue;
   }
-  const { errors, fieldCount } = checkHumanContentGate(course, pack, io);
+  const { errors, audit } = checkHumanContentGate(course, pack, io);
   if (errors.length > 0) {
     failed = true;
     console.error(`✗ ${name} — ${errors.length} gate violation(s)`);
     for (const e of errors) console.error(`  ${e}`);
   } else {
-    console.log(`✓ ${name} — Human Content Gate PASS (${fieldCount} fields)`);
+    console.log(
+      `✓ ${name} — Human Content Gate PASS (${audit.fieldCount} fields: ` +
+        `${audit.byKind.source} source · ${audit.byKind.derived} derived · ` +
+        `${audit.byKind.editor} editor · ${audit.byKind.gap} gap)`,
+    );
     const auditDir = join(root, "docs/pilots", pack.id);
     mkdirSync(auditDir, { recursive: true });
     writeFileSync(
@@ -98,7 +102,13 @@ for (const path of jsonFiles(contentDir, ".lesson.json")) {
           generatedAt: new Date().toISOString(),
           course: course.id,
           sourcePack: pack.id,
-          instructionalFields: fieldCount,
+          instructionalFields: audit.fieldCount,
+          byKind: audit.byKind,
+          fragmentsUsed: [...audit.fragmentsUsed].sort(),
+          transformsUsed: audit.transformsUsed,
+          approvalsUsed: [...audit.approvalsUsed].sort(),
+          fieldAudiences: audit.audiences,
+          gaps: audit.gaps,
           violations: [],
           result: "PASS",
         },

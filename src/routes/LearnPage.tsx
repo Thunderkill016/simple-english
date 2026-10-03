@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router";
-import { activityIndex, lesson, titleText, type ActivityRef } from "../content/course";
+import { activityIndex, course, lesson, titleText, type ActivityRef } from "../content/course";
 import { activityScore, type ActivityState } from "../features/state/model";
 import { listActivityStates } from "../features/state/store";
 import { EmptyState, PageHeader } from "../components/ui";
@@ -44,7 +44,7 @@ export function LearnPage() {
 
   return (
     <section className="space-y-8">
-      <PageHeader title={lesson.title} lede="Let's Learn English - Level 1" />
+      <PageHeader title={titleText(lesson.title)} lede={titleText(course.title)} />
       {lesson.sections.map((section) => (
         <div key={section.id} className="space-y-3">
           <h2 className="text-sm font-medium tracking-wide text-muted uppercase" lang="en">

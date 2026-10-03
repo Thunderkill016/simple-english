@@ -19,13 +19,37 @@ a mandatory fixed order — the source decides what exists.
 
 - **Quiz items appear twice**: once scored as authored (comprehension), once
   re-purposed as dictation stems in `s-practice` — the audio is the same VOA
-  asset; the function differs. Provenance: `derived` from the quiz assets.
+  asset; the function differs. Dictation answers cite the plan's verbatim
+  read-aloud stem fragments (`frag-dict-*`).
 - **Speaking is never scored**: the `record` item produces `practiced`
   evidence (local record → replay → re-record). No machine scoring is claimed.
-- **Self-evaluation is self-report**: `selfeval` items feed channel 3 only.
+- **Self-evaluation is self-report**: `selfeval` items feed channel 3 only;
+  their response choices are UI chrome (fixed `SELF_EVAL_OPTIONS` constant),
+  not instructional content.
 - **Non-answerable types** (`read`, `media`, `note`, `write`, `record`,
   `selfeval`) resolve by progression (`done`/`practiced`) and never enter the
   formative score or the FSRS eligibility set.
+
+## Provenance layer (Task 006.1)
+
+Every instructional field resolves to a verbatim source **fragment** —
+a contiguous substring of a declared asset's `sourceText`, hash-pinned and
+audience-classified (LEARNER / METADATA / ASSESSMENT / TEACHER). Derived
+fields name a transform from the allowlist; the gate recomputes the result:
+
+| Transform | Used for |
+|---|---|
+| `VERBATIM` (kind `source`) | all quoted lines, definitions, titles, transcripts |
+| `SELECT_LINES` | script-table cells → transcripts, wrapped quiz options, quiz instruction+stem, BE noticing lines |
+| `BLANK_TOKEN` | conversation lines → cloze items |
+| `TOKEN` | cloze answers, dictation prompt, self-eval goal statements |
+| `JOIN_VERBATIM_ITEMS` | key-words heads → Learning-Log word list |
+| `ENUMERATE_ALPHABET` / `ENUMERATE_CARDINALS` | alphabet/number sets authorized by the review objective |
+
+Three teacher-voice fields are **GAP dispositions** — withheld pending
+editor-approved learner wording (`editorial-packet.md`). Audience rules are
+enforced per field position: TEACHER text can never reach the learner;
+ASSESSMENT text only backs scored items; METADATA only display/title fields.
 
 ## Scope preservation check
 

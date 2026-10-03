@@ -1,5 +1,6 @@
 import courseJson from "./lessons/voa-lle1.lesson1.lesson.json";
 import sourcePackJson from "./sourcepacks/voa-lle1-lesson1.sourcepack.json";
+import { fieldText } from "./model";
 import type {
   Activity,
   Course,
@@ -18,7 +19,7 @@ export const course = courseJson as unknown as Course;
 export const sourcePack = sourcePackJson as SourcePack;
 
 export function titleText(t: Field | string): string {
-  return typeof t === "string" ? t : t.text;
+  return fieldText(t);
 }
 
 export interface ActivityRef {

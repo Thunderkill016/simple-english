@@ -50,7 +50,7 @@ export function TodayPage() {
             {titleText(next.activity.title)}
           </h2>
           <p className="text-sm text-muted">
-            {next.lesson.title} · <span lang="en">{titleText(next.section.title)}</span>
+            {titleText(next.lesson.title)} · <span lang="en">{titleText(next.section.title)}</span>
           </p>
         </div>
         <Link to={`/learn/activity/${next.activity.id}`} className="btn btn-primary">

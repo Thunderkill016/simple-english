@@ -1,9 +1,9 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://simple-english.dev/schema/sourcepack.schema.json",
-  "title": "SE source pack",
+  "title": "SE source pack (v2 — fragment layer)",
   "type": "object",
-  "required": ["id", "title", "canonicalUrl", "assets"],
+  "required": ["id", "title", "canonicalUrl", "assets", "fragments", "approvals"],
   "additionalProperties": false,
   "properties": {
     "id": { "type": "string" },
@@ -12,60 +12,150 @@
     "assets": {
       "type": "array",
       "minItems": 1,
-      "items": {
-        "type": "object",
-        "required": [
-          "id",
-          "title",
-          "creator",
-          "url",
-          "assetType",
-          "humanAuthorship",
-          "rights",
-          "license",
-          "role"
-        ],
-        "additionalProperties": false,
-        "properties": {
-          "id": { "type": "string" },
-          "title": { "type": "string" },
-          "creator": { "type": "string" },
-          "url": { "type": "string" },
-          "assetType": {
-            "enum": ["document", "video", "audio", "quiz", "embed", "directive", "page"]
-          },
-          "humanAuthorship": {
-            "enum": ["human-authored", "human-approved", "community", "unknown"]
-          },
-          "rights": {
-            "enum": ["reusable", "embed-only", "link-only", "reference"]
-          },
-          "license": { "type": "string" },
-          "local": { "type": "string", "pattern": "^public/" },
-          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
-          "role": { "type": "string" },
-          "notes": { "type": "string" }
+      "items": { "$ref": "#/$defs/asset" }
+    },
+    "fragments": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/fragment" }
+    },
+    "approvals": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/approval" }
+    }
+  },
+  "$defs": {
+    "asset": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "creator",
+        "url",
+        "assetType",
+        "humanAuthorship",
+        "rights",
+        "license",
+        "role",
+        "rightsStatus",
+        "thirdPartyStatus"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "creator": { "type": "string" },
+        "url": { "type": "string" },
+        "assetType": {
+          "enum": ["document", "video", "audio", "quiz", "embed", "page"]
         },
-        "allOf": [
-          {
-            "if": {
-              "required": ["local"],
-              "properties": { "local": { "type": "string" } }
-            },
-            "then": {
-              "required": ["sha256"],
-              "properties": { "sha256": { "type": "string" } }
-            }
+        "humanAuthorship": {
+          "enum": ["human-authored", "human-approved", "community", "unknown"]
+        },
+        "rights": {
+          "enum": ["reusable", "embed-only", "link-only", "reference"]
+        },
+        "license": { "type": "string" },
+        "local": { "type": "string", "pattern": "^public/" },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "role": { "type": "string" },
+        "notes": { "type": "string" },
+        "rightsStatus": { "enum": ["VERIFIED", "THIRD_PARTY", "UNVERIFIED"] },
+        "rightsEvidenceUrl": { "type": "string", "pattern": "^https://" },
+        "rightsVerifiedAt": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+        "thirdPartyStatus": { "enum": ["NONE_OBSERVED", "PRESENT", "UNKNOWN"] },
+        "thirdPartyNotes": { "type": "string" },
+        "sourceText": { "type": "string", "minLength": 1 }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": ["local"],
+            "properties": { "local": { "type": "string" } }
           },
-          {
-            "if": { "properties": { "rights": { "const": "reusable" } } },
-            "then": {
-              "properties": {
-                "humanAuthorship": { "enum": ["human-authored", "human-approved", "community"] }
-              }
+          "then": {
+            "required": ["sha256"],
+            "properties": { "sha256": { "type": "string" } }
+          }
+        },
+        {
+          "if": { "properties": { "rights": { "const": "reusable" } } },
+          "then": {
+            "required": ["rightsEvidenceUrl", "rightsVerifiedAt"],
+            "properties": {
+              "rightsEvidenceUrl": { "type": "string" },
+              "rightsVerifiedAt": { "type": "string" },
+              "rightsStatus": { "const": "VERIFIED" },
+              "humanAuthorship": { "enum": ["human-authored", "human-approved", "community"] },
+              "thirdPartyStatus": { "enum": ["NONE_OBSERVED", "PRESENT"] }
             }
           }
-        ]
+        },
+        {
+          "if": { "properties": { "rights": { "enum": ["embed-only", "link-only"] } } },
+          "then": {
+            "properties": {
+              "rightsStatus": { "enum": ["THIRD_PARTY", "UNVERIFIED"] },
+              "thirdPartyStatus": { "const": "PRESENT" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "thirdPartyStatus": { "const": "PRESENT" } } },
+          "then": {
+            "required": ["thirdPartyNotes"],
+            "properties": { "thirdPartyNotes": { "type": "string" } }
+          }
+        }
+      ]
+    },
+    "fragment": {
+      "type": "object",
+      "required": [
+        "id",
+        "assetRef",
+        "audience",
+        "role",
+        "locator",
+        "exactText",
+        "exactTextHash"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "assetRef": { "type": "string" },
+        "audience": { "enum": ["LEARNER", "METADATA", "ASSESSMENT", "TEACHER"] },
+        "role": {
+          "enum": [
+            "title",
+            "heading",
+            "topic",
+            "goal",
+            "vocab-def",
+            "script",
+            "prompt",
+            "option",
+            "stem",
+            "instruction",
+            "model",
+            "advice",
+            "note"
+          ]
+        },
+        "locator": { "type": "string" },
+        "exactText": { "type": "string", "minLength": 1 },
+        "exactTextHash": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    },
+    "approval": {
+      "type": "object",
+      "required": ["id", "text", "approvedBy", "approvedAt"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "text": { "type": "string", "minLength": 1 },
+        "approvedBy": { "type": "string" },
+        "approvedAt": { "type": "string" },
+        "note": { "type": "string" }
       }
     }
   }

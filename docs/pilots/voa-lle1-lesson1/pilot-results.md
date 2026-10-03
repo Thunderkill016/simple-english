@@ -1,20 +1,28 @@
 # Pilot results — VOA LLE1 Lesson 1, seven gates
 
-Task 006 exit review. The question the pilot answers: *can the architecture
-normalize a complete human-authored source pack into a coherent offline-capable
-self-study lesson with correct state handling?* It claims nothing about
-learning efficacy.
+Task 006 exit review, **re-assessed after the Task 006.1 hardening pass**.
+The question the pilot answers: *can the architecture normalize a complete
+human-authored source pack into a coherent offline-capable self-study lesson
+with correct state handling?* It claims nothing about learning efficacy.
 
 ## Gate 1 — Source integrity — PASS
 
-- Source pack inventories 13 assets with per-asset rights, human-authorship
-  class, local path + SHA-256 (`voa-lle1-lesson1.sourcepack.json`).
-- `pnpm validate:content` verifies every declared local file's hash against
-  disk — a tampered/missing file fails the build
-  (`tests/content-gate.test.ts` proves tamper + missing-file + missing-prov
-  detection).
+- Source pack inventories 14 assets with per-asset rights status, evidence
+  URL, verification date, third-party status, human-authorship class, local
+  path + SHA-256 (`voa-lle1-lesson1.sourcepack.json`). Rights evidence for
+  all reusable assets cites the official VOA copyright statement
+  (`learningenglish.voanews.com/p/6021.html`).
+- **Fragment layer**: 88 verbatim fragments extracted from the two text
+  assets' embedded `sourceText` — each a normalized-contiguous substring,
+  sha256-pinned, audience-classified (LEARNER/METADATA/ASSESSMENT/TEACHER).
+  Extraction is reproducible: `scripts/build-sourcepack.mjs` re-verifies
+  containment on every run.
+- `pnpm validate:content` verifies media hashes, fragment hashes, and
+  fragment→sourceText containment — a tampered file, tampered fragment, or
+  non-contiguous claim fails the build.
 - Automated audit artifact: `docs/pilots/voa-lle1-lesson1/gate-audit.json`
-  (generated each validation run — 122 instructional fields, 0 violations).
+  (110 instructional fields: 84 source · 23 derived · 0 editor · 3 gap;
+  82 fragments referenced; full lineage counts + gap dispositions).
 - Complete source-defined scope retained (see `transformation-map.md`):
   goals + strategy, 7 key words, speaking-practice clip, alphabet/numbers
   review, main video + conversation audio + script, 6-question quiz, BE
@@ -28,9 +36,17 @@ learning efficacy.
 - Sections typed by function (orient → prepare → input → comprehension →
   language-focus → practice → production → reflect); the source decides what
   exists.
-- Every learner-facing instructional string is a `{ text, prov }` field; the
-  Human Content Gate is enforced in code at build time and in tests — not by
-  review discipline alone.
+- Every learner-facing instructional string is a provenanced `Field` —
+  including all titles (bare-string titles fail schema validation). Prov
+  kinds: `source` (verbatim fragment), `derived` (allowlisted transform the
+  gate recomputes), `editor` (recorded approval), `gap` (withheld
+  teacher-voice). The internal `task006-spec` directive asset was removed —
+  spec text is never a content source; self-eval response choices moved to
+  UI chrome.
+- Teacher-voice audit: 3 fields withheld as GAP dispositions pending
+  editor-approved learner wording (`editorial-packet.md`). The gate rejects
+  a gap carrying text, a gap pointing at non-TEACHER material, TEACHER text
+  in any field position, and ASSESSMENT fragments outside scored items.
 - Retired the SE-authored lesson model: old `lesson.ts`/`curriculum.ts`,
   lesson JSON, schema, `lessonProgress` table, and their tests all removed;
   spec archived to `docs/curriculum/archive/`; SPEC §6.1 updated.
@@ -39,6 +55,9 @@ learning efficacy.
 
 - Item-cursor granularity: resume lands on the first *unresolved item*
   (`firstUnresolvedIndex`), finer than the USAL activity-level reference.
+- `resolveItem` is idempotent inside its transaction: a second resolution of
+  the same item is a no-op — double-invocation and concurrent calls collapse
+  to the first recorded outcome (regression-tested).
 - Proven unit-level (`tests/store.test.ts`: out-of-order resolution resumes
   correctly) and end-to-end (`e2e` 04: reload mid-activity → same item).
 - `nextActivityToDo` drives the Today pointer; verified across a full-course
@@ -90,8 +109,8 @@ learning efficacy.
 | Check | Result |
 |---|---|
 | `pnpm typecheck` | clean |
-| `pnpm validate:content` | sourcepack ✓ · gate PASS, 122 fields |
-| `pnpm test` (Vitest) | 44/44 |
+| `pnpm validate:content` | sourcepack ✓ · gate PASS — 110 fields (84 source / 23 derived / 3 gap), 82 fragments, 6 transform ops |
+| `pnpm test` (Vitest) | 58/58 |
 | `vite build` | 401 kB JS / 126 kB gzip |
 | `pnpm test:e2e` (Playwright) | 11/11 |
 
