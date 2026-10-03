@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { checkLessonSemantics } from "../scripts/content-checks.mjs";
 import fixture from "../src/content/fixtures/greetings.lesson.json";
-import { curriculum, lessons } from "../src/content/curriculum";
+import { curriculum } from "../src/content/curriculum";
 
 describe("semantic content checks (beyond JSON Schema)", () => {
   it("accepts the greetings fixture", () => {
@@ -30,8 +30,8 @@ describe("semantic content checks (beyond JSON Schema)", () => {
     expect(errors[0]).toContain("duplicate option ids");
   });
 
-  it.each(lessons.map((l) => [l.id, l] as const))(
-    "registered lesson %s passes semantic checks",
+  it.each(curriculum.map((l) => [l.id, l] as const))(
+    "curriculum lesson %s passes semantic checks",
     (_id, lesson) => {
       expect(checkLessonSemantics(lesson)).toEqual([]);
     },
@@ -44,7 +44,7 @@ describe("semantic content checks (beyond JSON Schema)", () => {
 });
 
 describe("provenance requirements (non-synthetic lessons)", () => {
-  const real = lessons.find((l) => !l.source.synthetic);
+  const real = curriculum[0];
   if (!real) throw new Error("expected at least one real lesson");
 
   it("rejects a source.id that is not in the registry", () => {

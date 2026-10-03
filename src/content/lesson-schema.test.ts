@@ -2,9 +2,12 @@ import Ajv2020 from "ajv/dist/2020.js";
 import { describe, expect, it } from "vitest";
 import fixture from "./fixtures/greetings.lesson.json";
 import schema from "./schema/lesson.schema.json";
+import sourceSchema from "./schema/source.schema.json";
+import sourceRecord from "./sources/pcc-esol-digital-workbook.json";
 
 const ajv = new Ajv2020({ strict: true, allErrors: true });
 const validate = ajv.compile(schema);
+const validateSource = ajv.compile(sourceSchema);
 
 describe("lesson JSON Schema", () => {
   it("accepts the greetings fixture", () => {
@@ -41,4 +44,18 @@ describe("lesson JSON Schema", () => {
     };
     expect(validate(invalid)).toBe(false);
   });
+});
+
+describe("source record JSON Schema (load-bearing provenance)", () => {
+  it("accepts the PCC source record", () => {
+    expect(validateSource(sourceRecord), ajv.errorsText(validateSource.errors)).toBe(true);
+  });
+
+  it.each(["authors", "publisher", "licenseUrl", "verifiedAt", "reuseStatus"] as const)(
+    "rejects a record missing %s",
+    (field) => {
+      const { [field]: _dropped, ...incomplete } = sourceRecord;
+      expect(validateSource(incomplete)).toBe(false);
+    },
+  );
 });

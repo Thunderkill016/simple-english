@@ -21,6 +21,7 @@
       "itemLicense": "CC0 1.0",
       "itemAuthors": ["Tim Krause"],
       "usedIn": "src/content/lessons/pcc-esol-l1m1-greetings.lesson.json",
+      "evidence": "docs/sources/evidence/pcc-esol-l1m1-greetings.h5p-metadata.json",
       "notes": "Conversation text (Hello / Hi / How are you? / Fine, thank you / Good. Thank you.) restructured into SE lesson blocks; one multiple-choice exercise derived from the original item's learning goal."
     }
   ]

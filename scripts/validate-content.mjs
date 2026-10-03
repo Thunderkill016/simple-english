@@ -14,10 +14,30 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const schema = JSON.parse(
   readFileSync(join(root, "src/content/schema/lesson.schema.json"), "utf8"),
 );
+const sourceSchema = JSON.parse(
+  readFileSync(join(root, "src/content/schema/source.schema.json"), "utf8"),
+);
 const contentDir = join(root, "src/content");
+const sourcesDir = join(contentDir, "sources");
 
 const ajv = new Ajv2020({ strict: true, allErrors: true });
 const validate = ajv.compile(schema);
+const validateSource = ajv.compile(sourceSchema);
+
+let failed = false;
+
+// Registry records are load-bearing provenance — they get their own schema.
+const sourceFiles = readdirSync(sourcesDir).filter((f) => f.endsWith(".json"));
+for (const file of sourceFiles) {
+  const data = JSON.parse(readFileSync(join(sourcesDir, file), "utf8"));
+  if (validateSource(data)) {
+    console.log(`✓ sources/${file}`);
+  } else {
+    failed = true;
+    console.error(`✗ sources/${file}`);
+    console.error(`  ${ajv.errorsText(validateSource.errors)}`);
+  }
+}
 
 /** Recursively collect *.lesson.json files (fixtures + real curriculum). */
 function* lessonFiles(dir) {
@@ -28,7 +48,6 @@ function* lessonFiles(dir) {
   }
 }
 
-let failed = false;
 const files = [...lessonFiles(contentDir)];
 
 for (const path of files) {

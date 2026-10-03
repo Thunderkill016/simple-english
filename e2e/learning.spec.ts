@@ -100,6 +100,18 @@ test.describe("local-first learning slice", () => {
     await expect(page.getByRole("heading", { name: "Progress" })).toBeVisible();
   });
 
+  test("synthetic fixture is not reachable in production", async ({
+    page,
+  }) => {
+    // ?lesson=greetings is a test-only fixture — production must render the
+    // Learn list, never the fixture lesson.
+    await page.goto("/learn?lesson=greetings");
+    await expect(page.getByRole("heading", { name: "Learn" })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Greetings", exact: true }),
+    ).toHaveCount(0);
+  });
+
   test("main navigation works across all four surfaces", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByRole("heading", { name: "Today" })).toBeVisible();

@@ -26,6 +26,8 @@ export interface SourceRecord {
     itemLicense?: string;
     itemAuthors?: string[];
     usedIn?: string;
+    /** path to retained license evidence (e.g. docs/sources/evidence/) */
+    evidence?: string;
     notes?: string;
   }[];
 }

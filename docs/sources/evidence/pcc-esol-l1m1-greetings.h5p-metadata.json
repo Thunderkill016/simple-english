@@ -1,0 +1,16 @@
+{
+  "note": "Evidence snapshot for the item-level license of the reused H5P exercise. A .h5p file is a zip archive; these fields were copied verbatim from its h5p.json, the authoritative per-item metadata set by the author. The book page itself only shows the book-level CC BY 4.0 license.",
+  "sourceItem": "Level 01 Module 01 Greetings 01",
+  "embeddedIn": "https://openoregon.pressbooks.pub/esol23/chapter/chapter-1-2/",
+  "exportUrl": "https://openoregon.pressbooks.pub/app/uploads/sites/35/h5p/exports/level-01-module-01-greetings-01-17.h5p",
+  "exportSha256": "8fcd13289137e2fc7eb1aaeda134807f370c1e4a071283c11c239ae8afa3bb4a",
+  "retrievedAt": "2026-10-03",
+  "retrievedBy": "Devin",
+  "h5pJson": {
+    "title": "Level 01 Module 01 Greetings 01",
+    "language": "en",
+    "mainLibrary": "H5P.Blanks",
+    "license": "CC0 1.0",
+    "authors": [{ "name": "Tim Krause", "role": "Author" }]
+  }
+}

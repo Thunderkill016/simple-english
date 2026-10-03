@@ -91,6 +91,11 @@ licenses and are approved only per item, recorded in the record's
 `adaptationLog`/`provenanceNotes` — an approved book does not approve
 everything inside it.
 
+Item-level license evidence is retained in `evidence/` — metadata snapshots
+(and hashes) of the artifacts a license claim was verified from, so a claim
+like "this item is CC0" can be re-checked without trusting the importer's
+conclusion alone.
+
 ## Adding a source
 
 1. Verify the license at the **original source** (the resource's own license
