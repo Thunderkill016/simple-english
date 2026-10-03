@@ -25,7 +25,7 @@ Claims are tagged `CONFIRMED` / `PARTIAL` / `UNKNOWN` where source visibility is
 | R1.1 | Cambridge ecosystem (deepest) | IN PROGRESS — reported to ChatGPT |
 | R1.2 | Professional course comparison (Empower / English File / Speakout / Roadmap-GSE / Outcomes) | DONE — reported to ChatGPT, awaiting review |
 | R1.3 | Open content & rights | Pending |
-| R1.4 | SLA evidence & digital systems | Pending |
+| R1.4 | SLA evidence & digital systems | Complete (pending ChatGPT review) |
 | Final | Evidence-base synthesis | Pending |
 
 ## Documents
@@ -211,28 +211,35 @@ measurement remains GAP; no AI-generated proficiency test.
 - `source-registry.csv` — machine-readable provenance for every inspected source.
 - `download-manifest.md` — what was downloaded, where it lives, and why it was/wasn't committed.
 
+### R1.4 — Learning science + existing systems
+
+- `sla-evidence-map.md` — Track A: 15 evidence areas (testing
+  effect, spacing, corrective feedback, explicit instruction,
+  vocabulary, comprehensible input, extensive reading, listening,
+  captions, pronunciation, TBLT, writing feedback, speaking,
+  mastery, interleaving) in SOURCE EVIDENCE / PRODUCT IMPLICATION /
+  UNCERTAINTY format, cited to meta-analyses and landmark studies.
+- `open-source-software-map.md` — Track B: 10 systems × 23
+  fields; verdicts per component. No course platform survives
+  gate+fit (archived/AGPL/AI-content); the engines worth
+  importing are libraries and widgets, not platforms.
+- `digital-product-benchmark.md` — 9 commercial products'
+  course/session/review/progress/mistake mechanics, separated
+  from effectiveness claims.
+- `session-mechanics-analysis.md` — the session-boundary
+  investigation: resume must be section-granular (finer than any
+  course app); due-review-first ordering; two-timescale mistakes;
+  section-boundary completion semantics.
+- `reuse-opportunity-map.md` — SE NEED → solution → license →
+  fit → evidence → verdict. Fork question answered: **continue
+  the custom shell; REUSE ts-fsrs + Dexie, ADAPT H5P widgets +
+  per-item states, STUDY everything else — do not fork.**
+
 ### Planned (not yet created)
 
 - R1.2: `english-file-analysis.md`, `speakout-analysis.md`, `roadmap-gse-analysis.md`, `outcomes-analysis.md`
-- R1.3 remaining: `language-data-landscape.md`, `speech-landscape.md`
-- R1.4 (locked output set): `sla-evidence-map.md`,
-  `open-source-software-map.md`, `digital-product-benchmark.md`,
-  `session-mechanics-analysis.md`, `reuse-opportunity-map.md`
-  — two tracks: (A) learning-science/pedagogy evidence,
-  (B) existing digital systems / reuse. Track B answers the
-  core question: does an existing open-source system already
-  solve enough of SE's non-content learning infrastructure
-  that adapting/forking beats continuing the custom build?
-  Per-project fields: license, maintenance, architecture,
-  course/unit/lesson/session models, content format, human-vs-AI
-  provenance, exercise engine, media, progress, mistakes, SRS,
-  resume, next-action, offline/local-first, sync, assessment
-  separation, speaking, reading, accessibility, test quality —
-  classified REUSE_DIRECTLY / ADAPT / STUDY_ONLY / REJECT.
-  Human-content rule remains hard: AI-generated lesson content
-  forbidden as SE learner content; code may still be studied.
-  Software quality ≠ curriculum quality — kept separate.
-- Final: `SE-EVIDENCE-MAP.md`, `contradictions-and-tradeoffs.md`, `research-coverage.md`
+
+- Final (post-R1.4 review): `SE-EVIDENCE-MAP.md`, `contradictions-and-tradeoffs.md`, `research-coverage.md`
 
 ## Working files
 
