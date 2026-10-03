@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { curriculum } from "../content/curriculum";
 import { getLessonProgress, type LessonProgress } from "../features/progress/progress";
+import { EmptyState, PageHeader } from "../components/ui";
 
+/** Today answers "what should I learn now?" — exactly one primary action. */
 export function TodayPage() {
-  // Vertical slice: exactly one lesson, one obvious next action.
   const lesson = curriculum[0];
   const [progress, setProgress] = useState<LessonProgress | undefined>(undefined);
 
@@ -19,31 +20,55 @@ export function TodayPage() {
     };
   }, [lesson]);
 
-  if (!lesson) return null;
+  if (!lesson) {
+    return (
+      <section className="space-y-6">
+        <PageHeader title="Today" />
+        <EmptyState
+          title="Nothing to learn yet"
+          body="No lessons are available right now."
+        />
+      </section>
+    );
+  }
 
   const completed = progress?.status === "completed";
+  const intro = lesson.blocks.find((b) => b.type === "text");
 
   return (
-    <section className="space-y-4">
-      <h1 className="text-2xl font-bold">Today</h1>
-      <div className="card space-y-3">
-        <h2 className="font-medium text-slate-600">Continue learning</h2>
-        <div className="flex items-center justify-between gap-4">
-          <div>
-            <p className="font-semibold">{lesson.title}</p>
-            {completed ? (
-              <p className="text-sm text-emerald-700">Completed</p>
-            ) : (
-              <p className="text-sm text-slate-600 capitalize">{lesson.level}</p>
-            )}
+    <section className="space-y-6">
+      <PageHeader title="Today" />
+
+      {completed ? (
+        <div className="space-y-4">
+          <div className="panel space-y-2">
+            <p className="font-semibold text-success">✓ Lesson complete</p>
+            <h2 className="font-semibold">{lesson.title}</h2>
+            <p className="text-sm text-muted">
+              You finished the available lesson.
+            </p>
           </div>
-          {!completed ? (
-            <Link to={`/learn?lesson=${lesson.id}`} className="btn btn-primary">
-              Start →
-            </Link>
-          ) : null}
+          <Link to="/learn" className="btn btn-primary">
+            View learning path
+          </Link>
         </div>
-      </div>
+      ) : (
+        <div className="space-y-4">
+          <p className="text-sm font-medium tracking-wide text-muted uppercase">
+            Continue learning
+          </p>
+          <div className="space-y-2">
+            <h2 className="text-lg font-semibold">{lesson.title}</h2>
+            {intro?.type === "text" ? (
+              <p className="text-muted">{intro.text}</p>
+            ) : null}
+            <p className="text-sm text-muted capitalize">{lesson.level}</p>
+          </div>
+          <Link to={`/learn?lesson=${lesson.id}`} className="btn btn-primary">
+            Start lesson
+          </Link>
+        </div>
+      )}
     </section>
   );
 }

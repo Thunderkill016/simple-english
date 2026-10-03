@@ -9,59 +9,29 @@ import type {
 } from "../../content/lesson";
 
 function Heading({ block }: { block: HeadingBlock }) {
-  return <h2 className="text-lg font-semibold">{block.text}</h2>;
+  return <h2 className="pt-4 text-xl font-semibold">{block.text}</h2>;
 }
 
 function Text({ block }: { block: TextBlock }) {
-  return <p className="leading-relaxed">{block.text}</p>;
+  return <p className="text-lesson">{block.text}</p>;
 }
 
+/** Dialogue/example — English is primary, Vietnamese is secondary support. */
 function Example({ block }: { block: ExampleBlock }) {
   return (
-    <figure className="card border-l-4 border-l-sky-600">
+    <figure className="rounded-r-xl border-l-2 border-primary bg-primary-soft/50 px-4 py-3">
       <p lang="en" className="font-medium whitespace-pre-line">
         {block.text}
       </p>
       {block.translation ? (
-        <figcaption lang="vi" className="mt-1 text-sm text-slate-600 whitespace-pre-line">
+        <figcaption
+          lang="vi"
+          className="mt-2 text-sm text-muted whitespace-pre-line"
+        >
           {block.translation}
         </figcaption>
       ) : null}
     </figure>
-  );
-}
-
-export function MultipleChoice({
-  block,
-  selected,
-  onSelect,
-}: {
-  block: MultipleChoiceBlock;
-  selected: string | undefined;
-  onSelect: (optionId: string) => void;
-}) {
-  return (
-    <fieldset className="card space-y-3">
-      <legend className="px-1 font-medium">{block.prompt}</legend>
-      <div className="space-y-2">
-        {block.options.map((option) => (
-          <label
-            key={option.id}
-            className="flex cursor-pointer items-center gap-3 rounded-lg border border-slate-200 px-3 py-2.5 has-checked:border-sky-600 has-checked:bg-sky-50"
-          >
-            <input
-              type="radio"
-              name={block.id}
-              value={option.id}
-              checked={selected === option.id}
-              onChange={() => onSelect(option.id)}
-              className="size-4 accent-sky-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
-            />
-            <span>{option.text}</span>
-          </label>
-        ))}
-      </div>
-    </fieldset>
   );
 }
 
@@ -77,15 +47,19 @@ const EMBED_IFRAME_ATTRS: Record<
   },
 };
 
+const PROVIDER_LABEL: Record<ExternalEmbedBlock["provider"], string> = {
+  youtube: "YouTube",
+};
+
 function ExternalEmbed({ block }: { block: ExternalEmbedBlock }) {
   const [loaded, setLoaded] = useState(false);
-  const host = new URL(block.src).hostname;
+  const provider = PROVIDER_LABEL[block.provider];
 
   return (
-    <section className="card space-y-3" aria-label={block.title}>
-      <div>
-        <h2 className="font-medium">{block.title}</h2>
-        <p className="text-sm text-slate-600">{block.purpose}</p>
+    <section className="panel space-y-3" aria-label={block.title}>
+      <div className="space-y-1">
+        <h2 className="font-semibold">{block.title}</h2>
+        <p className="text-sm text-muted">{block.purpose}</p>
       </div>
       {loaded ? (
         <iframe
@@ -95,45 +69,153 @@ function ExternalEmbed({ block }: { block: ExternalEmbedBlock }) {
           sandbox={EMBED_IFRAME_ATTRS[block.provider].sandbox}
           allow={EMBED_IFRAME_ATTRS[block.provider].allow}
           referrerPolicy="strict-origin-when-cross-origin"
-          className="aspect-video w-full rounded-lg border border-slate-200"
+          className="aspect-video w-full rounded-lg border border-border"
         />
       ) : (
-        <div className="space-y-2">
-          <p className="text-sm text-slate-500">
-            Loads content from {host} — external service, works only online.
-          </p>
-          <button
-            type="button"
-            className="btn btn-secondary"
-            onClick={() => setLoaded(true)}
-          >
-            Load {block.provider === "youtube" ? "video" : "activity"}
-          </button>
-        </div>
+        <button
+          type="button"
+          className="btn btn-secondary"
+          onClick={() => setLoaded(true)}
+        >
+          Watch video
+        </button>
       )}
-      {/* Persistent fallback — the embed is optional infrastructure, never a
-          dependency. If it fails, the learner always has the original link. */}
-      <a
-        href={block.fallbackUrl}
-        target="_blank"
-        rel="noreferrer"
-        className="inline-block text-sm text-sky-700 hover:underline"
-      >
-        Open original ↗
-      </a>
+      <p className="text-sm text-muted">
+        Video from {provider} · Requires internet ·{" "}
+        {/* Persistent fallback — the embed is optional infrastructure, never a
+            dependency. If it fails, the learner always has the original link. */}
+        <a
+          href={block.fallbackUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="text-primary hover:underline"
+        >
+          Open original ↗
+        </a>
+      </p>
     </section>
   );
 }
 
-export function Block({
+export type ExerciseFeedback = "correct" | "incorrect" | null;
+
+/**
+ * Visual state of one option. Learning feedback must never be ambiguous:
+ * a wrong selection reads as warning, a correct one as success — never as
+ * the same neutral green as an unchecked selection.
+ */
+export function optionState(
+  isSelected: boolean,
+  feedback: ExerciseFeedback,
+  completed: boolean,
+): "neutral" | "selected" | "incorrect" | "correct" {
+  if (!isSelected) return "neutral";
+  if (feedback === "incorrect") return "incorrect";
+  if (feedback === "correct" || completed) return "correct";
+  return "selected";
+}
+
+const OPTION_CLASSES: Record<ReturnType<typeof optionState>, string> = {
+  neutral: "border-border",
+  selected: "border-primary bg-primary-soft",
+  incorrect: "border-warning bg-warning-soft",
+  correct: "border-success bg-success-soft",
+};
+
+/**
+ * The exercise is ONE interaction surface: prompt, choices, check action
+ * and feedback belong together — feedback/completion stay separate.
+ */
+export function Exercise({
   block,
   selected,
+  feedback,
+  completed,
+  persistError,
   onSelect,
+  onCheck,
+  onComplete,
 }: {
-  block: LessonBlock;
+  block: MultipleChoiceBlock;
   selected: string | undefined;
+  feedback: ExerciseFeedback;
+  completed: boolean;
+  persistError: boolean;
   onSelect: (optionId: string) => void;
+  onCheck: () => void;
+  onComplete: () => void;
 }) {
+  const selectedText = block.options.find((o) => o.id === selected)?.text;
+
+  return (
+    <section className="panel space-y-4" aria-label="Exercise">
+      <fieldset className="space-y-3">
+        <legend className="px-0 font-semibold">{block.prompt}</legend>
+        <div className="space-y-2">
+          {block.options.map((option) => (
+            <label
+              key={option.id}
+              className={`flex cursor-pointer items-center gap-3 rounded-lg border px-3 py-3 transition-colors ${OPTION_CLASSES[optionState(selected === option.id, feedback, completed)]}`}
+            >
+              <input
+                type="radio"
+                name={block.id}
+                value={option.id}
+                checked={selected === option.id}
+                onChange={() => onSelect(option.id)}
+                className="size-4 accent-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              />
+              <span>{option.text}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      {!completed ? (
+        <div className="flex items-center gap-3">
+          {feedback === "correct" ? (
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={onComplete}
+            >
+              Complete lesson
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={onCheck}
+              disabled={selected === undefined}
+            >
+              Check answer
+            </button>
+          )}
+        </div>
+      ) : null}
+
+      {/* Exercise feedback — announced politely, visually separate from the
+          completion panel below. */}
+      {feedback === "correct" && !completed ? (
+        <p role="status" className="font-medium text-success">
+          ✓ Correct{selectedText ? ` — “${selectedText}”` : ""}
+        </p>
+      ) : null}
+      {feedback === "incorrect" ? (
+        <p role="status" className="font-medium text-warning">
+          Not quite — try again.
+        </p>
+      ) : null}
+      {persistError ? (
+        <p role="alert" className="text-sm text-warning">
+          Couldn't save progress locally — it may not be there after reload.
+        </p>
+      ) : null}
+    </section>
+  );
+}
+
+export function Block({ block }: { block: LessonBlock }) {
   switch (block.type) {
     case "heading":
       return <Heading block={block} />;
@@ -141,9 +223,11 @@ export function Block({
       return <Text block={block} />;
     case "example":
       return <Example block={block} />;
-    case "multiple-choice":
-      return <MultipleChoice block={block} selected={selected} onSelect={onSelect} />;
     case "external-embed":
       return <ExternalEmbed block={block} />;
+    case "multiple-choice":
+      // Rendered by LessonView via Exercise — needs live state the generic
+      // block renderer doesn't carry.
+      return null;
   }
 }

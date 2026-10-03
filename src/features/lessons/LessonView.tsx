@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
 import type { Lesson, MultipleChoiceBlock } from "../../content/lesson";
 import {
   completeLesson,
@@ -9,14 +10,12 @@ import {
   saveAnswer,
   type LessonProgress,
 } from "../progress/progress";
-import { Block } from "./blocks";
+import { Block, Exercise, type ExerciseFeedback } from "./blocks";
 import { getSourceRecord } from "../../content/sources";
-
-type Feedback = "correct" | "incorrect" | null;
 
 export function LessonView({ lesson }: { lesson: Lesson }) {
   const [progress, setProgress] = useState<LessonProgress | undefined>(undefined);
-  const [feedback, setFeedback] = useState<Feedback>(null);
+  const [feedback, setFeedback] = useState<ExerciseFeedback>(null);
   const [persistError, setPersistError] = useState(false);
 
   const exercise = lesson.blocks.find(
@@ -86,99 +85,94 @@ export function LessonView({ lesson }: { lesson: Lesson }) {
   };
 
   return (
-    <article className="space-y-4">
-      <header className="space-y-1">
-        <div className="flex items-center gap-2">
-          <h1 className="text-2xl font-bold">{lesson.title}</h1>
-          {completed ? (
-            <span className="badge bg-emerald-100 text-emerald-800">Completed</span>
-          ) : null}
-        </div>
-        <p className="text-sm text-slate-600 capitalize">{lesson.level}</p>
-      </header>
-
-      {lesson.blocks.map((block, i) => (
-        <Block
-          key={block.type === "multiple-choice" ? block.id : i}
-          block={block}
-          selected={progress?.selectedAnswer}
-          onSelect={handleSelect}
-        />
-      ))}
-
-      {exercise ? (
-        <div className="space-y-3">
-          <div className="flex items-center gap-3">
-            {!completed ? (
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={handleCheck}
-                disabled={progress?.selectedAnswer === undefined}
-              >
-                Check
-              </button>
-            ) : null}
-            {correctSelected && !completed ? (
-              <button type="button" className="btn btn-primary" onClick={handleComplete}>
-                Complete lesson
-              </button>
-            ) : null}
-          </div>
-          <p role="status" aria-live="polite" className="text-sm font-medium">
-            {feedback === "correct" ? (
-              <span className="text-emerald-700">Correct — well done.</span>
-            ) : null}
-            {feedback === "incorrect" ? (
-              <span className="text-amber-700">Not quite — try again.</span>
-            ) : null}
+    <article className="space-y-6">
+      {/* Focus header — the only chrome during a lesson is the way out. */}
+      <header className="space-y-3">
+        <Link to="/learn" className="text-link inline-block text-sm">
+          ← Back to Learn
+        </Link>
+        <div className="space-y-1">
+          <h1 className="text-2xl font-bold tracking-tight">{lesson.title}</h1>
+          <p className="text-sm text-muted">
+            <span className="capitalize">{lesson.level}</span>
             {completed ? (
-              <span className="text-emerald-700">Lesson complete.</span>
-            ) : null}
-            {persistError ? (
-              <span role="alert" className="text-amber-700">
-                Couldn't save progress locally — it may not be there after reload.
-              </span>
+              <>
+                {" · "}
+                <span className="font-medium text-success">Completed ✓</span>
+              </>
             ) : null}
           </p>
         </div>
+      </header>
+
+      {lesson.blocks.map((block, i) =>
+        block.type === "multiple-choice" ? (
+          <Exercise
+            key={block.id}
+            block={block}
+            selected={progress?.selectedAnswer}
+            feedback={feedback}
+            completed={completed}
+            persistError={persistError}
+            onSelect={handleSelect}
+            onCheck={handleCheck}
+            onComplete={handleComplete}
+          />
+        ) : (
+          <Block key={i} block={block} />
+        ),
+      )}
+
+      {completed ? (
+        <section className="panel space-y-3 border-success/30 bg-success-soft/60">
+          <p className="font-semibold text-success">✓ Lesson complete</p>
+          <p className="text-sm">You finished {lesson.title}.</p>
+          <Link to="/learn" className="btn btn-primary">
+            Back to Learn
+          </Link>
+        </section>
       ) : null}
 
-      <footer className="pt-2 text-xs text-slate-500">
-        <p>
-          Source:{" "}
-          {resolved.url ? (
-            <a
-              href={resolved.url}
-              target="_blank"
-              rel="noreferrer"
-              className="underline decoration-slate-300 underline-offset-2 hover:text-slate-700"
-            >
-              {resolved.title}
-            </a>
-          ) : (
-            resolved.title
-          )}
-          {" — "}
-          {resolved.licenseUrl ? (
-            <a
-              href={resolved.licenseUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="underline decoration-slate-300 underline-offset-2 hover:text-slate-700"
-            >
-              {resolved.license}
-            </a>
-          ) : (
-            resolved.license
-          )}
-          {lesson.source.adapted ? " (adapted)" : null}
-          {lesson.source.synthetic ? " (synthetic fixture)" : null}
-        </p>
-        {resolved.attribution ? (
-          <p className="mt-1">{resolved.attribution}</p>
-        ) : null}
-      </footer>
+      {/* Provenance stays intact but out of the reading flow. */}
+      <details className="text-sm text-muted">
+        <summary className="cursor-pointer font-medium text-ink">
+          Sources &amp; license
+        </summary>
+        <div className="mt-3 space-y-1 border-l-2 border-border pl-4">
+          <p>
+            {resolved.url ? (
+              <a
+                href={resolved.url}
+                target="_blank"
+                rel="noreferrer"
+                className="text-primary hover:underline"
+              >
+                {resolved.title} ↗
+              </a>
+            ) : (
+              resolved.title
+            )}
+          </p>
+          <p>
+            License:{" "}
+            {resolved.licenseUrl ? (
+              <a
+                href={resolved.licenseUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="text-primary hover:underline"
+              >
+                {resolved.license} ↗
+              </a>
+            ) : (
+              resolved.license
+            )}
+            {lesson.source.adapted ? " · adapted" : null}
+            {lesson.source.synthetic ? " · synthetic fixture" : null}
+          </p>
+          {resolved.attribution ? <p>{resolved.attribution}</p> : null}
+        </div>
+      </details>
     </article>
   );
 }

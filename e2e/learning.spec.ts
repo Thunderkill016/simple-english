@@ -1,24 +1,43 @@
 import { expect, test, type Page, type Request } from "@playwright/test";
 
 const OPTION_LABEL = "Fine, thank you.";
+const WRONG_OPTION = "Good night.";
 const LESSON_TITLE = "Greetings: How are you?";
 
 async function openLesson(page: Page) {
   await page.goto("/");
-  await page.getByRole("link", { name: "Learn" }).click();
-  await expect(page.getByRole("heading", { name: "Learn" })).toBeVisible();
-  await page.getByRole("link", { name: "Start" }).click();
+  await expect(page.getByRole("heading", { name: "Today", exact: true })).toBeVisible();
+  await page.getByRole("link", { name: "Start lesson", exact: true }).click();
   await expect(
-    page.getByRole("heading", { name: LESSON_TITLE }),
+    page.getByRole("heading", { name: LESSON_TITLE, exact: true }),
   ).toBeVisible();
+  // Focus mode: the top-level app nav must not compete with the lesson.
+  await expect(page.getByRole("navigation", { name: "Main" })).toHaveCount(0);
 }
 
 async function answerAndComplete(page: Page) {
+  // Check stays disabled until a selection exists.
+  await expect(
+    page.getByRole("button", { name: "Check answer" }),
+  ).toBeDisabled();
+
+  // Wrong answer → concise retry feedback, learner can try again.
+  await page.getByRole("radio", { name: WRONG_OPTION }).check();
+  await page.getByRole("button", { name: "Check answer" }).click();
+  await expect(page.getByText("Not quite — try again.")).toBeVisible();
+
   await page.getByRole("radio", { name: OPTION_LABEL }).check();
-  await page.getByRole("button", { name: "Check" }).click();
-  await expect(page.getByText("Correct — well done.")).toBeVisible();
+  await page.getByRole("button", { name: "Check answer" }).click();
+  await expect(page.getByText(/✓ Correct/)).toBeVisible();
+
   await page.getByRole("button", { name: "Complete lesson" }).click();
-  await expect(page.getByText("Lesson complete.")).toBeVisible();
+
+  // Feedback and completion are SEPARATE semantic states (regression:
+  // previously rendered as "Correct — well done.Lesson complete.").
+  const completion = page.getByText("✓ Lesson complete");
+  await expect(completion).toBeVisible();
+  await expect(completion).not.toContainText("Correct");
+  await expect(page.getByRole("link", { name: "Back to Learn", exact: true })).toBeVisible();
 }
 
 test.describe("local-first learning slice", () => {
@@ -30,10 +49,12 @@ test.describe("local-first learning slice", () => {
 
     // Reload — completion must come back from IndexedDB, not the network.
     await page.reload();
-    await expect(page.getByText("Lesson complete.")).toBeVisible();
+    await expect(page.getByText("✓ Lesson complete")).toBeVisible();
+    await expect(page.getByText("Completed ✓")).toBeVisible();
     await expect(page.getByRole("radio", { name: OPTION_LABEL })).toBeChecked();
 
-    // Provenance survives rendering (reuse-first principle)
+    // Provenance survives — behind progressive disclosure, not deleted.
+    await page.getByText("Sources & license").click();
     await expect(
       page.getByRole("link", { name: /Digital Workbook for Beginning ESOL/ }),
     ).toHaveAttribute("href", /openoregon\.pressbooks\.pub/);
@@ -41,13 +62,21 @@ test.describe("local-first learning slice", () => {
       page.getByText(/Adapted from 'Level 01 Module 01 Greetings 01' by Tim Krause/),
     ).toBeVisible();
 
-    // Today reflects completion
-    await page.getByRole("link", { name: "Today" }).click();
+    // Back to Learn shows the lesson as completed
+    await page.getByRole("link", { name: "Back to Learn", exact: true }).click();
     await expect(page.getByText("Completed")).toBeVisible();
 
-    // Progress derives from local state
-    await page.getByRole("link", { name: "Progress" }).click();
-    await expect(page.getByText("Lessons completed: 1")).toBeVisible();
+    // Today reflects completion with a truthful next action
+    await page.getByRole("link", { name: "Today", exact: true }).click();
+    await expect(page.getByText("✓ Lesson complete")).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: "View learning path" }),
+    ).toBeVisible();
+
+    // Progress derives from local state — human-readable, no fake denominator
+    await page.getByRole("link", { name: "Progress", exact: true }).click();
+    await expect(page.getByText("1 lesson completed")).toBeVisible();
+    await expect(page.getByText(LESSON_TITLE)).toBeVisible();
   });
 
   test("learning interaction needs no network: works fully offline after load", async ({
@@ -100,9 +129,9 @@ test.describe("local-first learning slice", () => {
 
     await openLesson(page);
 
-    // Placeholder with honest third-party boundary — no eager iframe
+    // Learner-facing placeholder — no eager iframe, honest external boundary
     await expect(page.getByText("Watch: Hello. How are you?")).toBeVisible();
-    await expect(page.getByText(/Loads content from www\.youtube\.com/)).toBeVisible();
+    await expect(page.getByText(/Video from YouTube/)).toBeVisible();
     await expect(page.locator("iframe")).toHaveCount(0);
 
     // Accessible title + fallback link before anything loads
@@ -111,7 +140,7 @@ test.describe("local-first learning slice", () => {
     ).toBeVisible();
 
     // Click-to-load inserts the iframe with restrictive sandbox
-    await page.getByRole("button", { name: "Load video" }).click();
+    await page.getByRole("button", { name: "Watch video" }).click();
     const iframe = page.locator('iframe[title="Watch: Hello. How are you?"]');
     await expect(iframe).toBeVisible();
     await expect(iframe).toHaveAttribute("sandbox", /allow-scripts/);
@@ -120,26 +149,30 @@ test.describe("local-first learning slice", () => {
     // Even with every third-party request dead, SE flow is intact
     await answerAndComplete(page);
     await page.reload();
-    await expect(page.getByText("Lesson complete.")).toBeVisible();
+    await expect(page.getByText("✓ Lesson complete")).toBeVisible();
   });
 
   test("deep links render routes directly (SPA static hosting)", async ({
     page,
   }) => {
     await page.goto("/learn");
-    await expect(page.getByRole("heading", { name: "Learn" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Learn", exact: true })).toBeVisible();
+
+    await page.goto("/review");
+    await expect(page.getByRole("heading", { name: "Review", exact: true })).toBeVisible();
 
     await page.goto("/progress");
-    await expect(page.getByRole("heading", { name: "Progress" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Progress", exact: true })).toBeVisible();
   });
 
   test("synthetic fixture is not reachable in production", async ({
     page,
   }) => {
-    // ?lesson=greetings is a test-only fixture — production must render the
-    // Learn list, never the fixture lesson.
+    // ?lesson=greetings is a test-only fixture — production must show a
+    // deliberate not-found state, never the fixture lesson.
     await page.goto("/learn?lesson=greetings");
-    await expect(page.getByRole("heading", { name: "Learn" })).toBeVisible();
+    await expect(page.getByText("Lesson not found")).toBeVisible();
+    await expect(page.getByRole("link", { name: "Back to Learn", exact: true })).toBeVisible();
     await expect(
       page.getByRole("heading", { name: "Greetings", exact: true }),
     ).toHaveCount(0);
@@ -147,17 +180,17 @@ test.describe("local-first learning slice", () => {
 
   test("main navigation works across all four surfaces", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByRole("heading", { name: "Today" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Today", exact: true })).toBeVisible();
 
-    await page.getByRole("link", { name: "Learn" }).click();
-    await expect(page.getByRole("heading", { name: "Learn" })).toBeVisible();
+    await page.getByRole("link", { name: "Learn", exact: true }).click();
+    await expect(page.getByRole("heading", { name: "Learn", exact: true })).toBeVisible();
 
-    await page.getByRole("link", { name: "Review" }).click();
-    await expect(page.getByRole("heading", { name: "Review" })).toBeVisible();
-    await expect(page.getByText("Nothing to review yet.")).toBeVisible();
+    await page.getByRole("link", { name: "Review", exact: true }).click();
+    await expect(page.getByRole("heading", { name: "Review", exact: true })).toBeVisible();
+    await expect(page.getByText("Nothing to review yet")).toBeVisible();
 
-    await page.getByRole("link", { name: "Progress" }).click();
-    await expect(page.getByRole("heading", { name: "Progress" })).toBeVisible();
+    await page.getByRole("link", { name: "Progress", exact: true }).click();
+    await expect(page.getByRole("heading", { name: "Progress", exact: true })).toBeVisible();
   });
 
   test("accessibility smoke: headings, names, keyboard reachability, focus", async ({
@@ -191,5 +224,11 @@ test.describe("local-first learning slice", () => {
       return s.outlineStyle !== "none" || s.outlineWidth !== "0px" || s.boxShadow !== "none";
     });
     expect(hasFocusStyle).toBe(true);
+
+    // Disclosure is keyboard/AT reachable and exposes provenance on demand
+    await page.getByText("Sources & license").click();
+    await expect(
+      page.getByRole("link", { name: /CC0 1\.0/ }),
+    ).toBeVisible();
   });
 });
