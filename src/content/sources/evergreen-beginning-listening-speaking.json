@@ -1,0 +1,26 @@
+{
+  "id": "evergreen-beginning-listening-speaking",
+  "type": "LearningResource",
+  "title": "Listening & Speaking for Beginning English Language Learners",
+  "authors": [
+    "Maria Antonini de Pino",
+    "Erika Bourne Lawson",
+    "Kelly N. Nguyễn-Jardin",
+    "Huong Pham",
+    "Rebecca Kallen Reddy",
+    "Pradeep Reddy",
+    "Richard Lawson",
+    "Adam Bloom"
+  ],
+  "publisher": "Evergreen Valley College via LibreTexts (OER)",
+  "url": "https://human.libretexts.org/Courses/Evergreen_Valley_College/Listening_and_Speaking_for_Beginning_English_Language_Learners",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "contentType": ["textbook", "listening", "pronunciation", "course"],
+  "levels": ["beginner"],
+  "subjects": ["ESL", "English language", "listening", "speaking", "pronunciation"],
+  "reuseStatus": "approved",
+  "provenanceNotes": "Self-declared high-beginning integrated-skills book; chapter pages carry CC BY 4.0 (LibreTexts metadata license:ccby/licenseversion:40). Chapter 1 'Greetings and Introductions' was inspected in full: strong Preview → Listen → Comprehension → Speaking staging, but its content mixes countries/spelling/email/phone beyond the Lesson 001 target and every speaking activity requires classmates. Role in SE Lesson 001: lesson-structure reference only — no text copied; its listenings are embedded players (not redistributable audio).",
+  "verifiedAt": "2026-10-03",
+  "verifiedBy": "Devin"
+}

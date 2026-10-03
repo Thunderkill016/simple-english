@@ -1,0 +1,28 @@
+{
+  "id": "voa-lets-learn-english-level-1",
+  "type": "LearningResource",
+  "title": "Let's Learn English - Level 1",
+  "authors": ["Voice of America - Learning English"],
+  "publisher": "Voice of America / U.S. Agency for Global Media",
+  "url": "https://learningenglish.voanews.com/p/5644.html",
+  "license": "Public domain (VOA Learning English content policy — credit required)",
+  "licenseUrl": "https://learningenglish.voanews.com/p/6861.html",
+  "contentType": ["video-course", "audio", "lessons", "worksheets"],
+  "levels": ["beginner"],
+  "subjects": ["ESL", "English language"],
+  "reuseStatus": "approved",
+  "provenanceNotes": "VOA policy: 'Learning English texts, MP3s, photos and videos are in the public domain… for educational and commercial purposes, with credit to learningenglish.voanews.com.' News-agency material (AP/Reuters/AFP) is excluded — each reused asset is verified VOA-produced individually (VOA byline + VOA CDN host). Per-item dispositions for Lesson 1 'Welcome!': Conversation MP3 → REUSE (local asset, evidence retained). Dialogue model → ADAPT (target lines extracted). Main video 5:00 / Speaking Practice 2:27 / Pronunciation 0:29 → LINK_ONLY (media budget — one focused asset). Spelling/address lines → OMIT (beyond target capability).",
+  "verifiedAt": "2026-10-03",
+  "verifiedBy": "Devin",
+  "adaptationLog": [
+    {
+      "item": "Lesson 1 'Welcome!' — conversation dialogue + MP3",
+      "itemUrl": "https://learningenglish.voanews.com/a/lets-learn-english-lesson-one/3111026.html",
+      "itemLicense": "Public domain (VOA Learning English)",
+      "itemAuthors": ["Voice of America - Learning English"],
+      "usedIn": "src/content/lessons/se-a1-meet-someone.lesson.json",
+      "evidence": "docs/sources/evidence/voa-lle1-conversation.json",
+      "notes": "MP3 served locally (public/media/voa-lle1-conversation.mp3, SHA-256 verified). Readable model adapted to the meet-someone exchange; audio and transcript kept complete as authentic input."
+    }
+  ]
+}

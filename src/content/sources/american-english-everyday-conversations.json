@@ -1,0 +1,17 @@
+{
+  "id": "american-english-everyday-conversations",
+  "type": "LearningResource",
+  "title": "Everyday Conversations: Learning American English",
+  "authors": ["U.S. Bureau of International Informational Programs"],
+  "publisher": "United States Department of State — American English",
+  "url": "https://americanenglish.state.gov/resources/everyday-conversations-learning-american-english",
+  "license": "Public domain — U.S. Government work (17 U.S.C. §105; cite U.S. Department of State)",
+  "licenseUrl": "https://www.state.gov/misc/87529.htm#copyright",
+  "contentType": ["dialogues", "audio", "pdf"],
+  "levels": ["beginner", "elementary"],
+  "subjects": ["ESL", "English language", "conversation"],
+  "reuseStatus": "approved",
+  "provenanceNotes": "Federal-government work authored by the Bureau of International Informational Programs — public domain per 17 U.S.C. §105 and the State Dept. policy 'information on State Department websites is in the public domain unless copyright indicated' (corroborated by Georgetown University Library's open-resources guide and Wikimedia Commons hosting the identical PDF marked PD). Dialogues 1-1..1-4 inspected: natural register range incl. informal introductions ('Nice to meet you' → 'You, too'). Role in SE Lesson 001: naturalness benchmark — no dialogue copied; intended audience is grades 6-7 EFL, not absolute beginners.",
+  "verifiedAt": "2026-10-03",
+  "verifiedBy": "Devin"
+}

@@ -1,0 +1,18 @@
+{
+  "sourceItem": "Let's Learn English - Level 1 - Lesson 1: Welcome! — Conversation audio",
+  "title": "Lesson 1 - Welcome! (conversation)",
+  "producer": "VOA - Voice of America English News",
+  "sourcePage": "https://learningenglish.voanews.com/a/lets-learn-english-lesson-one/3111026.html",
+  "assetUrl": "https://voa-audio.voanews.eu/vle/2016/02/08/49485bf8-4277-47f6-9abe-617ee2473f8c.mp3",
+  "rightsBasis": "Public domain — VOA Learning English content policy: 'Learning English texts, MP3s, photos and videos are in the public domain… for educational and commercial purposes, with credit to learningenglish.voanews.com.' Agency wire material (AP/Reuters/AFP) is excluded by the same policy; this asset is VOA-produced (VOA byline on the page, hosted on VOA's own CDN).",
+  "rightsUrl": "https://learningenglish.voanews.com/p/6861.html",
+  "mediaType": "audio/mpeg",
+  "durationSeconds": 29.6,
+  "bytes": 236944,
+  "sha256": "f9bd90edddbb8736f64fb5cb3a34ab5a27aecd6e99510977e7b820caf47c5cf7",
+  "retrievedAt": "2026-10-03",
+  "localPath": "public/media/voa-lle1-conversation.mp3",
+  "transcript": "Pete: Hi! Are you Anna?\nAnna: Yes! Hi there! Are you Pete?\nPete: I am Pete.\nAnna: Nice to meet you.\nAnna: Let's try that again. I'm Anna. Nice to meet you.\nPete: I'm Pete. \"Anna\" Is that A-N-A?\nAnna: No. A-N-N-A\nPete: Well, Anna with two \"n's\" ... Welcome to ... 1400 Irving Street!\nAnna: My new apartment! Yes!",
+  "usedIn": "src/content/lessons/se-a1-meet-someone.lesson.json",
+  "notes": "Served as a local static asset: reliability, speed and offline-capable core listening. Full dialogue retained as authentic input; the lesson's readable model extracts only the meet-someone exchange (see docs/curriculum/lesson-001-meet-someone.md)."
+}

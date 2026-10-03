@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type {
+  AudioBlock,
   ExampleBlock,
   ExternalEmbedBlock,
   HeadingBlock,
@@ -50,6 +51,26 @@ const EMBED_IFRAME_ATTRS: Record<
 const PROVIDER_LABEL: Record<ExternalEmbedBlock["provider"], string> = {
   youtube: "YouTube",
 };
+
+/**
+ * Listening — a local, rights-verified audio asset on native controls.
+ * The full transcript keeps the lesson usable when audio can't play.
+ */
+function Audio({ block }: { block: AudioBlock }) {
+  return (
+    <section className="panel space-y-3" aria-label={block.title}>
+      <h2 className="font-semibold">{block.title}</h2>
+      <audio
+        controls
+        preload="none"
+        src={block.src}
+        aria-label={block.title}
+        className="w-full"
+      />
+      <p className="text-lesson whitespace-pre-line">{block.transcript}</p>
+    </section>
+  );
+}
 
 function ExternalEmbed({ block }: { block: ExternalEmbedBlock }) {
   const [loaded, setLoaded] = useState(false);
@@ -223,6 +244,8 @@ export function Block({ block }: { block: LessonBlock }) {
       return <Text block={block} />;
     case "example":
       return <Example block={block} />;
+    case "audio":
+      return <Audio block={block} />;
     case "external-embed":
       return <ExternalEmbed block={block} />;
     case "multiple-choice":

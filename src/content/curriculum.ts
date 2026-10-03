@@ -1,4 +1,4 @@
-import greetingsJson from "./lessons/pcc-esol-l1m1-greetings.lesson.json";
+import meetSomeoneJson from "./lessons/se-a1-meet-someone.lesson.json";
 import type { Lesson } from "./lesson";
 
 // Static versioned content — validated against the lesson schema in the
@@ -7,9 +7,9 @@ import type { Lesson } from "./lesson";
 //
 // Synthetic fixtures (src/content/fixtures/) are test-only: they are never
 // imported here, so they never ship in the production bundle.
-const greetings = greetingsJson as unknown as Lesson;
+const meetSomeone = meetSomeoneJson as unknown as Lesson;
 
-export const curriculum: readonly Lesson[] = [greetings];
+export const curriculum: readonly Lesson[] = [meetSomeone];
 
 export function getLesson(id: string): Lesson | undefined {
   return curriculum.find((lesson) => lesson.id === id);

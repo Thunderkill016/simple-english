@@ -1,8 +1,11 @@
 import { expect, test, type Page, type Request } from "@playwright/test";
 
-const OPTION_LABEL = "Fine, thank you.";
+const OPTION_LABEL = "Nice to meet you too.";
 const WRONG_OPTION = "Good night.";
-const LESSON_TITLE = "Greetings: How are you?";
+const LESSON_TITLE = "Meet Someone";
+const LESSON_ID = "se-a1-meet-someone";
+const AUDIO_SRC = "/media/voa-lle1-conversation.mp3";
+const COMPLETION_STATEMENT = "✓ You can meet someone in English.";
 
 async function openLesson(page: Page) {
   await page.goto("/");
@@ -34,7 +37,7 @@ async function answerAndComplete(page: Page) {
 
   // Feedback and completion are SEPARATE semantic states (regression:
   // previously rendered as "Correct — well done.Lesson complete.").
-  const completion = page.getByText("✓ Lesson complete");
+  const completion = page.getByText(COMPLETION_STATEMENT);
   await expect(completion).toBeVisible();
   await expect(completion).not.toContainText("Correct");
   await expect(page.getByRole("link", { name: "Back to Learn", exact: true })).toBeVisible();
@@ -45,22 +48,34 @@ test.describe("local-first learning slice", () => {
     page,
   }) => {
     await openLesson(page);
+
+    // Lesson 001 scope: 'How are you?' content must not be in this lesson.
+    await expect(page.getByText("How are you?")).toHaveCount(0);
+
     await answerAndComplete(page);
+
+    // Capability completion — skills listed, not just "done".
+    await expect(
+      page.getByRole("listitem").filter({ hasText: "Say hello" }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("listitem").filter({ hasText: "Respond to an introduction" }),
+    ).toBeVisible();
 
     // Reload — completion must come back from IndexedDB, not the network.
     await page.reload();
-    await expect(page.getByText("✓ Lesson complete")).toBeVisible();
+    await expect(page.getByText(COMPLETION_STATEMENT)).toBeVisible();
     await expect(page.getByText("Completed ✓")).toBeVisible();
     await expect(page.getByRole("radio", { name: OPTION_LABEL })).toBeChecked();
 
-    // Provenance survives — behind progressive disclosure, not deleted.
+    // Provenance survives — behind progressive disclosure, SE-authored
+    // with individually credited sources.
     await page.getByText("Sources & license").click();
+    await expect(page.getByText("Lesson by Simple English.")).toBeVisible();
     await expect(
-      page.getByRole("link", { name: /Digital Workbook for Beginning ESOL/ }),
-    ).toHaveAttribute("href", /openoregon\.pressbooks\.pub/);
-    await expect(
-      page.getByText(/Adapted from 'Level 01 Module 01 Greetings 01' by Tim Krause/),
-    ).toBeVisible();
+      page.getByRole("link", { name: /Lesson 1: Welcome!/ }),
+    ).toHaveAttribute("href", /learningenglish\.voanews\.com/);
+    await expect(page.getByRole("link", { name: "license ↗" }).first()).toBeVisible();
 
     // Back to Learn shows the lesson as completed
     await page.getByRole("link", { name: "Back to Learn", exact: true }).click();
@@ -96,60 +111,67 @@ test.describe("local-first learning slice", () => {
     await answerAndComplete(page);
 
     // Progress landed in IndexedDB while offline
-    const persisted = await page.evaluate(async () => {
-      const req = indexedDB.open("simple-english");
-      const database: IDBDatabase = await new Promise((resolve, reject) => {
-        req.onsuccess = () => resolve(req.result);
-        req.onerror = () => reject(req.error);
-      });
-      const tx = database.transaction("lessonProgress", "readonly");
-      const record = await new Promise<{ status?: string } | undefined>(
-        (resolve, reject) => {
-          const get = tx.objectStore("lessonProgress").get("pcc-esol-l1m1-greetings");
-          get.onsuccess = () => resolve(get.result as { status?: string } | undefined);
-          get.onerror = () => reject(get.error);
-        },
-      );
-      database.close();
-      return record;
-    });
+    const persisted = await page.evaluate(
+      async (lessonId) => {
+        const req = indexedDB.open("simple-english");
+        const database: IDBDatabase = await new Promise((resolve, reject) => {
+          req.onsuccess = () => resolve(req.result);
+          req.onerror = () => reject(req.error);
+        });
+        const tx = database.transaction("lessonProgress", "readonly");
+        const record = await new Promise<{ status?: string } | undefined>(
+          (resolve, reject) => {
+            const get = tx.objectStore("lessonProgress").get(lessonId);
+            get.onsuccess = () =>
+              resolve(get.result as { status?: string } | undefined);
+            get.onerror = () => reject(get.error);
+          },
+        );
+        database.close();
+        return record;
+      },
+      LESSON_ID,
+    );
     expect(persisted?.status).toBe("completed");
 
     // And no runtime API calls were made at any point
     expect(apiRequests).toEqual([]);
   });
 
-  test("external embeds are click-to-load and never block learning", async ({
+  test("listening uses a local asset and never needs a third-party request", async ({
     page,
     context,
   }) => {
-    // Third-party requests fail hard — the learning flow must not care.
-    await context.route("**/youtube.com/**", (r) => r.abort());
-    await context.route("**/youtube-nocookie.com/**", (r) => r.abort());
+    // Audio may fail hard — the transcript keeps the lesson usable.
+    await context.route(`**${AUDIO_SRC}`, (r) => r.abort());
+
+    const thirdParty: Request[] = [];
+    page.on("request", (req) => {
+      const url = new URL(req.url());
+      // Compare against the page's current origin at request time — the
+      // listener registers before navigation, when url is about:blank.
+      if (url.origin !== new URL(page.url()).origin && page.url() !== "about:blank") {
+        thirdParty.push(req);
+      }
+    });
 
     await openLesson(page);
 
-    // Learner-facing placeholder — no eager iframe, honest external boundary
-    await expect(page.getByText("Watch: Hello. How are you?")).toBeVisible();
-    await expect(page.getByText(/Video from YouTube/)).toBeVisible();
+    // Native audio control, local asset only — no iframes anywhere.
+    const audio = page.locator("audio");
+    await expect(audio).toHaveCount(1);
+    await expect(audio).toHaveAttribute("src", AUDIO_SRC);
     await expect(page.locator("iframe")).toHaveCount(0);
 
-    // Accessible title + fallback link before anything loads
-    await expect(
-      page.getByRole("link", { name: "Open original ↗" }).first(),
-    ).toBeVisible();
+    // The language model stays usable with audio dead — transcript text.
+    await expect(page.getByText("I'm Anna.", { exact: false }).first()).toBeVisible();
 
-    // Click-to-load inserts the iframe with restrictive sandbox
-    await page.getByRole("button", { name: "Watch video" }).click();
-    const iframe = page.locator('iframe[title="Watch: Hello. How are you?"]');
-    await expect(iframe).toBeVisible();
-    await expect(iframe).toHaveAttribute("sandbox", /allow-scripts/);
-    await expect(iframe).toHaveAttribute("loading", "lazy");
-
-    // Even with every third-party request dead, SE flow is intact
     await answerAndComplete(page);
     await page.reload();
-    await expect(page.getByText("✓ Lesson complete")).toBeVisible();
+    await expect(page.getByText(COMPLETION_STATEMENT)).toBeVisible();
+
+    // The lesson itself never needed anything off-origin.
+    expect(thirdParty).toEqual([]);
   });
 
   test("deep links render routes directly (SPA static hosting)", async ({
@@ -178,6 +200,13 @@ test.describe("local-first learning slice", () => {
     ).toHaveCount(0);
   });
 
+  test("obsolete lesson ids do not count as completed", async ({ page }) => {
+    // The old PCC lesson id is a different pedagogy — its progress row must
+    // not satisfy the new canonical lesson.
+    await page.goto("/learn?lesson=pcc-esol-l1m1-greetings");
+    await expect(page.getByText("Lesson not found")).toBeVisible();
+  });
+
   test("main navigation works across all four surfaces", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByRole("heading", { name: "Today", exact: true })).toBeVisible();
@@ -200,6 +229,9 @@ test.describe("local-first learning slice", () => {
 
     // Heading hierarchy: page h1 exists
     await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
+
+    // Audio has an accessible name
+    await expect(page.locator("audio")).toHaveCount(1);
 
     // Form control has an accessible name via its label
     const option = page.getByRole("radio", { name: OPTION_LABEL });
@@ -227,8 +259,6 @@ test.describe("local-first learning slice", () => {
 
     // Disclosure is keyboard/AT reachable and exposes provenance on demand
     await page.getByText("Sources & license").click();
-    await expect(
-      page.getByRole("link", { name: /CC0 1\.0/ }),
-    ).toBeVisible();
+    await expect(page.getByText(/Public domain/).first()).toBeVisible();
   });
 });

@@ -28,7 +28,7 @@
     "contentType": { "type": "array", "items": { "type": "string" } },
     "levels": { "type": "array", "items": { "type": "string" } },
     "subjects": { "type": "array", "items": { "type": "string" } },
-    "reuseStatus": { "type": "string", "enum": ["approved", "review-required", "prohibited"] },
+    "reuseStatus": { "type": "string", "enum": ["approved", "review-required", "reference-only", "prohibited"] },
     "provenanceNotes": { "type": "string" },
     "verifiedAt": { "type": "string", "minLength": 1 },
     "verifiedBy": { "type": "string" },
