@@ -23,7 +23,7 @@ Claims are tagged `CONFIRMED` / `PARTIAL` / `UNKNOWN` where source visibility is
 | Round | Scope | Status |
 | --- | --- | --- |
 | R1.1 | Cambridge ecosystem (deepest) | IN PROGRESS — reported to ChatGPT |
-| R1.2 | Professional course comparison (Empower / English File / Speakout / Roadmap-GSE / Outcomes) | PRELIMINARY DATA COLLECTED — awaits ChatGPT direction |
+| R1.2 | Professional course comparison (Empower / English File / Speakout / Roadmap-GSE / Outcomes) | DONE — reported to ChatGPT, awaiting review |
 | R1.3 | Open content & rights | Pending |
 | R1.4 | SLA evidence & digital systems | Pending |
 | Final | Evidence-base synthesis | Pending |
@@ -97,6 +97,13 @@ unit/lesson/section/session boundaries, pronunciation integration,
 controlled-vs-personalized production, review, assessment-vs-completion,
 and classroom mechanics that don't transfer to solo web. No scores, no
 winner, no new SE curriculum.
+
+### R1.2 — Professional course comparison
+
+- `professional-course-comparison.md` — five-course Unit-1 comparison
+  (Empower 2e / EF 5e / Speakout 3e / Roadmap A1-GSE / Outcomes 2e)
+  answering the ten locked questions. Edition flags: Roadmap evidence is
+  1e (2e unverified); Outcomes Beginner is 2e (3e availability UNKNOWN).
 
 ### Cross-cutting
 

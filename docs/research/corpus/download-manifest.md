@@ -22,6 +22,12 @@ In gitignored `research_cache/` — inspected for structure only, never committe
 | `research_cache/voa/voa-l1-lessonplan.pdf` (+ `.txt`) | docs.voanews.eu | 1.3 MB | 8-page official lesson plan (PD) |
 | `research_cache/cambridge/empower2e-starter-sample.pdf` (+ `.txt`) | eltbooks.com (Cambridge-authorized retailer) | 20 MB | **Empower 2e Starter/A1 official sample — complete Scope & Sequence + sample Unit 5 (Correction A evidence)** |
 | `research_cache/cambridge/eltbooks.html` | eltbooks.com | 81 KB | sample-download provenance |
+| `research_cache/oup/ef5e-a1-toc.pdf` (+ `eftoc.txt`) | oup.es official | ~200 KB | EF5e A1 full TOC — File 1 structure evidence |
+| `research_cache/oup/ef-tb-sample.pdf` (+ `eftb.txt`) | oup.es official | ~1 MB | EF5e A1/A2 Teacher's Guide sample — architecture + assessment inventory |
+| `research_cache/oup/ef5e-a1-sample.pdf` | oup.es official | ~MB | EF5e A1 SB+WB sample unit 9 — spread conventions |
+| `research_cache/pearson/roadmap-gse-a1.pdf` (+ `rgse.txt`) | pearson.com official | ~500 KB | Roadmap A1 GSE Mapping Booklet — per-objective GSE scores |
+| `research_cache/pearson/roadmap-a1-contents.pdf` | prestige.bg distributor | ~150 KB | Roadmap A1 SB contents — alternating lesson structure |
+| `research_cache/ngl/outcomes2e-intro.pdf` (+ `outi.txt`) | eltngl.com official | ~300 KB | Outcomes Beginner methodology — 7 documented design deviations |
 | `research_cache/voa/voa-l1-page.html` | learningenglish.voanews.com | 163 KB | Full lesson page — media inventory source |
 | `research_cache/voa/quiz1-12.html` | learningenglish.voanews.com /Quiz/Start | ~25 KB ea | All 6 quiz questions + media IDs + option sets |
 | `research_cache/voa/voa-lle1-*.mp4` (9 files) | voa-video.voanews.eu (VOA CDN) | ~3.5 MB | Quiz stems ×6, Speaking Practice, Pronunciation — PD, retained for inspection |
