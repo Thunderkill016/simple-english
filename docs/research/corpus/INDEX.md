@@ -211,6 +211,30 @@ measurement remains GAP; no AI-generated proficiency test.
 - `source-registry.csv` — machine-readable provenance for every inspected source.
 - `download-manifest.md` — what was downloaded, where it lives, and why it was/wasn't committed.
 
+**ChatGPT R1.4 REVIEW — PARTIAL PASS / INCOMPLETE:**
+
+Corrections applied: fork/build verdict retracted to PROVISIONAL
+(USA Learns not yet deep-audited); "no system solves resumable
+lessons" → UNKNOWN; H5P licensing split into layers (core MIT /
+content-type code / per-item content license / deps / hosted
+services); DUE-REVIEW-FIRST downgraded to product hypothesis;
+98% coverage softened to unassisted-reading benchmark.
+
+**Locked this round:** FSRS approved via ts-fsrs behind an SE
+adapter — must not determine curriculum sequence, mastery,
+CEFR level, lesson completion, or proficiency. Session locks:
+resumability, explicit learner state, completion ≠ mastery,
+progress survives leaving/reloading. H5P = STUDY/IMPORT-COMPAT
+only. Speaking → USA Learns mechanics, not Sotto.
+
+**R1.4A MISSION (in progress):** USA Learns = primary self-study
+product reference; English 1 Plus (built on VOA Let's Learn
+English) is the highest-priority case — VOA ORIGINAL vs USA
+LEARNS TRANSFORMATION vs future SE. Clean-room rule: document
+behavior/architecture/state transitions only; never copy code,
+exercises, prose, media, or layout. Subsystems scored
+SOLVED_BY_REFERENCE / PARTIALLY_SOLVED / NOT_SOLVED.
+
 ### R1.4 — Learning science + existing systems
 
 - `sla-evidence-map.md` — Track A: 15 evidence areas (testing

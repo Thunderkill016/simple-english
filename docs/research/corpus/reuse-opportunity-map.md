@@ -11,7 +11,7 @@
 | SE NEED | Existing solution | License | Fit | Evidence | Verdict |
 |---------|-------------------|---------|-----|----------|---------|
 | **Spaced-review scheduling** | ts-fsrs (FSRS 4.5/5/6) | MIT | Exact — card DSR model, 4 ratings, review log, Dexie-persistable state | FSRS > SM-2 on open benchmarks; runs inside Anki v24+ | **REUSE** |
-| Interactive exercise widgets (MC, fill-blank, drag, dictation, question sets) | H5P content types + standalone player | MIT | Good — rendering layer only; needs local runtime adaptation | PCC workbook (Tier A) already ships H5P exercises; institutional standard | **ADAPT** |
+| Interactive exercise widgets (MC, fill-blank, drag, dictation, question sets) | H5P content types + standalone player | layered — core MIT; per-type code MIT; H5P *content* per-author; deps per-package | Good — rendering layer only; needs local runtime adaptation | PCC workbook (Tier A) already ships H5P exercises; institutional standard | **STUDY / IMPORT-COMPAT first** (no whole-runtime decision yet) |
 | Reading-with-lookup (graded reader channel) | LUTE v3 / LinguaCafe patterns | MIT / GPL-3.0 | Partial — tools, not course components; PHP/Vue stack ≠ ours | 1.6k+1.4k★, active; word-status models proven at scale | **STUDY** (patterns: word status, media library, Anki-bridge concept) |
 | Declarative course/content format | LibreLingo YAML → our lesson JSON schema | AGPL-3.0 + archived | Partial — we already have a schema; YAML course idea is precedent | 3.5k commits, then abandoned — format outlived app | **STUDY** (schema precedent only) |
 | Audio-first listening tasks | OmniLingo cloze types on Common Voice | AGPL-3.0 / CC0 data | Partial — task types worth copying; code AGPL | Common Voice (CC0) is the reusable part, per-item verified | **STUDY** (task taxonomy) + REUSE data (CC0, TIER C) |
@@ -46,8 +46,13 @@ forking it instead of continuing the current custom build:
    (ts-fsrs) or widgets (H5P content types) into the existing
    React+Dexie shell — no platform adoption needed.
 
-**Verdict: continue the custom shell; REUSE libraries, ADAPT
-widgets, STUDY everything else — do not fork a platform.**
+**Provisional verdict: lean custom shell + imported libraries
+(ts-fsrs) and widgets (H5P-compatible); FINAL call deferred to
+the USA Learns audit — the question is whether SE clean-room
+reimplements a proven self-study architecture, not whether it
+forks code. Classification set expanded per R1.4A mandate:
+REUSE CODE / REUSE OPEN CONTENT / CLEAN_ROOM_REIMPLEMENT /
+STUDY_ONLY / REJECT.**
 
 ## Things SE should definitely NOT rebuild
 

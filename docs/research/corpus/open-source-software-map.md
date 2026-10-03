@@ -132,14 +132,30 @@
 - The professional-course lesson structure (sections, controlled→
   personalized flow) — none implement it; SE still owns this gap.
 
-## Fork-vs-continue preliminary answer
+## Fork-vs-continue — PROVISIONAL (corrected by R1.4 review)
 
-No existing system solves enough of SE's non-content
-infrastructure to justify forking: the course products
-(LibreLingo, Lingo Lessons, OpenLingo) are archived/AGPL/
-AI-content-gated; the reading platforms (LUTE, LinguaCafe) are
-tools without curricula; the engines worth taking are *libraries*
-(ts-fsrs MIT) and *widgets* (H5P MIT), which adopt cleanly into
-SE's existing Dexie/React stack. **Continue the custom shell;
-import libraries and widgets — not platforms.** Full mapping in
-`reuse-opportunity-map.md`.
+Among the open-source systems audited, none survives gate+fit:
+the course products (LibreLingo, Lingo Lessons, OpenLingo) are
+archived/AGPL/AI-content-gated; the reading platforms (LUTE,
+LinguaCafe) are tools without curricula; the engines worth
+taking are *libraries* (ts-fsrs MIT) and *widgets* (H5P),
+adoptable into SE's Dexie/React stack.
+
+**However this verdict is PROVISIONAL**: USA Learns — a
+human-designed self-study system that already converted VOA
+content into independent web study — had not been deeply
+reverse-engineered when this was written. It is the R1.4A
+mission. Even if its code is proprietary (no fork), the broader
+question stands: can SE clean-room reproduce a proven
+self-study architecture instead of inventing one?
+
+### H5P licensing — corrected granularity
+
+Do NOT summarize H5P as "MIT". Separate layers:
+
+- H5P core libraries/plugins: MIT (h5p-php-library etc.)
+- content-type code: MIT for official types (verify per type)
+- H5P *content* created by others: licensed per item by its
+  author — a PCC H5P exercise's license ≠ the runtime's license
+- third-party dependencies inside types: per-package check
+- H5P.com/hub services: commercial, separate from libraries

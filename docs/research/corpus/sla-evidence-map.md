@@ -117,17 +117,18 @@ Nation excerpt, 9781107623026) — meaning-focused input requires
 ~**98% known-word coverage** for unassisted comprehension; below
 that, learning from input stalls.
 
-**PRODUCT IMPLICATION** — input level control is a hard
-constraint, not a nicety: SE content must be selected/measured
-for coverage (→ NGSL as coverage signal + graded sources) before
-being offered; unknown-word density is a first-class metric.
+**PRODUCT IMPLICATION** — input level control matters: SE content
+should be selected/measured for coverage (→ NGSL as coverage
+signal + graded sources) before being offered; unknown-word
+density is a first-class metric.
 
-**UNCERTAINTY** — 98% threshold is for unassisted reading; with
-support (glosses, audio, images) lower coverage works; the
-threshold for *listening* is higher-still in some studies (~95–98%
-of a different kind); Krashen's strong form (input alone
-suffices) is not accepted — output/instruction also matter
-(Norris & Ortega; Swain output hypothesis).
+**UNCERTAINTY** — the 98% figure is a *useful benchmark for
+unassisted meaning-focused reading*, not a universal threshold:
+supported reading, captioned input, listening, and beginner
+instructional material all shift it (support lowers it; listening
+may demand comparable-or-higher coverage without visible text).
+Krashen's strong form (input alone suffices) is not accepted —
+output/instruction also matter (Norris & Ortega; Swain).
 
 ## 7. Extensive reading
 

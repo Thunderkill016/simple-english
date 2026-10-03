@@ -67,9 +67,11 @@ due queue for review.
   up to daily budget.
 - Babbel: review first, then new lesson.
 - Duolingo: invisible — path decides.
-- **SE implication**: adopt the explicit rule — *due review
-  first, then next section* — visible to the learner ("3 items
-  to review, then continue Lesson 1"), not opaque ordering.
+- **SE implication**: DUE REVIEW FIRST is a *product
+  hypothesis* (products converge on it; learning evidence
+  doesn't order it) — candidate rule, marked as hypothesis in
+  the session spec, not a locked rule. If used, keep it
+  learner-visible, not opaque ordering.
 
 ### 7. Mistake recovery
 
@@ -119,12 +121,16 @@ due queue for review.
 
 ```text
 SESSION (one web sitting)
-  ├── A. Due review (FSRS queue) — always first, any length
+  ├── A. Due review (FSRS queue) — hypothesized first,
+  │      ordering NOT evidence-locked
   ├── B. Continue pointer → resume mid-section position
   │      inside the current pedagogical LESSON
   └── C. Stop anywhere; per-item attempt state persists
          (section boundaries are clean resume anchors)
-```
+
+LOCKED (R1.4 review): resumability, explicit learner state,
+completion ≠ mastery, progress survives leaving/reloading.
+NOT LOCKED: review-first, session size, exact stop rules.```
 
 Constraints pulled from the evidence:
 
@@ -133,7 +139,8 @@ Constraints pulled from the evidence:
 - Resume granularity = section, with per-item attempt state —
   finer than any course app, required by professional lesson
   depth.
-- Review vs new = explicit, learner-visible ordering rule.
+- Review vs new = ordering still open (review-first is the
+  product hypothesis; not evidence-locked).
 - Mistake handling = two timescales (in-session re-attempt,
   next-day queue).
 - Completion semantics = section boundary + attempt record;
