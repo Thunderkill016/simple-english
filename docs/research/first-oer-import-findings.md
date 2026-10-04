@@ -1,12 +1,12 @@
 # First OER import — findings (Task 003, 2026-10-03)
 
-What importing one real lesson from *A Digital Workbook for Beginning ESOL*
+What importing one real lesson from _A Digital Workbook for Beginning ESOL_
 actually looked like, and what it taught us about the pipeline.
 
 ## Source structure
 
 - The book is a Pressbooks site. Pages are thin: a chapter page contains
-  exercise *iframes* (H5P), not the learning content itself.
+  exercise _iframes_ (H5P), not the learning content itself.
 - Each H5P item carries its own metadata — title, author, license — inside
   the exportable `.h5p` zip (`h5p.json` + `content/content.json`).
 - The Greetings chapter contains: 1 intro sentence, 4 embedded H5P items
@@ -18,7 +18,7 @@ actually looked like, and what it taught us about the pipeline.
 
 - The fill-in-blank dialogue's accepted answers reconstruct a clean
   greeting conversation → heading/text/example blocks, zero schema change.
-- The exercise's learning goal ("choose a reply to *How are you?*") maps to
+- The exercise's learning goal ("choose a reply to _How are you?_") maps to
   one multiple-choice block.
 - `pnpm validate:content` + semantic checks covered the new content with
   no renderer changes.
@@ -40,15 +40,15 @@ Revised per the canonical asset decision: reuse → embed → link → omit.
 Unclear redistribution rights no longer mean deletion — items are embedded
 from their original host (rights and hosting stay upstream) or linked.
 
-| Asset | Redistribution | Class | Disposition |
-| --- | --- | --- | --- |
-| H5P `greetings-01-17` (dialogue text) | CC0 1.0, Tim Krause | REUSE/ADAPT | adapted into SE blocks |
-| YouTube `AzES-nhQFzk` "Hello. How are you?" | third-party, not reusable | EXTERNAL_EMBED | official YouTube player, click-to-load |
-| YouTube `uqgKvNxhCvQ` "More Greetings" | third-party, not reusable | LINK_ONLY | on-topic but second video would dilute one focused lesson |
-| H5P `greetings-02-18` memory game | CC0; per-image copyrights unverified | LINK_ONLY | embed endpoint exists but CloudFront blocks it cross-origin (403 in real browser — verified live 2026-10-03) |
-| H5P `useful-expressions-19` cards | license "U" | LINK_ONLY | embeddable technically, but excluded for lesson focus; reachable via chapter link |
-| H5P `greetings-extra-20` dialogue | license "U" | LINK_ONLY | same |
-| Source page URL | — | LINK_ONLY | attribution/provenance link in lesson footer |
+| Asset                                       | Redistribution                       | Class          | Disposition                                                                                                  |
+| ------------------------------------------- | ------------------------------------ | -------------- | ------------------------------------------------------------------------------------------------------------ |
+| H5P `greetings-01-17` (dialogue text)       | CC0 1.0, Tim Krause                  | REUSE/ADAPT    | adapted into SE blocks                                                                                       |
+| YouTube `AzES-nhQFzk` "Hello. How are you?" | third-party, not reusable            | EXTERNAL_EMBED | official YouTube player, click-to-load                                                                       |
+| YouTube `uqgKvNxhCvQ` "More Greetings"      | third-party, not reusable            | LINK_ONLY      | on-topic but second video would dilute one focused lesson                                                    |
+| H5P `greetings-02-18` memory game           | CC0; per-image copyrights unverified | LINK_ONLY      | embed endpoint exists but CloudFront blocks it cross-origin (403 in real browser — verified live 2026-10-03) |
+| H5P `useful-expressions-19` cards           | license "U"                          | LINK_ONLY      | embeddable technically, but excluded for lesson focus; reachable via chapter link                            |
+| H5P `greetings-extra-20` dialogue           | license "U"                          | LINK_ONLY      | same                                                                                                         |
+| Source page URL                             | —                                    | LINK_ONLY      | attribution/provenance link in lesson footer                                                                 |
 
 Nothing was classified OMIT — every asset turned out to be embeddable or
 linkable; nothing needed deletion on rights grounds alone.
@@ -65,13 +65,13 @@ linkable; nothing needed deletion on rights grounds alone.
   least-privilege sandbox + persistent "Open original ↗" fallback link.
   No eager third-party bytes at lesson render.
 - Iframe attrs: youtube = `sandbox="allow-scripts allow-same-origin
-  allow-presentation allow-popups"` + `allow="fullscreen;
-  picture-in-picture"`. No arbitrary embed HTML anywhere.
+allow-presentation allow-popups"` + `allow="fullscreen;
+picture-in-picture"`. No arbitrary embed HTML anywhere.
 - Offline/failure: SE content, exercises, progress unaffected — embed
   degrades to its fallback link. Proven by E2E with all third-party
   requests aborted.
 - CSP directions (when a policy is deployed): `frame-src
-  www.youtube.com`; `img-src`/`media-src` need nothing extra (no
+www.youtube.com`; `img-src`/`media-src` need nothing extra (no
   thumbnails/proxied media). No `*`.
 - Runtime impact: 1 embed, click-to-load → zero third-party bytes until
   learner opts in; measured SE bundle unaffected.
@@ -97,7 +97,7 @@ against the production build found:
 - Fetching real content required a browser User-Agent (the site 403s
   plain fetchers); content extraction used the `.h5p` export zips, which
   is also where per-item license metadata lives.
-- CC0 removes the attribution *obligation*; we still render provenance
+- CC0 removes the attribution _obligation_; we still render provenance
   (reuse-first principle).
 
 ## Schema gaps found & closed
@@ -154,7 +154,7 @@ wording edits; they double as the IndexedDB progress key.
 **Do we know enough to build an importer? NO.**
 
 One sample is insufficient to generalize. The valuable automation target
-visible now is *audit tooling* (item enumeration + license extraction),
+visible now is _audit tooling_ (item enumeration + license extraction),
 not an end-to-end lesson generator. Revisit after 2–3 more lessons from
 the same source, or a second source, reveal the stable parts.
 

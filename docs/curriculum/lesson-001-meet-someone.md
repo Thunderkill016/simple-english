@@ -3,142 +3,130 @@
 Canonical educational specification. The JSON implementation
 (`src/content/lessons/se-a1-meet-someone.lesson.json`) must match this.
 
-Evidence base: `docs/research/lesson-001-source-comparison.md`.
+Evidence bases:
+
+- Content: `docs/research/lesson-001-source-comparison.md`
+- Pedagogy: `docs/research/lesson-design-frameworks.md`
+- Contract: `docs/curriculum/lesson-design-contract.md`
+- Design audit: `docs/research/lesson-001-design-audit.md`
+- Stage map: `docs/curriculum/lesson-001-stage-map.md`
 
 ## Identity
 
-- Lesson id: `se-a1-meet-someone` (SE-owned; no source name in the ID)
+- Lesson id: `se-a1-meet-someone`
 - Title: **Meet Someone**
 - Authored by: Simple English (multi-source synthesis)
 - Level: beginner (absolute / early A1)
 
-## Capability
+## Learner
 
-The learner can meet someone for the first time in English:
+Absolute beginner, self-directed, no partner, no teacher. Vietnamese
+support lines are allowed as SE-authored glue.
+
+## Desired result (backward design — before activities)
+
+Take part in a very short first-time meeting in English:
 
 1. say hello
 2. say their name
 3. respond when another person introduces themselves
 
-## Success criteria
+## Acceptable lesson-level evidence
 
-- Chooses the natural response to "Nice to meet you." (controlled task)
-- Speaks the frame "Hi, I'm ___." + "Nice to meet you (too)." aloud
-  with their own name (production + transfer)
-- Completion copy: "You can meet someone in English." listing the three
-  practiced sub-skills — no XP, no celebration animation.
+1. First listen for gist, second listen with text support;
+2. selects an appropriate response to "Nice to meet you." (controlled
+   check, instant feedback);
+3. produces the greeting/name/response frame aloud with their own name
+   (self-practice; SE does not assess speech).
 
-## Target language (survived the comparison)
+**Non-claims:** one completion does not prove retention, real-time
+interaction with a live partner, pronunciation accuracy, or CEFR
+proficiency. Completion copy is practice-bounded.
+
+## Target language (all traced)
 
 ```
-Hi.
-I'm + name.            (e.g. "I'm Anna.", "I'm Pete.")
-Are you + name?
-Nice to meet you.
-Nice to meet you too.
+Hi.                        VOA (reused)
+I'm + name.                VOA ("I'm Anna.", "I'm Pete.") + Forum chart ("I'm ______.")
+Nice to meet you.          VOA
+Nice to meet you, too.     English Teaching Forum chart (verbatim)
+Good night.                AE verbatim (distractor; a farewell per AE notes)
+I am Pete.                 VOA verbatim (distractor)
 ```
-
-"I'm" = "I am" is the only grammar note — the minimum needed to say a
-name (§34 compliance: no verb-BE table).
 
 ## Source components & roles
 
-| sourceRef | Source | Role in this lesson | Use |
-|---|---|---|---|
-| voa-lle1-welcome | VOA Let's Learn English L1, Lesson 1 "Welcome!" | primary language model + listening audio | adapted / reused (MP3) |
-| evergreen-beginning-ls | Evergreen Valley "Listening & Speaking…" ch.1 | lesson staging pattern | reference |
-| pcc-esol-digital-workbook | PCC Digital Workbook for Beginning ESOL | exercise mechanics | reference |
-| ae-everyday-conversations | American English, Everyday Conversations | naturalness benchmark | reference |
+| sourceRef        | Source                                           | Role                                               | Use       |
+| ---------------- | ------------------------------------------------ | -------------------------------------------------- | --------- |
+| voa-lle1-welcome | VOA LLE L1 "Welcome!"                            | primary language model                             | adapted   |
+| voa-lle1-audio   | VOA LLE L1 conversation MP3                      | listening input (local)                            | reused    |
+| evergreen-ch1    | Evergreen ch.1 Grammar                           | I am→I'm contraction                               | adapted   |
+| ae-introductions | AE Everyday Conversations                        | first-meeting usage note + "Good night" distractor | adapted   |
+| ae-forum-trythis | English Teaching Forum, TRY THIS Role-Play Party | verbatim cloze starters + "Nice to meet you, too." | adapted   |
+| pcc-greetings    | PCC Digital Workbook                             | exercise-mechanics reference                       | reference |
 
-USA Learns and Oxford Online English were compared and rejected
-(reference-only rights) — they appear in the comparison document only.
+## Lesson stages (derived; see stage map for citations)
 
-## Lesson stages (evidence-based order)
+Planning: ACTFL Backward Design. Listening spine: BC
+pre/while/post-listening. Practice: ARC Restricted → freer production.
 
-Evergreen's staging was adapted for self-study: activation becomes a
-one-line goal, pair work becomes a solo speak-aloud step.
-
-1. **Goal** — one sentence telling the learner what they will be able to
-   do (SE-authored).
-2. **Model — listening** — VOA conversation MP3 (29.6 s, reused,
-   hosted locally) with its full transcript. The audio is authentic
-   input; it intentionally runs a few lines past the target exchange —
-   the transcript is shown in full. Replaying is the listening practice.
-3. **Model — target chunks** — the core exchange extracted as the
-   readable model (adapted from the VOA dialogue; "too" response
-   confirmed via the American English informal-introductions usage);
-   Vietnamese support line (SE-authored); the single "I'm = I am" note.
-4. **Controlled practice** — one multiple-choice item:
-   "Anna says 'Nice to meet you.' What is a good answer?" →
-   "Nice to meet you too." vs "Good night." and "I am Pete."
-   (SE-authored; PCC-style instant feedback via the existing Exercise
-   surface.)
-5. **Production + transfer** — speak-aloud frame with the learner's own
-   name filling the blank:
-   "Hi, I'm ______. / Nice to meet you. / Nice to meet you too."
-   This transfers the pattern off the Anna/Pete model onto the learner
-   (SE-authored). It is honest practice — SE does not assess speech.
-
-Rationale for exactly one interactive check: the multiple-choice state
-is stored per-lesson (`progress.selectedAnswer`); supporting several
-graded items needs a schema/persistence change. A single check that
-tests the capability's response step plus an ungated production step is
-the smallest defensible design — multi-item progression is deferred to
-a future lesson that actually needs it.
+1. **Outcome** — one sentence (SE glue).
+2. **Pre-listening + gist question** — "Two people are talking. Is this
+   their first time meeting? Listen." — a real overall-understanding
+   task (situation/relationship, not detail; answer not pre-revealed).
+   Evergreen True/False-style comprehension mechanic.
+3. **First listen (gist)** — VOA MP3 (neutral title so the gist answer
+   isn't leaked); transcript behind a `<details>` reveal.
+4. **Gist check + re-listen** — "They meet for the first time. Now
+   listen again and read the important parts…" — self-check answer,
+   then detail focus.
+5. **Chunks** — adapted VOA exchange (ARC Clarification).
+6. **Response** — "Nice to meet you, too." verbatim from the English
+   Teaching Forum Small-Talk Function Chart.
+7. **Meaning notes** — "'I'm' means 'I am'." (Evergreen contraction) and
+   "'Nice to meet you' is what people say when they meet someone for
+   the first time." (AE note) — split so each block's provenance points
+   at its actual source; no grammar table.
+8. **Check** — MC "Anna says 'Nice to meet you.' What is a good
+   answer?" — options: a. Forum-verbatim; b. "Good night." (AE
+   verbatim, a farewell per its own notes); c. "I am Pete." (VOA
+   verbatim). Instant correct/incorrect feedback.
+9. **Your turn** — speak-aloud cloze "Hi, I'm ______. / Nice to meet
+   you. / Nice to meet you, too." — Forum chart starters verbatim;
+   honest solo self-practice.
+10. **Completion** — practice-bounded statement + skills + honest note;
+    CTA remains after all blocks.
 
 ## Media
 
-One asset only:
+- `public/media/voa-lle1-conversation.mp3` — 19.9 s, 159,737 B.
+  Trimmed excerpt of the VOA conversation (meet-someone exchange only);
+  rights: public domain, VOA Learning English policy.
+- Evidence + SHA-256: `docs/sources/evidence/voa-lle1-conversation.json`
+- Native `<audio controls preload="none">`; transcript in `<details>`
+  (gist-first listening) — still readable if audio fails.
 
-- `public/media/voa-lle1-conversation.mp3` — VOA Lesson 1 conversation
-  audio, 29.6 s, 64 kbps MP3, 236,944 bytes.
-- Original: `https://voa-audio.voanews.eu/vle/2016/02/08/49485bf8-4277-47f6-9abe-617ee2473f8c.mp3`
-- Rights basis: public domain — VOA Learning English policy
-  (https://learningenglish.voanews.com/p/6861.html); VOA-produced
-  (VOA byline + VOA CDN host), no agency material.
-- Evidence + SHA-256:
-  `docs/sources/evidence/voa-lle1-conversation.json`
-- Delivered via a native `<audio controls preload="none">` — no player
-  library; transcript stays readable if audio fails or is offline.
+## Excluded content (unchanged)
 
-## Excluded content (with reasons)
-
-- Name spelling / alphabet / address (inside the VOA dialogue) —
-  different capability.
-- "How are you?" / "Fine, thank you." — deferred to a later lesson;
-  intentionally removed although the previous lesson taught it.
-- Formal introductions ("It's a pleasure to meet you", introducing a
-  third person), "Where are you from?", email/phone exchange.
-- VOA's 5:00 main video and its speaking/pronunciation videos — media
-  budget: one focused asset beats a pile of optional players.
-- Grammar table for verb BE.
-- Pronunciation intervention — deferred; the replayable short model +
-  speak-aloud is the smallest useful dose for this target.
+- Spelling/alphabet/address, "How are you?", formal introductions,
+  "Where are you from?", verb-BE tables, pronunciation intervention,
+  VOA's video assets.
 
 ## Provenance model
 
-- `authoredBy`: "Simple English"
-- `sourceRefs[]`: the four rows above; `reference` sources influence
-  structure/wording choices but contribute no copied content.
-- Block provenance:
-  - audio block → `reused` → voa-lle1-welcome
-  - target-chunk example block → `adapted` → voa-lle1-welcome
-  - everything else (goal, instructions, MC item, production frame,
-    all Vietnamese) → `se-authored`
-- Validation: REFERENCE_ONLY refs cannot back a `reused`/`adapted`
-  block; `se-authored` blocks carry no sourceRef; audio media must have
-  an evidence file with matching SHA-256 (build-time check).
+`authoredBy` + `sourceRefs[]` + block `provenance` (reused/adapted/
+se-authored); adapted/reused require a non-reference `use`; semantic
+checks unchanged. The pedagogy rationale lives in the stage map —
+deliberately not runtime schema.
 
 ## Completion semantics
 
-`completion.statement`: "You can meet someone in English."
-`completion.skills`: "Say hello", "Say your name",
-"Respond to an introduction".
+- `statement`: "You practiced meeting someone in English."
+- `skills`: "Say hello", "Say your name", "Respond to an introduction"
+- `note`: honest bound — one practice session; real meetings need more
+  practice (displayed in the completion panel).
 
 ## Progress reset
 
-`se-a1-meet-someone` replaces `pcc-esol-l1m1-greetings` as the canonical
-Lesson 001. The old lesson taught a different capability; its Dexie
-completion row is **not** migrated — it is ignored (orphaned rows
-render nothing since the lesson no longer exists in the curriculum).
-No migration code is written.
+`pcc-esol-l1m1-greetings` remains removed and unmigrated (different
+capability).

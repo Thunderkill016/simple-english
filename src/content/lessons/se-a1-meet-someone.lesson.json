@@ -26,10 +26,10 @@
     {
       "id": "evergreen-ch1",
       "sourceId": "evergreen-beginning-listening-speaking",
-      "itemTitle": "Chapter 1: Greetings and Introductions",
-      "itemUrl": "https://human.libretexts.org/Courses/Evergreen_Valley_College/Listening_and_Speaking_for_Beginning_English_Language_Learners/01:_Greetings_and_Introductions",
-      "role": "lesson-structure reference (activate → model → check → produce)",
-      "use": "reference"
+      "itemTitle": "Chapter 1: Greetings and Introductions — Grammar & practice",
+      "itemUrl": "https://human.libretexts.org/Courses/Evergreen_Valley_College/Listening_and_Speaking_for_Beginning_English_Language_Learners/01:_Greetings_and_Introductions/1.03:_Grammar",
+      "role": "I am→I'm contraction form + own-information cloze practice pattern",
+      "use": "adapted"
     },
     {
       "id": "pcc-greetings",
@@ -40,21 +40,26 @@
       "use": "reference"
     },
     {
-      "id": "ae-conversations",
+      "id": "ae-introductions",
       "sourceId": "american-english-everyday-conversations",
-      "itemTitle": "Everyday Conversations — Introductions and Small Talk",
+      "itemTitle": "Everyday Conversations — Introductions (dialogues 1-3/1-4 + language notes)",
       "itemUrl": "https://americanenglish.state.gov/resources/everyday-conversations-learning-american-english",
-      "role": "naturalness benchmark for the target chunk set",
-      "use": "reference"
+      "role": "first-meeting usage note + 'Good night' farewell distractor",
+      "use": "adapted"
+    },
+    {
+      "id": "ae-forum-trythis",
+      "sourceId": "ae-english-teaching-forum",
+      "itemTitle": "English Teaching Forum — TRY THIS: Role-Play Party (Small-Talk Function Chart)",
+      "itemUrl": "https://americanenglish.state.gov/files/ae/resource_files/53-2_10_trythis.pdf",
+      "role": "verbatim cloze starters + 'Nice to meet you, too.' response",
+      "use": "adapted"
     }
   ],
   "completion": {
-    "statement": "You can meet someone in English.",
-    "skills": [
-      "Say hello",
-      "Say your name",
-      "Respond to an introduction"
-    ]
+    "statement": "You practiced meeting someone in English.",
+    "skills": ["Say hello", "Say your name", "Respond to an introduction"],
+    "note": "One practice session — real meetings take more practice. Come back and try again."
   },
   "blocks": [
     {
@@ -64,12 +69,17 @@
     },
     {
       "type": "heading",
-      "text": "Listen: Anna and Pete meet",
+      "text": "First, just listen",
+      "provenance": { "kind": "se-authored" }
+    },
+    {
+      "type": "text",
+      "text": "Two people are talking. Is this their first time meeting? Listen.",
       "provenance": { "kind": "se-authored" }
     },
     {
       "type": "audio",
-      "title": "Anna and Pete meet — listen and repeat",
+      "title": "Anna and Pete — a conversation",
       "src": "/media/voa-lle1-conversation.mp3",
       "transcript": "Pete: Hi! Are you Anna?\nAnna: Yes! Hi there! Are you Pete?\nPete: I am Pete.\nAnna: Nice to meet you.\nAnna: Let's try that again. I'm Anna. Nice to meet you.\nPete: I'm Pete.",
       "evidence": "docs/sources/evidence/voa-lle1-conversation.json",
@@ -77,7 +87,7 @@
     },
     {
       "type": "text",
-      "text": "Listen two or three times. Then read the important parts below — the parts you use when you meet someone.",
+      "text": "They meet for the first time. Now listen again and read the important parts below — the parts you use when you meet someone.",
       "provenance": { "kind": "se-authored" }
     },
     {
@@ -88,21 +98,26 @@
     },
     {
       "type": "example",
-      "text": "— Nice to meet you too.",
+      "text": "— Nice to meet you, too.",
       "translation": "— Tôi cũng rất vui được gặp bạn.",
-      "provenance": { "kind": "se-authored" }
+      "provenance": { "kind": "adapted", "sourceRef": "ae-forum-trythis" }
     },
     {
       "type": "text",
-      "text": "“I'm” means “I am”. “I'm Anna” is how you say your name. “Nice to meet you” is what people say when they meet someone for the first time.",
-      "provenance": { "kind": "se-authored" }
+      "text": "“I'm” means “I am”. “I'm Anna” says her name.",
+      "provenance": { "kind": "adapted", "sourceRef": "evergreen-ch1" }
+    },
+    {
+      "type": "text",
+      "text": "“Nice to meet you” is what people say when they meet someone for the first time.",
+      "provenance": { "kind": "adapted", "sourceRef": "ae-introductions" }
     },
     {
       "type": "multiple-choice",
       "id": "q-nice-to-meet-you",
       "prompt": "Anna says “Nice to meet you.” What is a good answer?",
       "options": [
-        { "id": "a", "text": "Nice to meet you too." },
+        { "id": "a", "text": "Nice to meet you, too." },
         { "id": "b", "text": "Good night." },
         { "id": "c", "text": "I am Pete." }
       ],
@@ -121,9 +136,9 @@
     },
     {
       "type": "example",
-      "text": "— Hi, I'm ______.\n— Nice to meet you.\n— Nice to meet you too.",
+      "text": "— Hi, I'm ______.\n— Nice to meet you.\n— Nice to meet you, too.",
       "translation": "— Chào, tôi là ______.\n— Rất vui được gặp bạn.\n— Tôi cũng rất vui được gặp bạn.",
-      "provenance": { "kind": "se-authored" }
+      "provenance": { "kind": "adapted", "sourceRef": "ae-forum-trythis" }
     }
   ]
 }

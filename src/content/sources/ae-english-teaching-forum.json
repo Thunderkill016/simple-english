@@ -1,0 +1,33 @@
+{
+  "id": "ae-english-teaching-forum",
+  "type": "LearningResource",
+  "title": "English Teaching Forum — TRY THIS: Role-Play Party (Talking about Jobs)",
+  "authors": ["English Teaching Forum / U.S. Department of State"],
+  "publisher": "U.S. Department of State — American English (americanenglish.state.gov)",
+  "url": "https://americanenglish.state.gov/files/ae/resource_files/53-2_10_trythis.pdf",
+  "license": "Public domain — U.S. Government work (17 U.S.C. §105)",
+  "licenseUrl": "https://www.state.gov/misc/87529.htm#copyright",
+  "contentType": ["journal-article", "lesson-activity", "pdf"],
+  "levels": ["beginner", "elementary"],
+  "subjects": [
+    "ESL",
+    "English language",
+    "speaking",
+    "small talk",
+    "introductions"
+  ],
+  "reuseStatus": "approved",
+  "provenanceNotes": "English Teaching Forum 2015, 53(2), 'TRY THIS' stand-alone activity — federal-government publication (public domain per 17 U.S.C. §105 + State Dept policy). Live PDF URL returns 404 to automated fetch; content verified via Wayback snapshot 2024-06-16T08:28:04Z. Verified verbatim material used in Lesson 001: Small-Talk Function Chart 'Introductions/Greetings' cloze starters — 'Hi, my name is _____.', 'I'm ______.', 'Nice to meet you, _____. / Nice to meet you, too.' — and the Frank/Paul sample dialogue 'Nice to meet you, Frank. / Nice to meet you, too.' Role: supplies verbatim learner-facing patterns so no SE composition is needed.",
+  "verifiedAt": "2026-10-04",
+  "verifiedBy": "Devin",
+  "adaptationLog": [
+    {
+      "item": "Small-Talk Function Chart — Introductions/Greetings + Frank/Paul sample dialogue",
+      "itemUrl": "https://americanenglish.state.gov/files/ae/resource_files/53-2_10_trythis.pdf",
+      "itemLicense": "Public domain (17 U.S.C. §105)",
+      "itemAuthors": ["English Teaching Forum / U.S. Department of State"],
+      "usedIn": "src/content/lessons/se-a1-meet-someone.lesson.json",
+      "notes": "Response example 'Nice to meet you, too.' is verbatim; production frame 'Hi, I'm ______. / Nice to meet you. / Nice to meet you, too.' adapted from the chart's cloze starters (chart also attests 'I'm ______' and 'Nice to meet you, _____.'). 'Nice to meet you.' (no comma) is verbatim VOA — line-level mapping in docs/curriculum/lesson-001-stage-map.md."
+    }
+  ]
+}

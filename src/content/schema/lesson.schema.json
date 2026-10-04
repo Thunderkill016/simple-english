@@ -24,7 +24,10 @@
       "description": "URL-safe stable identifier, SE-owned — never encodes a source name"
     },
     "title": { "type": "string", "minLength": 1 },
-    "level": { "type": "string", "enum": ["beginner", "elementary", "intermediate"] },
+    "level": {
+      "type": "string",
+      "enum": ["beginner", "elementary", "intermediate"]
+    },
     "summary": {
       "type": "string",
       "minLength": 1,
@@ -92,6 +95,11 @@
           "minItems": 1,
           "items": { "type": "string", "minLength": 1 },
           "description": "what the learner practiced, shown on completion"
+        },
+        "note": {
+          "type": "string",
+          "minLength": 1,
+          "description": "honest bound on the claim — e.g. one practice session is not mastery"
         }
       }
     },
@@ -210,7 +218,15 @@
         },
         {
           "type": "object",
-          "required": ["type", "provider", "title", "src", "sourceUrl", "purpose", "fallbackUrl"],
+          "required": [
+            "type",
+            "provider",
+            "title",
+            "src",
+            "sourceUrl",
+            "purpose",
+            "fallbackUrl"
+          ],
           "additionalProperties": false,
           "properties": {
             "type": { "const": "external-embed" },

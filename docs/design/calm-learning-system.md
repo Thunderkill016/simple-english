@@ -17,17 +17,17 @@ can't see by scanning one screen.
 Defined once in `src/styles/index.css` (`@theme`); components use the
 semantic names only — no parallel vocabularies.
 
-| Token | Value | Use |
-| --- | --- | --- |
-| `canvas` | `#F7F8F5` | page background |
-| `surface` | `#FFFFFF` | contained panels, nav chrome |
-| `ink` | `#18201D` | primary text |
-| `muted` | `#66706B` | secondary text, translations, metadata |
-| `border` | `#E1E6E2` | hairline boundaries |
+| Token                                        | Value                             | Use                                      |
+| -------------------------------------------- | --------------------------------- | ---------------------------------------- |
+| `canvas`                                     | `#F7F8F5`                         | page background                          |
+| `surface`                                    | `#FFFFFF`                         | contained panels, nav chrome             |
+| `ink`                                        | `#18201D`                         | primary text                             |
+| `muted`                                      | `#66706B`                         | secondary text, translations, metadata   |
+| `border`                                     | `#E1E6E2`                         | hairline boundaries                      |
 | `primary` / `primary-hover` / `primary-soft` | `#176B4D` / `#125840` / `#E7F2EC` | actions, active states, example surfaces |
-| `success` / `success-soft` | `#18794E` / `#E7F2EC` | correct/completed feedback |
-| `warning` / `warning-soft` | `#9A6700` / `#FAF3E3` | retry/persist warnings |
-| `lesson` (text size) | 17px / 1.65 lh | lesson prose |
+| `success` / `success-soft`                   | `#18794E` / `#E7F2EC`             | correct/completed feedback               |
+| `warning` / `warning-soft`                   | `#9A6700` / `#FAF3E3`             | retry/persist warnings                   |
+| `lesson` (text size)                         | 17px / 1.65 lh                    | lesson prose                             |
 
 Spacing follows the Tailwind scale (4/8/12/16/24/32/48/64) — whitespace
 establishes hierarchy before borders do. Radius is limited (lg/xl);

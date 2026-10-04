@@ -54,9 +54,7 @@ describe("lesson JSON Schema", () => {
   it("rejects an unknown provenance kind", () => {
     const invalid = {
       ...fixture,
-      blocks: [
-        { type: "text", text: "x", provenance: { kind: "copied" } },
-      ],
+      blocks: [{ type: "text", text: "x", provenance: { kind: "copied" } }],
     };
     expect(validate(invalid)).toBe(false);
   });
@@ -113,10 +111,22 @@ describe("lesson JSON Schema", () => {
     ["unknown provider", { ...validEmbed, provider: "vimeo" }],
     ["non-HTTPS src", { ...validEmbed, src: "http://www.youtube.com/embed/x" }],
     ["javascript: src", { ...validEmbed, src: "javascript:alert(1)" }],
-    ["missing sourceUrl", Object.fromEntries(Object.entries(validEmbed).filter(([k]) => k !== "sourceUrl"))],
-    ["missing fallbackUrl", Object.fromEntries(Object.entries(validEmbed).filter(([k]) => k !== "fallbackUrl"))],
+    [
+      "missing sourceUrl",
+      Object.fromEntries(
+        Object.entries(validEmbed).filter(([k]) => k !== "sourceUrl"),
+      ),
+    ],
+    [
+      "missing fallbackUrl",
+      Object.fromEntries(
+        Object.entries(validEmbed).filter(([k]) => k !== "fallbackUrl"),
+      ),
+    ],
   ])("rejects an external-embed with %s", (_name, embed) => {
-    expect(validate({ ...fixture, blocks: [...fixture.blocks, embed] })).toBe(false);
+    expect(validate({ ...fixture, blocks: [...fixture.blocks, embed] })).toBe(
+      false,
+    );
   });
 });
 
@@ -124,15 +134,21 @@ describe("source record JSON Schema (load-bearing provenance)", () => {
   it.each(sourceRecords.map((s) => [s.id, s] as const))(
     "accepts every registry record: %s",
     (_id, record) => {
-      expect(validateSource(record), ajv.errorsText(validateSource.errors)).toBe(true);
+      expect(
+        validateSource(record),
+        ajv.errorsText(validateSource.errors),
+      ).toBe(true);
     },
   );
 
-  it.each(["authors", "publisher", "licenseUrl", "verifiedAt", "reuseStatus"] as const)(
-    "rejects a record missing %s",
-    (field) => {
-      const { [field]: _dropped, ...incomplete } = sourceRecord;
-      expect(validateSource(incomplete)).toBe(false);
-    },
-  );
+  it.each([
+    "authors",
+    "publisher",
+    "licenseUrl",
+    "verifiedAt",
+    "reuseStatus",
+  ] as const)("rejects a record missing %s", (field) => {
+    const { [field]: _dropped, ...incomplete } = sourceRecord;
+    expect(validateSource(incomplete)).toBe(false);
+  });
 });

@@ -18,9 +18,34 @@
   "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
   "contentType": ["textbook", "listening", "pronunciation", "course"],
   "levels": ["beginner"],
-  "subjects": ["ESL", "English language", "listening", "speaking", "pronunciation"],
+  "subjects": [
+    "ESL",
+    "English language",
+    "listening",
+    "speaking",
+    "pronunciation"
+  ],
   "reuseStatus": "approved",
-  "provenanceNotes": "Self-declared high-beginning integrated-skills book; chapter pages carry CC BY 4.0 (LibreTexts metadata license:ccby/licenseversion:40). Chapter 1 'Greetings and Introductions' was inspected in full: strong Preview → Listen → Comprehension → Speaking staging, but its content mixes countries/spelling/email/phone beyond the Lesson 001 target and every speaking activity requires classmates. Role in SE Lesson 001: lesson-structure reference only — no text copied; its listenings are embedded players (not redistributable audio).",
-  "verifiedAt": "2026-10-03",
-  "verifiedBy": "Devin"
+  "provenanceNotes": "Self-declared high-beginning integrated-skills book; chapter pages carry CC BY 4.0 (LibreTexts metadata license:ccby/licenseversion:40). Chapter 1 'Greetings and Introductions' was inspected in full: Preview → Listen → Comprehension Check → Speaking staging per cycle; 1.3 Grammar attests the I am→I'm contraction table and 'complete these sentences with your own information' practice pattern (Practice 4: 'Hello! Nice to meet you. My name is ___'). Its broader content mixes countries/spelling/email/phone beyond the Lesson 001 target and its speaking activities require classmates. Role in SE Lesson 001: ADAPTED — supplies the contraction explanation and the own-information cloze frame; staging also referenced. No verbatim text copied; its listenings are embedded players (not redistributable audio).",
+  "verifiedAt": "2026-10-04",
+  "verifiedBy": "Devin",
+  "adaptationLog": [
+    {
+      "item": "Chapter 1, 1.3 Grammar — BE contraction table + Practice 4 own-information cloze frame",
+      "itemUrl": "https://human.libretexts.org/Courses/Evergreen_Valley_College/Listening_and_Speaking_for_Beginning_English_Language_Learners/01:_Greetings_and_Introductions/1.03:_Grammar",
+      "itemLicense": "CC BY 4.0",
+      "itemAuthors": [
+        "Maria Antonini de Pino",
+        "Erika Bourne Lawson",
+        "Kelly N. Nguyễn-Jardin",
+        "Huong Pham",
+        "Rebecca Kallen Reddy",
+        "Pradeep Reddy",
+        "Richard Lawson",
+        "Adam Bloom"
+      ],
+      "usedIn": "src/content/lessons/se-a1-meet-someone.lesson.json",
+      "notes": "'I'm means I am' explanation adapted from the contraction table (I am → I'm); its True/False comprehension-check mechanic informs the gist-question design. The production frame is now sourced verbatim from the ae-english-teaching-forum cloze chart — post-re-audit fix."
+    }
+  ]
 }

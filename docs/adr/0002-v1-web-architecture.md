@@ -161,7 +161,7 @@ adapter, not a feature of the learning runtime.
 - **Firebase exit:** all learner state lives in Dexie (standard IndexedDB) —
   exportable without Firebase. Application code must reach Firebase only
   through a thin sync/auth adapter (`learning domain → storage/sync
-  interface → local | cloud`), so a replacement backend (Supabase, a small
+interface → local | cloud`), so a replacement backend (Supabase, a small
   self-hosted API, or another BaaS) swaps the adapter, not the app.
   Firebase APIs must not be imported across UI components.
 - **Hosting exit:** build output is plain static files; Netlify, Cloudflare
