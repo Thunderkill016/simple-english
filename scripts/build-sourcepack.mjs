@@ -26,24 +26,26 @@ const packPath = join(
   "src/content/sourcepacks/voa-lle1-lesson1.sourcepack.json",
 );
 
-/**
- * Ground-truth extractions live in research_cache/ (local provenance
- * evidence, gitignored). On a fresh clone, fall back to the pack's own
- * embedded sourceText — regenerating then re-verifies the existing
- * fragments rather than re-extracting.
- */
-function sourceTextFor(cacheFile, assetId) {
-  try {
-    return readFileSync(join(root, cacheFile), "utf8");
-  } catch {
-    const existing = JSON.parse(readFileSync(packPath, "utf8"));
-    const a = existing.assets.find((x) => x.id === assetId);
-    if (!a?.sourceText) throw new Error(`no sourceText for ${assetId}`);
-    return a.sourceText;
-  }
+// Canonical provenance root: the committed upstream evidence set at
+// docs/sources/evidence/voa-lle1-lesson1/ (manifest + raw artifacts +
+// extracted text snapshots, all sha256-verified). The generated
+// sourcepack JSON is an OUTPUT of this evidence — it is never consulted
+// as source truth for itself.
+import { loadEvidenceSet } from "./upstream-evidence.mjs";
+
+const evidenceDir = join(root, "docs/sources/evidence/voa-lle1-lesson1");
+const evidence = loadEvidenceSet(evidenceDir);
+if (evidence.errors.length) {
+  console.error("Upstream evidence verification FAILED:");
+  for (const e of evidence.errors) console.error(`  ${e}`);
+  process.exit(1);
 }
-const planText = sourceTextFor("research_cache/voa/voa-l1.txt", "lesson-plan");
-const pageText = sourceTextFor("research_cache/voa/voa-l1-page.txt", "learner-page");
+const planText = evidence.textByAsset["lesson-plan"];
+const pageText = evidence.textByAsset["learner-page"];
+if (!planText || !pageText) {
+  console.error("Upstream evidence set is missing required extracted text");
+  process.exit(1);
+}
 
 const VERIFIED = "2026-10-03";
 const EVIDENCE_URL = "https://learningenglish.voanews.com/p/6021.html";
@@ -432,6 +434,13 @@ for (const f of fragments) {
   }
   seenIds.add(f.id);
   f.exactTextHash = sha256(f.exactText);
+  // Mixed-asset origin: every fragment here is extracted from a
+  // VOA-produced text portion of its source (the learner page's only
+  // third-party content is the alphabet-song YouTube embed, which
+  // yields no fragments). THIRD_PARTY/UNKNOWN origins must never be
+  // emitted — a fragment only gets VOA_PRODUCED_VERIFIED because it is
+  // a verbatim substring of a VOA-produced text portion.
+  f.originStatus = "VOA_PRODUCED_VERIFIED";
 }
 
 const pack = {

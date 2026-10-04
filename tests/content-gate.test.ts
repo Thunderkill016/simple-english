@@ -1,13 +1,22 @@
 import { describe, expect, it } from "vitest";
 import Ajv2020 from "ajv/dist/2020.js";
+import { createHash } from "node:crypto";
+import { mkdtempSync, writeFileSync, readFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 // @ts-expect-error — plain-node gate module shared with the build script
 import { checkHumanContentGate } from "../scripts/content-gate.mjs";
+// @ts-expect-error — plain-node evidence loader shared with the build script
+import { loadEvidenceSet } from "../scripts/upstream-evidence.mjs";
 import course from "../src/content/lessons/voa-lle1.lesson1.lesson.json";
 import pack from "../src/content/sourcepacks/voa-lle1-lesson1.sourcepack.json";
 import courseSchema from "../src/content/schema/lesson-v3.schema.json";
 import packSchema from "../src/content/schema/sourcepack.schema.json";
 
 const io = { exists: () => true, sha256: (src: string) => findHash(src) };
+const repoRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
+const evidenceDir = join(repoRoot, "docs/sources/evidence/voa-lle1-lesson1");
 
 function findHash(src: string): string {
   type MediaHolder = { media?: { src?: string; sha256?: string } };
@@ -63,6 +72,88 @@ describe("Human Content Gate — real pilot course", () => {
       const f = pack.fragments.find((x) => x.id === g.ref);
       expect(f?.audience).toBe("TEACHER");
     }
+  });
+});
+
+describe("Upstream evidence root (Task 006.2)", () => {
+  it("verified evidence set + pack pass together", () => {
+    const evidence = loadEvidenceSet(evidenceDir);
+    expect(evidence.errors).toEqual([]);
+    const { errors, audit } = checkHumanContentGate(course, pack, {
+      ...io,
+      evidence,
+    });
+    expect(errors).toEqual([]);
+    expect(audit.upstreamEvidence.artifacts).toEqual(
+      expect.arrayContaining(["lesson-plan", "learner-page"]),
+    );
+  });
+
+  it("a tampered snapshot hash fails evidence verification", () => {
+    const evidence = loadEvidenceSet(evidenceDir);
+    const dir = mkdtempSync(join(tmpdir(), "se-evidence-"));
+    const manifest = JSON.parse(JSON.stringify(evidence.manifest));
+    manifest.artifacts[0].extractedTextSha256 = "0".repeat(64);
+    writeFileSync(join(dir, "manifest.json"), JSON.stringify(manifest));
+    for (const a of manifest.artifacts) {
+      for (const key of ["rawArtifact", "extractedText"])
+        writeFileSync(
+          join(dir, a[key]),
+          readFileSync(join(evidenceDir, a[key])),
+        );
+    }
+    const tampered = loadEvidenceSet(dir);
+    expect(
+      tampered.errors.some((e: string) => e.includes("sha256 mismatch")),
+    ).toBe(true);
+  });
+
+  it("an internally-consistent pack that diverges from upstream evidence fails", () => {
+    // Simulate the failure mode: invented text inserted into sourceText
+    // with a matching fragment + field — all pack-internal checks pass,
+    // only the committed evidence root catches it.
+    const p = clone(pack);
+    const c = clone(course);
+    const invented = "This invented sentence was never in the VOA source.";
+    const plan = p.assets.find((a: { id: string }) => a.id === "lesson-plan")!;
+    plan.sourceText += `\n${invented}`;
+    const fragId = "frag-invented";
+    p.fragments.push({
+      id: fragId,
+      assetRef: "lesson-plan",
+      audience: "LEARNER",
+      role: "script",
+      locator: "injected",
+      exactText: invented,
+      // honest hash of the invented text — internally consistent
+      exactTextHash: createHash("sha256").update(invented, "utf8").digest("hex"),
+      originStatus: "VOA_PRODUCED_VERIFIED",
+    });
+    const read = allItems(c).find((i) => i.type === "read")!;
+    read.blocks.push({ text: invented, prov: { kind: "source", ref: fragId } });
+
+    const withoutEvidence = checkHumanContentGate(c, p, io);
+    expect(withoutEvidence.errors).toEqual([]); // pack is self-consistent…
+
+    const evidence = loadEvidenceSet(evidenceDir);
+    const { errors } = checkHumanContentGate(c, p, { ...io, evidence });
+    expect(
+      errors.some((e: string) =>
+        e.includes("diverges from committed upstream evidence"),
+      ),
+    ).toBe(true);
+  });
+
+  it("a THIRD_PARTY-origin fragment cannot back instructional content", () => {
+    const p = clone(pack);
+    const f = p.fragments.find(
+      (x: { id: string }) => x.id === "frag-topic-meeting",
+    )! as { originStatus: string };
+    f.originStatus = "THIRD_PARTY";
+    const { errors } = checkHumanContentGate(course, p, io);
+    expect(
+      errors.some((e: string) => e.includes("originStatus=THIRD_PARTY")),
+    ).toBe(true);
   });
 });
 

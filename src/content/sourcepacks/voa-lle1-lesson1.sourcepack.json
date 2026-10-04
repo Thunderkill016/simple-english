@@ -245,7 +245,8 @@
       "role": "title",
       "locator": "page title block",
       "exactText": "Let's Learn English - Level 1",
-      "exactTextHash": "4c7646fb135f70ec60de8f2f2ebf70264cb3dfcde9541af3a567e2d0babc1822"
+      "exactTextHash": "4c7646fb135f70ec60de8f2f2ebf70264cb3dfcde9541af3a567e2d0babc1822",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-title-unit",
@@ -254,7 +255,8 @@
       "role": "title",
       "locator": "p.3 cover",
       "exactText": "Level 1",
-      "exactTextHash": "b75cf05d6d2aa22cbde9f59628a7cc6a5d70c52517333ed827bca8a397471084"
+      "exactTextHash": "b75cf05d6d2aa22cbde9f59628a7cc6a5d70c52517333ed827bca8a397471084",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-title-lesson",
@@ -263,7 +265,8 @@
       "role": "title",
       "locator": "page title block",
       "exactText": "Lesson 1: Welcome!",
-      "exactTextHash": "cad786093f8956652b571df82dd03aa3335129d40bd20c0b6c1161d73b582fbb"
+      "exactTextHash": "cad786093f8956652b571df82dd03aa3335129d40bd20c0b6c1161d73b582fbb",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-title-welcome",
@@ -272,7 +275,8 @@
       "role": "title",
       "locator": "p.3 cover",
       "exactText": "welcome!",
-      "exactTextHash": "e747d72b50d7d9c6a8bd5f898d595a5f801b26a9d4a7158ac535fa554099592f"
+      "exactTextHash": "e747d72b50d7d9c6a8bd5f898d595a5f801b26a9d4a7158ac535fa554099592f",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-topic-meeting",
@@ -281,7 +285,8 @@
       "role": "topic",
       "locator": "p.3 Topics",
       "exactText": "Meeting people",
-      "exactTextHash": "03ed256eee79a700e6d60cac6647aa6418e513b567482172888807fb251fc916"
+      "exactTextHash": "03ed256eee79a700e6d60cac6647aa6418e513b567482172888807fb251fc916",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-topic-introduce",
@@ -290,7 +295,8 @@
       "role": "topic",
       "locator": "p.3 Topics",
       "exactText": "Introduce yourself",
-      "exactTextHash": "d0247b12d965ab4eccd45b15ca1625ed99756bfa842f3b95d03ef34eeb3539e0"
+      "exactTextHash": "d0247b12d965ab4eccd45b15ca1625ed99756bfa842f3b95d03ef34eeb3539e0",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-goal-grammar",
@@ -299,7 +305,8 @@
       "role": "goal",
       "locator": "p.3 Goals",
       "exactText": "Grammar: Verb BE (I am) in introductions; BE + location",
-      "exactTextHash": "6d0337f3cb656af778324d61154c62b53252751a7b65d741076e1f52ec7f0332"
+      "exactTextHash": "6d0337f3cb656af778324d61154c62b53252751a7b65d741076e1f52ec7f0332",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-goal-speaking",
@@ -308,7 +315,8 @@
       "role": "goal",
       "locator": "p.3 Goals",
       "exactText": "Speaking: Meeting people; Ask question and answer “Are you (name)?”",
-      "exactTextHash": "0790f9484d4569ea6a50ecbba7b2ef9f10be1a06c7e97ad5931ce6a5f3f6164c"
+      "exactTextHash": "0790f9484d4569ea6a50ecbba7b2ef9f10be1a06c7e97ad5931ce6a5f3f6164c",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-goal-review",
@@ -317,7 +325,8 @@
       "role": "goal",
       "locator": "p.3 Goals",
       "exactText": "Review alphabet and numbers 1-20",
-      "exactTextHash": "a037356eaaafc22c5b9d2c021d946ef1054dd1679b0ca388c03c28f52e6568ce"
+      "exactTextHash": "a037356eaaafc22c5b9d2c021d946ef1054dd1679b0ca388c03c28f52e6568ce",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-goal-pron",
@@ -326,7 +335,8 @@
       "role": "goal",
       "locator": "p.3 Goals",
       "exactText": "Pronunciation: Pronouncing linked sounds",
-      "exactTextHash": "ebfea0012b9a20ea9fc46e3185ffaca3ada4eaf685522478044881613946d9c0"
+      "exactTextHash": "ebfea0012b9a20ea9fc46e3185ffaca3ada4eaf685522478044881613946d9c0",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-heading-goals",
@@ -335,7 +345,8 @@
       "role": "heading",
       "locator": "p.3",
       "exactText": "Goals",
-      "exactTextHash": "116cd3982a9bc435ecd50e5978b68f5f1d542c0ef071fdb598f06a9000dd33cb"
+      "exactTextHash": "116cd3982a9bc435ecd50e5978b68f5f1d542c0ef071fdb598f06a9000dd33cb",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-heading-strategy",
@@ -344,7 +355,8 @@
       "role": "heading",
       "locator": "p.3 / p.5 Learning Strategy",
       "exactText": "Learning Strategy",
-      "exactTextHash": "845d24ccff5ff69887d3cbc875d79f5ea4c594735417732143d43052326c0c5a"
+      "exactTextHash": "845d24ccff5ff69887d3cbc875d79f5ea4c594735417732143d43052326c0c5a",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-strategy-name",
@@ -353,7 +365,8 @@
       "role": "heading",
       "locator": "p.3 Learning Strategy",
       "exactText": "Set a Goal",
-      "exactTextHash": "1ba881bb95cdcb112ab95790bd1b532ed57d716e7ee08aa1ae525d51aa373414"
+      "exactTextHash": "1ba881bb95cdcb112ab95790bd1b532ed57d716e7ee08aa1ae525d51aa373414",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-heading-keywords",
@@ -362,7 +375,8 @@
       "role": "heading",
       "locator": "p.7 Resources",
       "exactText": "Key Words",
-      "exactTextHash": "9ca65a26ed3e134995168692cd1c045700977f2aeb9fe92f67b5c9728bd82efd"
+      "exactTextHash": "9ca65a26ed3e134995168692cd1c045700977f2aeb9fe92f67b5c9728bd82efd",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-heading-teachkw",
@@ -371,7 +385,8 @@
       "role": "heading",
       "locator": "p.5 Day 2",
       "exactText": "Teach Key Words",
-      "exactTextHash": "c8c6127a9ed1c20e1288b24e42e4798c633c21ffdd9201b2853feba59601ab3b"
+      "exactTextHash": "c8c6127a9ed1c20e1288b24e42e4798c633c21ffdd9201b2853feba59601ab3b",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-heading-present",
@@ -380,7 +395,8 @@
       "role": "heading",
       "locator": "p.4 Day 1",
       "exactText": "Present the Conversation",
-      "exactTextHash": "09673be076dcf527fc8dbeb70a14fc9816d82790b2e2229431b3d6ef65ea6549"
+      "exactTextHash": "09673be076dcf527fc8dbeb70a14fc9816d82790b2e2229431b3d6ef65ea6549",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-heading-quiz",
@@ -389,7 +405,8 @@
       "role": "heading",
       "locator": "p.5 Listening Quiz",
       "exactText": "Listening Quiz",
-      "exactTextHash": "3dd985aaffdc4472a19e2ea53c65b93943e61cc50818b2b3d341a4320bc6052a"
+      "exactTextHash": "3dd985aaffdc4472a19e2ea53c65b93943e61cc50818b2b3d341a4320bc6052a",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-heading-be",
@@ -398,7 +415,8 @@
       "role": "heading",
       "locator": "p.6 Day 3",
       "exactText": "Explain Questions and Answers Using BE",
-      "exactTextHash": "2e67eff8a98106eedc9048ab1118213ad07920369997c93da148e827c5827f12"
+      "exactTextHash": "2e67eff8a98106eedc9048ab1118213ad07920369997c93da148e827c5827f12",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-heading-writing",
@@ -407,7 +425,8 @@
       "role": "heading",
       "locator": "p.7 Day 5",
       "exactText": "Writing",
-      "exactTextHash": "a8bfae3eee941527f2568d7e1ae4d526cc1c764fd09ee1e62deb13e5f00c6078"
+      "exactTextHash": "a8bfae3eee941527f2568d7e1ae4d526cc1c764fd09ee1e62deb13e5f00c6078",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-heading-review",
@@ -416,7 +435,8 @@
       "role": "heading",
       "locator": "p.7 Review",
       "exactText": "Review",
-      "exactTextHash": "aff0766a5290e117b8433c351bae7b7b23bed682b2369bd822d88a647cc58512"
+      "exactTextHash": "aff0766a5290e117b8433c351bae7b7b23bed682b2369bd822d88a647cc58512",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-heading-mainscript",
@@ -425,7 +445,8 @@
       "role": "heading",
       "locator": "p.4",
       "exactText": "Main Video Script – Lesson 1",
-      "exactTextHash": "650edc476018b91627854fefe0179b94c61503632ef67c39c2acf59509aea436"
+      "exactTextHash": "650edc476018b91627854fefe0179b94c61503632ef67c39c2acf59509aea436",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-heading-pron",
@@ -434,7 +455,8 @@
       "role": "heading",
       "locator": "p.6-7",
       "exactText": "Pronunciation Practice",
-      "exactTextHash": "26ed980bb6d75cffa117b395b2f32f8efed1b28f4733fb5f6617648956f4534c"
+      "exactTextHash": "26ed980bb6d75cffa117b395b2f32f8efed1b28f4733fb5f6617648956f4534c",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-heading-alpha",
@@ -443,7 +465,8 @@
       "role": "heading",
       "locator": "p.5",
       "exactText": "Review the Alphabet",
-      "exactTextHash": "0dc4d3d884c5e7f4aab42535dca0659059b5c562313aa870edaf544551da8ec6"
+      "exactTextHash": "0dc4d3d884c5e7f4aab42535dca0659059b5c562313aa870edaf544551da8ec6",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-heading-numbers",
@@ -452,7 +475,8 @@
       "role": "heading",
       "locator": "p.6 Day 4",
       "exactText": "Numbers from 1 - 20",
-      "exactTextHash": "46b5cc6e43d628186424fb504b9482cf3774d94128cfde781ec91fc589a47f9a"
+      "exactTextHash": "46b5cc6e43d628186424fb504b9482cf3774d94128cfde781ec91fc589a47f9a",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-title-sp",
@@ -461,7 +485,8 @@
       "role": "title",
       "locator": "p.5 'the Speaking Practice video'",
       "exactText": "Speaking Practice",
-      "exactTextHash": "28a65191644aaa6c96c2c92701f23da4d95252f25464be3099e4a1c019acb52e"
+      "exactTextHash": "28a65191644aaa6c96c2c92701f23da4d95252f25464be3099e4a1c019acb52e",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-title-quiz",
@@ -470,7 +495,8 @@
       "role": "title",
       "locator": "p.8 quiz paper heading",
       "exactText": "Quiz - Level 1, Lesson 1: Welcome",
-      "exactTextHash": "78df69bc450be938a90bf70be976d28aa28a57331a16c13d365c6aa4124accf6"
+      "exactTextHash": "78df69bc450be938a90bf70be976d28aa28a57331a16c13d365c6aa4124accf6",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-title-page-alpha",
@@ -479,7 +505,8 @@
       "role": "title",
       "locator": "page embed heading",
       "exactText": "Learn the alphabet",
-      "exactTextHash": "b9f70f7992b9b9e31405a84b753f90cd0d872112a90736f55aec9e9ca27db6a3"
+      "exactTextHash": "b9f70f7992b9b9e31405a84b753f90cd0d872112a90736f55aec9e9ca27db6a3",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-title-page-convo",
@@ -488,7 +515,8 @@
       "role": "title",
       "locator": "page section heading",
       "exactText": "Conversation",
-      "exactTextHash": "ccca1817575365871461752f3229dd59ede742ae69e350e20fd00a6ce3d149e3"
+      "exactTextHash": "ccca1817575365871461752f3229dd59ede742ae69e350e20fd00a6ce3d149e3",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-alphabet-song",
@@ -497,7 +525,8 @@
       "role": "title",
       "locator": "p.5 Review the Alphabet",
       "exactText": "alphabet song",
-      "exactTextHash": "a506bd6e4c74d2c7a8d7fa0be26de330a11d8d7a56437d76fd92a11862ca5ba4"
+      "exactTextHash": "a506bd6e4c74d2c7a8d7fa0be26de330a11d8d7a56437d76fd92a11862ca5ba4",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-goal-question",
@@ -506,7 +535,8 @@
       "role": "prompt",
       "locator": "p.5 Learning Strategy (quoted learner question)",
       "exactText": "What do you want to do in English after studying for three months?",
-      "exactTextHash": "935a395250c6c835e1492da1699dbe0649cc3971850824c0b394073cbccf7dfd"
+      "exactTextHash": "935a395250c6c835e1492da1699dbe0649cc3971850824c0b394073cbccf7dfd",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-kw-apartment",
@@ -515,7 +545,8 @@
       "role": "vocab-def",
       "locator": "p.7 Key Words",
       "exactText": "apartment - n. a usually rented room or set of rooms that is part of a building and is used as a place to live",
-      "exactTextHash": "09143fbafba2ea09eed87abd69c8ce6b905187c87114b65883f18dca25eebe2a"
+      "exactTextHash": "09143fbafba2ea09eed87abd69c8ce6b905187c87114b65883f18dca25eebe2a",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-kw-meet",
@@ -524,7 +555,8 @@
       "role": "vocab-def",
       "locator": "p.7 Key Words",
       "exactText": "meet - v. to see and speak to someone for the first time",
-      "exactTextHash": "52639b395c29d9ff42eca6868b20a3dd72fc2e37a2c66aedab594831230149cf"
+      "exactTextHash": "52639b395c29d9ff42eca6868b20a3dd72fc2e37a2c66aedab594831230149cf",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-kw-new",
@@ -533,7 +565,8 @@
       "role": "vocab-def",
       "locator": "p.7 Key Words",
       "exactText": "new - adj. not known before; recently bought or rented",
-      "exactTextHash": "7825aeb26da29d390289764d00d0cbf698f74c11cf3160da76ed17d2b7ce7029"
+      "exactTextHash": "7825aeb26da29d390289764d00d0cbf698f74c11cf3160da76ed17d2b7ce7029",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-kw-nice",
@@ -542,7 +575,8 @@
       "role": "vocab-def",
       "locator": "p.8 Key Words",
       "exactText": "nice - adj. good and enjoyable",
-      "exactTextHash": "46e28416eebd0ca0c082798d1a06c18c73de35fabf54200f85dc402d257d5dcb"
+      "exactTextHash": "46e28416eebd0ca0c082798d1a06c18c73de35fabf54200f85dc402d257d5dcb",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-kw-street",
@@ -551,7 +585,8 @@
       "role": "vocab-def",
       "locator": "p.8 Key Words",
       "exactText": "street - n. a road in a city, town, or village",
-      "exactTextHash": "1ba02e34773445f145b86330396da7c229c6a9b63130a849b392781e6d491690"
+      "exactTextHash": "1ba02e34773445f145b86330396da7c229c6a9b63130a849b392781e6d491690",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-kw-try",
@@ -560,7 +595,8 @@
       "role": "vocab-def",
       "locator": "p.8 Key Words",
       "exactText": "try - v. to make an effort to do something",
-      "exactTextHash": "d9cffaef43252b5124478d7b04fafaf868d1e4fbecb519005757673571de1b3b"
+      "exactTextHash": "d9cffaef43252b5124478d7b04fafaf868d1e4fbecb519005757673571de1b3b",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-kw-welcome",
@@ -569,7 +605,8 @@
       "role": "vocab-def",
       "locator": "p.8 Key Words",
       "exactText": "welcome - interjection. used as a friendly greeting to someone who has arrived at a place",
-      "exactTextHash": "36ab48d3237429333444a7b8002bb63525fb9d3c63c05b9b0872c63e61fd6729"
+      "exactTextHash": "36ab48d3237429333444a7b8002bb63525fb9d3c63c05b9b0872c63e61fd6729",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-sp-script",
@@ -578,7 +615,8 @@
       "role": "script",
       "locator": "p.5 Speaking Practice video script",
       "exactText": "Here’s how to practice.\n     Listen. (video recording of “apartment” plays)\n     Record yourself.\n     “Apartment.”\n     Then listen.\n     “Apartment”",
-      "exactTextHash": "8a4c2593ac4400f7788a7e5dd9970abbd021605e9a334ae998c5565a5c369855"
+      "exactTextHash": "8a4c2593ac4400f7788a7e5dd9970abbd021605e9a334ae998c5565a5c369855",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-main-script",
@@ -587,7 +625,8 @@
       "role": "script",
       "locator": "p.4 Main Video Script – Lesson 1",
       "exactText": "1. Listen:                                          3. Listen:\n  Hi.                                                 Nice to meet you\n  Speak:                                              Speak:\n  Hi!                                                 Nice to meet you.\n  2. Listen:                                          4. Listen\n  I am Pete.                                          I’m Anna. A-N-N-A\n  Speak and say your name.                            Speak:\n  I am ________.                                      Speak and say your name.\n                                                      Then spell your name.\n                                                      I am ____________. __ __   ___ __ ___.",
-      "exactTextHash": "228f17ddc810f25d7d2dd5eb9ba1b6ea845bba6c8a6ff55d9c62af7bea542e99"
+      "exactTextHash": "228f17ddc810f25d7d2dd5eb9ba1b6ea845bba6c8a6ff55d9c62af7bea542e99",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-cue-name-spell",
@@ -596,7 +635,8 @@
       "role": "prompt",
       "locator": "p.4 Main Video Script",
       "exactText": "Speak and say your name.\n                                                      Then spell your name.",
-      "exactTextHash": "8e257e3b44e0de510952fdb904960c587e032abb0bb11b16f15fb306a1a15ed4"
+      "exactTextHash": "8e257e3b44e0de510952fdb904960c587e032abb0bb11b16f15fb306a1a15ed4",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-record-model",
@@ -605,7 +645,8 @@
       "role": "model",
       "locator": "p.4 Main Video Script",
       "exactText": "I am ____________. __ __   ___ __ ___.",
-      "exactTextHash": "06ad7adc9f31b4699a6c09b5030eda3250a4a1a70da02b9c2c9c5724d356aa53"
+      "exactTextHash": "06ad7adc9f31b4699a6c09b5030eda3250a4a1a70da02b9c2c9c5724d356aa53",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-convo",
@@ -614,7 +655,8 @@
       "role": "script",
       "locator": "p.7 Resources: Conversation",
       "exactText": "Pete: Hi! Are you Anna?\n Anna: Yes! Hi there! Are you Pete?\n Pete: I am Pete.\n Anna: Nice to meet you.\n Anna: Let’s try that again. I’m Anna.\n Pete: I’m Pete. “Anna” Is that A-N-A?\n Anna: No. A-N-N-A.\n Pete: Well, Anna with two “n’s” … Welcome to … 1400 Irving Street!\n Anna: My new apartment! Yes!",
-      "exactTextHash": "112d80573bb4b5770a86b38544682d760ca74b719d0bc6452dc26794f638536e"
+      "exactTextHash": "112d80573bb4b5770a86b38544682d760ca74b719d0bc6452dc26794f638536e",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-pron-script",
@@ -623,7 +665,8 @@
       "role": "script",
       "locator": "p.7 Pronunciation Practice Video Script",
       "exactText": "1. Slow Speech:                            2.\n  I am Pete                                  I am\n                                             (video shows change to)\n  Fast Speech:                               I’m\n  I’m Pete.                                  Now you try it. Say your name.\n                                             I’m ___________.",
-      "exactTextHash": "37975505fff2e57680dd04ecdcab70077adc515ebc3af58a0fbf956b330eb36b"
+      "exactTextHash": "37975505fff2e57680dd04ecdcab70077adc515ebc3af58a0fbf956b330eb36b",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-pron-cue",
@@ -632,7 +675,8 @@
       "role": "prompt",
       "locator": "p.7 Pronunciation Practice Video Script",
       "exactText": "Now you try it. Say your name.",
-      "exactTextHash": "8b35ecf9707bf39f5f2d171f96a872b386778946471c6a3bd0b6a1c2f964abc1"
+      "exactTextHash": "8b35ecf9707bf39f5f2d171f96a872b386778946471c6a3bd0b6a1c2f964abc1",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-pron-model",
@@ -641,7 +685,8 @@
       "role": "model",
       "locator": "p.7 Pronunciation Practice Video Script",
       "exactText": "I’m ___________.",
-      "exactTextHash": "22e9ab64aa12e255b833011837f13e863c0c460a3b591af4f873ade6d66741b6"
+      "exactTextHash": "22e9ab64aa12e255b833011837f13e863c0c460a3b591af4f873ade6d66741b6",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-quiz-instr",
@@ -650,7 +695,8 @@
       "role": "instruction",
       "locator": "p.8 quiz paper",
       "exactText": "Listen. Circle the letter of the correct answer.",
-      "exactTextHash": "f45d28adea5be8aa314fc585809c6012acf666ee73d1f97f974741bb41ee382a"
+      "exactTextHash": "f45d28adea5be8aa314fc585809c6012acf666ee73d1f97f974741bb41ee382a",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-quiz-q1",
@@ -659,7 +705,8 @@
       "role": "prompt",
       "locator": "p.8",
       "exactText": "1. Who is she?",
-      "exactTextHash": "adc83923fc215a01ea93e7496965a31632a6e9571db1df65d97924ab5a37c49b"
+      "exactTextHash": "adc83923fc215a01ea93e7496965a31632a6e9571db1df65d97924ab5a37c49b",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-quiz-q2",
@@ -668,7 +715,8 @@
       "role": "prompt",
       "locator": "p.9",
       "exactText": "2. Who is he?",
-      "exactTextHash": "ad3431ebe88cf936190061911d27a9203311885461029a0ba30d83ddc2239c6e"
+      "exactTextHash": "ad3431ebe88cf936190061911d27a9203311885461029a0ba30d83ddc2239c6e",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-quiz-q3",
@@ -677,7 +725,8 @@
       "role": "prompt",
       "locator": "p.9",
       "exactText": "3. What does the person say?",
-      "exactTextHash": "fb122d8b3948a90cd6391a02c4fbbc01297c1a6066399482383810cd5551fcb9"
+      "exactTextHash": "fb122d8b3948a90cd6391a02c4fbbc01297c1a6066399482383810cd5551fcb9",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-quiz-q4",
@@ -686,7 +735,8 @@
       "role": "prompt",
       "locator": "p.8",
       "exactText": "4. What does the person say?",
-      "exactTextHash": "986553a66bc3e15c54f7610178c3e04cc4f3ad861d1284c13abb501874bd603d"
+      "exactTextHash": "986553a66bc3e15c54f7610178c3e04cc4f3ad861d1284c13abb501874bd603d",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-quiz-q5",
@@ -695,7 +745,8 @@
       "role": "prompt",
       "locator": "p.9",
       "exactText": "5. What does Anna say?",
-      "exactTextHash": "b49240d73094e2c50d6db9054bac8a6125c2c53d2e70ae76fc811f1ffd7d15b0"
+      "exactTextHash": "b49240d73094e2c50d6db9054bac8a6125c2c53d2e70ae76fc811f1ffd7d15b0",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-quiz-q6",
@@ -704,7 +755,8 @@
       "role": "prompt",
       "locator": "p.9",
       "exactText": "6. What does Anna say?",
-      "exactTextHash": "b6c8436b9db19df8eabd1bd6d6a4ecce58d6a26fbf4c48f85d15c659df8558aa"
+      "exactTextHash": "b6c8436b9db19df8eabd1bd6d6a4ecce58d6a26fbf4c48f85d15c659df8558aa",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-q1-opt-a",
@@ -713,7 +765,8 @@
       "role": "option",
       "locator": "p.8 q1",
       "exactText": "Melissa",
-      "exactTextHash": "3fa72d13a8c74a75c6fba8e98c526fedc05ac2ea9f265b7c270405f460b104ca"
+      "exactTextHash": "3fa72d13a8c74a75c6fba8e98c526fedc05ac2ea9f265b7c270405f460b104ca",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-q1-opt-b",
@@ -722,7 +775,8 @@
       "role": "option",
       "locator": "p.8 q1",
       "exactText": "Mary",
-      "exactTextHash": "aebac53c46bbeff10fdd26ca0e2196a9bfc1d19bf88eb1efd65a36151c581051"
+      "exactTextHash": "aebac53c46bbeff10fdd26ca0e2196a9bfc1d19bf88eb1efd65a36151c581051",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-q1-opt-c",
@@ -731,7 +785,8 @@
       "role": "option",
       "locator": "p.8 q1",
       "exactText": "Maurice",
-      "exactTextHash": "679946faad78f61c5202e9d489d4ed0702a6344c6dcb64ec8394c016369d1ac7"
+      "exactTextHash": "679946faad78f61c5202e9d489d4ed0702a6344c6dcb64ec8394c016369d1ac7",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-q1-opt-d",
@@ -740,7 +795,8 @@
       "role": "option",
       "locator": "p.8 q1",
       "exactText": "Meghan",
-      "exactTextHash": "854d6f4950f75515d7be0242539de86cf7f03afd8c2a72cb70a0b168692bcb4f"
+      "exactTextHash": "854d6f4950f75515d7be0242539de86cf7f03afd8c2a72cb70a0b168692bcb4f",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-q2-opt-a",
@@ -749,7 +805,8 @@
       "role": "option",
       "locator": "p.9 q2",
       "exactText": "Joseph",
-      "exactTextHash": "78a1a1dae4e56fb0aba67dadc5ab5ab808f505137efedecfb7c2f12a4195c58b"
+      "exactTextHash": "78a1a1dae4e56fb0aba67dadc5ab5ab808f505137efedecfb7c2f12a4195c58b",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-q2-opt-b",
@@ -758,7 +815,8 @@
       "role": "option",
       "locator": "p.9 q2",
       "exactText": "Shawn",
-      "exactTextHash": "66e52fa9061472674466cdec63bfec6afe1417989e2e3f1e163b71e1b13f5f18"
+      "exactTextHash": "66e52fa9061472674466cdec63bfec6afe1417989e2e3f1e163b71e1b13f5f18",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-q2-opt-c",
@@ -767,7 +825,8 @@
       "role": "option",
       "locator": "p.9 q2",
       "exactText": "John",
-      "exactTextHash": "a8cfcd74832004951b4408cdb0a5dbcd8c7e52d43f7fe244bf720582e05241da"
+      "exactTextHash": "a8cfcd74832004951b4408cdb0a5dbcd8c7e52d43f7fe244bf720582e05241da",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-q2-opt-d",
@@ -776,7 +835,8 @@
       "role": "option",
       "locator": "p.9 q2",
       "exactText": "Josh",
-      "exactTextHash": "300648cea31d54fdec1ce29f8771bcae5107e97e6a9d3b98567a28cf85306b64"
+      "exactTextHash": "300648cea31d54fdec1ce29f8771bcae5107e97e6a9d3b98567a28cf85306b64",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-q3-opt-a1",
@@ -785,7 +845,8 @@
       "role": "option",
       "locator": "p.9 q3",
       "exactText": "Hello. My name is Russell.",
-      "exactTextHash": "a386c892a1e0616aa904716c3e8a9641e1e0870e66f9a3cd8c0fb715ac1ca961"
+      "exactTextHash": "a386c892a1e0616aa904716c3e8a9641e1e0870e66f9a3cd8c0fb715ac1ca961",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-q3-opt-a2",
@@ -794,7 +855,8 @@
       "role": "option",
       "locator": "p.9 q3",
       "exactText": "Are you Sarah?",
-      "exactTextHash": "ef86d505406b25df3adb527f40fee4bc06ab897234fbc2c8493c42adc63ffd7c"
+      "exactTextHash": "ef86d505406b25df3adb527f40fee4bc06ab897234fbc2c8493c42adc63ffd7c",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-q3-opt-b",
@@ -803,7 +865,8 @@
       "role": "option",
       "locator": "p.9 q3",
       "exactText": "What is your name?",
-      "exactTextHash": "b7bc3f438183072baf3ebb11d3d63d781661d4ed7f1f4d79916f89f51f5617f7"
+      "exactTextHash": "b7bc3f438183072baf3ebb11d3d63d781661d4ed7f1f4d79916f89f51f5617f7",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-q3-opt-c1",
@@ -812,7 +875,8 @@
       "role": "option",
       "locator": "p.9 q3",
       "exactText": "Hello. What is your name?",
-      "exactTextHash": "7d66b9b2271cde50d51991d116a122ceeee794ecf107028579155e3d0bff0925"
+      "exactTextHash": "7d66b9b2271cde50d51991d116a122ceeee794ecf107028579155e3d0bff0925",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-q3-opt-c2",
@@ -821,7 +885,8 @@
       "role": "option",
       "locator": "p.9 q3",
       "exactText": "My name is John.",
-      "exactTextHash": "45eb0e1bc81ed43c45fe50fb65a90179d3797c798e7407a61d1770a57c888dea"
+      "exactTextHash": "45eb0e1bc81ed43c45fe50fb65a90179d3797c798e7407a61d1770a57c888dea",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-q3-opt-d",
@@ -830,7 +895,8 @@
       "role": "option",
       "locator": "p.9 q3",
       "exactText": "Hi. I am Jill. Are you John?",
-      "exactTextHash": "5d626c746497411fc2cc70e9a95ccc82c14ed3806285538777e8075c7646ac80"
+      "exactTextHash": "5d626c746497411fc2cc70e9a95ccc82c14ed3806285538777e8075c7646ac80",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-q4-opt-a",
@@ -839,7 +905,8 @@
       "role": "option",
       "locator": "p.8 q4",
       "exactText": "Hi. I am Ross. Are you Jill’s friend?",
-      "exactTextHash": "04430441094a6afd400b26389b5c25516c6d874e2a83f69617e82d8389e53cfd"
+      "exactTextHash": "04430441094a6afd400b26389b5c25516c6d874e2a83f69617e82d8389e53cfd",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-q4-opt-b",
@@ -848,7 +915,8 @@
       "role": "option",
       "locator": "p.8 q4",
       "exactText": "Hello. I am Pete. Are you Anna?",
-      "exactTextHash": "285f2f0d8e9ca58d06eecb713404f0c5d4eb6aa4720b38cd16522925812de535"
+      "exactTextHash": "285f2f0d8e9ca58d06eecb713404f0c5d4eb6aa4720b38cd16522925812de535",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-q4-opt-c",
@@ -857,7 +925,8 @@
       "role": "option",
       "locator": "p.8 q4",
       "exactText": "Hi. I am Russell. Are you Anna’s friend?",
-      "exactTextHash": "5f569e6b585e80fecef084cd5fa061aa501274d8dc12a492c14b617673e50f85"
+      "exactTextHash": "5f569e6b585e80fecef084cd5fa061aa501274d8dc12a492c14b617673e50f85",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-q4-opt-d",
@@ -866,7 +935,8 @@
       "role": "option",
       "locator": "p.8 q4",
       "exactText": "Hello. I am John. Are you Mary?",
-      "exactTextHash": "b77fe9a440edf75cb093cce5a1f93de2c723f72d9bd98290282667f6661de717"
+      "exactTextHash": "b77fe9a440edf75cb093cce5a1f93de2c723f72d9bd98290282667f6661de717",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-q5-opt-a",
@@ -875,7 +945,8 @@
       "role": "option",
       "locator": "p.9 q5",
       "exactText": "Yes, Sam.",
-      "exactTextHash": "c98be6c931cd112ef7a716b73529bd8bde02734cdca9672343287a4cc3dd7203"
+      "exactTextHash": "c98be6c931cd112ef7a716b73529bd8bde02734cdca9672343287a4cc3dd7203",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-q5-opt-b",
@@ -884,7 +955,8 @@
       "role": "option",
       "locator": "p.9 q5",
       "exactText": "Yes ma’am.",
-      "exactTextHash": "9a4055866e7308b6c5a4f12b61aab57d52fec099f2d976aefc4ab37f3e1ecd78"
+      "exactTextHash": "9a4055866e7308b6c5a4f12b61aab57d52fec099f2d976aefc4ab37f3e1ecd78",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-q5-opt-c",
@@ -893,7 +965,8 @@
       "role": "option",
       "locator": "p.9 q5",
       "exactText": "Yes. I am.",
-      "exactTextHash": "d5a47c6a74b0c9b5a9a1d34b93b11b4647c1852400848ad139cc68483259e6ce"
+      "exactTextHash": "d5a47c6a74b0c9b5a9a1d34b93b11b4647c1852400848ad139cc68483259e6ce",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-q6-opt-a",
@@ -902,7 +975,8 @@
       "role": "option",
       "locator": "p.9 q6",
       "exactText": "Ice cream, please!",
-      "exactTextHash": "3b6d82add6a5d88c67efb37b3d5172891c6360b4e61aa425993f8268e665c1b4"
+      "exactTextHash": "3b6d82add6a5d88c67efb37b3d5172891c6360b4e61aa425993f8268e665c1b4",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-q6-opt-b",
@@ -911,7 +985,8 @@
       "role": "option",
       "locator": "p.9 q6",
       "exactText": "Nice to meet you!",
-      "exactTextHash": "1160a5ae1cde058c44e56e7c2f49bfb0197bf04c41e13314741bb014d1582047"
+      "exactTextHash": "1160a5ae1cde058c44e56e7c2f49bfb0197bf04c41e13314741bb014d1582047",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-q6-opt-c",
@@ -920,7 +995,8 @@
       "role": "option",
       "locator": "p.9 q6",
       "exactText": "Nice to chew food!",
-      "exactTextHash": "3eccea99570624f436ccaaf8d777ed39059a475b5228024026e734ff8a200ba4"
+      "exactTextHash": "3eccea99570624f436ccaaf8d777ed39059a475b5228024026e734ff8a200ba4",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-q6-opt-d",
@@ -929,7 +1005,8 @@
       "role": "option",
       "locator": "p.9 q6",
       "exactText": "Have a nice weekend!",
-      "exactTextHash": "624ab2418ee2dffc660a52323bf56d9c7653d89e54f23eed33ee10cb3c7cb61f"
+      "exactTextHash": "624ab2418ee2dffc660a52323bf56d9c7653d89e54f23eed33ee10cb3c7cb61f",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-dict-1",
@@ -938,7 +1015,8 @@
       "role": "stem",
       "locator": "p.5 read-aloud stems",
       "exactText": "Hi, I am Mary.",
-      "exactTextHash": "1b255770cfd7c44b63dedee2b4ede98b42d48a63a1429b598d3a87a8a1693494"
+      "exactTextHash": "1b255770cfd7c44b63dedee2b4ede98b42d48a63a1429b598d3a87a8a1693494",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-dict-2",
@@ -947,7 +1025,8 @@
       "role": "stem",
       "locator": "p.5 read-aloud stems",
       "exactText": "Hi, I am John.",
-      "exactTextHash": "a546a89b8d675be5de02bf1377fb2504ce629401751dd1a64945e4bb13c96320"
+      "exactTextHash": "a546a89b8d675be5de02bf1377fb2504ce629401751dd1a64945e4bb13c96320",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-dict-3",
@@ -956,7 +1035,8 @@
       "role": "stem",
       "locator": "p.5 read-aloud stems",
       "exactText": "Hi, I am Jill. Are you John?",
-      "exactTextHash": "3a7013a07e0f2bca9b6ba9624825a426563255993939a938af1a593b2b3a7be4"
+      "exactTextHash": "3a7013a07e0f2bca9b6ba9624825a426563255993939a938af1a593b2b3a7be4",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-dict-4",
@@ -965,7 +1045,8 @@
       "role": "stem",
       "locator": "p.5 read-aloud stems",
       "exactText": "Hi. I am Russell. Are you Anna’s friend?",
-      "exactTextHash": "5f569e6b585e80fecef084cd5fa061aa501274d8dc12a492c14b617673e50f85"
+      "exactTextHash": "5f569e6b585e80fecef084cd5fa061aa501274d8dc12a492c14b617673e50f85",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-dict-5",
@@ -974,7 +1055,8 @@
       "role": "stem",
       "locator": "p.5 read-aloud stems",
       "exactText": "Yes, I am.",
-      "exactTextHash": "cc07850c5e9229139005fd230419a5d512fb253e67cf4cfd4d58100b9d016a20"
+      "exactTextHash": "cc07850c5e9229139005fd230419a5d512fb253e67cf4cfd4d58100b9d016a20",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-dict-6",
@@ -983,7 +1065,8 @@
       "role": "stem",
       "locator": "p.5 read-aloud stems",
       "exactText": "Nice to meet you!",
-      "exactTextHash": "1160a5ae1cde058c44e56e7c2f49bfb0197bf04c41e13314741bb014d1582047"
+      "exactTextHash": "1160a5ae1cde058c44e56e7c2f49bfb0197bf04c41e13314741bb014d1582047",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-t-strategy-advice",
@@ -992,7 +1075,8 @@
       "role": "advice",
       "locator": "p.5 Learning Strategy",
       "exactText": "It is best to set a short-term and small goal. Remind them to focus on this goal as they\n study.",
-      "exactTextHash": "1973d4e37af17874c97bbed95fdd2809a52b167653a6aa47db39c36618e5a11e"
+      "exactTextHash": "1973d4e37af17874c97bbed95fdd2809a52b167653a6aa47db39c36618e5a11e",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-t-be-note",
@@ -1001,7 +1085,8 @@
       "role": "note",
       "locator": "p.6 Day 3",
       "exactText": "The conversation between Anna and Pete has questions and answers with the verb BE.",
-      "exactTextHash": "6638a1a7d60f93574bf69e1fa9a88252f11557a36ac00144bde59d169bc49525"
+      "exactTextHash": "6638a1a7d60f93574bf69e1fa9a88252f11557a36ac00144bde59d169bc49525",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-t-write",
@@ -1010,7 +1095,8 @@
       "role": "instruction",
       "locator": "p.7 Day 5 Writing",
       "exactText": "Have students write a conversation between themselves and another student. They can\n model it on the lesson conversation. Or, they can make changes by using the names of\n teachers or classmates.",
-      "exactTextHash": "6f6a1234fdfec2e8ff532734d0f86fa2e8c586ed4895d28ca8c213c9b59e6299"
+      "exactTextHash": "6f6a1234fdfec2e8ff532734d0f86fa2e8c586ed4895d28ca8c213c9b59e6299",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-t-review",
@@ -1019,7 +1105,8 @@
       "role": "instruction",
       "locator": "p.7 Review",
       "exactText": "Play the video again. Have students repeat, then ask students to form pairs and practice\n introducing themselves, spelling their own names, and asking others how to spell their\n names.",
-      "exactTextHash": "be53e9c8ae5cde28ddfc137bd5e8a1b557eba772c6611f13ff74f692a3126e13"
+      "exactTextHash": "be53e9c8ae5cde28ddfc137bd5e8a1b557eba772c6611f13ff74f692a3126e13",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     },
     {
       "id": "frag-t-quiz-admin",
@@ -1028,7 +1115,8 @@
       "role": "instruction",
       "locator": "p.5 Listening Quiz",
       "exactText": "Give each student a paper copy of the listening quiz. Play each question’s video and pause\n for students to answer. Ask students to choose the correct answer.",
-      "exactTextHash": "30ea15e13a9b2cbfe50892e0f83919f5062c45dce62ad9810ece2409ce1a2571"
+      "exactTextHash": "30ea15e13a9b2cbfe50892e0f83919f5062c45dce62ad9810ece2409ce1a2571",
+      "originStatus": "VOA_PRODUCED_VERIFIED"
     }
   ],
   "approvals": []

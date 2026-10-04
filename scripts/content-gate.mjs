@@ -40,8 +40,9 @@ const TRANSFORM_OPS = new Set([
  *
  * @param {object} course   parsed *.lesson.json (schemaVersion 3)
  * @param {object} pack     parsed *.sourcepack.json
- * @param {object} io       { exists(src), sha256(src) } — filesystem probes,
- *                          optional (media hash checks skipped when absent)
+ * @param {object} io       { exists(src), sha256(src), evidence } —
+ *                          filesystem probes + committed upstream evidence
+ *                          ({ errors, textByAsset }) — all optional
  */
 export function checkHumanContentGate(course, pack, io = {}) {
   const errors = [];
@@ -57,10 +58,46 @@ export function checkHumanContentGate(course, pack, io = {}) {
     approvalsUsed: new Set(),
     gaps: [],
     audiences: {},
+    origins: {},
+    upstreamEvidence: null,
   };
+
+  // ---------- upstream evidence root (Task 006.2) ---------------------------
+  // The pack must not self-bootstrap: when evidence is supplied, every text
+  // asset's sourceText must equal the committed extracted snapshot verbatim.
+  if (io.evidence) {
+    for (const e of io.evidence.errors ?? []) errors.push(e);
+    audit.upstreamEvidence = {
+      evidenceSet: io.evidence.manifest?.evidenceSet ?? pack.id,
+      artifacts: Object.keys(io.evidence.textByAsset ?? {}),
+    };
+    for (const a of pack.assets ?? []) {
+      if (a.sourceText === undefined) continue;
+      const expected = io.evidence.textByAsset?.[a.id];
+      if (expected === undefined) {
+        errors.push(
+          `asset ${a.id}: sourceText present but no committed upstream evidence snapshot`,
+        );
+      } else if (a.sourceText !== expected) {
+        errors.push(
+          `asset ${a.id}: sourceText diverges from committed upstream evidence snapshot`,
+        );
+      }
+    }
+  }
 
   const frag = (ref) => fragments.get(ref);
   const fragAsset = (f) => assets.get(f.assetRef);
+
+  /** origin gate: only VOA-produced-verified fragments may back content */
+  function checkOrigin(f, path) {
+    audit.origins[f.originStatus] = (audit.origins[f.originStatus] ?? 0) + 1;
+    if (f.originStatus !== "VOA_PRODUCED_VERIFIED") {
+      errors.push(
+        `${path}: fragment '${f.id}' originStatus=${f.originStatus} may not back instructional content`,
+      );
+    }
+  }
 
   // ---------- pack integrity: fragments ⊆ asset sourceText, hashes honest ----
   for (const f of pack.fragments ?? []) {
@@ -191,6 +228,7 @@ export function checkHumanContentGate(course, pack, io = {}) {
             `${path}: gap ref '${prov.ref}' must point at a TEACHER-audience fragment`,
           );
         }
+        checkOrigin(f, path);
         audit.fragmentsUsed.add(prov.ref);
       }
       audit.byKind.gap++;
@@ -211,6 +249,7 @@ export function checkHumanContentGate(course, pack, io = {}) {
       }
       audit.fragmentsUsed.add(prov.ref);
       audit.audiences[f.audience] = (audit.audiences[f.audience] ?? 0) + 1;
+      checkOrigin(f, path);
       const rule = refAudience(f, ctx);
       if (rule) errors.push(`${path}: ${rule}`);
       if (norm(field.text) !== norm(f.exactText)) {
@@ -238,6 +277,7 @@ export function checkHumanContentGate(course, pack, io = {}) {
         if (!f) continue;
         audit.fragmentsUsed.add(ref);
         audit.audiences[f.audience] = (audit.audiences[f.audience] ?? 0) + 1;
+        checkOrigin(f, path);
         if (f.audience === "TEACHER") {
           errors.push(`${path}: transform reads TEACHER fragment '${ref}'`);
         }

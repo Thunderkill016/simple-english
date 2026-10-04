@@ -117,7 +117,8 @@
         "role",
         "locator",
         "exactText",
-        "exactTextHash"
+        "exactTextHash",
+        "originStatus"
       ],
       "additionalProperties": false,
       "properties": {
@@ -143,7 +144,10 @@
         },
         "locator": { "type": "string" },
         "exactText": { "type": "string", "minLength": 1 },
-        "exactTextHash": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+        "exactTextHash": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "originStatus": {
+          "enum": ["VOA_PRODUCED_VERIFIED", "THIRD_PARTY", "UNKNOWN"]
+        }
       }
     },
     "approval": {

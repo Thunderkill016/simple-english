@@ -22,6 +22,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import Ajv2020 from "ajv/dist/2020.js";
 import { checkHumanContentGate } from "./content-gate.mjs";
+import { loadEvidenceSet } from "./upstream-evidence.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const contentDir = join(root, "src/content");
@@ -57,6 +58,7 @@ function* jsonFiles(dir, suffix) {
 }
 
 const packs = new Map();
+const evidenceSets = new Map();
 for (const path of jsonFiles(join(contentDir, "sourcepacks"), ".sourcepack.json")) {
   const data = JSON.parse(readFileSync(path, "utf8"));
   if (!validatePack(data)) {
@@ -65,6 +67,12 @@ for (const path of jsonFiles(join(contentDir, "sourcepacks"), ".sourcepack.json"
     continue;
   }
   packs.set(data.id, data);
+  // Upstream evidence root (Task 006.2): the pack's text must equal the
+  // committed evidence snapshots, verified by manifest hashes here.
+  evidenceSets.set(
+    data.id,
+    loadEvidenceSet(join(root, "docs/sources/evidence", data.id)),
+  );
   console.log(`✓ sourcepack ${data.id}`);
 }
 
@@ -82,7 +90,10 @@ for (const path of jsonFiles(contentDir, ".lesson.json")) {
     console.error(`✗ ${name}: sourcePack '${course.sourcePack}' not found`);
     continue;
   }
-  const { errors, audit } = checkHumanContentGate(course, pack, io);
+  const { errors, audit } = checkHumanContentGate(course, pack, {
+    ...io,
+    evidence: evidenceSets.get(pack.id),
+  });
   if (errors.length > 0) {
     failed = true;
     console.error(`✗ ${name} — ${errors.length} gate violation(s)`);
@@ -102,14 +113,29 @@ for (const path of jsonFiles(contentDir, ".lesson.json")) {
           generatedAt: new Date().toISOString(),
           course: course.id,
           sourcePack: pack.id,
+          upstreamEvidence: {
+            ...audit.upstreamEvidence,
+            snapshotSha256: Object.fromEntries(
+              (evidenceSets.get(pack.id)?.manifest?.artifacts ?? []).map(
+                (a) => [a.assetRef, a.extractedTextSha256],
+              ),
+            ),
+          },
           instructionalFields: audit.fieldCount,
           byKind: audit.byKind,
           fragmentsUsed: [...audit.fragmentsUsed].sort(),
           transformsUsed: audit.transformsUsed,
           approvalsUsed: [...audit.approvalsUsed].sort(),
           fieldAudiences: audit.audiences,
+          fragmentOrigins: audit.origins,
           gaps: audit.gaps,
+          requiredGapsRemaining: audit.gaps.length,
           violations: [],
+          // Two separate verdicts (Task 006.2): pipeline integrity is the
+          // gate's PASS; learner-readiness additionally requires zero
+          // unresolved editorial gaps.
+          pipelineIntegrity: "PASS",
+          learnerReady: audit.gaps.length === 0 ? "PASS" : "GAP",
           result: "PASS",
         },
         null,

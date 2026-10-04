@@ -110,3 +110,20 @@ source; and `resolveItem` could double-resolve. Hardened as follows:
   the transaction; concurrent/double invocations collapse to one outcome.
 - **Spec documents are never provenance** — the `task006-spec` directive
   asset was removed; internal instructions cannot back learner-facing text.
+
+### Amendment addendum — Task 006.2 (upstream evidence root)
+
+- **Committed upstream evidence** — the provenance chain must not
+  self-bootstrap. Text sources are pinned by an immutable evidence set at
+  `docs/sources/evidence/<packId>/` (manifest + raw artifacts + extracted
+  text, all sha256-verified). `build-sourcepack.mjs` reads only committed
+  evidence; the generated pack is never consulted as source truth for
+  itself. The gate requires every `sourceText` to equal its committed
+  snapshot — an internally consistent pack that diverges from upstream
+  fails validation.
+- **Fragment origin** — every fragment carries `originStatus`
+  (`VOA_PRODUCED_VERIFIED` / `THIRD_PARTY` / `UNKNOWN`); only
+  VOA_PRODUCED_VERIFIED fragments may back instructional content. This
+  closes the mixed-asset case (pages that embed third-party media).
+- **Two verdicts** — the audit separates `pipelineIntegrity` (the gate)
+  from `learnerReady` (requires zero unresolved editorial gaps).

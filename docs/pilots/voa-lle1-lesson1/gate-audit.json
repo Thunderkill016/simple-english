@@ -1,7 +1,18 @@
 {
-  "generatedAt": "2026-10-03T22:12:29.750Z",
+  "generatedAt": "2026-10-04T03:12:58.241Z",
   "course": "voa-lle1",
   "sourcePack": "voa-lle1-lesson1",
+  "upstreamEvidence": {
+    "evidenceSet": "voa-lle1-lesson1",
+    "artifacts": [
+      "lesson-plan",
+      "learner-page"
+    ],
+    "snapshotSha256": {
+      "lesson-plan": "e23bff968a63f078c081bb2d8425bc3abf35c1b09354c3fe5f82252a4f306f21",
+      "learner-page": "7185f67752b5e5f78e3089483ae3649f8d7530c7cef30d8d5b8136f7b8e92edd"
+    }
+  },
   "instructionalFields": 110,
   "byKind": {
     "source": 84,
@@ -107,6 +118,9 @@
     "LEARNER": 33,
     "ASSESSMENT": 38
   },
+  "fragmentOrigins": {
+    "VOA_PRODUCED_VERIFIED": 119
+  },
   "gaps": [
     {
       "path": "orient-set-goal/item:orient-strategy/blocks[1]",
@@ -124,6 +138,9 @@
       "note": "teacher-voice production instruction withheld; awaiting editor-approved learner-facing wording"
     }
   ],
+  "requiredGapsRemaining": 3,
   "violations": [],
+  "pipelineIntegrity": "PASS",
+  "learnerReady": "GAP",
   "result": "PASS"
 }

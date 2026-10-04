@@ -1,23 +1,28 @@
-// Per-item renderers for the activity runner. Item components are
-// presentation + local interaction only; resolution goes through
-// `onResolve(outcome, attempts)` → the four-channel store.
+// Per-item renderers for the lesson stepper. Item components are
+// presentation + local interaction; results go up via `onResolve(result)`
+// and land in localStorage progress. Items with a saved result render
+// read-only — resolved work never repeats.
 import { useRef, useState } from "react";
 import type {
   ClozeItem,
-  DictationItem,
   Field,
   Item,
   McItem,
   MediaItem,
-  NoteItem,
   RecordItem,
-  SelfEvalItem,
   WriteItem,
 } from "../../content/model";
 import { isGapField } from "../../content/model";
-import type { ItemOutcome } from "../state/model";
+import type { ItemOutcome } from "../feedback/feedback";
 import { evaluate, normalizeAnswer } from "../feedback/feedback";
 import { recorderSupported, startRecording } from "../recorder/recorder";
+
+export interface ItemResult {
+  outcome: ItemOutcome;
+  attempts: number;
+  /** recorded payload — selected option id, free text */
+  answer?: string;
+}
 
 type Feedback =
   | { kind: "correct" }
@@ -25,22 +30,12 @@ type Feedback =
   | { kind: "revealed"; answer: string }
   | null;
 
-// UI chrome — not instructional content, no provenance required.
-const SELF_EVAL_OPTIONS = [
-  { id: "practiced", label: "I practiced this" },
-  { id: "confident", label: "I can do this with confidence" },
-  { id: "needs", label: "Needs more practice" },
-];
-
-/** renders a field's text, or nothing instructional when the field is a GAP */
+/**
+ * Renders a field's text. GAP fields are withheld teacher-voice wording —
+ * they render nothing at all (Task 007: omit, don't block).
+ */
 function FieldText({ field, className }: { field: Field; className?: string }) {
-  if (isGapField(field)) {
-    return (
-      <p className={className ?? "text-lesson"} data-gap={field.prov.ref}>
-        <span className="text-muted">Wording awaiting editor approval.</span>
-      </p>
-    );
-  }
+  if (isGapField(field)) return null;
   return (
     <p lang="en" className={`${className ?? "text-lesson"} whitespace-pre-line`}>
       {field.text}
@@ -150,10 +145,24 @@ function Answerable({
   );
 }
 
-function McView({ item, onResolve }: { item: McItem; onResolve: (o: ItemOutcome, a: number) => void }) {
-  const [selected, setSelected] = useState<string>();
-  const [attempts, setAttempts] = useState(0);
-  const [feedback, setFeedback] = useState<Feedback>(null);
+function McView({
+  item,
+  saved,
+  onResolve,
+}: {
+  item: McItem;
+  saved?: ItemResult;
+  onResolve: (r: ItemResult) => void;
+}) {
+  const [selected, setSelected] = useState<string | undefined>(saved?.answer);
+  const [attempts, setAttempts] = useState(saved?.attempts ?? 0);
+  const initial: Feedback =
+    saved?.outcome === "correct"
+      ? { kind: "correct" }
+      : saved?.outcome === "revealed"
+        ? { kind: "revealed", answer: item.options.find((o) => o.id === item.answer)?.text.text ?? "" }
+        : null;
+  const [feedback, setFeedback] = useState<Feedback>(initial);
   const resolved = feedback?.kind === "correct" || feedback?.kind === "revealed";
 
   function check() {
@@ -166,7 +175,8 @@ function McView({ item, onResolve }: { item: McItem; onResolve: (o: ItemOutcome,
     );
     setAttempts(state.attempts);
     setFeedback(event);
-    if (state.resolved) onResolve(state.resolved, state.attempts);
+    if (state.resolved)
+      onResolve({ outcome: state.resolved, attempts: state.attempts, answer: selected });
   }
 
   return (
@@ -211,41 +221,43 @@ function McView({ item, onResolve }: { item: McItem; onResolve: (o: ItemOutcome,
   );
 }
 
-function TextEntry({
+function ClozeView({
   item,
-  answerText,
-  displayText,
+  saved,
   onResolve,
 }: {
-  item: DictationItem | ClozeItem;
-  answerText: string;
-  displayText: string;
-  onResolve: (o: ItemOutcome, a: number) => void;
+  item: ClozeItem;
+  saved?: ItemResult;
+  onResolve: (r: ItemResult) => void;
 }) {
-  const [value, setValue] = useState("");
-  const [attempts, setAttempts] = useState(0);
-  const [feedback, setFeedback] = useState<Feedback>(null);
+  const [value, setValue] = useState(saved?.answer ?? "");
+  const [attempts, setAttempts] = useState(saved?.attempts ?? 0);
+  const initial: Feedback =
+    saved?.outcome === "correct"
+      ? { kind: "correct" }
+      : saved?.outcome === "revealed"
+        ? { kind: "revealed", answer: item.answer.text }
+        : null;
+  const [feedback, setFeedback] = useState<Feedback>(initial);
   const resolved = feedback?.kind === "correct" || feedback?.kind === "revealed";
-  const media = item.type === "dictation" ? item.media : undefined;
 
   function check() {
     if (!value.trim() || resolved) return;
     const { state, event } = evaluate(
       { attempts, resolved: undefined },
-      normalizeAnswer(value) === normalizeAnswer(answerText),
+      normalizeAnswer(value) === normalizeAnswer(item.answer.text),
       item.attempts,
-      answerText,
+      item.answer.text,
     );
     setAttempts(state.attempts);
     setFeedback(event);
-    if (state.resolved) onResolve(state.resolved, state.attempts);
+    if (state.resolved)
+      onResolve({ outcome: state.resolved, attempts: state.attempts, answer: value });
   }
 
   return (
     <Answerable
-      prompt={displayText}
-      mediaSrc={media?.src}
-      mediaKind={media?.kind}
+      prompt={item.text.text}
       feedback={feedback}
       onCheck={check}
       canCheck={value.trim().length > 0 && !resolved}
@@ -263,7 +275,7 @@ function TextEntry({
   );
 }
 
-function RecordView({ item, onResolve }: { item: RecordItem; onResolve: (o: ItemOutcome, a: number) => void }) {
+function RecordView({ item, onResolve }: { item: RecordItem; onResolve: (r: ItemResult) => void }) {
   const [recording, setRecording] = useState(false);
   const [url, setUrl] = useState<string>();
   const [micState, setMicState] = useState<"idle" | "denied">("idle");
@@ -305,97 +317,51 @@ function RecordView({ item, onResolve }: { item: RecordItem; onResolve: (o: Item
           Recording is unavailable here — practice aloud along with the model.
         </p>
       )}
-      <button type="button" className="btn btn-primary" onClick={() => onResolve("practiced", 0)}>
-        {url || !supported || micState === "denied" ? "I practiced — continue" : "Continue"}
+      <button type="button" className="btn btn-secondary" onClick={() => onResolve({ outcome: "practiced", attempts: 0 })}>
+        {url ? "Practiced" : "Mark as practiced"}
       </button>
     </div>
   );
 }
 
-function WriteView({ item, onResolve }: { item: WriteItem; onResolve: (o: ItemOutcome, a: number, selfReport?: string) => void }) {
-  const [value, setValue] = useState("");
+function WriteView({
+  item,
+  savedText,
+  onResolve,
+}: {
+  item: WriteItem;
+  savedText?: string;
+  onResolve: (r: ItemResult) => void;
+}) {
+  const [value, setValue] = useState(savedText ?? "");
   return (
     <div className="space-y-4">
       <FieldText field={item.prompt} className="font-semibold" />
       {item.model ? <FieldText field={item.model} /> : null}
       <textarea
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => {
+          setValue(e.target.value);
+          onResolve({ outcome: "done", attempts: 0, answer: e.target.value });
+        }}
         rows={6}
         placeholder="Write here"
         className="w-full rounded-lg border border-border bg-panel px-3 py-3 text-ink"
       />
-      <button
-        type="button"
-        className="btn btn-primary"
-        disabled={value.trim().length === 0}
-        onClick={() => onResolve("done", 0, value)}
-      >
-        Done — continue
-      </button>
-    </div>
-  );
-}
-
-function NoteView({ item, onResolve }: { item: NoteItem; onResolve: (o: ItemOutcome, a: number, selfReport?: string) => void }) {
-  const [value, setValue] = useState("");
-  return (
-    <div className="space-y-4">
-      <FieldText field={item.prompt} className="font-semibold" />
-      <textarea
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        rows={3}
-        placeholder="Write here"
-        className="w-full rounded-lg border border-border bg-panel px-3 py-3 text-ink"
-      />
-      <button
-        type="button"
-        className="btn btn-primary"
-        disabled={value.trim().length === 0}
-        onClick={() => onResolve("done", 0, value)}
-      >
-        Save — continue
-      </button>
-    </div>
-  );
-}
-
-function SelfEvalView({ item, onResolve }: { item: SelfEvalItem; onResolve: (o: ItemOutcome, a: number, selfReport?: string) => void }) {
-  const [picked, setPicked] = useState<string>();
-  return (
-    <div className="space-y-3">
-      <FieldText field={item.statement} className="font-semibold" />
-      <div className="space-y-2">
-        {SELF_EVAL_OPTIONS.map((o) => (
-          <label
-            key={o.id}
-            className={`flex cursor-pointer items-center gap-3 rounded-lg border px-3 py-3 ${picked === o.id ? "border-primary bg-primary-soft" : "border-border"}`}
-          >
-            <input
-              type="radio"
-              name={item.id}
-              checked={picked === o.id}
-              onChange={() => {
-                setPicked(o.id);
-                onResolve("done", 0, o.id);
-              }}
-              className="size-4 accent-primary"
-            />
-            <span>{o.label}</span>
-          </label>
-        ))}
-      </div>
     </div>
   );
 }
 
 export function ItemView({
   item,
+  saved,
+  savedText,
   onResolve,
 }: {
   item: Item;
-  onResolve: (outcome: ItemOutcome, attempts: number, selfReport?: string) => void;
+  saved?: ItemResult;
+  savedText?: string;
+  onResolve: (r: ItemResult) => void;
 }) {
   switch (item.type) {
     case "read":
@@ -403,18 +369,14 @@ export function ItemView({
     case "media":
       return <MediaBlock item={item} />;
     case "mc":
-      return <McView item={item} onResolve={onResolve} />;
-    case "dictation":
-      return <TextEntry item={item} answerText={item.answer.text} displayText={item.prompt.text} onResolve={onResolve} />;
+      return <McView item={item} saved={saved} onResolve={onResolve} />;
     case "cloze":
-      return <TextEntry item={item} answerText={item.answer.text} displayText={item.text.text} onResolve={onResolve} />;
+      return <ClozeView item={item} saved={saved} onResolve={onResolve} />;
     case "record":
       return <RecordView item={item} onResolve={onResolve} />;
     case "write":
-      return <WriteView item={item} onResolve={onResolve} />;
-    case "note":
-      return <NoteView item={item} onResolve={onResolve} />;
-    case "selfeval":
-      return <SelfEvalView item={item} onResolve={onResolve} />;
+      return <WriteView item={item} savedText={savedText} onResolve={onResolve} />;
+    default:
+      return null;
   }
 }

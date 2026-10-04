@@ -434,6 +434,11 @@ Rationale:
 
 ## 14. Status
 
-V1 foundation locked. Architecture validated in ADR-0002. No product features
-are implemented. Active research track: Issue R1 (wider reusable-ecosystem
-audit + ongoing challenge of the accepted stack).
+V1 foundation locked. R1 research corpus closed (merged in PR #9 — final
+synthesis at `docs/research/corpus/R1-FINAL-SYNTHESIS.md`). Task 007 shipped
+the first learner-facing product feature (PR #10): VOA LLE Lesson 1 as a
+simple 11-step linear flow — source-pack content, localStorage progress,
+bounded-attempt quiz, record/playback speaking, local packaged media.
+Research-stage machinery (fragment gate internals, four-channel state, FSRS,
+service worker) is retained only where it costs nothing (build-time content
+validation) and is not part of the learner runtime.

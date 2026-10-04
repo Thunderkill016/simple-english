@@ -3,7 +3,7 @@
 // reveal verified answer as last resort. Cues are never generated — an item
 // either carries a provenanced cue or falls back to the simple verified path.
 
-import type { ItemOutcome } from "../state/model";
+export type ItemOutcome = "correct" | "revealed" | "done" | "practiced";
 
 export type FeedbackEvent =
   | { kind: "correct" }
