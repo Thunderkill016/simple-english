@@ -1,20 +1,17 @@
 import { Route, Routes } from "react-router";
 import { LearnPage } from "../routes/LearnPage";
-import { ProgressPage } from "../routes/ProgressPage";
-import { ReviewPage } from "../routes/ReviewPage";
-import { TodayPage } from "../routes/TodayPage";
+import { LessonPage } from "../routes/LessonPage";
 
 /**
- * Declarative-mode routing (ADR-0002): URL → component, no data-router
- * machinery. The local-first data layer has no pending states to manage.
+ * Declarative-mode routing: one lesson, two screens.
+ * `/` is the Learn page (the only place to start).
  */
 export function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<TodayPage />} />
+      <Route path="/" element={<LearnPage />} />
       <Route path="/learn" element={<LearnPage />} />
-      <Route path="/review" element={<ReviewPage />} />
-      <Route path="/progress" element={<ProgressPage />} />
+      <Route path="/learn/lesson-1" element={<LessonPage />} />
       <Route path="*" element={<p>Page not found.</p>} />
     </Routes>
   );

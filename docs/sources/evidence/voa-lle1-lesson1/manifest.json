@@ -1,0 +1,40 @@
+{
+  "evidenceSet": "voa-lle1-lesson1",
+  "sourceOrganization": "Voice of America — Learning English",
+  "canonicalUrl": "https://learningenglish.voanews.com/a/lets-learn-english-lesson-one/3111026.html",
+  "rightsStatementUrl": "https://learningenglish.voanews.com/p/6021.html",
+  "retrievedAt": "2026-10-03",
+  "purpose": "Immutable upstream evidence root for the voa-lle1-lesson1 source pack. Every text asset's sourceText must equal the committed extractedText below; the build gate verifies artifact and extraction hashes. The generated sourcepack is an output of this evidence, never an input.",
+  "artifacts": [
+    {
+      "assetRef": "lesson-plan",
+      "evidenceType": "official-pdf-document",
+      "rawUrl": "https://docs.voanews.eu/en-US-LEARN/2022/06/07/c4dbd6af-5f63-4f28-bc42-0bd175f4e4b4.pdf",
+      "rawArtifact": "lesson-plan.pdf",
+      "rawArtifactSha256": "c34c28eb85478639402a6cfddb12ad0b57b2a448dd621472d010dc8b9621e0d9",
+      "extractedText": "lesson-plan.txt",
+      "extractedTextSha256": "e23bff968a63f078c081bb2d8425bc3abf35c1b09354c3fe5f82252a4f306f21",
+      "extraction": {
+        "method": "pdftotext -layout",
+        "tool": "poppler-utils",
+        "reproducible": true,
+        "note": "extractedText is byte-identical to `pdftotext -layout lesson-plan.pdf`; extraction is deterministic and re-verifiable"
+      }
+    },
+    {
+      "assetRef": "learner-page",
+      "evidenceType": "captured-page-snapshot",
+      "rawUrl": "https://learningenglish.voanews.com/a/lets-learn-english-lesson-one/3111026.html",
+      "rawArtifact": "learner-page.html",
+      "rawArtifactSha256": "f40533d033d08e572dc4247c71fb9d26a1610cffd2a6efac5b9d4fd68a96607f",
+      "extractedText": "learner-page.txt",
+      "extractedTextSha256": "7185f67752b5e5f78e3089483ae3649f8d7530c7cef30d8d5b8136f7b8e92edd",
+      "extraction": {
+        "method": "headless-browser body-text capture",
+        "tool": "playwright innerText",
+        "reproducible": false,
+        "note": "page markup is mutable and ad-weighted; the committed learner-page.txt is the canonical captured text snapshot of the retrieved HTML artifact"
+      }
+    }
+  ]
+}
